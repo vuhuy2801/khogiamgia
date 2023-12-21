@@ -1,0 +1,18 @@
+project-root/
+|-- app/
+|   |-- controllers/
+|       |-- Web/
+|           |-- PostController.php   <-- Controller cho giao diện
+|       |-- Api/
+|           |-- PostApiController.php   <-- Controller cho API
+|   |-- models/
+|       |-- Post.php   <-- Lớp model cho bài viết
+|   |-- views/
+|-- public/
+|   |-- css/
+|   |-- js/
+|       |-- script.js
+|-- config/
+|   |-- database.php   <-- Cấu hình database
+|-- vendor/
+
