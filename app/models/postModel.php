@@ -1,0 +1,188 @@
+<?php
+require_once 'dbConnection.php';
+require_once __DIR__ . '/interface/PostService.php';
+
+
+class post implements PostService {
+    private $postId;
+    private $title;
+    private $image;
+    private $supplierId;
+    private $content;
+    private $description;
+    private $categories_post;
+    private $createdAt;
+    private $status;
+    private $db;
+
+    public function __construct() {
+        $this->db = new DBConnection();
+    }
+
+    public function getPostId() {
+        return $this->postId;
+    }
+
+    public function setPostId($value) {
+        $this->postId=$value;
+    }
+    public function getTitle() {
+        return $this->title;
+    }
+
+    public function setTitle($title) {
+        $this->title = $title;
+    }
+
+    public function getImage() {
+        return $this->image;
+    }
+
+    public function setImage($value) {
+        $this->image = $value;
+    }
+
+    public function getSupplierId() {
+        return $this->supplierId;
+    }
+
+    public function setSupplierId($value) {
+        $this->supplierId = $value;
+    }
+
+    public function getContent() {
+        return $this->content;
+    }
+
+    public function setContent($value) {
+        $this->content = $value;
+    }
+
+    public function getDescription() {
+        return $this->description;
+    }
+
+    public function setDescription($value) {
+        $this->description = $value;
+    }
+
+    public function getCategoriesPost() {
+        return $this->categories_post;
+    }
+
+    public function setCategoriesPost($value) {
+        $this->categories_post = $value;
+    }
+
+    public function getCreatedAt() {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt($value) {
+        $this->createdAt = $value;
+    }
+    public function getStatus() {
+        return $this->status;
+    }
+
+    public function setStatus($value) {
+        $this->status = $value;
+    }
+    public function post(
+        int $id,
+        string $title,
+        string $image,
+        int $supplierId,
+        string $content,
+        string $description,
+        string $categories_post,
+        string $createdAt,
+        int $status
+    ) {
+        $this->title = $title;
+        $this->image = $image;
+        $this->supplierId = $supplierId;
+        $this->content = $content;
+        $this->description = $description;
+        $this->categories_post = $categories_post;
+        $this->createdAt = $createdAt;
+        $this->status = $status;
+    }
+
+    
+    public function List(): array {
+        $connection = $this->db->getConnection();
+
+        if ($connection) {         
+            $query = "CALL GetListPosts()"; 
+            $statement = $connection->prepare($query);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } else {
+            return [];
+        }
+    }
+   
+    public function Add(): bool {
+        $connection = $this->db->getConnection();
+        $query = "CALL AddPost(:title, :image, :supplierId, :content, :description, :categories_post, :createdAt, :status)";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(':title', $this->title);
+        $statement->bindParam(':image', $this->image);
+        $statement->bindParam(':supplierId', $this->supplierId);
+        $statement->bindParam(':content', $this->content);
+        $statement->bindParam(':description', $this->description);
+        $statement->bindParam(':categories_post', $this->categories_post);
+        $statement->bindParam(':createdAt', $this->createdAt);
+        $statement->bindParam(':status', $this->status);
+        try {
+            $statement->execute();
+            return true;
+        }catch (PDOException $e) {
+            return false;
+        }
+       
+    }
+
+    public function Edit(): bool {
+        $connection = $this->db->getConnection();
+        $query = "CALL UpdatePost(:postId, :title, :image, :supplierId, :content, :description, :categories_post, :createdAt, :status) ";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(':postId', $this->postId);
+        $statement->bindParam(':title', $this->title);
+        $statement->bindParam(':image', $this->image);
+        $statement->bindParam(':supplierId', $this->supplierId);
+        $statement->bindParam(':content', $this->content);
+        $statement->bindParam(':description', $this->description);
+        $statement->bindParam(':categories_post', $this->categories_post);
+        $statement->bindParam(':createdAt', $this->createdAt);
+        $statement->bindParam(':status', $this->status);
+        try {
+            $statement->execute();
+            return true;
+        }catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    public function Delete(): bool {
+        $connection = $this->db->getConnection();
+        $query =  "CALL DeletePost(:postId)";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(':postId', $this->postId);
+        try {
+            $statement->execute();
+            return true;
+        }catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    // public function Search(string $key): array {
+    //     // Tìm kiếm bài viết trong cơ sở dữ liệu và trả về danh sách kết quả
+    // }
+
+ 
+}
+?>
