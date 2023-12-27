@@ -29,6 +29,7 @@
                 <label for="supplierId">Nhà cung cấp</label>
                 <input type="text" value="<?php echo isset($_GET['s']) ? htmlspecialchars($_GET['s']) : ''; ?>"
                     class="form-control" id="supplierId" name="supplierId">
+
             </div>
             <div class="form-group">
                 <label for="content">Nội dung</label>

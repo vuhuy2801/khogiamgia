@@ -88,7 +88,7 @@
                                     echo "<td>" . $post['description'] . "</td>";
                         
                                     echo "<td>
-                                        <a href='#' class='px-2'>Xem</a>
+                                        <a class='px-2' href='detail.php?i="  . $post['postId'] . "&t="  . $post['title'] . "&a="  . $post['image'] . "&s="  . $post['supplierId'] . "&c="  . $post['content'] . "&d="  . $post['description']  . "&l="  . $post['categories_post'] . "&at="  . $post['createdAt'] . "&status="  . $post['status'] ." ' >Xem</a>
                                         <a class='px-2' href='edit.php?i="  . $post['postId'] . "&t="  . $post['title'] . "&a="  . $post['image'] . "&s="  . $post['supplierId'] . "&c="  . $post['content'] . "&l="  . $post['categories_post'] . "' >Sửa</a>
                                         <a href=''class='delete-post px-2' data-post-id='" . $post['postId'] . "' data-bs-toggle='modal' data-bs-target='#deletePost'>Xóa</a>
                                     </td>";

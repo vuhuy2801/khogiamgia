@@ -18,17 +18,31 @@
                 <label for="imageId">Hình ảnh bài viết</label>
                 <input type="text" class="form-control" id="imageId" name="imageId">
             </div>
-            <div class="form-group">
-                <label for="supplierId">Nhà cung cấp</label>
-                <input type="text" class="form-control" id="supplierId" name="supplierId">
+
+            <div class="form-group mt-3">
+                <select class="form-select form-select-sm mb-3" name="supplierId" id="supplierId">
+                    <option selected>Chọn nhà cung cấp</option>
+                    <?php 
+                        require_once '../../controllers/supplierController.php'; 
+                        $supplierController = new supplierController();
+                        $suppliers = $supplierController->getListOfSuppliers();
+                        foreach ($suppliers as $index => $supplier) {
+                            echo "<option value=".$supplier['supplierId'].">".$supplier['supplierName']."</option>";
+                        }
+                    ?>
+                </select>
             </div>
             <div class="form-group">
                 <label for="content">Nội dung</label>
                 <input type="text" class="form-control" id="content" name="content">
             </div>
-            <div class="form-group">
-                <label for="category_post">Loại bài viết</label>
-                <input type="text" class="form-control" id="category_post" name="category_post">
+            <div class="form-group mt-3">
+                <select class="form-select form-select-sm mb-3" name="category_post" id="category_post">
+                    <option selected>Loại bài viết</option>
+                    <option value="1">Khuyến mại</option>
+                    <option value="2">Hướng dẫn</option>
+                    <option value="3">Kinh nghiệm mua sắm</option>
+                </select>
             </div>
 
             <button type="submit" class="btn btn-primary mt-4">Thêm bài viết</button>
