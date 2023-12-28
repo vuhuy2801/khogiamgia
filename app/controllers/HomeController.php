@@ -5,7 +5,8 @@ class HomeController
 {
     public function index()
     {
-        echo 'Trang chủ';
+      include 'app/views/home/index.php';
+      
     }
 
     public function maGiamGia()

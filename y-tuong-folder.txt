@@ -1,18 +1,27 @@
 project-root/
 |-- app/
 |   |-- controllers/
-|       |-- Web/
-|           |-- PostController.php   <-- Controller cho giao diện
-|       |-- Api/
-|           |-- PostApiController.php   <-- Controller cho API
+|   |   |-- Web/
+|   |   |   |-- PostController.php   <-- Controller for the interface
+|   |   |   |-- UserController.php   <-- Controller for user management
+|   |   |   |-- CommentController.php   <-- Controller for comments
 |   |-- models/
-|       |-- Post.php   <-- Lớp model cho bài viết
+|   |   |-- Post.php   <-- Model class for posts
+|   |   |-- User.php   <-- Model class for users
+|   |   |-- Comment.php   <-- Model class for comments
 |   |-- views/
+|   |   |-- posts/   <-- Directory for post views
+|   |   |   |-- index.php   <-- View for listing posts
+|   |   |   |-- show.php   <-- View for showing a single post
+|   |   |-- users/   <-- Directory for user views
+|   |   |   |-- profile.php   <-- View for showing a user profile
+|   |   |-- comments/   <-- Directory for comment views
+|   |   |   |-- index.php   <-- View for listing comments on a post
 |-- public/
 |   |-- css/
+|   |   |-- style.css   <-- Main CSS file
 |   |-- js/
-|       |-- script.js
+|   |   |-- script.js   <-- Main JavaScript file
 |-- config/
-|   |-- database.php   <-- Cấu hình database
+|   |-- database.php   <-- Database configuration
 |-- vendor/
-

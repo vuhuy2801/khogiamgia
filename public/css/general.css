@@ -1,0 +1,38 @@
+/* FILEPATH: /c:/Users/ADMIN/Documents/lap-trinh-web-voi-php/bai-tap-lon/khogiamgia/public/css/general.css */
+
+/* Reset default styles */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li {
+    margin: 0;
+    padding: 0;
+    line-height: 24px;
+}
+
+/* Set default font and color */
+* {
+    font-family: "Inter", sans-serif;
+}
+
+h2 {
+    font-size: 32px;
+    font-weight: 900;
+}
+h3 {
+    font-size: 24px;
+    font-weight: 600;
+}
+h4 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* Add your custom styles below this line */
