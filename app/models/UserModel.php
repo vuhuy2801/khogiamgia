@@ -13,38 +13,38 @@ class User implements UserService {
     }
 
     // Getter and Setter for $userId
-    public function getUserId(): int {
+    public function getUserId() {
         return $this->userId;
     }
 
-    public function setUserId(int $userId): void {
+    public function setUserId($userId) {
         $this->userId = $userId;
     }
 
     // Getter and Setter for $userName
-    public function getUserName(): string {
+    public function getUserName() {
         return $this->userName;
     }
 
-    public function setUserName(string $userName): void {
+    public function setUserName($userName) {
         $this->userName = $userName;
     }
 
     // Getter and Setter for $email
-    public function getEmail(): string {
+    public function getEmail() {
         return $this->email;
     }
 
-    public function setEmail(string $email): void {
+    public function setEmail(string $email) {
         $this->email = $email;
     }
 
     // Getter and Setter for $password
-    public function getPassword(): string {
+    public function getPassword() {
         return $this->password;
     }
 
-    public function setPassword(string $password): void {
+    public function setPassword($password) {
         $this->password = $password;
     }
     

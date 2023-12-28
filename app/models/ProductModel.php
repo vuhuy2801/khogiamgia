@@ -16,56 +16,56 @@ class Product implements ProductService{
     }
 
     // Getter and Setter for $productID
-    public function getProductID(): int {
+    public function getProductID() {
         return $this->productID;
     }
 
-    public function setProductID(int $productID): void {
+    public function setProductID(int $productID) {
         $this->productID = $productID;
     }
 
     // Getter and Setter for $productName
-    public function getProductName(): string {
+    public function getProductName() {
         return $this->productName;
     }
 
-    public function setProductName(string $productName): void {
+    public function setProductName(string $productName) {
         $this->productName = $productName;
     }
 
     // Getter and Setter for $image
-    public function getImage(): string {
+    public function getImage() {
         return $this->image;
     }
 
-    public function setImage(string $image): void {
+    public function setImage(string $image) {
         $this->image = $image;
     }
 
     // Getter and Setter for $rateCount
-    public function getRateCount(): int {
+    public function getRateCount() {
         return $this->rateCount;
     }
 
-    public function setRateCount(int $rateCount): void {
+    public function setRateCount(int $rateCount) {
         $this->rateCount = $rateCount;
     }
 
     // Getter and Setter for $link
-    public function getLink(): string {
+    public function getLink() {
         return $this->link;
     }
 
-    public function setLink(string $link): void {
+    public function setLink(string $link) {
         $this->link = $link;
     }
 
     // Getter and Setter for $soldCount
-    public function getSoldCount(): int {
+    public function getSoldCount() {
         return $this->soldCount;
     }
 
-    public function setSoldCount(int $soldCount): void {
+    public function setSoldCount(int $soldCount) {
         $this->soldCount = $soldCount;
     }
 

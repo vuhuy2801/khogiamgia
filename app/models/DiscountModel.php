@@ -13,35 +13,35 @@ class Discount implements DiscountService {
         $this->db = new DBConnection();
     }
 
-    public function getDiscountId(): int {
+    public function getDiscountId() {
         return $this->discountId;
     }
 
-    public function setDiscountId(int $discountId): void {
+    public function setDiscountId(int $discountId) {
         $this->discountId = $discountId;
     }
 
-    public function getDiscountName(): string {
+    public function getDiscountName() {
         return $this->discountName;
     }
 
-    public function setDiscountName(string $discountName): void {
+    public function setDiscountName(string $discountName) {
         $this->discountName = $discountName;
     }
 
-    public function getDescription(): string {
+    public function getDescription() {
         return $this->description;
     }
 
-    public function setDescription(string $description): void {
+    public function setDescription(string $description) {
         $this->description = $description;
     }
 
-    public function getMaximumDiscount(): float {
+    public function getMaximumDiscount() {
         return $this->maximumDiscount;
     }
 
-    public function setMaximumDiscount(float $maximumDiscount): void {
+    public function setMaximumDiscount(float $maximumDiscount) {
         $this->maximumDiscount = $maximumDiscount;
     }
 

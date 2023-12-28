@@ -10,27 +10,27 @@ class Used implements UsedService {
         $this->db = new DBConnection();
     }
     
-    public function getVoucherId(): ?int {
+    public function getVoucherId() {
         return $this->voucherId;
     }
 
-    public function setVoucherId(?int $voucherId): void {
+    public function setVoucherId($voucherId) {
         $this->voucherId = $voucherId;
     }
 
-    public function getUsedCount(): ?int {
+    public function getUsedCount() {
         return $this->usedCount;
     }
 
-    public function setUsedCount(?int $usedCount): void {
+    public function setUsedCount($usedCount) {
         $this->usedCount = $usedCount;
     }
 
-    public function getUsedId(): ?int {
+    public function getUsedId() {
         return $this->usedId;
     }
 
-    public function setUsedId(?int $usedId): void {
+    public function setUsedId($usedId) {
         $this->usedId = $usedId;
     }
 

@@ -11,19 +11,19 @@ class Banner implements BannerService {
         $this->db = new DBConnection();
     }
 
-    public function getBannerID(): int {
+    public function getBannerID() {
         return $this->bannerID;
     }
 
-    public function setBannerID(int $bannerID): void {
+    public function setBannerID(int $bannerID) {
         $this->bannerID = $bannerID;
     }
 
-    public function getImage(): string {
+    public function getImage() {
         return $this->image;
     }
 
-    public function setImage(string $image): void {
+    public function setImage(string $image) {
         $this->image = $image;
     }
 
