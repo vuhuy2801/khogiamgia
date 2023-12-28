@@ -73,7 +73,7 @@
     padding: 0 7px;
     font-size: 15px;
     font-weight: 600;
-    color: #1e3769;
+    color: #6C757D;
     white-space: nowrap;
     transition: 0.3s;
     position: relative;
@@ -139,12 +139,12 @@
     text-transform: none;
     font-weight: bold;
     text-decoration: none;
-    color: #1e3769;
+    color: #6C757D;
   }
   
   .navbar .dropdown ul i {
     font-size: 12px;
-    color: #1e3769;
+    color: #6C757D;
   }
   
   @media (max-width: 1200px) {
@@ -183,7 +183,7 @@
       text-transform: none;
       font-weight: bold;
       text-decoration: none;
-      color: #1e3769;
+      color: #6C757D;
     }
   }
   
@@ -223,7 +223,7 @@
   .navbar-mobile a:focus {
     padding: 10px 20px;
     font-size: 15px;
-    color: #1e3769;
+    color: #6C757D;
   }
   
   .navbar-mobile > ul > li {
@@ -311,7 +311,7 @@
       padding: 10 7px;
       font-size: 16px;
       font-weight: 600;
-      color: #1e3769;
+      color: #6C757D;
       white-space: nowrap;
       transition: 0.3s;
       position: relative;
@@ -413,7 +413,7 @@
       font-size: 14px;
       font-weight: bold;
       text-decoration: none;
-      color: #1e3769;
+      color: #6C757D;
       transition: 0.3s;
       margin-left: 10px;
     }
