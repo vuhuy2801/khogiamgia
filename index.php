@@ -4,7 +4,9 @@ session_start();
 $router = new \Bramus\Router\Router();
 
 $router->get('/', function () {
-    echo 'Trang chủ';
+    require 'app/controllers/HomeController.php';
+    $HomeController = new HomeController();
+    $HomeController->index();
 });
 
 $router->get('/trang-chu', function () {

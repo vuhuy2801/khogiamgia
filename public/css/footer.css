@@ -1,0 +1,25 @@
+.logo-footer {
+}
+
+.logo-footer img {
+    padding-top: 40px;
+    width: 100%;
+}
+
+
+#footer{
+    padding-top: 30px;
+    background-color: #F3F3F3;
+}
+
+#footer .content{
+    padding: 10px 0;
+}
+
+.copyright{
+    margin-top: 20px;
+    background-color: #E45F2B;
+    color: #fff;
+    padding: 15px 90px;
+    /* text-align: center; */
+}
