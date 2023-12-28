@@ -2,7 +2,7 @@
 require_once '../config/DbConnection.php';
 require_once __DIR__ . '/interface/supplierService.php';
 
-class supplier implements SupplierService {
+class Supplier implements SupplierService {
     private $supplierId;
     private $supplierName;
     private $address;

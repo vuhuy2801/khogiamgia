@@ -1,7 +1,7 @@
 <?php 
 require_once '../config/DbConnection.php';
 require_once __DIR__ . '/interface/productService.php';
-class product implements ProductService{
+class Product implements ProductService{
     private $db;
 
     private $productID;

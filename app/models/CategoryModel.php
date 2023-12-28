@@ -2,7 +2,7 @@
 require_once '../config/DbConnection.php';
 require_once __DIR__ . '/interface/categoryService.php';
 
-class category implements CategoryService{
+class Category implements CategoryService{
     private $categoryId;
     private $categoryName;
     private $description;

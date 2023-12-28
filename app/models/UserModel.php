@@ -1,7 +1,7 @@
 <?php
 require_once '../config/DbConnection.php';
 require_once __DIR__ . '/interface/userService.php';
-class user implements UserService {
+class User implements UserService {
     private $db;
     private $userId;
     private $userName;

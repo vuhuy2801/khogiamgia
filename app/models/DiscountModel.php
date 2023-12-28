@@ -2,7 +2,7 @@
 require_once '../config/DbConnection.php';
 require_once __DIR__ . '/interface/discountService.php';
 
-class discount implements DiscountService {
+class Discount implements DiscountService {
     private $discountId;
     private $discountName;
     private $description;

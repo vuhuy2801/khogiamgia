@@ -1,11 +1,11 @@
 <?php
-require_once __DIR__ . '/../models/supplierModel.php';
+require_once __DIR__ . '/../models/SupplierModel.php';
 
 class supplierController {
     private $supplierData;
 
     public function __construct() {
-        $this->supplierData = new supplier(); 
+        $this->supplierData = new Supplier(); 
     }
 
     public function getListOfSuppliers() {

@@ -2,7 +2,7 @@
 require_once '../config/DbConnection.php';
 require_once __DIR__ . '/interface/bannerService.php';
 
-class banner implements BannerService {
+class Banner implements BannerService {
     private $bannerID;
     private $image;
     private $db;

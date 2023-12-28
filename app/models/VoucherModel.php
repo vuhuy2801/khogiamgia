@@ -1,7 +1,7 @@
 <?php
 require_once '../config/DbConnection.php';
 require_once __DIR__ . '/interface/voucherService.php';
-class voucher implements VoucherService {
+class Voucher implements VoucherService {
     private $voucherId;
     private $voucherName;
     private $discountId;

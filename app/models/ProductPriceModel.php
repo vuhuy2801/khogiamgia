@@ -1,8 +1,8 @@
 <?php 
 require_once '../config/DbConnection.php';
-require_once __DIR__ . '/interface/productPriceService.php';
+require_once __DIR__ . '/interface/ProductPriceService.php';
 
-class productPrice implements productPriceService {
+class ProductPrice implements productPriceService {
     private $productPriceID;
     private $productID;
     private $date;

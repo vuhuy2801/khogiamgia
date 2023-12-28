@@ -3,7 +3,7 @@ require_once '../config/DbConnection.php';
 require_once __DIR__ . '/interface/PostService.php';
 
 
-class post implements PostService {
+class Post implements PostService {
     private $postId;
     private $title;
     private $image;
