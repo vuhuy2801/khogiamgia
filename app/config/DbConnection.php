@@ -1,5 +1,5 @@
 <?php
-class dbConnection {
+class DbConnection {
     private $servername = 'localhost:3306';
     private $username = 'root';
     private $password = '';
