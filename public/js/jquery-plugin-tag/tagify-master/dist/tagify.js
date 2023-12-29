@@ -1232,7 +1232,7 @@
       if (cb) events.split(/\s+/g).forEach(name => target[op + 'EventListener'].call(target, name, cb));
     }
 
-    // Pass EventTarget interface calls to DOM EventTarget object
+    // Pass EventTarget services calls to DOM EventTarget object
     return {
       off(events, cb) {
         addRemove('remove', events, cb);

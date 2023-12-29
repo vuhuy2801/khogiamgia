@@ -1,6 +1,6 @@
 <?php
 require_once '../config/DbConnection.php';
-require_once __DIR__ . '/interface/PostService.php';
+require_once __DIR__ . '/services/PostService.php';
 
 
 class Post implements PostService {
@@ -181,7 +181,7 @@ class Post implements PostService {
 
     public function Search(): array {
         $connection = $this->db->getConnection();
-        $query = "CALL SearchPost(?)";
+        $query = "CALL SearchPostByTitle(?)";
         $statement = $connection->prepare($query);
         $statement->bindParam(1, $this->title);
         try {
