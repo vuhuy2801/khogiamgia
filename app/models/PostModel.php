@@ -181,7 +181,7 @@ class Post implements PostService {
 
     public function Search(): array {
         $connection = $this->db->getConnection();
-        $query = "CALL SearchPost(?)";
+        $query = "CALL SearchPostByTitle(?)";
         $statement = $connection->prepare($query);
         $statement->bindParam(1, $this->title);
         try {
