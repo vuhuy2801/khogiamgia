@@ -3,10 +3,10 @@
 <footer id="footer" class="footer">
     <div class="container">
         <div class="row">
-            <div class="col-2 logo-footer">
+            <div class="col-md-2 logo-footer">
                 <img src="https://api.vuhuy.site/uploads/LOGO_2bd919edea.png" alt="logo" />
             </div>
-            <div class="col-6">
+            <div class="col-md-6">
                 <div class="title">
                     <h3>VỀ KHO GIẢM GIÁ</h3>
                 </div>
@@ -17,7 +17,7 @@
                     tiêu dùng chủ động tìm kiếm sự tiết kiệm trong mọi giao dịch mua sắm trực tuyến.
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-md-4">
                 <div class="title">
                     <h3>LIÊN HỆ</h3>
                 </div>

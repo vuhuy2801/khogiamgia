@@ -23,3 +23,15 @@
     padding: 15px 90px;
     /* text-align: center; */
 }
+
+@media only screen and (max-width: 768px) {
+    .copyright{
+        padding: 15px 90px;
+        text-align: center;
+        font-size: 12px;
+    }
+    .logo-footer img {
+        padding-top: 0px;
+       margin-bottom: 20px;
+    }
+  }
