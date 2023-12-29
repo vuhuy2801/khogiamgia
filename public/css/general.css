@@ -36,3 +36,118 @@ h4 {
 }
 
 /* Add your custom styles below this line */
+
+.btn-xem-them {
+    background-color: #e45f2b;
+    color: #fff;
+}
+
+.btn-xem-them:hover {
+    background-color: rgb(255, 74, 2);
+    color: #fff;
+}
+
+/* bài viết */
+.post-box {
+    box-shadow: 0px 0 30px rgba(1, 41, 112, 0.08);
+    transition: 0.3s;
+    overflow: hidden;
+    padding: 30px;
+    border-radius: 8px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    min-height: 464.9px;
+}
+
+.post-box .post-img {
+    overflow: hidden;
+}
+
+.post-box .post-img img {
+    display: block;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.post-box .post-img img {
+    transition: 0.5s;
+}
+
+.post-box .post-date {
+    margin-top: 8px;
+    font-size: 16px;
+    font-weight: 450;
+    color: rgba(1, 41, 112, 0.6);
+    display: block;
+    margin-bottom: 10px;
+}
+
+.post-box:hover .post-img img {
+    scale: 1.1;
+}
+.post-box .description {
+    font-size: 13px;
+    color: #1e3769;
+    margin-bottom: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.blog-title h3 {
+    padding-top: 50px;
+    font-weight: bold;
+    font-size: 48px;
+    text-align: center;
+    margin-bottom: 70px;
+}
+@media (max-width: 1200px) {
+    .post-box .post-img img {
+        height: 150px;
+    }
+}
+@media (max-width: 992px) {
+    .post-box .post-img img {
+        height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .post-box .post-img img {
+        height: 170px;
+        object-fit: cover;
+    }
+
+    .post-box .description {
+        font-size: 12px;
+    }
+    .post-box .post-title {
+        font-size: 16px;
+    }
+    .post-box .post-date {
+        font-size: 16px;
+    }
+    .blog-title h3 {
+        font-size: 32px;
+        margin-bottom: 50px;
+    }
+    .post-box {
+        min-height: 434px;
+    }
+
+    h2 {
+        font-size: 26px;
+    }
+    h3 {
+        font-size: 18px;
+    }
+    h4 {
+        font-size: 16px;
+    }
+}
+
+/* bài viết */

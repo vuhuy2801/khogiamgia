@@ -49,48 +49,6 @@ $huongDanText = "Hướng dẫn";
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>
-
-        <nav id="sub-navbar" class="sub-navbar container">
-            <div class="subnav-wrapper">
-                <ul>
-                    <li>
-                        <a class="nav-link scrollto active" href="<?php echo $homeUrl; ?>">
-                            <span class="icon-square"></span>
-                            <i class="fas fa-home icon-home"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a
-                            class="nav-link dropdown-toggle"
-                            href="<?php echo $maGiamGiaUrl; ?>"
-                            id="maGiamGiaDropdown"
-                            role="button"
-                            data-bs-toggle="false"
-                            aria-expanded="false"
-                        >
-                            <?php echo $maGiamGiaText; ?>
-                        </a>
-                        <ul
-                            id="dropDownGT"
-                            class="dropdown-menu"
-                            aria-labelledby="maGiamGiaDropdown"
-                        >
-                        <li><a href="#">shopee</a></li>
-                        <li><a href="#">tiki</a></li>
-                        <li><a href="#">lazada</a></li>
-                        <li><a href="#">tiktok shop</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="nav-link scrollto" href="<?php echo $tinKhuyenMaiUrl; ?>"><?php echo $tinKhuyenMaiText; ?></a>
-                    </li>
-                    <li>
-                        <a class="nav-link scrollto" href="<?php echo $huongDanText; ?>"><?php echo $huongDanText; ?></a>
-                    </li>
-
-                </ul>
-            </div>
-        </nav>
     </div>
 </header>
 <!-- End NAV -->
