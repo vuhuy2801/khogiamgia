@@ -19,6 +19,23 @@ $router->get('/ma-giam-gia', function () {
     echo 'Mã giảm giá';
 });
 
+
+$router->get('/shopee', function () {
+    require 'app/controllers/VoucherController.php';
+    $VoucherController = new VoucherController();
+    $VoucherController->showShoppee();
+});
+
+$router->get('/tiki', function () {
+    echo 'tiki';
+});
+$router->get('/lazada', function () {
+    echo 'lazada';
+});
+$router->get('/tiktok-shop', function () {
+    echo 'tiktok-shop';
+});
+
 $router->get('/theo-doi-ma-san-pham', function () {
     echo 'Theo dõi mã sản phẩm';
 });
@@ -42,6 +59,11 @@ $router->get('/tin-khuyen-mai/chi-tiet', function () {
 $router->get('/huong-dan/chi-tiet', function () {
     echo 'Hướng dẫn/ Chi tiết hướng dẫn';
 });
+
+$router->set404(function () {
+    echo 'Không tìm thấy trang';
+});
+
 
 $router->run();
 ?>

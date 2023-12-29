@@ -1,6 +1,8 @@
-
-
-/* provider */
+#testimonials .section-title h2 {
+    margin-bottom: 60px;
+    text-align: center;
+    color: #e45f2b;
+}
 
 .section-title h2 {
     margin-bottom: 60px;
@@ -8,12 +10,42 @@
     color: #e45f2b;
 }
 
+#testimonials {
+    background-color: #f3f3f3;
+}
+
+#testimonials .row {
+    padding: 100px;
+    background-image: url("../../public/images/svg/voucher-bg.svg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+@media (max-width: 1024px) {
+    #testimonials .row {
+        padding: 35px;
+    }
+}
+@media (max-width: 768px) {
+    #testimonials .row {
+        padding: 0px;
+    }
+    .testimonial-item img {
+        width: 40px !important;
+        height: 40px !important;
+    }
+    #testimonials .section-title h2 {
+        margin-top: 20px;
+        margin-bottom: 25px;
+        text-align: center;
+        color: #e45f2b;
+    }
+}
+
 .testimonials .testimonial-item {
     box-sizing: content-box;
     margin-left: 40px;
     margin-bottom: 50px;
-    box-shadow: 0px 0 20px rgba(1, 41, 112, 0.1);
-    background: #fff;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -22,8 +54,6 @@
 }
 
 .testimonials .testimonial-item .testimonial-img {
-    width: 300px;
-    height: 180px;
     object-fit: contain;
     object-position: center;
 }
@@ -72,5 +102,15 @@
     }
 }
 
+.testimonial-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
 /* provider end */
 
+
+.section-help-voucher img {
+    width: 100%;
+}
