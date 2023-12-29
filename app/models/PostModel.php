@@ -126,16 +126,16 @@ class Post implements PostService {
    
     public function Add(): bool {
         $connection = $this->db->getConnection();
-        $query = "CALL AddPost(:title, :image, :supplierId, :content, :description, :categories_post, :createdAt, :status)";
+        $query = "CALL AddPost(?, ?, ?, ?, ?, ?, ?, ?)";
         $statement = $connection->prepare($query);
-        $statement->bindParam(':title', $this->title);
-        $statement->bindParam(':image', $this->image);
-        $statement->bindParam(':supplierId', $this->supplierId);
-        $statement->bindParam(':content', $this->content);
-        $statement->bindParam(':description', $this->description);
-        $statement->bindParam(':categories_post', $this->categories_post);
-        $statement->bindParam(':createdAt', $this->createdAt);
-        $statement->bindParam(':status', $this->status);
+        $statement->bindParam(1, $this->title);
+        $statement->bindParam(2, $this->image);
+        $statement->bindParam(3, $this->supplierId);
+        $statement->bindParam(4, $this->content);
+        $statement->bindParam(5, $this->description);
+        $statement->bindParam(6, $this->categories_post);
+        $statement->bindParam(7, $this->createdAt);
+        $statement->bindParam(8, $this->status);
         try {
             $statement->execute();
             return true;
@@ -147,17 +147,17 @@ class Post implements PostService {
 
     public function Edit(): bool {
         $connection = $this->db->getConnection();
-        $query = "CALL UpdatePost(:postId, :title, :image, :supplierId, :content, :description, :categories_post, :createdAt, :status) ";
+        $query = "CALL UpdatePost(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $statement = $connection->prepare($query);
-        $statement->bindParam(':postId', $this->postId);
-        $statement->bindParam(':title', $this->title);
-        $statement->bindParam(':image', $this->image);
-        $statement->bindParam(':supplierId', $this->supplierId);
-        $statement->bindParam(':content', $this->content);
-        $statement->bindParam(':description', $this->description);
-        $statement->bindParam(':categories_post', $this->categories_post);
-        $statement->bindParam(':createdAt', $this->createdAt);
-        $statement->bindParam(':status', $this->status);
+        $statement->bindParam(1, $this->postId);
+        $statement->bindParam(2, $this->title);
+        $statement->bindParam(3, $this->image);
+        $statement->bindParam(4, $this->supplierId);
+        $statement->bindParam(5, $this->content);
+        $statement->bindParam(6, $this->description);
+        $statement->bindParam(7, $this->categories_post);
+        $statement->bindParam(8, $this->createdAt);
+        $statement->bindParam(9, $this->status);
         try {
             $statement->execute();
             return true;
@@ -168,9 +168,9 @@ class Post implements PostService {
 
     public function Delete(): bool {
         $connection = $this->db->getConnection();
-        $query =  "CALL DeletePost(:postId)";
+        $query =  "CALL DeletePost(?)";
         $statement = $connection->prepare($query);
-        $statement->bindParam(':postId', $this->postId);
+        $statement->bindParam(1, $this->postId);
         try {
             $statement->execute();
             return true;
@@ -179,10 +179,32 @@ class Post implements PostService {
         }
     }
 
-    // public function Search(string $key): array {
-    //     // Tìm kiếm bài viết trong cơ sở dữ liệu và trả về danh sách kết quả
-    // }
+    public function Search(): array {
+        $connection = $this->db->getConnection();
+        $query = "CALL SearchPost(?)";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(1, $this->title);
+        try {
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }catch (PDOException $e) {
+            return [];
+        }
+    }
 
- 
+    public function GetPostsByCategory(): array {
+        $connection = $this->db->getConnection();
+        $query = "CALL GetPostsByCategory(?)";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(1, $this->categories_post);
+        try {
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }catch (PDOException $e) {
+            return [];
+        }
+    }
 }
 ?>

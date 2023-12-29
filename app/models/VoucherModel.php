@@ -141,18 +141,141 @@ class Voucher implements VoucherService {
     }
 
     public function Add(): bool{
-        return true;
+        $connection = $this->db->getConnection();
+        $query = "CALL AddVoucher(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(1, $this->voucherName);
+        $statement->bindParam(2, $this->discountId);
+        $statement->bindParam(3, $this->quantity);
+        $statement->bindParam(4, $this->expressAt);
+        $statement->bindParam(5, $this->expiresAt);
+        $statement->bindParam(6, $this->conditionOrder);
+        $statement->bindParam(7, $this->conditionBranch);
+        $statement->bindParam(8, $this->description);
+        $statement->bindParam(9, $this->categoryId);
+        $statement->bindParam(10, $this->createdAt);
+        $statement->bindParam(11, $this->updatedAt);
+        $statement->bindParam(12, $this->is_trend);
+        $statement->bindParam(13, $this->supplierId);
+        $statement->bindParam(14, $this->status);
+        $statement->bindParam(15, $this->address);
+        $statement->bindParam(16, $this->discountType);
+        try {
+            $statement->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
     public function Edit(): bool{
-        return true;
+        $connection = $this->db->getConnection();
+        $query = "CALL UpdateVoucher(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(1, $this->voucherId);
+        $statement->bindParam(2, $this->voucherName);
+        $statement->bindParam(3, $this->discountId);
+        $statement->bindParam(4, $this->quantity);
+        $statement->bindParam(5, $this->expressAt);
+        $statement->bindParam(6, $this->expiresAt);
+        $statement->bindParam(7, $this->conditionOrder);
+        $statement->bindParam(8, $this->conditionBranch);
+        $statement->bindParam(9, $this->description);
+        $statement->bindParam(10, $this->categoryId);
+        $statement->bindParam(11, $this->createdAt);
+        $statement->bindParam(12, $this->updatedAt);
+        $statement->bindParam(13, $this->is_trend);
+        $statement->bindParam(14, $this->supplierId);
+        $statement->bindParam(15, $this->status);
+        $statement->bindParam(16, $this->address);
+        $statement->bindParam(17, $this->discountType);
+        try {
+            $statement->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
     public function Delete(): bool{
-        return true;
+        $connection = $this->db->getConnection();
+        $query = "CALL DeleteVoucher(?)";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(1, $this->voucherId);
+        try {
+            $statement->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
-    public function Search(): array{
+
+    public function GetListVouchersWithDiscounts(): array{
+        $connection = $this->db->getConnection();
+        if ($connection){
+            $query = "CALL GetListVouchersWithDiscounts()";
+            $statement = $connection->prepare($query);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
         return [];
     }
     public function List(): array{
+        $connection = $this->db->getConnection();
+        if ($connection){
+            $query = "CALL GetListVouchers()";
+            $statement = $connection->prepare($query);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+        return [];
+    }
+    public function GetTrendingVouchers(): array{
+        $connection = $this->db->getConnection();
+        if ($connection){
+            $query = "CALL GetTrendingVouchers(1)";
+            $statement = $connection->prepare($query);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+        return [];
+    }
+    public function GetVouchersBySupplierId(): array{
+        $connection = $this->db->getConnection();
+        if ($connection){
+            $query = "CALL GetVouchersBySupplierId(?)";
+            $statement = $connection->prepare($query);
+            $statement->bindParam(1, $this->supplierId);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+        return [];
+    }
+
+    public function GetVouchersByCategoryId(): array{
+        $connection = $this->db->getConnection();
+        if ($connection){
+            $query = "CALL GetVouchersByCategoryId(?)";
+            $statement = $connection->prepare($query);
+            $statement->bindParam(1, $this->categoryId);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+        return [];
+    }
+    public function SearchVoucherAndDiscountByKeyword(): array{
+        $connection = $this->db->getConnection();
+        if ($connection){
+            $query = "CALL SearchVoucherAndDiscountByKeyword(?)";
+            $statement = $connection->prepare($query);
+            $statement->bindParam(1, $this->voucherName);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
         return [];
     }
 }

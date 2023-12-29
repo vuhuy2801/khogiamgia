@@ -13,56 +13,98 @@ class User implements UserService {
     }
 
     // Getter and Setter for $userId
-    public function getUserId(): int {
+    public function getUserId() {
         return $this->userId;
     }
 
-    public function setUserId(int $userId): void {
+    public function setUserId($userId) {
         $this->userId = $userId;
     }
 
     // Getter and Setter for $userName
-    public function getUserName(): string {
+    public function getUserName() {
         return $this->userName;
     }
 
-    public function setUserName(string $userName): void {
+    public function setUserName($userName) {
         $this->userName = $userName;
     }
 
     // Getter and Setter for $email
-    public function getEmail(): string {
+    public function getEmail() {
         return $this->email;
     }
 
-    public function setEmail(string $email): void {
+    public function setEmail($email) {
         $this->email = $email;
     }
 
     // Getter and Setter for $password
-    public function getPassword(): string {
+    public function getPassword() {
         return $this->password;
     }
 
-    public function setPassword(string $password): void {
+    public function setPassword($password) {
         $this->password = $password;
     }
     
 
     public function Add(): bool {
-        return true;
+        $connection = $this->db->getConnection();
+        $query = "CALL AddUser(?,?,?)";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(1, $this->userName);
+        $statement->bindParam(2, $this->email);
+        $statement->bindParam(3, $this->password);
+        try {
+            $statement->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+
     }
 
     public function Edit(): bool {
-        return true;
+        $connection = $this->db->getConnection();
+        $query = "CALL UpdateUser(?,?,?,?)";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(1, $this->userId);
+        $statement->bindParam(2, $this->userName);
+        $statement->bindParam(3, $this->email);
+        $statement->bindParam(4, $this->password);
+        try {
+            $statement->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     public function Delete(): bool {
-        return true;
+        $connection = $this->db->getConnection();
+        $query = "CALL DeleteUser(?)";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(1, $this->userId);
+        try {
+            $statement->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     public function List(): array {
-        return [];
+        $connection = $this->db->getConnection();
+        if ($connection){
+            $query = "CALL GetAllUsers()";
+            $statement = $connection->prepare($query);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }else{
+            return [];
+        }
     }
 }
 ?>

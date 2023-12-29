@@ -16,82 +16,146 @@ class Product implements ProductService{
     }
 
     // Getter and Setter for $productID
-    public function getProductID(): int {
+    public function getProductID() {
         return $this->productID;
     }
 
-    public function setProductID(int $productID): void {
+    public function setProductID(int $productID) {
         $this->productID = $productID;
     }
 
     // Getter and Setter for $productName
-    public function getProductName(): string {
+    public function getProductName() {
         return $this->productName;
     }
 
-    public function setProductName(string $productName): void {
+    public function setProductName(string $productName) {
         $this->productName = $productName;
     }
 
     // Getter and Setter for $image
-    public function getImage(): string {
+    public function getImage() {
         return $this->image;
     }
 
-    public function setImage(string $image): void {
+    public function setImage(string $image) {
         $this->image = $image;
     }
 
     // Getter and Setter for $rateCount
-    public function getRateCount(): int {
+    public function getRateCount() {
         return $this->rateCount;
     }
 
-    public function setRateCount(int $rateCount): void {
+    public function setRateCount(int $rateCount) {
         $this->rateCount = $rateCount;
     }
 
     // Getter and Setter for $link
-    public function getLink(): string {
+    public function getLink() {
         return $this->link;
     }
 
-    public function setLink(string $link): void {
+    public function setLink(string $link) {
         $this->link = $link;
     }
 
     // Getter and Setter for $soldCount
-    public function getSoldCount(): int {
+    public function getSoldCount() {
         return $this->soldCount;
     }
 
-    public function setSoldCount(int $soldCount): void {
+    public function setSoldCount(int $soldCount) {
         $this->soldCount = $soldCount;
     }
 
     
 
     public function Add(): bool {
-        return true;
+        $connection = $this->db->getConnection();
+        $query = "CALL AddProduct(?,?,?,?,?)";
+        $staement = $connection->prepare($query);
+        $staement->bindParam(1, $this->productName);
+        $staement->bindParam(2, $this->image);
+        $staement->bindParam(3, $this->rateCount);
+        $staement->bindParam(4, $this->link);
+        $staement->bindParam(5, $this->soldCount);
+        try {
+            $staement->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     public function Edit(): bool {
-        return true;
+        $connection = $this->db->getConnection();
+        $query = "CALL UpdateProduct(?,?,?,?,?,?)";
+        $staement = $connection->prepare($query);
+        $staement->bindParam(1, $this->productID);
+        $staement->bindParam(2, $this->productName);
+        $staement->bindParam(3, $this->image);
+        $staement->bindParam(4, $this->rateCount);
+        $staement->bindParam(5, $this->link);
+        $staement->bindParam(6, $this->soldCount);
+        try {
+            $staement->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     public function Delete(): bool {
-        return true;
+        $connection = $this->db->getConnection();
+        $query = "CALL DeleteProduct(?)";
+        $staement = $connection->prepare($query);
+        $staement->bindParam(1, $this->productID);
+        try {
+            $staement->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     public function List(): array {
+        $connection = $this->db->getConnection();
+        if($connection){
+            $query = "CALL GetListProducts()";
+            $staement = $connection->prepare($query);
+            $staement->execute();
+            $result = $staement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
         return [];
     }
     public function Search(): array{
-        return [];
+        $connection = $this->db->getConnection();
+        $query = "CALL SearchProduct(?)";
+        $staement = $connection->prepare($query);
+        $staement->bindParam(1, $this->productName);
+        try {
+            $staement->execute();
+            $result = $staement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            return [];
+        }
     }
     
     public function GetProductWithPriceByLink(): array {
-        return [];
+        $connection = $this->db->getConnection();
+        $query = "CALL GetProductWithPriceByLink(?)";
+        $staement = $connection->prepare($query);
+        $staement->bindParam(1, $this->link);
+        try {
+            $staement->execute();
+            $result = $staement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            return [];
+        }
 
     }
 }
