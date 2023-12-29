@@ -1,6 +1,6 @@
 <?php
 require_once '../config/DbConnection.php';
-require_once __DIR__ . '/interface/PostService.php';
+require_once __DIR__ . '/services/PostService.php';
 
 
 class Post implements PostService {
