@@ -46,15 +46,47 @@ class ProductPrice implements productPriceService {
     }
 
     public function Add(): bool {
-        return true;
+        $connection = $this->db->getConnection();
+        $query = "CALL AddProductPrice(?, ?, ?)";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(1, $this->productID);
+        $statement->bindParam(2, $this->date);
+        $statement->bindParam(3, $this->currentPrice);
+        try {
+            $statement->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     public function Edit(): bool {
-        return true;
+        $connection = $this->db->getConnection();
+        $query = "CALL UpdateProductPrice(?, ?, ?, ?)";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(1, $this->productPriceID);
+        $statement->bindParam(2, $this->productID);
+        $statement->bindParam(3, $this->date);
+        $statement->bindParam(4, $this->currentPrice);
+        try {
+            $statement->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     public function Delete(): bool {
-        return true;
+        $connection = $this->db->getConnection();
+        $query = "CALL DeleteProductPrice(?)";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(1, $this->productPriceID);
+        try {
+            $statement->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 }
 

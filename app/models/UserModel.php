@@ -35,7 +35,7 @@ class User implements UserService {
         return $this->email;
     }
 
-    public function setEmail(string $email) {
+    public function setEmail($email) {
         $this->email = $email;
     }
 
@@ -50,19 +50,61 @@ class User implements UserService {
     
 
     public function Add(): bool {
-        return true;
+        $connection = $this->db->getConnection();
+        $query = "CALL AddUser(?,?,?)";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(1, $this->userName);
+        $statement->bindParam(2, $this->email);
+        $statement->bindParam(3, $this->password);
+        try {
+            $statement->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+
     }
 
     public function Edit(): bool {
-        return true;
+        $connection = $this->db->getConnection();
+        $query = "CALL UpdateUser(?,?,?,?)";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(1, $this->userId);
+        $statement->bindParam(2, $this->userName);
+        $statement->bindParam(3, $this->email);
+        $statement->bindParam(4, $this->password);
+        try {
+            $statement->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     public function Delete(): bool {
-        return true;
+        $connection = $this->db->getConnection();
+        $query = "CALL DeleteUser(?)";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(1, $this->userId);
+        try {
+            $statement->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     public function List(): array {
-        return [];
+        $connection = $this->db->getConnection();
+        if ($connection){
+            $query = "CALL GetAllUsers()";
+            $statement = $connection->prepare($query);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }else{
+            return [];
+        }
     }
 }
 ?>

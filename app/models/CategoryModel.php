@@ -39,19 +39,58 @@ class Category implements CategoryService{
     }
     
     public function Add(): bool {
-        return true;
+        $connection = $this->db->getConnection();
+        $query = "CALL AddCategory(?,?)";
+        $staement = $connection->prepare($query);
+        $staement->bindParam(1, $this->categoryName);
+        $staement->bindParam(2, $this->description);
+        try {
+            $staement->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     public function Edit(): bool {
-        return true;
+        $connection = $this->db->getConnection();
+        $query = "CALL UpdateCategory(?,?,?)";
+        $staement = $connection->prepare($query);
+        $staement->bindParam(1, $this->categoryId);
+        $staement->bindParam(2, $this->categoryName);
+        $staement->bindParam(3, $this->description);
+        try {
+            $staement->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     public function Delete(): bool {
-        return true;
+        $connection = $this->db->getConnection();
+        $query = "CALL DeleteCategory(?)";
+        $staement = $connection->prepare($query);
+        $staement->bindParam(1, $this->categoryId);
+        try {
+            $staement->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     public function List(): array {
-        return [];
+        $connection = $this->db->getConnection();
+        if($connection){
+            $query = "CALL GetListCategories()";
+            $staement = $connection->prepare($query);
+            $staement->execute();
+            $result = $staement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }else {
+            return [];
+        }
     }
 }
 ?>

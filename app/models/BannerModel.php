@@ -28,19 +28,56 @@ class Banner implements BannerService {
     }
 
     public function Add(): bool {
-        return true;
+        $connection = $this->db->getConnection();
+        $query = "CALL AddBanner(?)";
+        $staement = $connection->prepare($query);
+        $staement->bindParam(1, $this->image);
+        try {
+            $staement->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     public function Edit(): bool {
-        return true;
+        $connection = $this->db->getConnection();
+        $query = "CALL UpdateBanner(?,?)";
+        $staement = $connection->prepare($query);
+        $staement->bindParam(1, $this->bannerID);
+        $staement->bindParam(2, $this->image);
+        try {
+            $staement->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     public function Delete(): bool {
-        return true;
+        $connection = $this->db->getConnection();
+        $query = "CALL DeleteBanner(?)";
+        $staement = $connection->prepare($query);
+        $staement->bindParam(1, $this->bannerID);
+        try {
+            $staement->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     public function List(): array {
-        return [];
+        $connection = $this->db->getConnection();
+        if ($connection) {
+            $query = "CALL GetListBanners()";
+            $staement = $connection->prepare($query);
+            $staement->execute();
+            $result = $staement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } else {
+            return [];
+        }
     }
 }
 ?>

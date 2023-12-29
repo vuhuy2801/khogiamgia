@@ -72,26 +72,90 @@ class Product implements ProductService{
     
 
     public function Add(): bool {
-        return true;
+        $connection = $this->db->getConnection();
+        $query = "CALL AddProduct(?,?,?,?,?)";
+        $staement = $connection->prepare($query);
+        $staement->bindParam(1, $this->productName);
+        $staement->bindParam(2, $this->image);
+        $staement->bindParam(3, $this->rateCount);
+        $staement->bindParam(4, $this->link);
+        $staement->bindParam(5, $this->soldCount);
+        try {
+            $staement->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     public function Edit(): bool {
-        return true;
+        $connection = $this->db->getConnection();
+        $query = "CALL UpdateProduct(?,?,?,?,?,?)";
+        $staement = $connection->prepare($query);
+        $staement->bindParam(1, $this->productID);
+        $staement->bindParam(2, $this->productName);
+        $staement->bindParam(3, $this->image);
+        $staement->bindParam(4, $this->rateCount);
+        $staement->bindParam(5, $this->link);
+        $staement->bindParam(6, $this->soldCount);
+        try {
+            $staement->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     public function Delete(): bool {
-        return true;
+        $connection = $this->db->getConnection();
+        $query = "CALL DeleteProduct(?)";
+        $staement = $connection->prepare($query);
+        $staement->bindParam(1, $this->productID);
+        try {
+            $staement->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     public function List(): array {
+        $connection = $this->db->getConnection();
+        if($connection){
+            $query = "CALL GetListProducts()";
+            $staement = $connection->prepare($query);
+            $staement->execute();
+            $result = $staement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
         return [];
     }
     public function Search(): array{
-        return [];
+        $connection = $this->db->getConnection();
+        $query = "CALL SearchProduct(?)";
+        $staement = $connection->prepare($query);
+        $staement->bindParam(1, $this->productName);
+        try {
+            $staement->execute();
+            $result = $staement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            return [];
+        }
     }
     
     public function GetProductWithPriceByLink(): array {
-        return [];
+        $connection = $this->db->getConnection();
+        $query = "CALL GetProductWithPriceByLink(?)";
+        $staement = $connection->prepare($query);
+        $staement->bindParam(1, $this->link);
+        try {
+            $staement->execute();
+            $result = $staement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            return [];
+        }
 
     }
 }
