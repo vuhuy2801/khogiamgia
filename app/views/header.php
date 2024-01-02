@@ -1,6 +1,6 @@
 <?php
 $currentUrl = $_SERVER['REQUEST_URI'];
-
+echo print_r($_GET);
 $logoUrl = "https://api.vuhuy.site/uploads/LOGO_2bd919edea.png";
 $homeUrl = "/trang-chu";
 $maGiamGiaUrl = "#";
@@ -24,13 +24,13 @@ $huongDanText = "Hướng dẫn";
         <nav id="navbar" class="navbar">
             <ul>
                 <li>
-                    <a class="nav-link scrollto <?php echo $currentUrl === $homeUrl ? 'active' : '' ?>"
+                    <a class="nav-link scrollto <?php echo $currentUrl === $homeUrl || $currentUrl === "/" ? 'active' : ''; ?>"
                         href="<?php echo $homeUrl; ?>">
                         <?php echo $trangChuText; ?>
                     </a>
                 </li>
                 <li class="dropdown">
-                    <a class="nav-link scrollto <?php echo $currentUrl === "/shopee" || $currentUrl === "/tiki" || $currentUrl === "/lazada" || $currentUrl === "/tiktok-shop" ? 'active' : '' ?>"
+                    <a class="nav-link scrollto <?php echo strpos($currentUrl, "/shopee") !== false || strpos($currentUrl, "/tiki") !== false || strpos($currentUrl, "/lazada") !== false || strpos($currentUrl, "/tiktok-shop") !== false ? 'active' : ''; ?>"
                         href="<?php echo $maGiamGiaUrl; ?>">
                         <?php echo $maGiamGiaText; ?>
                     </a>
@@ -42,17 +42,20 @@ $huongDanText = "Hướng dẫn";
                     </ul>
                 </li>
                 <li>
-                    <a class="nav-link scrollto" href="<?php echo $theoDoiGiaSPUrl; ?>">
+                    <a class="nav-link scrollto <?php echo $currentUrl === $theoDoiGiaSPUrl ? 'active' : ''; ?>"
+                        href="<?php echo $theoDoiGiaSPUrl; ?>">
                         <?php echo $theoDoiGiaSpText; ?>
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link scrollto" href="<?php echo $tinKhuyenMaiUrl; ?>">
+                    <a class="nav-link scrollto <?php echo $currentUrl === $tinKhuyenMaiUrl ? 'active' : ''; ?>"
+                        href="<?php echo $tinKhuyenMaiUrl; ?>">
                         <?php echo $tinKhuyenMaiText; ?>
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link scrollto" href="<?php echo $huongDanUrl; ?>">
+                    <a class="nav-link scrollto <?php echo $currentUrl === $huongDanUrl ? 'active' : ''; ?>"
+                        href="<?php echo $huongDanUrl; ?>">
                         <?php echo $huongDanText; ?>
                     </a>
                 </li>
