@@ -7,6 +7,7 @@ $router->get('/', function () {
     require 'app/controllers/HomeController.php';
     $HomeController = new HomeController();
     $HomeController->index();
+   
 });
 
 $router->get('/trang-chu', function () {
@@ -17,6 +18,9 @@ $router->get('/trang-chu', function () {
 
 $router->get('/ma-giam-gia', function () {
     echo 'Mã giảm giá';
+});
+$router->get('/login', function () {
+    require 'app/views/login/login.html';
 });
 
 
