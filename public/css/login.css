@@ -1,18 +1,23 @@
-body{
-    background-color: #F0F2F5;
-    background-image:  url("../../public/images/bglogin.png");
+body {
+    background-color: #f0f2f5;
+    background-image: url("../../public/images/bglogin.png");
 }
 
-
-.logo img{
+.logo img {
     width: 226px;
     height: 83px;
 }
 
-.logo p{
-    color: d9d9d9;
+.logo p {
+    color: rgba(0, 0, 0, 0.45);
 }
 
-.form-login{
+.form-login {
     margin-top: 100px;
+}
+
+.footer {
+    color: rgba(0, 0, 0, 0.45);
+    margin-top: 170px;
+    text-transform: uppercase; /* Added */
 }
