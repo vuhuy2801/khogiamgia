@@ -1,0 +1,26 @@
+.table_item {
+  width: 13%;
+}
+
+.item_image {
+  height: 104px;
+  width: 94px;
+}
+
+.wrap_dasboard {
+  background-color: #f0f2f5;
+}
+
+.action_edit {
+  color: #28a745;
+  font-size: 24px;
+}
+
+.delete-post {
+  color: #dc3545;
+  font-size: 24px;
+}
+
+.action_detail {
+  font-size: 24px;
+}

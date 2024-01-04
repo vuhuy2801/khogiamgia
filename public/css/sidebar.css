@@ -1,0 +1,51 @@
+.wrap-logo {
+  width: 100%;
+  overflow: hidden;
+}
+
+.logo {
+  height: auto;
+  width: 226px;
+  height: 83px;
+}
+
+.wrap-sidebar {
+  z-index: 99;
+  box-shadow: 4px 0 6px -3px rgba(21, 111, 237, 0.5); /* Thay đổi màu và giá trị offset nếu cần */
+}
+
+.wrap-item {
+  font-weight: bold;
+  width: 100%;
+  padding-left: 27px;
+}
+
+.active {
+  background-color: #e6f7ff;
+  position: relative;
+}
+
+.sidebar {
+  width: 100%;
+}
+.wrap-item.nav-item.active a.nav-link::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 3px;
+  background-color: #1890ff;
+}
+
+#btnAdd {
+  background-color: #1890ff;
+  border: none;
+  color: white;
+  border-radius: 6px;
+}
+
+.addLink {
+  color: white;
+  text-decoration: none;
+}

@@ -1,5 +1,5 @@
 <?php
-require_once '../config/DbConnection.php';
+require_once __DIR__ . '/../config/DbConnection.php';
 require_once __DIR__ . '/services/supplierService.php';
 
 class Supplier implements SupplierService {
