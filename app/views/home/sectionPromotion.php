@@ -1,11 +1,12 @@
-
-   <!-- Section promotion -->                 
+<!-- Section promotion -->
 <section class="section-promotion" style="background-color: #f3f3f3; ">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="section-title">
-                    <h2>MÃ GIẢM GIÁ HOT</h2>
+                    <h2>
+                        <?php echo $titleVoucher ?>
+                    </h2>
                 </div>
             </div>
         </div>

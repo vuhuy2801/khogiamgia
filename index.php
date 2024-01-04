@@ -7,6 +7,7 @@ $router->get('/', function () {
     require 'app/controllers/HomeController.php';
     $HomeController = new HomeController();
     $HomeController->index();
+   
 });
 
 $router->get('/trang-chu', function () {
@@ -18,6 +19,26 @@ $router->get('/trang-chu', function () {
 
 $router->get('/ma-giam-gia', function () {
     echo 'Mã giảm giá';
+});
+$router->get('/login', function () {
+    require 'app/views/login/login.html';
+});
+
+
+$router->get('/shopee', function () {
+    require 'app/controllers/VoucherController.php';
+    $VoucherController = new VoucherController();
+    $VoucherController->showShoppee();
+});
+
+$router->get('/tiki', function () {
+    echo 'tiki';
+});
+$router->get('/lazada', function () {
+    echo 'lazada';
+});
+$router->get('/tiktok-shop', function () {
+    echo 'tiktok-shop';
 });
 
 $router->get('/theo-doi-ma-san-pham', function () {

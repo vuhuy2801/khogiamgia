@@ -151,3 +151,72 @@ h4 {
 }
 
 /* bài viết */
+
+
+
+/* banner */
+section.banner {
+    margin-top: 90px;
+}
+
+.carousel-inner {
+    height: 100%;
+    width: 100%;
+}
+
+.carousel-item img {
+    position: relative;
+    object-fit: cover;
+    width: 100%;
+    height: 614.92px;
+}
+
+.carousel-control-prev {
+    /* left: -85px; */
+    /* padding-left: 75px; */
+    display: none;
+    opacity: 0;
+}
+
+.carousel-control-next {
+    /* right:-85px; */
+    /* padding-right: 75px; */
+    display: none;
+    opacity: 0;
+}
+
+.carousel:hover .carousel-control-prev,
+.carousel:hover .carousel-control-next {
+    display: block;
+    opacity: 1;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+    width: 10%;
+}
+
+.carousel-control-prev:hover {
+    background: rgb(255, 255, 255);
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+        -270deg,
+        rgba(255, 255, 255, 0.5) 0%,
+        rgba(252, 0, 0, 0) 100%
+    );
+}
+.carousel-control-next:hover {
+    background: rgb(255, 255, 255);
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+        270deg,
+        rgba(255, 255, 255, 0.5) 0%,
+        rgba(252, 0, 0, 0) 100%
+    );
+}
+
+.carousel-control-prev.fade-out,
+.carousel-control-next.fade-out {
+    opacity: 0.5;
+}
+/* banner end  */
