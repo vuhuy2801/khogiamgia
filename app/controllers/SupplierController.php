@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../models/SupplierModel.php';
 
-class supplierController {
+class SupplierController {
     private $supplierData;
 
     public function __construct() {

@@ -15,6 +15,7 @@ $router->get('/trang-chu', function () {
     $HomeController->index();
 });
 
+
 $router->get('/ma-giam-gia', function () {
     echo 'Mã giảm giá';
 });
@@ -41,6 +42,42 @@ $router->get('/tin-khuyen-mai/chi-tiet', function () {
 
 $router->get('/huong-dan/chi-tiet', function () {
     echo 'Hướng dẫn/ Chi tiết hướng dẫn';
+});
+
+
+// router handle Post
+$router->get('/admin/bai-viet/show', function () {
+    require 'app/controllers/PostController.php';
+    $PostController = new PostController();
+    $PostController->index();
+});
+$router->get('/admin/bai-viet/create', function () {
+    require 'app/controllers/PostController.php';
+    $PostController = new PostController();
+    $PostController->create();
+});
+$router->get('/admin/bai-viet/edit', function ()  {
+    require 'app/controllers/PostController.php';
+    $PostController = new PostController();
+    $PostController->edit();
+});
+
+$router->post('/admin/bai-viet/add', function () {
+    require 'app/controllers/PostController.php';
+    $PostController = new PostController();
+    $PostController->addPost();
+});
+
+$router->post('/admin/bai-viet/update', function ()  {
+    require 'app/controllers/PostController.php';
+    $PostController = new PostController();
+    $PostController->updatePost();
+});
+
+$router->post('/admin/bai-viet/delete/(\d+)', function ($postId)  {
+    require 'app/controllers/PostController.php';
+    $PostController = new PostController();
+    $PostController->deletePost($postId);
 });
 
 $router->run();

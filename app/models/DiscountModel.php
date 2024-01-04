@@ -1,5 +1,5 @@
 <?php
-require_once '../config/DbConnection.php';
+require_once __DIR__ . '/../config/DbConnection.php';
 require_once __DIR__ . '/services/discountService.php';
 
 class Discount implements DiscountService {
