@@ -1,17 +1,19 @@
 <?php
-require_once '../config/DbConnection.php';
-require_once __DIR__ . '/interface/PostService.php';
+require_once __DIR__ . '/../config/DbConnection.php';
+require_once __DIR__ . '/services/PostService.php';
 
 
 class Post implements PostService {
     private $postId;
     private $title;
     private $image;
+    private $slug;
     private $supplierId;
     private $content;
     private $description;
     private $categories_post;
     private $createdAt;
+    private $updatedAt;
     private $status;
     private $db;
 
@@ -38,8 +40,17 @@ class Post implements PostService {
         return $this->image;
     }
 
+
     public function setImage($value) {
         $this->image = $value;
+    }
+
+    public function getSlug() {
+        return $this->slug;
+    }
+
+    public function setSlug($value) {
+        $this->slug = $value;
     }
 
     public function getSupplierId() {
@@ -81,6 +92,13 @@ class Post implements PostService {
     public function setCreatedAt($value) {
         $this->createdAt = $value;
     }
+    public function getUpdateAt() {
+        return $this->updatedAt;
+    }
+
+    public function setUpdateAt($value) {
+        $this->updatedAt = $value;
+    }
     public function getStatus() {
         return $this->status;
     }
@@ -88,28 +106,7 @@ class Post implements PostService {
     public function setStatus($value) {
         $this->status = $value;
     }
-    public function post(
-        int $id,
-        string $title,
-        string $image,
-        int $supplierId,
-        string $content,
-        string $description,
-        string $categories_post,
-        string $createdAt,
-        int $status
-    ) {
-        $this->title = $title;
-        $this->image = $image;
-        $this->supplierId = $supplierId;
-        $this->content = $content;
-        $this->description = $description;
-        $this->categories_post = $categories_post;
-        $this->createdAt = $createdAt;
-        $this->status = $status;
-    }
 
-    
     public function List(): array {
         $connection = $this->db->getConnection();
 
@@ -126,16 +123,18 @@ class Post implements PostService {
    
     public function Add(): bool {
         $connection = $this->db->getConnection();
-        $query = "CALL AddPost(?, ?, ?, ?, ?, ?, ?, ?)";
+        $query = "CALL AddPost(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $statement = $connection->prepare($query);
         $statement->bindParam(1, $this->title);
         $statement->bindParam(2, $this->image);
-        $statement->bindParam(3, $this->supplierId);
-        $statement->bindParam(4, $this->content);
-        $statement->bindParam(5, $this->description);
-        $statement->bindParam(6, $this->categories_post);
-        $statement->bindParam(7, $this->createdAt);
-        $statement->bindParam(8, $this->status);
+        $statement->bindParam(3, $this->slug);
+        $statement->bindParam(4, $this->supplierId);
+        $statement->bindParam(5, $this->content);
+        $statement->bindParam(6, $this->description);
+        $statement->bindParam(7, $this->categories_post);
+        $statement->bindParam(8, $this->createdAt);
+        $statement->bindParam(9, $this->updatedAt);
+        $statement->bindParam(10, $this->status);
         try {
             $statement->execute();
             return true;
@@ -147,17 +146,18 @@ class Post implements PostService {
 
     public function Edit(): bool {
         $connection = $this->db->getConnection();
-        $query = "CALL UpdatePost(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $query = "CALL UpdatePost(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $statement = $connection->prepare($query);
         $statement->bindParam(1, $this->postId);
         $statement->bindParam(2, $this->title);
         $statement->bindParam(3, $this->image);
-        $statement->bindParam(4, $this->supplierId);
-        $statement->bindParam(5, $this->content);
-        $statement->bindParam(6, $this->description);
-        $statement->bindParam(7, $this->categories_post);
-        $statement->bindParam(8, $this->createdAt);
-        $statement->bindParam(9, $this->status);
+        $statement->bindParam(4, $this->slug);
+        $statement->bindParam(5, $this->supplierId);
+        $statement->bindParam(6, $this->content);
+        $statement->bindParam(7, $this->description);
+        $statement->bindParam(8, $this->categories_post);
+        $statement->bindParam(9, $this->updatedAt);
+        $statement->bindParam(10, $this->status);
         try {
             $statement->execute();
             return true;
@@ -181,7 +181,7 @@ class Post implements PostService {
 
     public function Search(): array {
         $connection = $this->db->getConnection();
-        $query = "CALL SearchPost(?)";
+        $query = "CALL SearchPostByTitle(?)";
         $statement = $connection->prepare($query);
         $statement->bindParam(1, $this->title);
         try {

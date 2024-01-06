@@ -1,6 +1,6 @@
 <?php 
-require_once '../config/DbConnection.php';
-require_once __DIR__ . '/interface/usedService.php';
+require_once __DIR__ . '/../config/DbConnection.php';
+require_once __DIR__ . '/services/usedService.php';
 class Used implements UsedService {
     private $voucherId;
     private $usedCount;

@@ -1,6 +1,6 @@
 <?php
-require_once '../config/DbConnection.php';
-require_once __DIR__ . '/interface/categoryService.php';
+require_once __DIR__ . '/../config/DbConnection.php';
+require_once __DIR__ . '/services/categoryService.php';
 
 class Category implements CategoryService{
     private $categoryId;
