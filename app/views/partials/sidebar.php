@@ -22,7 +22,7 @@ $dangXuat = "Đăng xuất"
     <div class=" d-flex flex-column align-items-center align-items-sm-start pt-2 text-white min-vh-100">
         <nav id="sidebar" class="sidebar">
             <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start " id="menu">
-                <div class="wrap-logo mb-5 justify-content-center d-flex mt-5">
+                <div class="wrap-logo mb-2 justify-content-center d-flex mt-5">
                     <a href="#" class="text-dark text-decoration-none">
                         <img src="<?php echo $logoUrl; ?>" alt="logo" class="logo" />
                     </a>
