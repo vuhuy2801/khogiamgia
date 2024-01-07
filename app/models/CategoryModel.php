@@ -5,7 +5,6 @@ require_once __DIR__ . '/services/categoryService.php';
 class Category implements CategoryService{
     private $categoryId;
     private $categoryName;
-    private $description;
     private $db;
 
     public function __construct() {
@@ -29,21 +28,11 @@ class Category implements CategoryService{
     public function setCategoryName($categoryName) {
         $this->categoryName = $categoryName;
     }
-
-    public function getDescription() {
-        return $this->description;
-    }
-
-    public function setDescription($description) {
-        $this->description = $description;
-    }
-    
     public function Add(): bool {
         $connection = $this->db->getConnection();
-        $query = "CALL AddCategory(?,?)";
+        $query = "CALL AddCategory(?)";
         $staement = $connection->prepare($query);
         $staement->bindParam(1, $this->categoryName);
-        $staement->bindParam(2, $this->description);
         try {
             $staement->execute();
             return true;
@@ -54,11 +43,10 @@ class Category implements CategoryService{
 
     public function Edit(): bool {
         $connection = $this->db->getConnection();
-        $query = "CALL UpdateCategory(?,?,?)";
+        $query = "CALL UpdateCategory(?,?)";
         $staement = $connection->prepare($query);
         $staement->bindParam(1, $this->categoryId);
         $staement->bindParam(2, $this->categoryName);
-        $staement->bindParam(3, $this->description);
         try {
             $staement->execute();
             return true;

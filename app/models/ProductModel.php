@@ -9,6 +9,7 @@ class Product implements ProductService{
     private $image;
     private $rateCount;
     private $link;
+    private $status;
     private $soldCount;
 
     public function __construct() {
@@ -20,7 +21,7 @@ class Product implements ProductService{
         return $this->productID;
     }
 
-    public function setProductID(int $productID) {
+    public function setProductID($productID) {
         $this->productID = $productID;
     }
 
@@ -29,7 +30,7 @@ class Product implements ProductService{
         return $this->productName;
     }
 
-    public function setProductName(string $productName) {
+    public function setProductName($productName) {
         $this->productName = $productName;
     }
 
@@ -38,7 +39,7 @@ class Product implements ProductService{
         return $this->image;
     }
 
-    public function setImage(string $image) {
+    public function setImage($image) {
         $this->image = $image;
     }
 
@@ -47,7 +48,7 @@ class Product implements ProductService{
         return $this->rateCount;
     }
 
-    public function setRateCount(int $rateCount) {
+    public function setRateCount($rateCount) {
         $this->rateCount = $rateCount;
     }
 
@@ -60,12 +61,19 @@ class Product implements ProductService{
         $this->link = $link;
     }
 
+    public function getStatus() {
+        return $this->status;
+    }
+
+    public function setStatus($status) {
+        $this->status = $status;
+    }
     // Getter and Setter for $soldCount
     public function getSoldCount() {
         return $this->soldCount;
     }
 
-    public function setSoldCount(int $soldCount) {
+    public function setSoldCount($soldCount) {
         $this->soldCount = $soldCount;
     }
 
@@ -73,13 +81,14 @@ class Product implements ProductService{
 
     public function Add(): bool {
         $connection = $this->db->getConnection();
-        $query = "CALL AddProduct(?,?,?,?,?)";
+        $query = "CALL AddProduct(?,?,?,?,?,?)";
         $staement = $connection->prepare($query);
         $staement->bindParam(1, $this->productName);
         $staement->bindParam(2, $this->image);
         $staement->bindParam(3, $this->rateCount);
         $staement->bindParam(4, $this->link);
         $staement->bindParam(5, $this->soldCount);
+        $staement->bindParam(6, $this->status);
         try {
             $staement->execute();
             return true;
@@ -90,7 +99,7 @@ class Product implements ProductService{
 
     public function Edit(): bool {
         $connection = $this->db->getConnection();
-        $query = "CALL UpdateProduct(?,?,?,?,?,?)";
+        $query = "CALL UpdateProduct(?,?,?,?,?,?,?)";
         $staement = $connection->prepare($query);
         $staement->bindParam(1, $this->productID);
         $staement->bindParam(2, $this->productName);
@@ -98,6 +107,7 @@ class Product implements ProductService{
         $staement->bindParam(4, $this->rateCount);
         $staement->bindParam(5, $this->link);
         $staement->bindParam(6, $this->soldCount);
+        $staement->bindParam(7, $this->status);
         try {
             $staement->execute();
             return true;

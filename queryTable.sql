@@ -1,24 +1,16 @@
 Create schema dbVoucher;
 use dbVoucher;
 
--- table Discount
-CREATE TABLE IF NOT EXISTS Discount (
-    discountId INT PRIMARY KEY AUTO_INCREMENT,
-    discountValue FLOAT(20),
-    description NVARCHAR(255),
-    maximumDiscount FLOAT(30)
-);
 -- table Category
 CREATE TABLE IF NOT EXISTS Category (
     categoryId INT PRIMARY KEY AUTO_INCREMENT,
-    categoryName NVARCHAR(255),
-    description NVARCHAR(255)
+    categoryName NVARCHAR(255)
 );
 -- table Supplier
 CREATE TABLE IF NOT EXISTS Supplier (
     supplierId INT PRIMARY KEY AUTO_INCREMENT,
     supplierName NVARCHAR(255),
-    address NVARCHAR(255),
+    address_target NVARCHAR(255),
     logoSupplier NVARCHAR(255)
 );
 
@@ -39,30 +31,30 @@ CREATE TABLE IF NOT EXISTS Post (
 
 -- table Voucher
 CREATE TABLE IF NOT EXISTS Voucher (
-    voucherId INT PRIMARY KEY AUTO_INCREMENT,
+    voucherId NVARCHAR(15) PRIMARY KEY,
     voucherName NVARCHAR(55),
-    discountId INT,
     quantity INT,
     expressAt DATE,
     expiresAt DATE,
-    conditionOrder NVARCHAR(55),
-    conditionBranch NVARCHAR(55),
-    description NVARCHAR(255),
+    orderConditions NVARCHAR(155),
+    conditionsOfUse NVARCHAR(155),
     categoryId INT,
     createdAt DATE,
     updatedAt DATE,
     is_trend TINYINT(1),
     supplierId INT,
     status INT,
-    address_taget NVARCHAR(55),
-    discountType INT
+    address_target NVARCHAR(55),
+    discountType INT,
+    maximumDiscount NVARCHAR(55),
+    is_inWallet TINYINT(1)
 );
 
 -- table Use
 CREATE TABLE IF NOT EXISTS Used (
-    voucherId INT,
-    usedCount INT,
-    usedId INT PRIMARY KEY AUTO_INCREMENT
+	usedId INT PRIMARY KEY AUTO_INCREMENT,
+    voucherId NVARCHAR(15),
+    usedCount INT
 );
 
 -- table Product 
@@ -72,7 +64,8 @@ CREATE TABLE IF NOT EXISTS Product (
     image NVARCHAR(255),
     link NVARCHAR(255),
     rateCount FLOAT(15),
-    soldCount Float(15)
+    soldCount Float(15),
+    status INT
 );
 
 -- table ProductPrice
@@ -86,7 +79,12 @@ CREATE TABLE IF NOT EXISTS ProductPrice (
 -- table banner
 CREATE TABLE IF NOT EXISTS Banner (
     bannerId INT PRIMARY KEY AUTO_INCREMENT,
-    image NVARCHAR(255)
+    image NVARCHAR(255),
+    title NVARCHAR(255),
+    address_target NVARCHAR(55),
+    status INT,
+    createdAt DATE,
+    updatedAt DATE
 );
 -- table user
 CREATE TABLE IF NOT EXISTS User (
@@ -101,11 +99,6 @@ ALTER TABLE Post
 ADD CONSTRAINT fk_supplier
 FOREIGN KEY (supplierId)
 REFERENCES Supplier(supplierId);
-
-ALTER TABLE Voucher
-ADD CONSTRAINT fk_discount
-FOREIGN KEY (discountId)
-REFERENCES Discount(discountId);
 
 ALTER TABLE Voucher
 ADD CONSTRAINT fk_category
@@ -127,20 +120,6 @@ ADD CONSTRAINT fk_product
 FOREIGN KEY (productID)
 REFERENCES Product(productID);
 
---  Trigger --
-DELIMITER //
-
-CREATE TRIGGER generate_random_number
-BEFORE INSERT ON Voucher
-FOR EACH ROW
-BEGIN
-    DECLARE random_number INT;
-    SET random_number = FLOOR(RAND() * 90000) + 10000; -- Sinh số ngẫu nhiên từ 10000 đến 99999
-    SET NEW.voucherId = random_number; -- Gán số ngẫu nhiên vào cột voucherId
-END;
-//
-
-DELIMITER ;
 
 DELIMITER //
 

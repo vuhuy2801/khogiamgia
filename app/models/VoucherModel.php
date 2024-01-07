@@ -4,20 +4,20 @@ require_once __DIR__ . '/services/voucherService.php';
 class Voucher implements VoucherService {
     private $voucherId;
     private $voucherName;
-    private $discountId;
     private $quantity;
     private $expressAt;
     private $expiresAt;
-    private $conditionOrder;
-    private $conditionBranch;
-    private $description;
+    private $orderConditions;
+    private $conditionsOfUse;
     private $categoryId;
     private $createdAt;
     private $updatedAt;
     private $is_trend;
     private $supplierId;
     private $status;
-    private $address;
+    private $address_target;
+    private $maximunDiscount;
+    private $is_inWallet;
     private $discountType;
     private $db;
     public function __construct() {
@@ -29,9 +29,6 @@ class Voucher implements VoucherService {
     public function getVoucherName() {
         return $this->voucherName;
     }
-    public function getDiscountId() {
-        return $this->discountId;
-    }
     public function getQuantity() {
         return $this->quantity;
     }
@@ -41,14 +38,11 @@ class Voucher implements VoucherService {
     public function getExpiresAt() {
         return $this->expiresAt;
     }
-    public function getConditionOrder() {
-        return $this->conditionOrder;
+    public function getOrderConditions() {
+        return $this->orderConditions;
     }
-    public function getConditionBranch() {
-        return $this->conditionBranch;
-    }
-    public function getDescription() {
-        return $this->description;
+    public function getConditionsOfUse() {
+        return $this->conditionsOfUse;
     }
     public function getCategoryId() {
         return $this->categoryId;
@@ -68,21 +62,23 @@ class Voucher implements VoucherService {
     public function getStatus() {
         return $this->status;
     }
-    public function getAddress() {
-        return $this->address;
+    public function getAddress_target() {
+        return $this->address_target;
     }
     public function getDiscountType() {
         return $this->discountType;
     }
-   
+    public function getMaximunDiscount() {
+        return $this->maximunDiscount;
+    }
+    public function getIs_inWallet() {
+        return $this->is_inWallet;
+    }
     public function setVoucherId($value) {
         $this->voucherId=$value;
     }
     public function setVoucherName($value) {
         $this->voucherName=$value;
-    }
-    public function setDiscountId($value) {
-        $this->discountId=$value;
     }
     public function setQuantity($value) {
         $this->quantity = $value;
@@ -96,16 +92,12 @@ class Voucher implements VoucherService {
         $this->expiresAt = $value;
     }
 
-    public function setConditionOrder($value) {
-        $this->conditionOrder = $value;
+    public function setOrderConditions($value) {
+        $this->orderConditions = $value;
     }
 
-    public function setConditionBranch($value) {
-        $this->conditionBranch = $value;
-    }
-
-    public function setDescription($value) {
-        $this->description = $value;
+    public function setConditionsOfUse($value) {
+        $this->conditionsOfUse = $value;
     }
 
     public function setCategoryId($value) {
@@ -132,34 +124,41 @@ class Voucher implements VoucherService {
         $this->status = $value;
     }
 
-    public function setAddress($value) {
-        $this->address = $value;
+    public function setAddress_target($value) {
+        $this->address_target = $value;
     }
 
     public function setDiscountType($value) {
         $this->discountType = $value;
     }
-
+    public function setMaximunDiscount($value) {
+        $this->maximunDiscount = $value;
+    }
+    public function setIs_inWallet($value) {
+        $this->is_inWallet = $value;
+    }
+    
     public function Add(): bool{
         $connection = $this->db->getConnection();
-        $query = "CALL AddVoucher(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        $query = "CALL AddVoucher(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         $statement = $connection->prepare($query);
-        $statement->bindParam(1, $this->voucherName);
-        $statement->bindParam(2, $this->discountId);
+        $statement->bindParam(1, $this->voucherId);
+        $statement->bindParam(2, $this->voucherName);
         $statement->bindParam(3, $this->quantity);
         $statement->bindParam(4, $this->expressAt);
         $statement->bindParam(5, $this->expiresAt);
-        $statement->bindParam(6, $this->conditionOrder);
-        $statement->bindParam(7, $this->conditionBranch);
-        $statement->bindParam(8, $this->description);
-        $statement->bindParam(9, $this->categoryId);
-        $statement->bindParam(10, $this->createdAt);
-        $statement->bindParam(11, $this->updatedAt);
-        $statement->bindParam(12, $this->is_trend);
-        $statement->bindParam(13, $this->supplierId);
-        $statement->bindParam(14, $this->status);
-        $statement->bindParam(15, $this->address);
-        $statement->bindParam(16, $this->discountType);
+        $statement->bindParam(6, $this->orderConditions);
+        $statement->bindParam(7, $this->conditionsOfUse);
+        $statement->bindParam(8, $this->categoryId);
+        $statement->bindParam(9, $this->createdAt);
+        $statement->bindParam(10, $this->updatedAt);
+        $statement->bindParam(11, $this->is_trend);
+        $statement->bindParam(12, $this->supplierId);
+        $statement->bindParam(13, $this->status);
+        $statement->bindParam(14, $this->address_target);
+        $statement->bindParam(15, $this->discountType);
+        $statement->bindParam(16, $this->maximunDiscount);
+        $statement->bindParam(17, $this->is_inWallet);
         try {
             $statement->execute();
             return true;
@@ -173,21 +172,20 @@ class Voucher implements VoucherService {
         $statement = $connection->prepare($query);
         $statement->bindParam(1, $this->voucherId);
         $statement->bindParam(2, $this->voucherName);
-        $statement->bindParam(3, $this->discountId);
-        $statement->bindParam(4, $this->quantity);
-        $statement->bindParam(5, $this->expressAt);
-        $statement->bindParam(6, $this->expiresAt);
-        $statement->bindParam(7, $this->conditionOrder);
-        $statement->bindParam(8, $this->conditionBranch);
-        $statement->bindParam(9, $this->description);
-        $statement->bindParam(10, $this->categoryId);
-        $statement->bindParam(11, $this->createdAt);
-        $statement->bindParam(12, $this->updatedAt);
-        $statement->bindParam(13, $this->is_trend);
-        $statement->bindParam(14, $this->supplierId);
-        $statement->bindParam(15, $this->status);
-        $statement->bindParam(16, $this->address);
-        $statement->bindParam(17, $this->discountType);
+        $statement->bindParam(3, $this->quantity);
+        $statement->bindParam(4, $this->expressAt);
+        $statement->bindParam(5, $this->expiresAt);
+        $statement->bindParam(6, $this->orderConditions);
+        $statement->bindParam(7, $this->conditionsOfUse);
+        $statement->bindParam(8, $this->categoryId);
+        $statement->bindParam(9, $this->updatedAt);
+        $statement->bindParam(10, $this->is_trend);
+        $statement->bindParam(11, $this->supplierId);
+        $statement->bindParam(12, $this->status);
+        $statement->bindParam(13, $this->address_target);
+        $statement->bindParam(14, $this->discountType);
+        $statement->bindParam(15, $this->maximunDiscount);
+        $statement->bindParam(16, $this->is_inWallet);
         try {
             $statement->execute();
             return true;
