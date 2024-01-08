@@ -100,7 +100,7 @@ class InfoProductShopee
 
     public function getInfo()
     {
-        include_once('simple_html_dom.php');
+        include_once('lib\simple_html_dom.php');
         $dom = file_get_html($this->link);
         $this->date = date('Y-m-d H:i:s');
         $string_id = $dom->find('.ha5ReG a', 0)->href;
