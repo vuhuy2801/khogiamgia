@@ -1,10 +1,15 @@
 <?php
 require_once __DIR__ . '/../config/DbConnection.php';
-require_once __DIR__ . '/services/bannerService.php';
+require_once __DIR__ . '/interfaces/bannerService.php';
 
 class Banner implements BannerService {
     private $bannerID;
     private $image;
+    private $title;
+    private $address_target;
+    private $status;
+    private $createdAt;
+    private $updatedAt;
     private $db;
 
     public function __construct() {
@@ -15,7 +20,7 @@ class Banner implements BannerService {
         return $this->bannerID;
     }
 
-    public function setBannerID(int $bannerID) {
+    public function setBannerID($bannerID) {
         $this->bannerID = $bannerID;
     }
 
@@ -23,15 +28,60 @@ class Banner implements BannerService {
         return $this->image;
     }
 
-    public function setImage(string $image) {
+    public function setImage($image) {
         $this->image = $image;
+    }
+
+    public function getTitle() {
+        return $this->title;
+    }
+
+    public function setTitle($title) {
+        $this->title = $title;
+    }
+
+    public function getAddressTarget() {
+        return $this->address_target;
+    }
+
+    public function setAddressTarget($address_target) {
+        $this->address_target = $address_target;
+    }
+
+    public function getStatus() {
+        return $this->status;
+    }
+
+    public function setStatus($status) {
+        $this->status = $status;
+    }
+
+    public function getCreatedAt() {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt($createdAt) {
+        $this->createdAt = $createdAt;
+    }
+
+    public function getUpdatedAt() {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt($updatedAt) {
+        $this->updatedAt = $updatedAt;
     }
 
     public function Add(): bool {
         $connection = $this->db->getConnection();
-        $query = "CALL AddBanner(?)";
+        $query = "CALL AddBanner(?,?,?,?,?,?)";
         $staement = $connection->prepare($query);
         $staement->bindParam(1, $this->image);
+        $staement->bindParam(2, $this->title);
+        $staement->bindParam(3, $this->address_target);
+        $staement->bindParam(4, $this->status);
+        $staement->bindParam(5, $this->createdAt);
+        $staement->bindParam(6, $this->updatedAt);
         try {
             $staement->execute();
             return true;
@@ -42,10 +92,14 @@ class Banner implements BannerService {
 
     public function Edit(): bool {
         $connection = $this->db->getConnection();
-        $query = "CALL UpdateBanner(?,?)";
+        $query = "CALL UpdateBanner(?,?,?,?,?,?)";
         $staement = $connection->prepare($query);
         $staement->bindParam(1, $this->bannerID);
         $staement->bindParam(2, $this->image);
+        $staement->bindParam(3, $this->title);
+        $staement->bindParam(4, $this->address_target);
+        $staement->bindParam(5, $this->status);
+        $staement->bindParam(6, $this->updatedAt);
         try {
             $staement->execute();
             return true;

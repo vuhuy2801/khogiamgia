@@ -1,64 +1,14 @@
 use dbVoucher;
--- Discount
-DELIMITER //
-
-CREATE PROCEDURE AddDiscount(
-    IN discount_value FLOAT,
-    IN description_text NVARCHAR(255),
-    IN max_discount FLOAT
-)
-BEGIN
-    INSERT INTO Discount (discountValue, description, maximumDiscount)
-    VALUES (discount_value, description_text, max_discount);
-END;
-//
-
-DELIMITER //
-
-CREATE PROCEDURE UpdateDiscount(
-    IN discount_id INT,
-    IN new_discount_value FLOAT,
-    IN new_description NVARCHAR(255),
-    IN new_max_discount FLOAT
-)
-BEGIN
-    UPDATE Discount
-    SET discountValue = new_discount_value,
-        description = new_description,
-        maximumDiscount = new_max_discount
-    WHERE discountId = discount_id;
-END;
-//
-
-DELIMITER //
-
-CREATE PROCEDURE DeleteDiscount(
-    IN discount_id INT
-)
-BEGIN
-    DELETE FROM Discount
-    WHERE discountId = discount_id;
-END;
-//
-
-DELIMITER //
-
-CREATE PROCEDURE GetListDiscounts()
-BEGIN
-    SELECT * FROM Discount;
-END;
-//
 
 -- Category
 DELIMITER //
 
 CREATE PROCEDURE AddCategory(
-    IN category_name NVARCHAR(255),
-    IN category_description NVARCHAR(255)
+    IN category_name NVARCHAR(255)
 )
 BEGIN
-    INSERT INTO Category (categoryName, description)
-    VALUES (category_name, category_description);
+    INSERT INTO Category (categoryName)
+    VALUES (category_name);
 END;
 //
 
@@ -68,13 +18,11 @@ DELIMITER //
 
 CREATE PROCEDURE UpdateCategory(
     IN category_id INT,
-    IN new_category_name NVARCHAR(255),
-    IN new_category_description NVARCHAR(255)
+    IN new_category_name NVARCHAR(255)
 )
 BEGIN
     UPDATE Category
-    SET categoryName = new_category_name,
-        description = new_category_description
+    SET categoryName = new_category_name
     WHERE categoryId = category_id;
 END;
 //
@@ -109,12 +57,12 @@ DELIMITER //
 
 CREATE PROCEDURE AddSupplier(
     IN supplier_name NVARCHAR(255),
-    IN supplier_address NVARCHAR(255),
+    IN supplier_address_target NVARCHAR(255),
     IN supplier_logo NVARCHAR(255)
 )
 BEGIN
-    INSERT INTO Supplier (supplierName, address, logoSupplier)
-    VALUES (supplier_name, supplier_address, supplier_logo);
+    INSERT INTO Supplier (supplierName, address_target, logoSupplier)
+    VALUES (supplier_name, supplier_address_target, supplier_logo);
 END;
 //
 
@@ -125,13 +73,13 @@ DELIMITER //
 CREATE PROCEDURE UpdateSupplier(
     IN supplier_id INT,
     IN new_supplier_name NVARCHAR(255),
-    IN new_supplier_address NVARCHAR(255),
+    IN new_supplier_address_target NVARCHAR(255),
     IN new_supplier_logo NVARCHAR(255)
 )
 BEGIN
     UPDATE Supplier
     SET supplierName = new_supplier_name,
-        address = new_supplier_address,
+        address_target = new_supplier_address_target,
         logoSupplier = new_supplier_logo
     WHERE supplierId = supplier_id;
 END;
@@ -175,8 +123,6 @@ END;
 //
 
 DELIMITER ;
-
-
 
 -- Post --
 DELIMITER //
@@ -289,79 +235,79 @@ DELIMITER ;
 DELIMITER //
 
 CREATE PROCEDURE AddVoucher(
+	In voucher_id NVARCHAR(15),
     IN voucher_name NVARCHAR(55),
-    IN discount_id INT,
     IN voucher_quantity INT,
     IN voucher_expressAt DATE,
     IN voucher_expiresAt DATE,
-    IN voucher_conditionOrder NVARCHAR(55),
-    IN voucher_conditionBranch NVARCHAR(55),
-    IN voucher_description NVARCHAR(255),
+    IN voucher_conditionOrder NVARCHAR(155),
+    IN voucher_conditionOfUse NVARCHAR(155),
     IN voucher_categoryId INT,
     IN voucher_createdAt DATE,
     IN voucher_updatedAt DATE,
     IN voucher_is_trend TINYINT,
     IN voucher_supplierId INT,
     IN voucher_status INT,
-    IN voucher_address_taget NVARCHAR(55),
-    IN voucher_discountType INT
+    IN voucher_address_target NVARCHAR(55),
+    IN voucher_discountType INT,
+    IN voucher_maximumDiscount NVARCHAR(55),
+    IN voucher_is_inWallet TINYINT
 )
 BEGIN
     INSERT INTO Voucher (
-        voucherName, discountId, quantity, expressAt, expiresAt, 
-        conditionOrder, conditionBranch, description, categoryId, 
-        createdAt, updatedAt, is_trend, supplierId, status, address_taget, discountType
+        voucherId,voucherName, quantity, expressAt, expiresAt, orderConditions,
+        conditionsOfUse, categoryId, createdAt, updatedAt, is_trend,
+        supplierId, status, address_target, discountType,maximumDiscount, is_inWallet
     ) VALUES (
-        voucher_name, discount_id, voucher_quantity, voucher_expressAt, voucher_expiresAt, 
-        voucher_conditionOrder, voucher_conditionBranch, voucher_description, voucher_categoryId, 
-        voucher_createdAt, voucher_updatedAt, voucher_is_trend, voucher_supplierId, voucher_status, 
-        voucher_address_taget, voucher_discountType
+        voucher_id,voucher_name, voucher_quantity, voucher_expressAt, voucher_expiresAt, voucher_conditionOrder,
+        voucher_conditionOfUse, voucher_categoryId, voucher_createdAt, voucher_updatedAt, voucher_is_trend,
+        voucher_supplierId, voucher_status, voucher_address_target, voucher_discountType,voucher_maximumDiscount, voucher_is_inWallet
     );
 END;
 //
 
 DELIMITER ;
 
+
 DELIMITER //
 
 CREATE PROCEDURE UpdateVoucher(
-    IN voucher_id INT,
+    In new_voucher_id NVARCHAR(15),
     IN new_voucher_name NVARCHAR(55),
-    IN new_discount_id INT,
     IN new_voucher_quantity INT,
     IN new_voucher_expressAt DATE,
     IN new_voucher_expiresAt DATE,
-    IN new_voucher_conditionOrder NVARCHAR(55),
-    IN new_voucher_conditionBranch NVARCHAR(55),
-    IN new_voucher_description NVARCHAR(255),
+    IN new_voucher_conditionOrder NVARCHAR(155),
+    IN new_voucher_conditionOfUse NVARCHAR(155),
     IN new_voucher_categoryId INT,
-    IN new_voucher_createdAt DATE,
     IN new_voucher_updatedAt DATE,
     IN new_voucher_is_trend TINYINT,
     IN new_voucher_supplierId INT,
     IN new_voucher_status INT,
-    IN new_voucher_address_taget NVARCHAR(55),
-    IN new_voucher_discountType INT
+    IN new_voucher_address_target NVARCHAR(55),
+    IN new_voucher_discountType INT,
+    IN new_voucher_maximumDiscount NVARCHAR(55),
+    IN new_voucher_is_inWallet TINYINT
 )
 BEGIN
     UPDATE Voucher
     SET voucherName = new_voucher_name,
-        discountId = new_discount_id,
         quantity = new_voucher_quantity,
         expressAt = new_voucher_expressAt,
         expiresAt = new_voucher_expiresAt,
-        conditionOrder = new_voucher_conditionOrder,
-        conditionBranch = new_voucher_conditionBranch,
-        description = new_voucher_description,
+        orderConditions = new_voucher_conditionOrder,
+        conditionsOfUse = new_voucher_conditionOfUse,
         categoryId = new_voucher_categoryId,
-        createdAt = new_voucher_createdAt,
         updatedAt = new_voucher_updatedAt,
         is_trend = new_voucher_is_trend,
         supplierId = new_voucher_supplierId,
         status = new_voucher_status,
-        address_taget = new_voucher_address_taget,
-        discountType = new_voucher_discountType
-    WHERE voucherId = voucher_id;
+        address_target = new_voucher_address_target,
+        discountType = new_voucher_discountType,
+        maximumDiscount = new_voucher_maximumDiscount, 
+        is_inWallet = new_voucher_is_inWallet,
+        createdAt = IFNULL(createdAt, createdAt)
+    WHERE voucherId = new_voucher_id;
 END;
 //
 
@@ -370,7 +316,7 @@ DELIMITER ;
 DELIMITER //
 
 CREATE PROCEDURE DeleteVoucher(
-    IN voucher_id INT
+    IN voucher_id NVARCHAR(15)
 )
 BEGIN
     DELETE FROM Voucher
@@ -426,25 +372,12 @@ DELIMITER ;
 
 DELIMITER //
 
-CREATE PROCEDURE GetListVouchersWithDiscounts()
-BEGIN
-    SELECT V.*, D.*
-    FROM Voucher V
-    INNER JOIN Discount D ON V.discountId = D.discountId;
-END;
-//
-
-DELIMITER ;
-
-DELIMITER //
-
-CREATE PROCEDURE SearchVoucherAndDiscountByKeyword(
+CREATE PROCEDURE SearchVoucherByKeyword(
     IN search_keyword NVARCHAR(255)
 )
 BEGIN
-    SELECT V.*, D.*
+    SELECT V.*
     FROM Voucher V
-    INNER JOIN Discount D ON V.discountId = D.discountId
     LEFT JOIN Supplier S ON V.supplierId = S.supplierId
     LEFT JOIN Category PC ON V.categoryId = PC.categoryId
     WHERE S.supplierName LIKE CONCAT('%', search_keyword, '%')
@@ -460,7 +393,7 @@ DELIMITER ;
 DELIMITER //
 
 CREATE PROCEDURE AddUsed(
-    IN in_voucherId INT,
+    IN in_voucherId NVARCHAR(15),
     IN in_usedCount INT
 )
 BEGIN
@@ -475,7 +408,7 @@ DELIMITER //
 
 CREATE PROCEDURE UpdateUsed(
     IN in_usedId INT,
-    IN in_voucherId INT,
+    IN in_voucherId NVARCHAR(15),
     IN in_usedCount INT
 )
 BEGIN
@@ -531,11 +464,12 @@ CREATE PROCEDURE AddProduct(
     IN in_image NVARCHAR(255),
     IN in_link NVARCHAR(255),
 	IN in_rateCount FLOAT(15),
-	IN in_soldCount FLOAT(15)
+	IN in_soldCount FLOAT(15),
+    IN in_status INT
 )
 BEGIN
-    INSERT INTO Product (productName, image, link, rateCount, soldCount)
-    VALUES (in_productName, in_image, in_link, in_rateCount, in_soldCount);
+    INSERT INTO Product (productName, image, link, rateCount, soldCount, status)
+    VALUES (in_productName, in_image, in_link, in_rateCount, in_soldCount, in_status);
 END;
 //
 
@@ -549,11 +483,12 @@ CREATE PROCEDURE UpdateProduct(
     IN in_image NVARCHAR(255),
 	IN in_link NVARCHAR(255),
 	IN in_rateCount FLOAT(15),
-	IN in_soldCount FLOAT(15)
+	IN in_soldCount FLOAT(15),
+	IN in_status INT
 )
 BEGIN
     UPDATE Product
-    SET productName = in_productName, image = in_image, link = in_link, rateCount = in_rateCount, soldCount = in_soldCount
+    SET productName = in_productName, image = in_image, link = in_link, rateCount = in_rateCount, soldCount = in_soldCount, status = in_status
     WHERE productID = in_productID;
 END;
 //
@@ -664,11 +599,16 @@ DELIMITER ;
 DELIMITER //
 
 CREATE PROCEDURE AddBanner(
-    IN in_image NVARCHAR(255)
+    IN in_image NVARCHAR(255),
+    IN in_title NVARCHAR(255),
+    IN in_address_target NVARCHAR(55),
+    IN in_status INT,
+    IN in_createdAt DATE,
+    IN in_updateAt DATE
 )
 BEGIN
-    INSERT INTO Banner (image)
-    VALUES (in_image);
+    INSERT INTO Banner (image,title,address_target,status,createdAt,updatedAt)
+    VALUES (in_image,in_title,in_address_target,in_status,in_createdAt,in_updateAt);
 END;
 //
 
@@ -678,11 +618,20 @@ DELIMITER //
 
 CREATE PROCEDURE UpdateBanner(
     IN in_bannerId INT,
-    IN in_image NVARCHAR(255)
+    IN in_image NVARCHAR(255),
+	IN in_title NVARCHAR(255),
+    IN in_address_target NVARCHAR(55),
+    IN in_status INT,
+    IN in_updateAt DATE
 )
 BEGIN
     UPDATE Banner
-    SET image = in_image
+    SET image = in_image,
+    title = in_title,
+    address_target = in_address_target,
+    status = in_status,
+    updatedAt = in_updateAt,
+    createdAt = IFNULL(createdAt, createdAt)
     WHERE bannerId = in_bannerId;
 END;
 //

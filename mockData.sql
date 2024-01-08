@@ -1,25 +1,25 @@
 use dbVoucher;
 
-INSERT INTO Discount (discountValue, description, maximumDiscount)
-VALUES 
-    (10.000, 'Discount for category A', 50.000),
-    (70.000, 'Special offer for product B', 30.000),
-    (15.205, 'Seasonal discount', 75.000),
-    (5.000, 'Limited time offer', 20.000);
+INSERT INTO Category (categoryName) VALUES 
+    ('Điện thoại di động'),
+    ('Laptop và Máy tính bảng'),
+    ('Thời trang nam'),
+    ('Thời trang nữ'),
+    ('Đồ gia dụng'),
+    ('Đồ chơi và Trò chơi điện tử'),
+    ('Thể thao và Dã ngoại'),
+    ('Sức khỏe và Làm đẹp'),
+    ('Ô tô và Xe máy'),
+    ('Nhà sách và Văn phòng phẩm');
 
-INSERT INTO Category (categoryName, description)
-VALUES 
-    ('Electronics', 'Electronic devices and accessories'),
-    ('Clothing', 'Apparel for men, women, and children'),
-    ('Home Decor', 'Furniture and decorative items for homes'),
-    ('Beauty', 'Cosmetics and beauty products');
 
-INSERT INTO Supplier (supplierName, address, logoSupplier)
-VALUES 
-    ('ABC Electronics', '123 Main Street, City A', 'abc_logo.png'),
-    ('Fashion Trends Ltd.', '456 Oak Avenue, City B', 'fashion_logo.png'),
-    ('HomeStyle Furnishings', '789 Elm Street, City C', 'homestyle_logo.png'),
-    ('Beauty Haven', '101 Pine Street, City D', 'beauty_logo.png');
+INSERT INTO Supplier (supplierName, address_target, logoSupplier) VALUES 
+    ('Shopee', 'Số 123 Đường ABC, Quận XYZ, Thành phố HCM', 'logo_dienmayxanh.png'),
+    ('Tiki', 'Số 456 Đường DEF, Quận UVW, Thành phố Hà Nội', 'logo_nguyenkim.png'),
+    ('Tiktok Shop', 'Số 789 Đường GHI, Quận JKL, Thành phố Đà Nẵng', 'logo_lotte.png'),
+    ('Lazada', 'Số 321 Đường MNO, Quận PQR, Thành phố Hải Phòng', 'logo_fptshop.png'),
+    ('Thế giới di động', 'Số 654 Đường STU, Quận VWX, Thành phố Cần Thơ', 'logo_thegioididong.png');
+
 
 INSERT INTO Post (title, image,slug, supplierId, content, description, categories_post, createdAt, updateAt,status)
 VALUES 
@@ -27,44 +27,58 @@ VALUES
 
 
 INSERT INTO Voucher (
-    voucherName, discountId, quantity, expressAt, expiresAt, conditionOrder, conditionBranch, description,
-    categoryId, createdAt, updatedAt, is_trend, supplierId, status, address_taget, discountType
+    voucherId,
+    voucherName,
+    quantity,
+    expressAt,
+    expiresAt,
+    orderConditions,
+    conditionsOfUse,
+    categoryId,
+    createdAt,
+    updatedAt,
+    is_trend,
+    supplierId,
+    status,
+    address_target,
+    discountType,
+    maximumDiscount,
+    is_inWallet
 ) VALUES 
-    ('Summer Sale', 1, 100, '2024-06-01', '2024-06-30', 'Minimum order of $50', 'All branches', 'Big discounts for summer products!',
-    2, '2023-12-21', '2023-12-21', 1, 1, 1, '123 Main St.', 1),
-    ('Holiday Special', 2, 50, '2024-12-01', '2024-12-25', 'No conditions', 'Online orders only', 'Special discounts for the holiday season',
-    3, '2023-12-22', '2023-12-22', 1, 2, 1, '456 Oak Ave.', 2);
-
-INSERT INTO Used (voucherId, usedCount)
-VALUES 
-    (28193, 20),
-    (76953, 10);
-
-INSERT INTO Product (productName, image, link, rateCount, soldCount)
-VALUES 
-    ('Product 1', 'image_url_1', 'link_1', 60.100, 23.11),
-    ('Product 2', 'image_url_2', 'link_2', 60.100, 23.11),
-    ('Product 3', 'image_url_3', 'link_3', 60.100, 23.11),
-    ('Product 4', 'image_url_4', 'link_4', 60.100, 23.11),
-    ('Product 5', 'image_url_5', 'link_5', 60.100, 23.11);
+    ('VOUCHER001', 'Giảm 20%', 100, '2024-01-15', '2024-02-28', 'Áp dụng cho điện thoại Samsung', 'Chỉ áp dụng khi đặt hàng online', 1, '2024-01-01', '2024-01-05', 1, 1, 1, '123 Đường ABC, TP.HCM', 1, '200.000 VNĐ', 1),
+    ('VOUCHER002', 'Giảm 50K', 50, '2024-01-10', '2024-03-15', 'Áp dụng cho laptop Asus', 'Áp dụng cho tất cả các đơn hàng', 2, '2024-01-02', '2024-01-06', 0, 2, 1, '456 Đường DEF, Hà Nội', 2, '300.000 VNĐ', 0),
+    ('VOUCHER003', 'Giảm 20K', 80, '2024-01-20', '2024-03-10', 'Áp dụng cho đồng hồ dành cho nam', 'Chỉ áp dụng khi mua trên 2 sản phẩm', 4, '2024-01-03', '2024-01-07', 1, 3, 1, '789 Đường GHI, Đà Nẵng', 1, '150.000 VNĐ', 1),
+    ('VOUCHER004', 'Giảm 60K', 30, '2024-01-25', '2024-02-28', 'Áp dụng cho bộ nồi đun nấu', 'Chỉ áp dụng khi mua trên 1.000.000 VNĐ', 5, '2024-01-04', '2024-01-08', 0, 4, 0, '321 Đường MNO, Hải Phòng', 2, '250.000 VNĐ', 0),
+    ('VOUCHER005', 'Freeship', 60, '2024-01-30', '2024-03-20', 'Áp dụng cho sách giáo khoa', 'Áp dụng cho học sinh, sinh viên', 10, '2024-01-05', '2024-01-09', 1, 5, 1, '654 Đường STU, Cần Thơ', 1, '100.000 VNĐ', 1);
 
 
-INSERT INTO ProductPrice (productID, date, currentPrice)
-VALUES 
-    (1, '2023-12-20', 1200.0),
-    (2, '2023-12-20', 25.99),
-    (3, '2023-12-20', 899.0),
-    (4, '2023-12-20', 12.5);
-
-INSERT INTO Banner (image)
-VALUES 
-    ('banner_image1.jpg'),
-    ('banner_image2.jpg'),
-    ('banner_image3.jpg'),
-    ('banner_image4.jpg');
+INSERT INTO Used (voucherId, usedCount) VALUES 
+    ('VOUCHER001', 25),
+    ('VOUCHER002', 10),
+    ('VOUCHER003', 30),
+    ('VOUCHER004', 5),
+    ('VOUCHER005', 20);
 
 
-INSERT INTO User (userName,email,password)
-values
-	('admin','admin@gmail.com','123'),
-	('TienAnh','tienanhtch@gmail.com','Tienanh@123');
+INSERT INTO Product (productName, image, link, rateCount, soldCount, status) VALUES 
+    ('Samsung Galaxy S21', 'samsung_s21.jpg', 'https://example.com/samsung_s21', 4.5, 1000, 1),
+    ('Asus Zenbook Pro', 'asus_zenbook_pro.jpg', 'https://example.com/asus_zenbook_pro', 4.7, 500, 1),
+    ('Đồng hồ Nam Casio', 'casio_watch.jpg', 'https://example.com/casio_watch', 4.2, 800, 1),
+    ('Bộ nồi từ Tefal', 'tefal_cookware.jpg', 'https://example.com/tefal_cookware', 4.8, 300, 0),
+    ('Sách Giáo Khoa', 'textbooks.jpg', 'https://example.com/textbooks', 4.6, 1200, 1);
+
+-- id sản phẩm tự động random nên muốn insert vào price thì select ra trước để có id insert 
+
+
+INSERT INTO Banner (image, title, address_target, status, createdAt, updatedAt) VALUES 
+    ('banner1.jpg', 'Khuyến mãi Đặc biệt', 'https://example.com/special_offer', 1, '2024-01-01', '2024-01-02'),
+    ('banner2.jpg', 'Ưu đãi hấp dẫn', 'https://example.com/attractive_deal', 1, '2024-01-03', '2024-01-04'),
+    ('banner3.jpg', 'Giảm giá lên đến 50%', 'https://example.com/up_to_50_off', 0, '2024-01-05', '2024-01-06');
+
+
+INSERT INTO User (userName, email, password) VALUES 
+    ('john_doe', 'john@example.com', 'password123'),
+    ('jane_smith', 'jane@example.com', 'securepass456'),
+    ('alex_jones', 'alex@example.com', 'password789'),
+    ('emily_wilson', 'emily@example.com', 'pass123word'),
+    ('michael_brown', 'michael@example.com', 'strongpass567');
