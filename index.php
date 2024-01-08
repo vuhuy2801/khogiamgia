@@ -5,7 +5,6 @@ $router = new \Bramus\Router\Router();
 
 
 
-
 $router->get('/', function () {
     require 'app/controllers/HomeController.php';
     $HomeController = new HomeController();
@@ -14,25 +13,15 @@ $router->get('/', function () {
 });
 
 $router->get('/test', function () {
-    date_default_timezone_set('Asia/Bangkok'); // Set the time zone to UTC+7 (Asia/Bangkok)
-    $date = date('Y-m-d H:i:s');
-    echo $date;
-    echo "<br>";
-    include_once('simple_html_dom.php');
-    $dom = file_get_html('https://shopee.vn/Balo-%C4%90i-H%E1%BB%8Dc-%C4%90i-Ch%C6%A1i-Nam-N%E1%BB%AF-Th%E1%BB%9Di-Trang-H%C3%A0n-Qu%E1%BB%91c-Nhi%E1%BB%81u-Ng%C4%83n-Ti%E1%BB%87n-D%E1%BB%A5ng-%C4%91%E1%BB%B1ng-v%E1%BB%ABa-laptop-15.6inch-KT105-i.1144976040.24305621990');
-    $string_id = $dom->find('.ha5ReG a', 0)->href;
-    echo "id:" . explode("/", $string_id)[4];
-    echo "<br>";
-    echo "tên sản phẩm:" . $dom->find('._5f9gl5 span', 0)->plaintext;
-    echo "<br>";
-    echo "giá:" . $dom->find('.TVzooJ', 0)->plaintext;
-    echo "<br>";
-    echo "vote rate:" . $dom->find('.sbAxkj', 0)->plaintext;
-    echo "<br>";
-    echo "Lượt bán:" . $dom->find('.product-review__sold-count', 0)->plaintext;
-    echo "<br>";
-
+    require 'scripts\InfoProductShopee.php';
+    $InfoProductShopee = new InfoProductShopee('https://shopee.vn/Thi%E1%BA%BFt-b%E1%BB%8B-k%C3%ADch-s%C3%B3ng-m%E1%BB%9F-r%E1%BB%99ng-v%C3%B9ng-ph%E1%BB%A7-s%C3%B3ng-Xiaomi-Wifi-Repeater-Pro-2-t%E1%BB%91c-%C4%91%E1%BB%99-300mbps-i.243828760.6868596090');
+    $InfoProductShopee->getInfo();
+    $InfoProductShopee->showInFo();
 });
+
+
+
+
 
 
 $router->get('/trang-chu', function () {
@@ -102,7 +91,7 @@ $router->get('/admin/bai-viet/create', function () {
     $PostController = new PostController();
     $PostController->create();
 });
-$router->get('/admin/bai-viet/edit', function ()  {
+$router->get('/admin/bai-viet/edit', function () {
     require 'app/controllers/PostController.php';
     $PostController = new PostController();
     $PostController->edit();
@@ -114,13 +103,13 @@ $router->post('/admin/bai-viet/add', function () {
     $PostController->addPost();
 });
 
-$router->post('/admin/bai-viet/update', function ()  {
+$router->post('/admin/bai-viet/update', function () {
     require 'app/controllers/PostController.php';
     $PostController = new PostController();
     $PostController->updatePost();
 });
 
-$router->post('/admin/bai-viet/delete/(\d+)', function ($postId)  {
+$router->post('/admin/bai-viet/delete/(\d+)', function ($postId) {
     require 'app/controllers/PostController.php';
     $PostController = new PostController();
     $PostController->deletePost($postId);
