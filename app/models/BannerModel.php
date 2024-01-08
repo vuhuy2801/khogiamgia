@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../config/DbConnection.php';
-require_once __DIR__ . '/services/bannerService.php';
+require_once __DIR__ . '/interfaces/bannerService.php';
 
 class Banner implements BannerService {
     private $bannerID;

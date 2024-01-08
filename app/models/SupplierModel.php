@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../config/DbConnection.php';
-require_once __DIR__ . '/services/supplierService.php';
+require_once __DIR__ . '/interfaces/supplierService.php';
 
 class Supplier implements SupplierService {
     private $supplierId;
