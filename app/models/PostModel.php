@@ -206,5 +206,37 @@ class Post implements PostService {
             return [];
         }
     }
+
+
+    public function GetPostsBySupplier($id): array {
+        $connection = $this->db->getConnection();
+        $query = "CALL GetPostsBySupplierId(?)";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(1, $id); 
+    
+        try {
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            return [];
+        }
+    }
+
+    public function GetGuidancePostsBySupplierId($id): array {
+        $connection = $this->db->getConnection();
+        $query = "CALL GetGuidancePostsBySupplierId(?)";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(1, $id); 
+    
+        try {
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            return [];
+        }
+    }
+    
 }
 ?>

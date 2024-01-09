@@ -231,6 +231,41 @@ END;
 
 DELIMITER ;
 
+
+DELIMITER //
+
+CREATE PROCEDURE GetPostsBySupplierId(
+    IN supplier_id_to_search INT
+)
+BEGIN
+    SELECT *
+    FROM Post
+    WHERE supplierId = supplier_id_to_search 
+        AND categories_post = 1
+    ORDER BY createdAt DESC
+    LIMIT 20;
+END //
+
+DELIMITER ;
+
+
+DELIMITER //
+
+CREATE PROCEDURE GetGuidancePostsBySupplierId(
+    IN supplierIdParam INT
+)
+BEGIN
+    SELECT * 
+    FROM Post
+    WHERE supplierId = supplierIdParam 
+        AND (categories_post = 2 OR categories_post = 3)
+    ORDER BY createdAt DESC
+    LIMIT 20;
+END //
+
+DELIMITER ;
+
+
 -- Voucher
 DELIMITER //
 

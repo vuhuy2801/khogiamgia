@@ -45,12 +45,36 @@ $router->get('/theo-doi-ma-san-pham', function () {
     echo 'Theo dõi mã sản phẩm';
 });
 
-$router->get('/tin-khuyen-mai', function () {
-    echo 'Tin khuyến mại';
+$router->get('/tin-khuyen-mai/shopee', function () {
+    require 'app/controllers/NewsPromotionController.php';
+    $NewsPromotionController = new NewsPromotionController();
+    $NewsPromotionController->shopeeShow();
+});
+$router->get('/tin-khuyen-mai/tiktok', function () {
+    require 'app/controllers/NewsPromotionController.php';
+    $NewsPromotionController = new NewsPromotionController();
+    $NewsPromotionController->tiktokShow();
+});
+$router->get('/tin-khuyen-mai/lazada', function () {
+    require 'app/controllers/NewsPromotionController.php';
+    $NewsPromotionController = new NewsPromotionController();
+    $NewsPromotionController->lazadaShow();
 });
 
-$router->get('/huong-dan', function () {
-    echo 'Hướng dẫn';
+$router->get('/huong-dan/shopee', function () {
+    require 'app/controllers/GuidanceController.php';
+    $GuidanceController = new GuidanceController();
+    $GuidanceController->shopeeShow();
+});
+$router->get('/huong-dan/lazada', function () {
+    require 'app/controllers/GuidanceController.php';
+    $GuidanceController = new GuidanceController();
+    $GuidanceController->lazadaShow();
+});
+$router->get('/huong-dan/tiktokshop', function () {
+    require 'app/controllers/GuidanceController.php';
+    $GuidanceController = new GuidanceController();
+    $GuidanceController->tiktokShow();
 });
 
 $router->get('/ma-giam-gia/nha-cung-cap', function () {

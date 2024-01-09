@@ -1,0 +1,51 @@
+.pagination .page-item .page-link {
+  border: none;
+  background-color: #fff;
+  color: #424242;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #e45f2b;
+  color: #fff;
+  border-radius: 4px;
+}
+
+.pagination .page-item .page-link:hover {
+  background-color: #e7e7ea;
+}
+
+.btn-supplier {
+  text-decoration: none;
+  color: #e45f2b;
+  border-radius: 4px;
+  border: 1px solid #e45f2b;
+  padding: 0px 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.btn-supplier:hover {
+  background-color: #e45f2b;
+  color: #fff;
+}
+.wrap-body {
+  background-color: #f8f9fa;
+}
+
+.btn-supplier.active {
+  background-color: #e45f2b;
+  color: #fff;
+}
+
+.image-banner {
+  width: 100%;
+  height: 330px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.titlePost {
+  margin-bottom: 60px;
+  text-align: center;
+  color: #e45f2b;
+}
