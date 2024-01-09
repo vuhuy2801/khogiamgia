@@ -34,7 +34,7 @@
                 </thead>
                 <tbody>
                     <?php
-                                require_once '../../controllers/postController.php';
+                                require_once '../../controllers/PostController.php';
 
                                 $postController = new PostController();
                                 $posts = $postController->getListOfPosts();

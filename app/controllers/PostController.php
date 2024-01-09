@@ -14,20 +14,30 @@ class PostController {
         
     }
 
+    public function getListWithSupplier($id) {
+        return $this->postData->GetPostsBySupplier($id);
+        
+    }
+
+    public function getListGuidanceWithSupplier($id) {
+        return $this->postData->GetGuidancePostsBySupplierId($id);
+        
+    }
+
     public function index()
     {
-      include 'app/views/posts/show.php';
+      include 'app/views/admin/posts/show.php';
       
     }
 
     public function create()
     {
-      include 'app/views/posts/create.php';
+      include 'app/views/admin/posts/create.php';
     }
 
     public function edit()
     {
-        include 'app/views/posts/edit.php';
+        include 'app/views/admin/posts/edit.php';
     }
   
 
