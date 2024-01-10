@@ -17,7 +17,8 @@ CALL DeletePost(88316);
 CALL GetListPosts();
 CALL GetPostsByCategory(1);
 CALL SearchPostByTitle('n');
-
+CALL GetPostsBySupplierId(3);
+CALL GetGuidancePostsBySupplierId(2);
 -- Voucher
 CALL AddVoucher(
     'VOUCHER007','Voucher Name', 50, '2024-01-15', '2024-02-28', 
