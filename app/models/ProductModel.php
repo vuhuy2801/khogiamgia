@@ -81,14 +81,15 @@ class Product implements ProductService{
 
     public function Add(): bool {
         $connection = $this->db->getConnection();
-        $query = "CALL AddProduct(?,?,?,?,?,?)";
+        $query = "CALL AddProduct(?,?,?,?,?,?,?)";
         $staement = $connection->prepare($query);
-        $staement->bindParam(1, $this->productName);
-        $staement->bindParam(2, $this->image);
-        $staement->bindParam(3, $this->rateCount);
-        $staement->bindParam(4, $this->link);
-        $staement->bindParam(5, $this->soldCount);
-        $staement->bindParam(6, $this->status);
+        $staement->bindParam(1, $this->productID);
+        $staement->bindParam(2, $this->productName);
+        $staement->bindParam(3, $this->image);
+        $staement->bindParam(4, $this->rateCount);
+        $staement->bindParam(5, $this->link);
+        $staement->bindParam(6, $this->soldCount);
+        $staement->bindParam(7, $this->status);
         try {
             $staement->execute();
             return true;
@@ -154,11 +155,11 @@ class Product implements ProductService{
         }
     }
     
-    public function GetProductWithPriceByLink(): array {
+    public function GetProductWithPriceById(): array {
         $connection = $this->db->getConnection();
-        $query = "CALL GetProductWithPriceByLink(?)";
+        $query = "CALL GetProductWithPriceById(?)";
         $staement = $connection->prepare($query);
-        $staement->bindParam(1, $this->link);
+        $staement->bindParam(1, $this->productID);
         try {
             $staement->execute();
             $result = $staement->fetchAll(PDO::FETCH_ASSOC);

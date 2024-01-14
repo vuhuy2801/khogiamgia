@@ -13,7 +13,7 @@ CALL SearchSupplier('ti');
 -- Post
 CALL AddPost('New Post Title', 'image_path.jpg','abc', 1, 'Post content...', 'Post description...', 2, '2023-12-20','2023-12-20', 1);
 CALL UpdatePost(34090, 'Updated Post Title', 'https://api.vuhuy.site/uploads/small_img_index_73bc26433c.png','abc', 2, 'Updated post content...', 'Updated post description...', 1, '2023-12-21','2023-12-21', 0);
-CALL DeletePost(88316);
+CALL DeletePost(84558);
 CALL GetListPosts();
 CALL GetPostsByCategory(1);
 CALL SearchPostByTitle('n');
@@ -50,7 +50,7 @@ CALL UpdateProduct(10848, 'Tên sản phẩm mới', 'link_hình_ảnh_mới','l
 CALL DeleteProduct(10848);
 CALL GetListProducts();
 CALL SearchProduct('s');
-CALL GetProductWithPriceByLink('https://example.com/textbooks');
+CALL GetProductWithPriceById('sp001');
 -- ProductPrice
 CALL AddProductPrice(10627, '2023-12-30', 50.99);
 CALL UpdateProductPrice(3, 2, '2023-12-30', 45.99);

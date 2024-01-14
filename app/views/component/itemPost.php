@@ -2,6 +2,14 @@
 
 function itemPostBox($imgSrc, $postDate, $postTitle, $postLink, $description)
 {
+  
+    if (strpos($imgSrc, '../../') === 0) {
+        $imgSrc =  substr($imgSrc, 6); 
+        if (!file_exists($imgSrc)) {
+            echo "Lỗi: Tệp hình ảnh không tồn tại - $imgSrc";
+        }
+    }
+
     return '<div class="col-lg-4">
         <div class="post-box">
             <div class="post-img">
@@ -14,7 +22,6 @@ function itemPostBox($imgSrc, $postDate, $postTitle, $postLink, $description)
             <p class="description">' . $description . '</p>
         </div>
     </div>';
-
 }
 
 ?>
