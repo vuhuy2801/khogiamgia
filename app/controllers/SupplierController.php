@@ -12,5 +12,9 @@ class SupplierController {
         return $this->supplierData->List();
         
     }
+
+    public function index() {
+        include 'app/views/admin/suppliers/show.php';
+    }
 }
 ?>

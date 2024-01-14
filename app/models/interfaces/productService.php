@@ -5,6 +5,6 @@ interface ProductService {
     public function Delete(): bool;
     public function List(): array;
     public function Search(): array;
-    public function GetProductWithPriceByLink(): array;
+    public function GetProductWithPriceById(): array;
 }
 ?>

@@ -165,13 +165,26 @@ $router->get('/huong-dan/chi-tiet', function () {
     echo 'Hướng dẫn/ Chi tiết hướng dẫn';
 });
 
+// router home admin
+$router->get('/admin/trang-chu/show', function () {
+    require 'app/controllers/HomeAdminController.php';
+    $HomeAdminController = new HomeAdminController();
+    $HomeAdminController->index();
+});
 
-// router handle Post
+// router admin handle Post
 $router->get('/admin/bai-viet/show', function () {
     require 'app/controllers/PostController.php';
     $PostController = new PostController();
     $PostController->index();
 });
+
+$router->get('/admin/bai-viet/detail', function () {
+    require 'app/controllers/PostController.php';
+    $PostController = new PostController();
+    $PostController->detail();
+});
+
 $router->get('/admin/bai-viet/create', function () {
     require 'app/controllers/PostController.php';
     $PostController = new PostController();
@@ -189,6 +202,12 @@ $router->post('/admin/bai-viet/add', function () {
     $PostController->addPost();
 });
 
+$router->post('/admin/bai-viet/upload', function () {
+    require 'app/controllers/PostController.php';
+    $PostController = new PostController();
+    $PostController->upload();
+});
+
 $router->post('/admin/bai-viet/update', function () {
     require 'app/controllers/PostController.php';
     $PostController = new PostController();
@@ -201,5 +220,11 @@ $router->post('/admin/bai-viet/delete/(\d+)', function ($postId) {
     $PostController->deletePost($postId);
 });
 
+// Router admin handel suppliers
+$router->get('/admin/nha-cung-cap/show', function () {
+    require 'app/controllers/SupplierController.php';
+    $SupplierController = new SupplierController();
+    $SupplierController->index();
+});
 $router->run();
 ?>

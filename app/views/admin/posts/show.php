@@ -4,12 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
+    <title>Bài viết</title>
+    <link rel="stylesheet" href="../../public/css/bootstrap/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../../public/css/sidebar.css">
@@ -23,7 +19,10 @@
         <div class="row flex-nowrap">
             <?php
                 require_once 'app/views/partials/sidebar.php';
-             
+                require_once 'app/views/admin/posts/deleteModal.php';
+                require_once 'app/views/admin/component/convertDate.php';
+                require_once 'app/views/admin/posts/generalProcessing.php';
+                require_once 'app/controllers/PostController.php';
             ?>
 
             <!-- end sidebar -->
@@ -65,7 +64,6 @@
                         </thead>
                         <tbody class="body_item">
                             <?php
-                                require_once 'app/controllers/PostController.php';
                                 $postController = new PostController();
                                 $posts = $postController->getListOfPosts();
                                 $postsPerPage = 5;
@@ -83,13 +81,14 @@
                                     echo "<td class='item_table' scope='row'>" . $post['postId'] . "</td>";
                                     echo "<td class='item_table_title'>" . $post['title'] . "</td>";
                                     echo "<td class='item_table'> <img class='w-100 item_image' src='". $post['image'] ."' alt=''></td>";
-                                    echo "<td class='item_table'>" . $post['categories_post'] . "</td>";
-                                    echo "<td class='item_table'>" . $post['createdAt'] . "</td>";
-                                    echo "<td class='item_table'>" . $post['status'] . "</td>";
+                                    echo "<td class='item_table'>" . $categories[ $post['categories_post']] . "</td>";
+                                    echo "<td class='item_table'>" . convertDateFormat( $post['createdAt']) . "</td>";
+                                    $statusClass = ($post['status'] == 0) ? 'status-inactive' : 'status-active';
+                                    echo "<td class='item_table '><p class='item_status my-0 rounded-3 " . $statusClass . "'>" . $statuses[$post['status']] . "</p></td>";
                         
                                     echo "<td class='item_table'>
-                                        <a class='px-1 action_detail' href='detail.php?i=" . urlencode($post['postId']) . "&t=" . urlencode($post['title']) . "&a=" . urlencode($post['image']) . "&s=" . urlencode($post['supplierId']) . "&c=" . urlencode($post['content']) . "&d=" . urlencode($post['description']) . "&l=" . urlencode($post['categories_post']) . "&at=" . urlencode($post['createdAt']) . "&status=" . urlencode($post['status']) . "'><i class='bi bi-eye-fill'></i></a>
-                                        <a class='px-1 action_edit' href='edit?postId=" . urlencode($post['postId']) . "&description=" . urlencode($post['description']) . "&title=" . urlencode($post['title']) . "&image=" . urlencode($post['image']) . "&supplier=" . urlencode($post['supplierId']). "&category=" . urlencode($post['categories_post']) . "&status=" . urlencode($post['status']) ."'><i class='bi bi-pencil-square'></i></a>
+                                        <a class='px-1 action_detail' href='detail?id=" . urlencode($post['postId']) . "&title=" . urlencode($post['title']) . "&img=" . urlencode($post['image']) . "&supp=" . urlencode($post['supplierId']) . "&content=" . urlencode($post['content']) . "&des=" . urlencode($post['description']) . "&cate=" . urlencode($post['categories_post']) . "&slug=" . urlencode($post['slug']) . "&at=" . urlencode($post['createdAt']). "&upat=" . urlencode($post['updateAt']) . "&status=" . urlencode($post['status'])  . "'><i class='bi bi-eye-fill'></i></a>
+                                        <a class='px-1 action_edit' href='edit?id=" . urlencode($post['postId']) . "&title=" . urlencode($post['title']) . "&img=" . urlencode($post['image']) . "&supp=" . urlencode($post['supplierId']) . "&content=" . urlencode($post['content']) . "&des=" . urlencode($post['description']) . "&cate=" . urlencode($post['categories_post']) . "&slug=" . urlencode($post['slug']) . "&at=" . urlencode($post['createdAt']). "&upat=" . urlencode($post['updateAt']) . "&status=" . urlencode($post['status'])  ."'><i class='bi bi-pencil-square'></i></a>
                                         <a href='' class='delete-post px-1' data-post-id='" . urlencode($post['postId']) . "' data-bs-toggle='modal' data-bs-target='#deletePost'><i class='bi bi-trash'></i></a>
                                      </td>";
                                 
@@ -117,51 +116,15 @@
 
                 <!-- Button trigger modal -->
 
+                <form name="delete-post-form" method="POST"></form>
 
-                <!-- Modal delete post -->
-                <div class="modal fade" id="deletePost" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Xóa bài viết</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p>Bạn có chắc chắn muốn xóa bài viết ?</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button id="btn-delete-post" type="button" class="btn btn-danger">Xóa</button>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
-    </div>
-    <form name="delete-post-form" method="POST"></form>
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const btnDeletePost = $("#btn-delete-post");
-        let idPost;
 
-        const deleteForm = document.forms['delete-post-form'];
+    <script src="../../public/js/admin/posts/show.js"> </script>
+    <script src="../../public\js\bootstrap\bootstrap.bundle.min.js"> </script>
 
-        $('#deletePost').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget)
-            idPost = button.data('post-id')
-            console.log(idPost);
-        })
-
-        btnDeletePost.click(function() {
-            deleteForm.action = "../bai-viet/delete/" + idPost;
-            deleteForm.submit();
-        })
-    })
-    </script>
 
 </body>
 

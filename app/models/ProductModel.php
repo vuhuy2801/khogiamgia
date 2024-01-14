@@ -184,9 +184,9 @@ class Product implements ProductService
     public function GetProductWithPriceByLink(): array
     {
         $connection = $this->db->getConnection();
-        $query = "CALL GetProductWithPriceByLink(?)";
+        $query = "CALL GetProductWithPriceById(?)";
         $staement = $connection->prepare($query);
-        $staement->bindParam(1, $this->link);
+        $staement->bindParam(1, $this->productID);
         try {
             $staement->execute();
             $result = $staement->fetchAll(PDO::FETCH_ASSOC);
