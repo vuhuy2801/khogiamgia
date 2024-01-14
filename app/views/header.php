@@ -4,7 +4,7 @@ echo print_r($_GET);
 $logoUrl = "https://api.vuhuy.site/uploads/LOGO_2bd919edea.png";
 $homeUrl = "/trang-chu";
 $maGiamGiaUrl = "#";
-$theoDoiGiaSPUrl = "#";
+$theoDoiGiaSPUrl = "/theo-doi-gia";
 $tinKhuyenMaiUrl = "#";
 $huongDanUrl = "#";
 
