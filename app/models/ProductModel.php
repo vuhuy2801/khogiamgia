@@ -1,7 +1,8 @@
-<?php 
+<?php
 require_once __DIR__ . '/../config/DbConnection.php';
 require_once __DIR__ . '/interfaces/productService.php';
-class Product implements ProductService{
+class Product implements ProductService
+{
     private $db;
 
     private $productID;
@@ -12,83 +13,102 @@ class Product implements ProductService{
     private $status;
     private $soldCount;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = new DBConnection();
     }
 
     // Getter and Setter for $productID
-    public function getProductID() {
+    public function getProductID()
+    {
         return $this->productID;
     }
 
-    public function setProductID($productID) {
+    public function setProductID($productID)
+    {
         $this->productID = $productID;
     }
 
     // Getter and Setter for $productName
-    public function getProductName() {
+    public function getProductName()
+    {
         return $this->productName;
     }
 
-    public function setProductName($productName) {
+    public function setProductName($productName)
+    {
         $this->productName = $productName;
     }
 
     // Getter and Setter for $image
-    public function getImage() {
+    public function getImage()
+    {
         return $this->image;
     }
 
-    public function setImage($image) {
+    public function setImage($image)
+    {
         $this->image = $image;
     }
 
     // Getter and Setter for $rateCount
-    public function getRateCount() {
+    public function getRateCount()
+    {
         return $this->rateCount;
     }
 
-    public function setRateCount($rateCount) {
+    public function setRateCount($rateCount)
+    {
         $this->rateCount = $rateCount;
     }
 
     // Getter and Setter for $link
-    public function getLink() {
+    public function getLink()
+    {
         return $this->link;
     }
 
-    public function setLink(string $link) {
+    public function setLink(string $link)
+    {
         $this->link = $link;
     }
 
-    public function getStatus() {
+    public function getStatus()
+    {
         return $this->status;
     }
 
-    public function setStatus($status) {
+    public function setStatus($status)
+    {
         $this->status = $status;
     }
     // Getter and Setter for $soldCount
-    public function getSoldCount() {
+    public function getSoldCount()
+    {
         return $this->soldCount;
     }
 
-    public function setSoldCount($soldCount) {
+    public function setSoldCount($soldCount)
+    {
         $this->soldCount = $soldCount;
     }
 
-    
 
-    public function Add(): bool {
+
+    public function Add(): bool
+    {
+        // INSERT INTO Product (productID, productName, image, link, rateCount, soldCount, status)
+        // VALUES (in_productID, in_productName, in_image, in_link, in_rateCount, in_soldCount, in_status);
         $connection = $this->db->getConnection();
-        $query = "CALL AddProduct(?,?,?,?,?,?)";
+        $query = "CALL AddProduct(?,?,?,?,?,?,?)";
         $staement = $connection->prepare($query);
-        $staement->bindParam(1, $this->productName);
-        $staement->bindParam(2, $this->image);
-        $staement->bindParam(3, $this->rateCount);
+        $staement->bindParam(1, $this->productID);
+        $staement->bindParam(2, $this->productName);
+        $staement->bindParam(3, $this->image);
         $staement->bindParam(4, $this->link);
-        $staement->bindParam(5, $this->soldCount);
-        $staement->bindParam(6, $this->status);
+        $staement->bindParam(5, $this->rateCount);
+        $staement->bindParam(6, $this->soldCount);
+        $staement->bindParam(7, $this->status);
         try {
             $staement->execute();
             return true;
@@ -97,7 +117,8 @@ class Product implements ProductService{
         }
     }
 
-    public function Edit(): bool {
+    public function Edit(): bool
+    {
         $connection = $this->db->getConnection();
         $query = "CALL UpdateProduct(?,?,?,?,?,?,?)";
         $staement = $connection->prepare($query);
@@ -116,7 +137,8 @@ class Product implements ProductService{
         }
     }
 
-    public function Delete(): bool {
+    public function Delete(): bool
+    {
         $connection = $this->db->getConnection();
         $query = "CALL DeleteProduct(?)";
         $staement = $connection->prepare($query);
@@ -129,10 +151,14 @@ class Product implements ProductService{
         }
     }
 
-    public function List(): array {
+    public function List(): array
+    {
+        // productID;productName;image;link;rateCount;soldCount;status
+        // 22984793242;Áo Sweatshirts NEWSEVEN Striped Retro PL.276;https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lo2alcnxkeel23;https://shopee.vn/%C3%81o-Sweatshirts-NEWSEVEN-Striped-Retro-PL.276-i.257372007.22984793242;4.9;272;1
+
         $connection = $this->db->getConnection();
-        if($connection){
-            $query = "CALL GetListProducts()";
+        if ($connection) {
+            $query = "select * from product";
             $staement = $connection->prepare($query);
             $staement->execute();
             $result = $staement->fetchAll(PDO::FETCH_ASSOC);
@@ -140,7 +166,8 @@ class Product implements ProductService{
         }
         return [];
     }
-    public function Search(): array{
+    public function Search(): array
+    {
         $connection = $this->db->getConnection();
         $query = "CALL SearchProduct(?)";
         $staement = $connection->prepare($query);
@@ -153,8 +180,9 @@ class Product implements ProductService{
             return [];
         }
     }
-    
-    public function GetProductWithPriceByLink(): array {
+
+    public function GetProductWithPriceByLink(): array
+    {
         $connection = $this->db->getConnection();
         $query = "CALL GetProductWithPriceByLink(?)";
         $staement = $connection->prepare($query);
@@ -168,6 +196,26 @@ class Product implements ProductService{
         }
 
     }
+    //isExist
+    public function isExist(): bool
+    {
+        $connection = $this->db->getConnection();
+        // using query
+        $query = "select * from product where productID = ?";
+        $staement = $connection->prepare($query);
+        $staement->bindParam(1, $this->productID);
+        try {
+            $staement->execute();
+            $result = $staement->fetchAll(PDO::FETCH_ASSOC);
+            if (count($result) > 0) {
+                return true;
+            }
+            return false;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+    
 }
 
 ?>

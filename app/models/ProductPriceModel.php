@@ -1,51 +1,62 @@
-<?php 
+<?php
 require_once __DIR__ . '/../config/DbConnection.php';
 require_once __DIR__ . '/interfaces/ProductPriceService.php';
 
-class ProductPrice implements productPriceService {
+class ProductPrice implements productPriceService
+{
     private $productPriceID;
     private $productID;
     private $date;
     private $currentPrice;
     private $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = new DBConnection();
     }
 
-    public function getProductPriceID() {
+    public function getProductPriceID()
+    {
         return $this->productPriceID;
     }
 
-    public function setProductPriceID($productPriceID) {
+    public function setProductPriceID($productPriceID)
+    {
         $this->productPriceID = $productPriceID;
     }
 
-    public function getProductID() {
+    public function getProductID()
+    {
         return $this->productID;
     }
 
-    public function setProductID($productID) {
+    public function setProductID($productID)
+    {
         $this->productID = $productID;
     }
 
-    public function getDate() {
+    public function getDate()
+    {
         return $this->date;
     }
 
-    public function setDate($date) {
+    public function setDate($date)
+    {
         $this->date = $date;
     }
 
-    public function getCurrentPrice() {
+    public function getCurrentPrice()
+    {
         return $this->currentPrice;
     }
 
-    public function setCurrentPrice($currentPrice) {
+    public function setCurrentPrice($currentPrice)
+    {
         $this->currentPrice = $currentPrice;
     }
 
-    public function Add(): bool {
+    public function Add(): bool
+    {
         $connection = $this->db->getConnection();
         $query = "CALL AddProductPrice(?, ?, ?)";
         $statement = $connection->prepare($query);
@@ -60,7 +71,8 @@ class ProductPrice implements productPriceService {
         }
     }
 
-    public function Edit(): bool {
+    public function Edit(): bool
+    {
         $connection = $this->db->getConnection();
         $query = "CALL UpdateProductPrice(?, ?, ?, ?)";
         $statement = $connection->prepare($query);
@@ -76,7 +88,8 @@ class ProductPrice implements productPriceService {
         }
     }
 
-    public function Delete(): bool {
+    public function Delete(): bool
+    {
         $connection = $this->db->getConnection();
         $query = "CALL DeleteProductPrice(?)";
         $statement = $connection->prepare($query);
@@ -86,6 +99,60 @@ class ProductPrice implements productPriceService {
             return true;
         } catch (PDOException $e) {
             return false;
+        }
+    }
+
+    public function getHistoryPrice($productID)
+    {
+        // productPriceID;productID;date;currentPrice
+        // 20;22984793242;2024-01-10;275000
+        //sort by date limit 5
+
+        $connection = $this->db->getConnection();
+        $query = "SELECT productID, productPriceID, date, currentPrice
+        FROM productprice
+        WHERE productID = ?
+        GROUP BY date
+        ORDER BY date;
+        ";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(1, $productID);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    // get min price
+    public function getMinPrice(): int
+    {
+        $connection = $this->db->getConnection();
+        $query = "SELECT MIN(currentPrice) AS minPrice
+        FROM productprice
+        WHERE productID = ?;";
+        $staement = $connection->prepare($query);
+        $staement->bindParam(1, $this->productID);
+        try {
+            $staement->execute();
+            $result = $staement->fetch(PDO::FETCH_ASSOC);
+            return $result['minPrice'];
+        } catch (PDOException $e) {
+            return 0;
+        }
+    }
+    // get max price
+    public function getMaxPrice(): int
+    {
+        $connection = $this->db->getConnection();
+        $query = "SELECT MAX(currentPrice) AS maxPrice
+        FROM productprice
+        WHERE productID = ?;";
+        $staement = $connection->prepare($query);
+        $staement->bindParam(1, $this->productID);
+        try {
+            $staement->execute();
+            $result = $staement->fetch(PDO::FETCH_ASSOC);
+            return $result['maxPrice'];
+        } catch (PDOException $e) {
+            return 0;
         }
     }
 }
