@@ -1580,7 +1580,9 @@ class simple_html_dom
 
 	function find($selector, $idx = null, $lowercase = false)
 	{
-		return $this->root->find($selector, $idx, $lowercase);
+		try{return $this->root->find($selector, $idx, $lowercase);}
+		catch(Exception $e){return null;}
+		
 	}
 
 	function clear()

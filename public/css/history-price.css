@@ -1,0 +1,151 @@
+/* Styles for the .follow-price class */
+.follow-price {
+    color: white;
+    margin-top: 63px;
+    background: linear-gradient(
+        0deg,
+        rgba(246, 196, 69, 1),
+        rgba(228, 96, 43, 1)
+    );
+}
+
+.follow-price h1 {
+    line-height: normal;
+    padding: 88px 0 10px;
+    font-weight: 700;
+}
+
+.follow-price p {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.5;
+    padding-bottom: 5px;
+}
+
+.follow-price__img {
+    width: 60%;
+}
+
+.follow-price__img img {
+    width: 100%;
+}
+
+.btn-custom {
+    /* width: 100%; */
+    background-color: #48bb78;
+    border-color: #48bb78;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 400;
+    padding: 10px 20px;
+    border-radius: 0 5px 5px 0;
+    height: 55px;
+}
+
+.btn-paste {
+    background-color: #fff;
+    font-size: 18px;
+    font-weight: 400;
+    padding: 10px 20px;
+    border-radius: 0;
+    height: 55px;
+    flex-grow: 1;
+}
+
+.btn-paste:hover,
+.btn-paste:active {
+    background-color: #fff !important;
+    color: #000 !important;
+}
+
+.btn-custom:hover,
+.btn-custom:active {
+    background-color: #38a169 !important;
+}
+
+.input-link-product {
+    font-size: 24px;
+    height: 120px;
+}
+
+.link-product-group {
+    display: flex;
+    flex-grow: 8;
+}
+
+.input-link-product input {
+    height: 55px;
+    border-radius: 5px 0 0 5px;
+    border: 1px solid #fff;
+    padding-left: 20px;
+    font-size: 18px;
+    font-weight: 400;
+    color: #000;
+    background-color: #fff;
+    flex-grow: 8;
+}
+
+/* Media query for screens with max-width of 768px */
+@media (max-width: 768px) {
+    .follow-price {
+        margin-top: 0;
+        height: auto;
+    }
+
+    .follow-price h1 {
+        padding: 20px 0 10px;
+        font-size: 24px;
+    }
+
+    .follow-price p {
+        font-size: 16px;
+    }
+
+    .follow-price__img {
+        width: 100%;
+    }
+
+    .follow-price__img img {
+        width: 100%;
+    }
+    .btn-custom, .btn-paste, .input-link-product input {
+        height: 45px;
+        font-size: 16px;
+    }
+
+    .btn-custom {
+        width: 100%;
+        margin-top: 5px;
+        border-radius: 5px;
+    }
+
+    .btn-paste {
+        border-radius: 0 5px 5px 0;
+    }
+}
+
+/* Styles for the .info-product class */
+.info-product {
+    padding: 50px 0;
+    background-color: #f8f9fa;
+}
+
+.info-product__img img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.vote-sold-count div {
+    flex-basis: 200px;
+}
+
+.price {
+    font-size: 14px;
+}
+
+.box-content {
+    padding: 20px 40px;
+    border: 1px solid #e2e8f0;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}

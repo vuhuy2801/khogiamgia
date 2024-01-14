@@ -3,9 +3,9 @@
 use RPurinton\GeminiPHP\GeminiClient;
 use RPurinton\GeminiPHP\GeminiPrompt;
 
+include_once('lib\simple_html_dom.php');
 class InfoProductShopee
 {
-    private $link;
     private $date;
     private $id;
     private $name;
@@ -15,10 +15,11 @@ class InfoProductShopee
     private $description;
     private $advice;
     private $image;
+    private $link;
 
-    public function __construct($link)
+
+    public function __construct()
     {
-        $this->link = $link;
         $this->date = "";
         $this->id = "";
         $this->name = "";
@@ -28,11 +29,13 @@ class InfoProductShopee
         $this->description = "";
         $this->advice = "";
         $this->image = "";
+        $this->link = "";
     }
     public function getLink()
     {
         return $this->link;
     }
+
     public function getDate()
     {
         return $this->date;
@@ -97,13 +100,23 @@ class InfoProductShopee
     {
         $this->image = $image;
     }
-
-    public function getInfo()
+    public function setlink($link)
     {
-        include_once('simple_html_dom.php');
-        $dom = file_get_html($this->link);
+        $this->link = $link;
+    }
+
+    public function getBasicInfo($linkProduct)
+    {
+        $this->link = $linkProduct;
+        $dom = file_get_html($linkProduct);
+        date_default_timezone_set('Asia/Bangkok');
         $this->date = date('Y-m-d H:i:s');
-        $string_id = $dom->find('.ha5ReG a', 0)->href;
+        $string_id = $dom->find('.ha5ReG a', 0);
+        if ($string_id == null) {
+            return false;
+        } else {
+            $string_id = $string_id->href;
+        }
         $this->id = explode("/", $string_id)[4];
         $this->name = $dom->find('._5f9gl5 span', 0)->plaintext;
         if ($dom->find('.Ybrg9j', 0) != null) {
@@ -113,16 +126,55 @@ class InfoProductShopee
         } else {
             $this->price = $dom->find('.TVzooJ', 0)->plaintext;
         }
+        $this->price = str_replace(['₫', '.', 'đ'], ['', '', ''], $this->price);
         $this->vote_rate = $dom->find('.sbAxkj', 0)->plaintext;
-        $this->sold = $dom->find('.product-review__sold-count', 0)->plaintext;
+        $soldCount = $dom->find('.product-review__sold-count', 0)->plaintext;
+        $soldCount = str_replace(['Đã bán', ',', 'k'], ['', '', '00'], $soldCount);
+        $this->sold = (int) $soldCount;
+        if ((int) $soldCount) {
+            $this->sold = $soldCount;
+        }
         $arr_mota = $dom->find('._3cIWQC');
         $strMoTa = "";
         foreach ($arr_mota as $mota) {
             $strMoTa .= $mota->plaintext . "\n";
         }
         $this->description = $strMoTa;
-        $this->advice = $this->getAdviceByGemini($strMoTa);
-        $this->image = $dom->find('._7D4JtJ', 0)->src;
+        // $this->advice = $this->getAdviceByGemini($strMoTa);
+        // if .7D4JtJ use .AC2nRJ 
+        if ($dom->find('._7D4JtJ', 0) == null) {
+            $this->image = $dom->find('.AC2nRJ', 0)->src;
+        } else {
+            $this->image = $dom->find('._7D4JtJ', 0)->src;
+        }
+
+        return $this;
+    }
+    public function getCurrentPrice($link)
+    {
+        $dom = file_get_html($link);
+        date_default_timezone_set('Asia/Bangkok');
+        $this->date = date('Y-m-d H:i:s');
+        $string_id = $dom->find('.ha5ReG a', 0)->href;
+        $this->id = explode("/", $string_id)[4];
+        if ($dom->find('.Ybrg9j', 0) != null) {
+            $this->price = $dom->find('.Ybrg9j', 0)->plaintext;
+        } else if ($dom->find('.jS-qN8', 0) != null) {
+            $this->price = $dom->find('.jS-qN8', 0)->plaintext;
+        } else {
+            $this->price = $dom->find('.TVzooJ', 0)->plaintext;
+        }
+        $this->price = str_replace(['₫', '.', 'đ'], ['', '', ''], $this->price);
+
+
+        return $this;
+    }
+    public function showCurrentPrice()
+    {
+        echo $this->id;
+        echo $this->price;
+        echo $this->date;
+        return $this;
     }
     public function getAdviceByGemini($infoProduct)
     {
@@ -352,49 +404,49 @@ class InfoProductShopee
         echo "Lượt bán:" . $this->sold;
         echo "<br>";
         // echo "mô tả:" . $this->description;
+        
         echo "<br>";
-        echo "lời khuyên" . $this->advice;
-        echo "<br>";
+        echo "lời khuyên" . $this->getAdviceByGemini($this->description);
+        // echo "<br>";
     }
 
 
 
 }
 
+// <!-- $link =
+// "https://shopee.vn/5SE.Gi%C3%A1-si%C3%AAu-r%E1%BA%BB.m%C3%A1y-nh%E1%BB%8F-g%E1%BB%8Dn-c%E1%BA%A5u-h%C3%ACnh-6s-t%E1%BA%B7ng-k%C3%A8m-ph%E1%BB%A5-ki%E1%BB%87n-.-c%C3%B3-b%E1%BA%A3o-h%C3%A0nh.-i.459344212.19489656104";
+// date_default_timezone_set('Asia/Bangkok'); // Set the time zone to UTC+7 (Asia/Bangkok)
+// $date = date('Y-m-d H:i:s');
+// echo $date;
+// echo "<br>";
+// include_once('simple_html_dom.php');
+// $dom = file_get_html($link);
+// $string_id = $dom->find('.ha5ReG a', 0)->href;
+// echo "id:" . explode("/", $string_id)[4];
+// echo "<br>";
+// echo "tên sản phẩm:" . $dom->find('._5f9gl5 span', 0)->plaintext;
+// echo "<br>";
+// if ($dom->find('.Ybrg9j', 0) != null) {
+// echo "giá:" . $dom->find('.Ybrg9j', 0)->plaintext;
+// } else if ($dom->find('.jS-qN8', 0) != null) {
+// echo "giá:" . $dom->find('.jS-qN8', 0)->plaintext;
+// } else {
+// echo "giá:" . $dom->find('.TVzooJ', 0)->plaintext;
+// }
+
+// echo "<br>";
+// echo "vote rate:" . $dom->find('.sbAxkj', 0)->plaintext;
+// echo "<br>";
+// echo "Lượt bán:" . $dom->find('.product-review__sold-count', 0)->plaintext;
+// echo "<br>";
+// $arr_mota = $dom->find('._3cIWQC');
+// $strMoTa = "";
+// // echo "mô tả:" . $dom->find('._46g+V7', 0)->plaintext;
+// foreach ($arr_mota as $mota) {
+// $strMoTa .= $mota->plaintext . "\n";
+// }
+// echo "lời khuyên" . getAdvice($strMoTa); -->
+
 
 ?>
-
-
-<!-- $link =
-"https://shopee.vn/5SE.Gi%C3%A1-si%C3%AAu-r%E1%BA%BB.m%C3%A1y-nh%E1%BB%8F-g%E1%BB%8Dn-c%E1%BA%A5u-h%C3%ACnh-6s-t%E1%BA%B7ng-k%C3%A8m-ph%E1%BB%A5-ki%E1%BB%87n-.-c%C3%B3-b%E1%BA%A3o-h%C3%A0nh.-i.459344212.19489656104";
-date_default_timezone_set('Asia/Bangkok'); // Set the time zone to UTC+7 (Asia/Bangkok)
-$date = date('Y-m-d H:i:s');
-echo $date;
-echo "<br>";
-include_once('simple_html_dom.php');
-$dom = file_get_html($link);
-$string_id = $dom->find('.ha5ReG a', 0)->href;
-echo "id:" . explode("/", $string_id)[4];
-echo "<br>";
-echo "tên sản phẩm:" . $dom->find('._5f9gl5 span', 0)->plaintext;
-echo "<br>";
-if ($dom->find('.Ybrg9j', 0) != null) {
-echo "giá:" . $dom->find('.Ybrg9j', 0)->plaintext;
-} else if ($dom->find('.jS-qN8', 0) != null) {
-echo "giá:" . $dom->find('.jS-qN8', 0)->plaintext;
-} else {
-echo "giá:" . $dom->find('.TVzooJ', 0)->plaintext;
-}
-
-echo "<br>";
-echo "vote rate:" . $dom->find('.sbAxkj', 0)->plaintext;
-echo "<br>";
-echo "Lượt bán:" . $dom->find('.product-review__sold-count', 0)->plaintext;
-echo "<br>";
-$arr_mota = $dom->find('._3cIWQC');
-$strMoTa = "";
-// echo "mô tả:" . $dom->find('._46g+V7', 0)->plaintext;
-foreach ($arr_mota as $mota) {
-$strMoTa .= $mota->plaintext . "\n";
-}
-echo "lời khuyên" . getAdvice($strMoTa); -->
