@@ -495,16 +495,17 @@ DELIMITER ;
 DELIMITER //
 
 CREATE PROCEDURE AddProduct(
+	IN in_productId  NVARCHAR(255),
     IN in_productName NVARCHAR(255),
     IN in_image NVARCHAR(255),
-    IN in_link NVARCHAR(255),
+    IN in_link TEXT,
 	IN in_rateCount FLOAT(15),
 	IN in_soldCount FLOAT(15),
     IN in_status INT
 )
 BEGIN
-    INSERT INTO Product (productName, image, link, rateCount, soldCount, status)
-    VALUES (in_productName, in_image, in_link, in_rateCount, in_soldCount, in_status);
+    INSERT INTO Product (productId,productName, image, link, rateCount, soldCount, status)
+    VALUES (in_productId,in_productName, in_image, in_link, in_rateCount, in_soldCount, in_status);
 END;
 //
 
@@ -513,10 +514,10 @@ DELIMITER ;
 DELIMITER //
 
 CREATE PROCEDURE UpdateProduct(
-    IN in_productID INT,
+    IN in_productID NVARCHAR(255),
     IN in_productName NVARCHAR(255),
     IN in_image NVARCHAR(255),
-	IN in_link NVARCHAR(255),
+	IN in_link TEXT,
 	IN in_rateCount FLOAT(15),
 	IN in_soldCount FLOAT(15),
 	IN in_status INT
@@ -533,7 +534,7 @@ DELIMITER ;
 DELIMITER //
 
 CREATE PROCEDURE DeleteProduct(
-    IN in_productID INT
+    IN in_productID NVARCHAR(255)
 )
 BEGIN
     DELETE FROM Product WHERE productID = in_productID;
@@ -570,14 +571,14 @@ DELIMITER ;
 
 DELIMITER //
 
-CREATE PROCEDURE GetProductWithPriceByLink(
-    IN in_productLink NVARCHAR(255)
+CREATE PROCEDURE GetProductWithPriceById(
+    IN in_productId NVARCHAR(255)
 )
 BEGIN
-    SELECT P.*, PP.currentPrice
+    SELECT P.*, PP.currentPrice, PP.date
     FROM Product P
     LEFT JOIN ProductPrice PP ON P.productID = PP.productID
-    WHERE P.link = in_productLink;
+    WHERE P.productId = in_productId;
 END;
 //
 
@@ -588,7 +589,7 @@ DELIMITER ;
 DELIMITER //
 
 CREATE PROCEDURE AddProductPrice(
-    IN in_productID INT,
+    IN in_productID NVARCHAR(255),
     IN in_date DATE,
     IN in_currentPrice FLOAT(25)
 )
@@ -604,7 +605,7 @@ DELIMITER //
 
 CREATE PROCEDURE UpdateProductPrice(
     IN in_productPriceID INT,
-    IN in_productID INT,
+    IN in_productID NVARCHAR(255),
     IN in_date DATE,
     IN in_currentPrice FLOAT(25)
 )

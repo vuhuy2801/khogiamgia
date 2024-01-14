@@ -59,10 +59,10 @@ CREATE TABLE IF NOT EXISTS Used (
 
 -- table Product 
 CREATE TABLE IF NOT EXISTS Product (
-    productID INT PRIMARY KEY AUTO_INCREMENT,
+    productID NVARCHAR(255) PRIMARY KEY,
     productName NVARCHAR(255),
     image NVARCHAR(255),
-    link NVARCHAR(255),
+    link TEXT,
     rateCount FLOAT(15),
     soldCount Float(15),
     status INT
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS Product (
 -- table ProductPrice
 CREATE TABLE IF NOT EXISTS ProductPrice (
     productPriceID INT PRIMARY KEY AUTO_INCREMENT,
-    productID INT,
+    productID NVARCHAR(255),
     date DATE,
     currentPrice FLOAT(25)
 );
@@ -135,19 +135,6 @@ END;
 
 DELIMITER ;
 
-DELIMITER //
-
-CREATE TRIGGER generate_random_id_product
-BEFORE INSERT ON Product
-FOR EACH ROW
-BEGIN
-    DECLARE random_number INT;
-    SET random_number = FLOOR(RAND() * 90000) + 10000; 
-    SET NEW.productId = random_number; 
-END;
-//
-
-DELIMITER ;
 
 DELIMITER //
 

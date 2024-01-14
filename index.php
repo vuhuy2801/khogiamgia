@@ -110,6 +110,13 @@ $router->get('/admin/bai-viet/show', function () {
     $PostController = new PostController();
     $PostController->index();
 });
+
+$router->get('/admin/bai-viet/detail', function () {
+    require 'app/controllers/PostController.php';
+    $PostController = new PostController();
+    $PostController->detail();
+});
+
 $router->get('/admin/bai-viet/create', function () {
     require 'app/controllers/PostController.php';
     $PostController = new PostController();
@@ -125,6 +132,12 @@ $router->post('/admin/bai-viet/add', function () {
     require 'app/controllers/PostController.php';
     $PostController = new PostController();
     $PostController->addPost();
+});
+
+$router->post('/admin/bai-viet/upload', function () {
+    require 'app/controllers/PostController.php';
+    $PostController = new PostController();
+    $PostController->upload();
 });
 
 $router->post('/admin/bai-viet/update', function () {

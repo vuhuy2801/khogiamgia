@@ -29,6 +29,11 @@ class PostController {
       include 'app/views/admin/posts/show.php';
       
     }
+    public function detail()
+    {
+      include 'app/views/admin/posts/detail.php';
+      
+    }
 
     public function create()
     {
@@ -40,61 +45,46 @@ class PostController {
         include 'app/views/admin/posts/edit.php';
     }
   
-
-    function createSlug($string)
+    public function upload()
     {
-        $search = array(
-            '#(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)#',
-            '#(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)#',
-            '#(ì|í|ị|ỉ|ĩ)#',
-            '#(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)#',
-            '#(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)#',
-            '#(ỳ|ý|ỵ|ỷ|ỹ)#',
-            '#(đ)#',
-            '#(À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ)#',
-            '#(È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ)#',
-            '#(Ì|Í|Ị|Ỉ|Ĩ)#',
-            '#(Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ)#',
-            '#(Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ)#',
-            '#(Ỳ|Ý|Ỵ|Ỷ|Ỹ)#',
-            '#(Đ)#',
-            "/[^a-zA-Z0-9\-\_]/",
-        );
-        $replace = array(
-            'a',
-            'e',
-            'i',
-            'o',
-            'u',
-            'y',
-            'd',
-            'A',
-            'E',
-            'I',
-            'O',
-            'U',
-            'Y',
-            'D',
-            '-',
-        );
-        $string = preg_replace($search, $replace, $string);
-        $string = preg_replace('/(-)+/', '-', $string);
-        $string = strtolower($string);
-        return $string;
+        $targetDirectory = 'public/uploads/posts/' . date('d-m-Y') . '/';
+        
+        $originalFileName = pathinfo($_FILES['file']['name'], PATHINFO_FILENAME); // lấy tên file ảnh
+        $extension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION); //lấy đuôi file ảnh
+
+        $newFileName = $originalFileName;
+        $counter = 1;
+        while (file_exists($targetDirectory . $newFileName . '.' . $extension)) {
+            $newFileName = $originalFileName . '_' . $counter++;
+        }
+
+        $targetFile = $targetDirectory . $newFileName . '.' . $extension;
+
+        if (!file_exists($targetDirectory)) {
+            mkdir($targetDirectory, 0777, true);
+        }
+        
+        if (move_uploaded_file($_FILES['file']['tmp_name'], $targetFile)) {
+            echo "File đã được tải lên thành công.";
+        } else {
+            echo "Có lỗi khi tải file lên.";
+        }
     }
+
   
     public function addPost() {
-        $slug = $this->createSlug($_POST['title']);
-        $this->postData->setSlug($slug);
-        $this->postData->setContent('');
+        $this->postData->setContent($_POST['content']);
         $this->postData->setCreatedAt(date('Y-m-d H:i:s'));
         $this->postData->setUpdateAt(date('Y-m-d H:i:s'));
         $this->postData->setStatus(1);
+        $this->postData->setSlug($_POST['slug']);
+        $imageName = ($_POST['image']);
+        $targetDirectory = '../../public/uploads/posts/' . date('d-m-Y') . '/';
+        $imageUrl = $targetDirectory . $imageName;
+        $this->postData->setImage($imageUrl);
+    
         if (isset($_POST['title'])) {
             $this->postData->setTitle($_POST['title']);
-        }
-        if (isset($_POST['image'])) {
-            $this->postData->setImage($_POST['image']);
         }
         if (isset($_POST['description'])) {
             $this->postData->setDescription($_POST['description']);
@@ -114,19 +104,28 @@ class PostController {
     }
 
     public function updatePost() {
-        $slug = $this->createSlug($_POST['title']);
-        $this->postData->setSlug($slug);
-        $this->postData->setContent('');
+
+        $this->postData->setContent($_POST['content']);
         $this->postData->setUpdateAt(date('Y-m-d H:i:s'));
-        $this->postData->setStatus($_POST['status']);
+        $this->postData->setStatus(1);
+        $this->postData->setSlug($_POST['slug']);
+
+        $imageName = ($_POST['image']);
+        $imageFake = ($_POST['fakeImage']);
+        if ($imageName == "") {
+            $this->postData->setImage($imageFake);
+        }else { $targetDirectory = '../../public/uploads/posts/' . date('d-m-Y') . '/';
+            $imageUrl = $targetDirectory . $imageName;
+            
+            $this->postData->setImage($imageUrl);
+        }
+       
+        
         if (isset($_POST['postId'])) {
             $this->postData->setPostId($_POST['postId']);
         }
         if (isset($_POST['title'])) {
             $this->postData->setTitle($_POST['title']);
-        }
-        if (isset($_POST['image'])) {
-            $this->postData->setImage($_POST['image']);
         }
         if (isset($_POST['description'])) {
             $this->postData->setDescription($_POST['description']);
@@ -154,7 +153,10 @@ class PostController {
         }
         
     }
-}
 
+    
+   
+ 
+}
 
 ?>

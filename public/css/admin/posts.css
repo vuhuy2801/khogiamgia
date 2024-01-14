@@ -116,3 +116,59 @@
 .input-group {
   width: 240px;
 }
+
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: #fff !important;
+}
+
+.wrap_img_detail {
+  max-width: 100%;
+  text-align: center;
+}
+
+.wrap_img_detail img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+}
+
+.label_input {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.label_right {
+  font-weight: 500;
+  color: #909090;
+}
+
+.date_value {
+  font-weight: 500;
+  color: #909090;
+}
+
+.btn {
+  border-radius: 6px;
+}
+
+.status-inactive {
+  background-color: #e9ecef;
+  color: #343a40;
+  width: 20%;
+  text-align: center;
+  margin: auto;
+}
+
+.status-active {
+  background-color: #c7f5d9;
+  color: #174c2c;
+  width: 40%;
+  text-align: center;
+  margin: auto;
+}
+.dropzone {
+  padding: 20px 0px;
+}
