@@ -1,4 +1,5 @@
 body {
+    height: 100%;
     background-color: #f0f2f5;
     background-image: url("../../public/images/bglogin.png");
 }
@@ -17,7 +18,10 @@ body {
 }
 
 .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     color: rgba(0, 0, 0, 0.45);
-    margin-top: 170px;
+    /* margin-top: 170px; */
     text-transform: uppercase; /* Added */
 }

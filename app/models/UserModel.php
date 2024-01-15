@@ -1,55 +1,66 @@
 <?php
 require_once __DIR__ . '/../config/DbConnection.php';
 require_once __DIR__ . '/interfaces/userService.php';
-class User implements UserService {
+class User implements UserService
+{
     private $db;
     private $userId;
     private $userName;
     private $email;
     private $password;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->db = new DBConnection();
     }
 
     // Getter and Setter for $userId
-    public function getUserId() {
+    public function getUserId()
+    {
         return $this->userId;
     }
 
-    public function setUserId($userId) {
+    public function setUserId($userId)
+    {
         $this->userId = $userId;
     }
 
     // Getter and Setter for $userName
-    public function getUserName() {
+    public function getUserName()
+    {
         return $this->userName;
     }
 
-    public function setUserName($userName) {
+    public function setUserName($userName)
+    {
         $this->userName = $userName;
     }
 
     // Getter and Setter for $email
-    public function getEmail() {
+    public function getEmail()
+    {
         return $this->email;
     }
 
-    public function setEmail($email) {
+    public function setEmail($email)
+    {
         $this->email = $email;
     }
 
     // Getter and Setter for $password
-    public function getPassword() {
+    public function getPassword()
+    {
         return $this->password;
     }
 
-    public function setPassword($password) {
+    public function setPassword($password)
+    {
         $this->password = $password;
     }
-    
 
-    public function Add(): bool {
+
+    public function Add(): bool
+    {
         $connection = $this->db->getConnection();
         $query = "CALL AddUser(?,?,?)";
         $statement = $connection->prepare($query);
@@ -65,7 +76,8 @@ class User implements UserService {
 
     }
 
-    public function Edit(): bool {
+    public function Edit(): bool
+    {
         $connection = $this->db->getConnection();
         $query = "CALL UpdateUser(?,?,?,?)";
         $statement = $connection->prepare($query);
@@ -81,7 +93,8 @@ class User implements UserService {
         }
     }
 
-    public function Delete(): bool {
+    public function Delete(): bool
+    {
         $connection = $this->db->getConnection();
         $query = "CALL DeleteUser(?)";
         $statement = $connection->prepare($query);
@@ -94,17 +107,37 @@ class User implements UserService {
         }
     }
 
-    public function List(): array {
+    public function List(): array
+    {
         $connection = $this->db->getConnection();
-        if ($connection){
+        if ($connection) {
             $query = "CALL GetAllUsers()";
             $statement = $connection->prepare($query);
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $result;
-        }else{
+        } else {
             return [];
         }
     }
+
+    //getUserByUsername
+    public function getUserByUsername($username)
+    {
+        $connection = $this->db->getConnection();
+        if ($connection) {
+            $query = "select * from user where username = ?";
+            $statement = $connection->prepare($query);
+            $statement->bindParam(1, $username);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        } else {
+            return [];
+        }
+    }
+
+
+
 }
 ?>
