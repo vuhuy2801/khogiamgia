@@ -1,6 +1,7 @@
 .item-promotion {
     padding: 24px 20px 10px 20px;
     max-width: 400px;
+    /* width: 100%; */
     font-size: 14px;
     line-height: 20px;
     background-color: #ffffff;
@@ -102,4 +103,10 @@
     cursor: pointer;
     background-color: #0a3622;
     color: #d1e7dd;
+}
+
+@media (max-width: 1400px) {
+    .item-promotion {
+        max-width: 370px;
+    }
 }

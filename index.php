@@ -96,8 +96,22 @@ $router->get('/trang-chu', function () {
 $router->get('/ma-giam-gia', function () {
     echo 'Mã giảm giá';
 });
+
+
 $router->get('/login', function () {
-    require 'app/views/login/login.html';
+    require_once 'app\controllers\AuthenticationController.php';
+    $AuthenticationController = new AuthenticationController();
+    $AuthenticationController->loginView();
+});
+$router->post('/login', function () {
+    require_once 'app\controllers\AuthenticationController.php';
+    $AuthenticationController = new AuthenticationController();
+    $AuthenticationController->handleLogin();
+});
+$router->get('/dang-xuat', function () {
+    require_once 'app\controllers\AuthenticationController.php';
+    $AuthenticationController = new AuthenticationController();
+    $AuthenticationController->logout();
 });
 
 
@@ -167,7 +181,7 @@ $router->get('/huong-dan/chi-tiet', function () {
 
 // router home admin
 $router->get('/admin/trang-chu/show', function () {
-    require 'app/controllers/HomeAdminController.php';
+    require 'app\controllers\admin\HomeAdminController.php';
     $HomeAdminController = new HomeAdminController();
     $HomeAdminController->index();
 });
@@ -220,11 +234,22 @@ $router->post('/admin/bai-viet/delete/(\d+)', function ($postId) {
     $PostController->deletePost($postId);
 });
 
+// 404 
+$router->set404(function () {
+    header('HTTP/1.1 404 Not Found');
+    echo '404 - Page not found';
+    include 'app/views/404.php';
+});
+
 // Router admin handel suppliers
 $router->get('/admin/nha-cung-cap/show', function () {
     require 'app/controllers/SupplierController.php';
     $SupplierController = new SupplierController();
     $SupplierController->index();
 });
+
+
+
+
 $router->run();
 ?>
