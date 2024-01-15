@@ -6,6 +6,33 @@ const elmAdviceProduct = document.querySelector(".advice-product");
 const elmAdviceProductContent = document.querySelector(
     ".advice-product__content"
 );
+const elmLinkProduct = document.getElementById("linkProduct");
+const elmInfoProduct = document.getElementById("infoProduct");
+const elmNotifiCation = document.getElementById("notifiCation");
+// btn-paste
+const elmBtnPaste = document.querySelector(".btn-paste");
+
+//elmLinkProduct on typing or on have value elmBtnPaste innerHTML = "xóa"
+elmLinkProduct.addEventListener("input", function () {
+    if (elmLinkProduct.value === "") {
+        elmBtnPaste.innerHTML = `<i class="bi bi-clipboard"></i> Dán`;
+    } else {
+        elmBtnPaste.innerHTML = `<i class="bi bi-x-circle"></i> Xóa`;
+    }
+});
+
+// handle click btn-paste
+elmBtnPaste.addEventListener("click", function () {
+    if (elmLinkProduct.value === "") {
+        navigator.clipboard.readText().then((text) => {
+            elmLinkProduct.value = text;
+        });
+        elmBtnPaste.innerHTML = `<i class="bi bi-x-circle"></i> Xóa`;
+    } else {
+        elmLinkProduct.value = "";
+        elmBtnPaste.innerHTML = `<i class="bi bi-clipboard"></i> Dán`;
+    }
+});
 
 function renderInfoProduct(data) {
     const { infoProduct, dataChart } = data;
@@ -73,10 +100,6 @@ function renderInfoProduct(data) {
 }
 
 function getHistoryPriceProduct() {
-    const elmLinkProduct = document.getElementById("linkProduct");
-    const elmInfoProduct = document.getElementById("infoProduct");
-    const elmNotifiCation = document.getElementById("notifiCation");
-
     if (elmLinkProduct.value === "") {
         elmNotifiCation.classList.remove("d-none");
         elmNotifiCation.innerHTML = `

@@ -1,6 +1,5 @@
 <?php
 $currentUrl = $_SERVER['REQUEST_URI'];
-echo print_r($_GET);
 $logoUrl = "https://api.vuhuy.site/uploads/LOGO_2bd919edea.png";
 $homeUrl = "/trang-chu";
 $maGiamGiaUrl = "#";
