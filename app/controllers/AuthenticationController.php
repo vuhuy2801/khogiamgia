@@ -13,13 +13,12 @@ class AuthenticationController
         $password = $_POST['password'];
         $userModel = new User();
         $user = $userModel->getUserByUsername($username);
-
         if (password_verify($password, $user['password'])) {
             $_SESSION['user'] = $user;
             print_r($_SESSION['user']);
             header('Location: /admin/trang-chu/show');
         } else {
-            $_SESSION['error'] = 'Sai tài khoản hoặc mật khẩu';
+            $_SESSION['error'] = 'Sai tài khoản hoặc mật khẩu'. $user['password'];
             header('Location: /login');
         }
     }

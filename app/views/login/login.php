@@ -28,19 +28,14 @@
             <div class="col-md-5">
                 <form class="form-login" method="post">
                     <!-- dynamic arlet -->
-                    <?php if (isset($_SESSION['error'])): ?>
-                        <div class="alert alert-danger" role="alert">
-                            <?php echo $_SESSION['error']; ?>
-                        </div>
-                    <?php endif; ?>
-                    <?php if (isset($_SESSION['success'])): ?>
-                        <div class="alert alert-success" role="alert">
-                            <?php echo $_SESSION['success']; ?>
-                        </div>
-                    <?php endif; ?>
+                    <div class="alert <?php echo isset($_SESSION['error']) ? "alert-danger" : (isset($_SESSION['success']) ? "alert-success" : "alert-danger d-none") ?>"
+                        role="alert">
+                        <?php echo isset($_SESSION['error']) ? $_SESSION['error'] : (isset($_SESSION['success']) ? $_SESSION['success'] : "") ?>
+                    </div>
                     <?php unset($_SESSION['error']); ?>
                     <?php unset($_SESSION['success']); ?>
                     <!-- end dynamic arlet -->
+
 
 
                     <div class="form-group mt-4">
