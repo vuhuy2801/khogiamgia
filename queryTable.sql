@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS Banner (
 CREATE TABLE IF NOT EXISTS User (
     userName NVARCHAR(25) PRIMARY KEY,
     email NVARCHAR(25),
-    password NVARCHAR(25)
+    password NVARCHAR(255)
 );
 
 -- FOREIGN KEY 

@@ -27,7 +27,7 @@ class AuthenticationController
     public function checkLogin()
     {
         if (!isset($_SESSION['user'])) {
-            header("Location: login.php"); // redirect to login page if user is not logged in
+            header("Location: login"); // redirect to login page if user is not logged in
             exit();
         }
 
