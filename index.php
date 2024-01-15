@@ -220,6 +220,13 @@ $router->post('/admin/bai-viet/delete/(\d+)', function ($postId) {
     $PostController->deletePost($postId);
 });
 
+// 404 
+$router->set404(function () {
+    header('HTTP/1.1 404 Not Found');
+    echo '404 - Page not found';
+    include 'app/views/404.php';
+});
+
 // Router admin handel suppliers
 $router->get('/admin/nha-cung-cap/show', function () {
     require 'app/controllers/SupplierController.php';
