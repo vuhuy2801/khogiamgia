@@ -166,6 +166,35 @@ class Product implements ProductService
         }
         return [];
     }
+
+    public function ListAdmin(): array
+    {
+        $connection = $this->db->getConnection();
+        if ($connection) {
+            $query = "CALL GetListProducts()";
+            $staement = $connection->prepare($query);
+            $staement->execute();
+            $result = $staement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+        return [];
+    }
+
+    public function Detail($productId) {
+        $connection = $this->db->getConnection();
+        $query = "CALL GetProductDetail(?)";
+        try {
+            $statement = $connection->prepare($query);
+            $statement->bindParam(1, $productId);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }catch (PDOException $e) {
+            return false;
+        }
+    }
+
+
     public function Search(): array
     {
         $connection = $this->db->getConnection();

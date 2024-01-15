@@ -1,17 +1,17 @@
 const editorTextarea = document.getElementById("editor");
-const parser = new DOMParser();
-const parsedContent = parser.parseFromString(phpContentValue, "text/html");
-const plainTextContent = parsedContent.body.textContent;
-editorTextarea.value = plainTextContent;
 
-ClassicEditor.create(document.querySelector("#editor"))
-  .then((editor) => {
-    editor.enableReadOnlyMode("editor");
-    console.log(editor);
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+function intEditor(content) {
+  ClassicEditor.create(document.querySelector("#editor"))
+    .then((editor) => {
+      editor.enableReadOnlyMode("editor");
+      editor.setData(content);
+      console.log(editor);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+intEditor(dataPost.content);
 
 document.addEventListener("DOMContentLoaded", function () {
   const btnDeletePost = $("#btn-delete-post");

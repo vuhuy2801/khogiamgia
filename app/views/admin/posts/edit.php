@@ -17,16 +17,22 @@
     <div class="container-fluid">
         <div class="row flex-nowrap">
             <?php
+        //    error_reporting(0); 
+            
             require_once 'app/views/partials/sidebar.php';
-            require_once 'app/views/admin/component/convertDate.php';
+            require_once 'lib/convertDate.php';
             require_once 'app/controllers/SupplierController.php';
             require_once 'app/views/admin/posts/generalProcessing.php';
+            require_once 'app/controllers/PostController.php';
+            $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
+            $postController = new PostController();
+            $post= $postController->getPostDetail($id);
             ?>
 
 
             <div class="col px-3 py-3 bg-light">
                 <div class="mt-4">
-                    <h3 class="mt-3 mb-3"><?php echo $title ?>
+                    <h3 class="mt-3 mb-3"><?php echo $post['title'] ?>
                     </h3>
 
                     <div class="row pt-1">
@@ -43,23 +49,23 @@
                             <form class="bg-body rounded-3 px-3 pt-3 pb-5" id="formSubmit" method="POST"
                                 action="update">
                                 <div class="form-group">
-                                    <input type="hidden" value="<?php echo $id ?>" class="form-control" id="postId"
-                                        name="postId">
+                                    <input type="hidden" value="<?php echo $post['postId'] ?>" class="form-control"
+                                        id="postId" name="postId">
                                 </div>
                                 <div class="form-group">
                                     <label class="label_input" for="title">Tiêu đề</label>
-                                    <input type="text" class="form-control" value="<?php echo $title ?>" id="title"
-                                        name="title">
+                                    <input type="text" class="form-control" value="<?php echo $post['title'] ?>"
+                                        id="title" name="title">
                                 </div>
                                 <div class="form-group mt-2">
                                     <label class="label_input" for="description">Mô tả</label>
-                                    <input type="text" value="<?php echo $description ?>" class="form-control"
+                                    <input type="text" value="<?php echo $post['description'] ?>" class="form-control"
                                         id="description" name="description">
                                 </div>
                                 <div class="form-group mt-2">
                                     <label class="label_input" for="slug">Slug</label>
-                                    <input type="text" value="<?php echo $slug ?>" class="form-control" id="slug"
-                                        name="slug">
+                                    <input type="text" value="<?php echo $post['slug'] ?>" class="form-control"
+                                        id="slug" name="slug">
                                 </div>
 
                                 <div class="form-group mt-2">
@@ -72,7 +78,7 @@
                                 </div>
 
                                 <div class="form-group mt-2">
-                                    <input type="hidden" class="form-control" value="<?php echo $image ?>"
+                                    <input type="hidden" class="form-control" value="<?php echo $post['image'] ?>"
                                         id="fakeImage" name="fakeImage">
                                 </div>
 
@@ -83,7 +89,7 @@
                                             id="supplierId">
                                             <?php
                                                 foreach ($suppliers as $index => $supplier) {
-                                                    $selected = ($supplier['supplierId'] == $supplierId) ? 'selected' : '';
+                                                    $selected = ($supplier['supplierId'] == $post['supplier']) ? 'selected' : '';
                                                     echo "<option value=".$supplier['supplierId']." $selected>".$supplier['supplierName']."</option>";
                                                 }
                                             ?>
@@ -96,7 +102,7 @@
 
                                             <?php
                                                 foreach ($categories as $key => $category) {
-                                                    $selected = ($key == $categoryId) ? 'selected' : '';
+                                                    $selected = ($key == $post['categories_post']) ? 'selected' : '';
                                                     echo "<option value=$key $selected>$category</option>";
                                                 }
                                             ?>
@@ -113,10 +119,12 @@
                                     <hr>
                                 </div>
                                 <div class="px-4 mb-5 ">
-                                    <form action="upload" class="dropzone text-center" id="myDropzone"
-                                        enctype="multipart/form-data">
-
-                                    </form>
+                                    <div class="dropzone-container">
+                                        <form action="upload" class="dropzone text-center" id="myDropzone"
+                                            enctype="multipart/form-data"></form>
+                                        <button id="deleteImageBtn" style="display:block;"><i
+                                                class="bi bi-trash"></i></button>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card">
@@ -126,10 +134,10 @@
                                 </div>
                                 <div class="px-3">
                                     <p class="label_input">Thời gian tạo: <span
-                                            class="float-end date_value"><?php  echo convertDateFormat($createdAt)  ?></span>
+                                            class="float-end date_value"><?php  echo convertDateFormat($post['createdAt'])  ?></span>
                                     </p>
                                     <p class="label_input">Thời gian cập nhật: <span
-                                            class="float-end date_value"><?php echo $currentDateTime ?></span>
+                                            class="float-end date_value update_at"></span>
                                     </p>
                                 </div>
                             </div>
@@ -142,13 +150,24 @@
 
 
     </div>
-    <script src="../../public\js\bootstrap\bootstrap.bundle.min.js"> </script>
     <script>
-    const phpContentValue = "<?php echo $content ?>";
-    const srcImg = "<?php echo $image ?>";
+    //data post php to json format
+    const dataPost = {
+        content: `<?php echo $post['content'] ?>`,
+        image: "<?php echo $post['image'] ?>",
+    }
     </script>
-    <script src="../../public/js/admin/posts/edit.js"> </script>
 
+    <script src="../../public\js\bootstrap\bootstrap.bundle.min.js"> </script>
+    <script src="../../public\js\admin\posts\edit.js"> </script>
+    <script src="
+    https://cdn.jsdelivr.net/npm/dayjs@1.11.10/dayjs.min.js
+    "></script>
+    <script>
+    const now = dayjs();
+    const formattedTime = now.format('hh:mm A DD/MM/YY');
+    document.querySelector('.update_at').textContent = formattedTime;
+    </script>
 </body>
 
 </html>

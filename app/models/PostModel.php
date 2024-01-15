@@ -120,6 +120,20 @@ class Post implements PostService {
             return [];
         }
     }
+
+    public function ListUser(): array {
+        $connection = $this->db->getConnection();
+
+        if ($connection) {         
+            $query = "CALL GetListPostsUser()"; 
+            $statement = $connection->prepare($query);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } else {
+            return [];
+        }
+    }
    
     public function Add(): bool {
         $connection = $this->db->getConnection();
@@ -222,6 +236,22 @@ class Post implements PostService {
             return [];
         }
     }
+
+
+    public function GetPostDetail($postId) {
+        $connection = $this->db->getConnection();
+        $query = "CALL GetPostDetail(?)";
+        try {
+            $statement = $connection->prepare($query);
+            $statement->bindParam(1, $postId, PDO::PARAM_INT);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+    
 
     public function GetGuidancePostsBySupplierId($id): array {
         $connection = $this->db->getConnection();

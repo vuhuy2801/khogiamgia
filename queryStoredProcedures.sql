@@ -112,6 +112,26 @@ DELIMITER ;
 
 DELIMITER //
 
+CREATE PROCEDURE GetDetailSupplier(in supplierId INT)
+BEGIN
+    SELECT * FROM Supplier Where supplierId = Supplier.supplierId ;
+END;
+//
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE GetListNameSuppliers()
+BEGIN
+    SELECT supplierId, supplierName FROM Supplier;
+END;
+//
+
+DELIMITER ;
+
+DELIMITER //
+
 CREATE PROCEDURE SearchSupplier(
     IN in_supplierName NVARCHAR(255)
 )
@@ -135,8 +155,8 @@ CREATE PROCEDURE AddPost(
     IN post_content TEXT,
     IN post_description NVARCHAR(1555),
     IN post_categories INT,
-    IN post_created_at DATE,
-    IN post_update_at DATE,
+    IN post_created_at DATETIME,
+    IN post_update_at DATETIME,
     IN post_status INT
 )
 BEGIN
@@ -158,7 +178,7 @@ CREATE PROCEDURE UpdatePost(
     IN new_post_content TEXT,
     IN new_post_description NVARCHAR(1555),
     IN new_post_categories INT,
-    IN new_post_update_at DATE,
+    IN new_post_update_at DATETIME,
     IN new_post_status INT
 )
 BEGIN
@@ -197,11 +217,62 @@ DELIMITER //
 
 CREATE PROCEDURE GetListPosts()
 BEGIN
-    SELECT * FROM Post;
+    SELECT
+        postId,
+        title,
+        image,
+        categories_post,
+        createdAt,
+        status
+    FROM
+        Post;
 END;
 //
 
 DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE GetListPostsUser()
+BEGIN
+    SELECT
+        postId,
+        title,
+        image,
+        createdAt,
+        slug,
+        description
+    FROM
+        Post;
+END;
+//
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE GetPostDetail(IN postIdParam INT)
+BEGIN
+    SELECT
+        postId,
+        title,
+        image,
+        slug,
+        supplierId,
+        content,
+        description,
+        categories_post,
+        createdAt,
+        updateAt,
+        status
+    FROM
+        Post
+    WHERE
+        postId = postIdParam;
+END //
+
+DELIMITER ;
+
 
 DELIMITER //
 
@@ -278,8 +349,8 @@ CREATE PROCEDURE AddVoucher(
     IN voucher_conditionOrder NVARCHAR(155),
     IN voucher_conditionOfUse NVARCHAR(155),
     IN voucher_categoryId INT,
-    IN voucher_createdAt DATE,
-    IN voucher_updatedAt DATE,
+    IN voucher_createdAt DATETIME,
+    IN voucher_updatedAt DATETIME,
     IN voucher_is_trend TINYINT,
     IN voucher_supplierId INT,
     IN voucher_status INT,
@@ -315,7 +386,7 @@ CREATE PROCEDURE UpdateVoucher(
     IN new_voucher_conditionOrder NVARCHAR(155),
     IN new_voucher_conditionOfUse NVARCHAR(155),
     IN new_voucher_categoryId INT,
-    IN new_voucher_updatedAt DATE,
+    IN new_voucher_updatedAt DATETIME,
     IN new_voucher_is_trend TINYINT,
     IN new_voucher_supplierId INT,
     IN new_voucher_status INT,
@@ -365,7 +436,17 @@ DELIMITER //
 
 CREATE PROCEDURE GetListVouchers()
 BEGIN
-    SELECT * FROM Voucher;
+    SELECT voucherId,voucherName,discountType,supplierId,expiresAt,status FROM Voucher;
+END;
+//
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE GetDetailVoucher(IN voucherId NVARCHAR(15))
+BEGIN
+    SELECT * FROM Voucher where Voucher.voucherId = voucherId;
 END;
 //
 
@@ -543,13 +624,26 @@ END;
 
 DELIMITER ;
 
+
 DELIMITER //
 
 CREATE PROCEDURE GetListProducts()
 BEGIN
+    SELECT productID,productName,image,soldCount,rateCount,status
+    FROM Product;
+END;
+//
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE GetProductDetail(IN productId NVARCHAR(255))
+BEGIN
     SELECT P.*, PP.date, PP.currentPrice
     FROM Product P
-    LEFT JOIN ProductPrice PP ON P.productID = PP.productID;
+    LEFT JOIN ProductPrice PP ON P.productID = PP.productID
+    WHERE P.productID = productId;
 END;
 //
 
@@ -639,8 +733,8 @@ CREATE PROCEDURE AddBanner(
     IN in_title NVARCHAR(255),
     IN in_address_target NVARCHAR(55),
     IN in_status INT,
-    IN in_createdAt DATE,
-    IN in_updateAt DATE
+    IN in_createdAt DATETIME,
+    IN in_updateAt DATETIME
 )
 BEGIN
     INSERT INTO Banner (image,title,address_target,status,createdAt,updatedAt)
@@ -658,7 +752,7 @@ CREATE PROCEDURE UpdateBanner(
 	IN in_title NVARCHAR(255),
     IN in_address_target NVARCHAR(55),
     IN in_status INT,
-    IN in_updateAt DATE
+    IN in_updateAt DATETIME
 )
 BEGIN
     UPDATE Banner
@@ -690,12 +784,21 @@ DELIMITER //
 
 CREATE PROCEDURE GetListBanners()
 BEGIN
-    SELECT * FROM Banner;
+    SELECT bannerId,image,address_target,title,createdAt,status FROM Banner;
 END;
 //
 
 DELIMITER ;
 
+DELIMITER //
+
+CREATE PROCEDURE GetDetailBanner(In bannerId INT)
+BEGIN
+    SELECT bannerId,image,address_target,title,createdAt,updatedAt,status FROM Banner where Banner.bannerId = bannerId;
+END;
+//
+
+DELIMITER ;
 -- user -- 
 
 DELIMITER //
@@ -716,15 +819,26 @@ DELIMITER ;
 DELIMITER //
 
 CREATE PROCEDURE UpdateUser(
-    IN in_userId INT,
     IN in_userName NVARCHAR(25),
     IN in_email NVARCHAR(25),
     IN in_password NVARCHAR(25)
 )
 BEGIN
     UPDATE User
-    SET userName = in_userName, email = in_email, password = in_password
-    WHERE userId = in_userId;
+    SET  email = in_email, password = in_password
+    WHERE userName = in_userName;
+END;
+//
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE DeleteUser(
+    IN in_userName NVARCHAR(25)
+)
+BEGIN
+    DELETE FROM User WHERE userName = in_userName;
 END;
 //
 
@@ -735,6 +849,16 @@ DELIMITER //
 CREATE PROCEDURE GetAllUsers()
 BEGIN
     SELECT * FROM User;
+END;
+//
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE GetDetailUser(In userName NVARCHAR(25))
+BEGIN
+    SELECT * FROM User where user.userName = userName;
 END;
 //
 

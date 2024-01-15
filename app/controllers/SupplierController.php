@@ -13,6 +13,11 @@ class SupplierController {
         
     }
 
+    public function getListNameSuppliers() {
+        return $this->supplierData->ListName();
+        
+    }
+
     public function index() {
         include 'app/views/admin/suppliers/show.php';
     }

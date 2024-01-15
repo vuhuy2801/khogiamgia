@@ -91,11 +91,17 @@
                                     </p>
                                     <hr>
                                 </div>
-                                <div class="px-4 mb-5 ">
-                                    <form action="upload" class="dropzone text-center" id="myDropzone"
-                                        enctype="multipart/form-data">
-                                    </form>
+                                <div class="px-4 mb-5">
+                                    <div class="dropzone-container">
+                                        <form action="upload" class="dropzone text-center" id="myDropzone"
+                                            enctype="multipart/form-data"></form>
+                                        <button id="deleteImageBtn" style="display:none;"><i
+                                                class="bi bi-trash"></i></button>
+                                    </div>
                                 </div>
+
+
+
                             </div>
                             <div class="card">
                                 <div class="card-body">
@@ -104,10 +110,10 @@
                                 </div>
                                 <div class="px-3">
                                     <p class="label_input">Thời gian tạo: <span
-                                            class="float-end date_value"><?php echo $currentDateTime ?></span>
+                                            class="float-end date_value create_at"></span>
                                     </p>
                                     <p class="label_input">Thời gian cập nhật: <span
-                                            class="float-end date_value"><?php echo $currentDateTime ?></span>
+                                            class="float-end date_value update_at"></span>
                                     </p>
                                 </div>
                             </div>
@@ -121,5 +127,15 @@
 
     <script src="../../public/js/admin/posts/create.js"></script>
     <script src="../../public\js\bootstrap\bootstrap.bundle.min.js"> </script>
+    <script src="
+    https://cdn.jsdelivr.net/npm/dayjs@1.11.10/dayjs.min.js
+    "></script>
+    <script>
+    const now = dayjs();
+    const formattedTime = now.format('hh:mm A DD/MM/YY');
+
+    document.querySelector('.create_at').textContent = formattedTime;
+    document.querySelector('.update_at').textContent = formattedTime;
+    </script>
 
 </body>

@@ -4,31 +4,41 @@ const formSubmit = document.getElementById("formSubmit");
 const titleInput = document.getElementById("title");
 const slugInput = document.getElementById("slug");
 const imageInput = document.getElementById("image");
-
-const parser = new DOMParser();
-const parsedContent = parser.parseFromString(phpContentValue, "text/html");
-const plainTextContent = parsedContent.body.textContent;
-editorTextarea.value = plainTextContent;
+// console.log(phpContentValue);
+// const parser = new DOMParser();
+// const parsedContent = parser.parseFromString(phpContentValue, "text/html");
+// const plainTextContent = parsedContent.body.textContent;
+// console.log(parsedContent);
+// editorTextarea.value = plainTextContent;
 btnSubmit.addEventListener("click", () => {
   formSubmit.submit();
 });
 
-ClassicEditor.create(document.querySelector("#editor"))
-  .then((editor) => {
-    // editor.enableReadOnlyMode("editor");
-    console.log(editor);
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+function intEditor(content) {
+  ClassicEditor.create(document.querySelector("#editor"))
+    .then((editor) => {
+      // editor.enableReadOnlyMode("editor");
+      editor.setData(content);
+      console.log(editor);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+intEditor(dataPost.content);
+let myDropzone;
 
 Dropzone.options.myDropzone = {
   acceptedFiles: "image/*",
   maxFiles: 1,
-  dictDefaultMessage: "Click để tải ảnh lên",
+  dictDefaultMessage: "<i class='bi bi-upload'></i></br>Click để tải ảnh lên",
+  thumbnailHeight: null,
+  thumbnailWidth: null,
   init: function () {
     const previewsContainer = document.getElementById("myDropzone");
-    const defaultImageUrl = srcImg;
+    const deleteBtn = document.getElementById("deleteImageBtn");
+    myDropzone = this;
+    const defaultImageUrl = dataPost.image;
     let mockFile = {
       name: "Filename",
       size: 12345,
@@ -46,8 +56,29 @@ Dropzone.options.myDropzone = {
         this.files.length > 0 ? "block" : "none";
     });
 
-    this.on("complete", function (file) {
+    this.on("success", function (file) {
       imageInput.value = file.name;
+      deleteBtn.style.display = "inline-block";
+    });
+
+    this.on("removedfile", function (file) {
+      imageInput.value = "";
+      deleteBtn.style.display = "none";
+    });
+
+    deleteBtn.addEventListener("click", function () {
+      const files = myDropzone.getAcceptedFiles();
+      myDropzone.removeFile(mockFile);
+      if (files.length > 0) {
+        myDropzone.removeFile(files[0]);
+      }
+    });
+
+    this.on("thumbnail", function (file) {
+      file.previewElement.classList.add("hoverable");
+      file.previewElement.addEventListener("mouseleave", function () {
+        file.previewElement.classList.remove("hoverable");
+      });
     });
   },
 };

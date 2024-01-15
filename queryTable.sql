@@ -24,8 +24,8 @@ CREATE TABLE IF NOT EXISTS Post (
     content TEXT,
     description NVARCHAR(1555),
     categories_post INT,
-    createdAt DATE,
-    updateAt DATE,
+    createdAt DATETIME,
+    updateAt DATETIME,
     status INT
 );
 
@@ -39,8 +39,8 @@ CREATE TABLE IF NOT EXISTS Voucher (
     orderConditions NVARCHAR(155),
     conditionsOfUse NVARCHAR(155),
     categoryId INT,
-    createdAt DATE,
-    updatedAt DATE,
+    createdAt DATETIME,
+    updatedAt DATETIME,
     is_trend TINYINT(1),
     supplierId INT,
     status INT,
@@ -83,13 +83,12 @@ CREATE TABLE IF NOT EXISTS Banner (
     title NVARCHAR(255),
     address_target NVARCHAR(55),
     status INT,
-    createdAt DATE,
-    updatedAt DATE
+    createdAt DATETIME,
+    updatedAt DATETIME
 );
 -- table user
 CREATE TABLE IF NOT EXISTS User (
-    userId INT PRIMARY KEY AUTO_INCREMENT,
-    userName NVARCHAR(25),
+    userName NVARCHAR(25) PRIMARY KEY,
     email NVARCHAR(25),
     password NVARCHAR(25)
 );

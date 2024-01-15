@@ -15,15 +15,20 @@ ClassicEditor.create(document.querySelector("#editor"))
   .catch((error) => {
     console.error(error);
   });
-
+let myDropzone;
 Dropzone.options.myDropzone = {
   acceptedFiles: "image/*",
+  thumbnailHeight: null,
+  thumbnailWidth: null,
   maxFiles: 1,
   dictDefaultMessage: "<i class='bi bi-upload'></i></br> Click để tải ảnh lên",
   init: function () {
     const previewsContainer = document.getElementById("myDropzone");
+    const deleteBtn = document.getElementById("deleteImageBtn");
+    myDropzone = this;
     this.on("success", function (file, response) {
       imageInput.value = file.name;
+      deleteBtn.style.display = "inline-block";
     });
 
     this.on("addedfile", function (file) {
@@ -32,6 +37,25 @@ Dropzone.options.myDropzone = {
       }
       previewsContainer.style.display =
         this.files.length > 0 ? "block" : "none";
+    });
+
+    this.on("removedfile", function (file) {
+      imageInput.value = "";
+      deleteBtn.style.display = "none";
+    });
+
+    deleteBtn.addEventListener("click", function () {
+      const files = myDropzone.getAcceptedFiles();
+      if (files.length > 0) {
+        myDropzone.removeFile(files[0]);
+      }
+    });
+
+    this.on("thumbnail", function (file) {
+      file.previewElement.classList.add("hoverable");
+      file.previewElement.addEventListener("mouseleave", function () {
+        file.previewElement.classList.remove("hoverable");
+      });
     });
   },
 };
