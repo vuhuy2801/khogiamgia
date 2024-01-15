@@ -51,6 +51,33 @@ class Supplier implements SupplierService {
         }
 
     }
+
+    public function Detail($supplierId) {
+        $connection = $this->db->getConnection();
+        $query = "CALL GetDetailSupplier(?)";
+        try {
+            $statement = $connection->prepare($query);
+            $statement->bindParam(1, $supplierId, PDO::PARAM_INT);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    public function ListName(): array {
+        $connection = $this->db->getConnection();
+        $query = "CALL GetListNameSuppliers()";
+        try {
+            $statement = $connection->prepare($query);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }catch (PDOException $e) {
+            return [];
+        }
+    }
     public function Add(): bool{
         $connection = $this->db->getConnection();
             $query = "CALL AddSupplier(?,?,?)";

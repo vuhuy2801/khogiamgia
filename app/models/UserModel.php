@@ -106,5 +106,19 @@ class User implements UserService {
             return [];
         }
     }
+
+    public function Detail($userId) {
+        $connection = $this->db->getConnection();
+        $query = "CALL GetDetailUser(?)";
+        try {
+            $statement = $connection->prepare($query);
+            $statement->bindParam(1, $userId);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }catch (PDOException $e) {
+            return false;
+        }
+    }
 }
 ?>

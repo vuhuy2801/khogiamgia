@@ -13,6 +13,10 @@ class PostController {
         return $this->postData->List();
         
     }
+    public function getListPostsUser() {
+        return $this->postData->ListUser();
+        
+    }
 
     public function getListWithSupplier($id) {
         return $this->postData->GetPostsBySupplier($id);
@@ -23,7 +27,9 @@ class PostController {
         return $this->postData->GetGuidancePostsBySupplierId($id);
         
     }
-
+    public function getPostDetail($postId) {
+        return $this->postData->GetPostDetail($postId);
+    }
     public function index()
     {
       include 'app/views/admin/posts/show.php';
@@ -73,6 +79,7 @@ class PostController {
 
   
     public function addPost() {
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
         $this->postData->setContent($_POST['content']);
         $this->postData->setCreatedAt(date('Y-m-d H:i:s'));
         $this->postData->setUpdateAt(date('Y-m-d H:i:s'));
@@ -104,6 +111,7 @@ class PostController {
     }
 
     public function updatePost() {
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
 
         $this->postData->setContent($_POST['content']);
         $this->postData->setUpdateAt(date('Y-m-d H:i:s'));
@@ -149,7 +157,7 @@ class PostController {
         if ($this->postData->Delete()){
             header('Location: ../show');
         }else{
-            echo "Sửa bài viết thất bại";
+            echo "Xóa bài viết thất bại";
         }
         
     }

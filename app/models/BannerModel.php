@@ -133,5 +133,19 @@ class Banner implements BannerService {
             return [];
         }
     }
+
+    public function Detail($bannerId) {
+        $connection = $this->db->getConnection();
+        $query = "CALL GetDetailBanner(?)";
+        try {
+            $statement = $connection->prepare($query);
+            $statement->bindParam(1, $bannerId, PDO::PARAM_INT);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }catch (PDOException $e) {
+            return false;
+        }
+    }
 }
 ?>

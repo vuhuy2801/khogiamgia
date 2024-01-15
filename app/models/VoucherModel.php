@@ -228,6 +228,20 @@ class Voucher implements VoucherService {
         }
         return [];
     }
+
+    public function Detail($voucherId) {
+        $connection = $this->db->getConnection();
+        $query = "CALL GetDetailVoucher(?)";
+        try {
+            $statement = $connection->prepare($query);
+            $statement->bindParam(1, $voucherId);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }catch (PDOException $e) {
+            return false;
+        }
+    }
     public function GetTrendingVouchers(): array{
         $connection = $this->db->getConnection();
         if ($connection){

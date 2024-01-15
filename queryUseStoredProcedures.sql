@@ -6,15 +6,19 @@ CALL DeleteCategory(11);
 CALL GetListCategories();
 -- Supplier
 CALL AddSupplier('Supplier A', 'abc.com', 'logo_supplier_a.png');
-CALL UpdateSupplier(1, 'TiKi', '789 Elm Street, City Z', 'new_logo_supplier_a.png');
+CALL UpdateSupplier(1, 'Shopee', '789 Elm Street, City Z', 'new_logo_supplier_a.png');
 CALL DeleteSupplier(6);
 CALL GetListSuppliers();
+CALL GetListNameSuppliers();
+CALL GetDetailSupplier(1);
 CALL SearchSupplier('ti');
 -- Post
 CALL AddPost('New Post Title', 'image_path.jpg','abc', 1, 'Post content...', 'Post description...', 2, '2023-12-20','2023-12-20', 1);
 CALL UpdatePost(34090, 'Updated Post Title', 'https://api.vuhuy.site/uploads/small_img_index_73bc26433c.png','abc', 2, 'Updated post content...', 'Updated post description...', 1, '2023-12-21','2023-12-21', 0);
 CALL DeletePost(84558);
 CALL GetListPosts();
+CALL GetListPostsUser();
+CALL GetPostDetail(11547);
 CALL GetPostsByCategory(1);
 CALL SearchPostByTitle('n');
 CALL GetPostsBySupplierId(3);
@@ -34,6 +38,7 @@ CALL UpdateVoucher(
 
 CALL DeleteVoucher('VOUCHER006');
 CALL GetListVouchers();
+CALL GetDetailVoucher('VOUCHER001');
 CALL GetTrendingVouchers(1);
 CALL GetVouchersBySupplierId(2); 
 CALL GetVouchersByCategoryId(2); 
@@ -49,13 +54,13 @@ CALL AddProduct('Bồn ngâm chân massage cao cấp con lăn tự động Seren
 CALL UpdateProduct(10848, 'Tên sản phẩm mới', 'link_hình_ảnh_mới','link_sản_phẩm', 30 ,40,1);
 CALL DeleteProduct(10848);
 CALL GetListProducts();
+CALL GetProductDetail('sp002');
 CALL SearchProduct('s');
 CALL GetProductWithPriceById('sp001');
 -- ProductPrice
-CALL AddProductPrice(10627, '2023-12-30', 50.99);
+CALL AddProductPrice('sp002', '2024-12-30', 50.99);
 CALL UpdateProductPrice(3, 2, '2023-12-30', 45.99);
 CALL DeleteProductPrice(5);
-select * from productprice;
 -- Banner
 CALL AddBanner(
     'banner_image.jpg',
@@ -73,8 +78,11 @@ CALL UpdateBanner(1, 'banner_image.jpg',
     '2024-01-06'); 
 CALL DeleteBanner(5); 
 CALL GetListBanners();
+CALL GetDetailBanner(1);
 -- User 
-CALL AddUser('username1', 'email1@example.com', 'password1');
-CALL UpdateUser(58158, 'new_username', 'new_email@example.com', 'new_password');
+CALL AddUser('username2', 'email1@example.com', 'password1');
+CALL UpdateUser('username2', 'new_email@example.com', 'new_password');
+CALL DeleteUser('username2');
 CALL GetAllUsers();
+CALL GetDetailUser('username2');
 

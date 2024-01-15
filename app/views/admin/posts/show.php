@@ -20,7 +20,7 @@
             <?php
                 require_once 'app/views/partials/sidebar.php';
                 require_once 'app/views/admin/posts/deleteModal.php';
-                require_once 'app/views/admin/component/convertDate.php';
+                require_once 'lib/convertDate.php';
                 require_once 'app/views/admin/posts/generalProcessing.php';
                 require_once 'app/controllers/PostController.php';
             ?>
@@ -87,11 +87,10 @@
                                     echo "<td class='item_table '><p class='item_status my-0 rounded-3 " . $statusClass . "'>" . $statuses[$post['status']] . "</p></td>";
                         
                                     echo "<td class='item_table'>
-                                        <a class='px-1 action_detail' href='detail?id=" . urlencode($post['postId']) . "&title=" . urlencode($post['title']) . "&img=" . urlencode($post['image']) . "&supp=" . urlencode($post['supplierId']) . "&content=" . urlencode($post['content']) . "&des=" . urlencode($post['description']) . "&cate=" . urlencode($post['categories_post']) . "&slug=" . urlencode($post['slug']) . "&at=" . urlencode($post['createdAt']). "&upat=" . urlencode($post['updateAt']) . "&status=" . urlencode($post['status'])  . "'><i class='bi bi-eye-fill'></i></a>
-                                        <a class='px-1 action_edit' href='edit?id=" . urlencode($post['postId']) . "&title=" . urlencode($post['title']) . "&img=" . urlencode($post['image']) . "&supp=" . urlencode($post['supplierId']) . "&content=" . urlencode($post['content']) . "&des=" . urlencode($post['description']) . "&cate=" . urlencode($post['categories_post']) . "&slug=" . urlencode($post['slug']) . "&at=" . urlencode($post['createdAt']). "&upat=" . urlencode($post['updateAt']) . "&status=" . urlencode($post['status'])  ."'><i class='bi bi-pencil-square'></i></a>
+                                        <a class='px-1 action_detail' href='detail?id=" . urlencode($post['postId']) .  "'><i class='bi bi-eye-fill'></i></a>
+                                        <a class='px-1 action_edit' href='edit?id=" . urlencode($post['postId']) ."'><i class='bi bi-pencil-square'></i></a>
                                         <a href='' class='delete-post px-1' data-post-id='" . urlencode($post['postId']) . "' data-bs-toggle='modal' data-bs-target='#deletePost'><i class='bi bi-trash'></i></a>
                                      </td>";
-                                
                                      echo "</tr>" ; } ?>
                         </tbody>
                     </table>

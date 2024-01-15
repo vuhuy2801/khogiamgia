@@ -19,14 +19,18 @@
             <?php
             require_once 'app/views/partials/sidebar.php';
             require_once 'app/views/admin/posts/deleteModal.php';
-            require_once 'app/views/admin/component/convertDate.php';
+            require_once 'lib/convertDate.php';
             require_once 'app/views/admin/posts/generalProcessing.php';
-            $hrefEdit = 'edit?id='.$id.'&title='.$title.'&des='.$description.'&slug='.$slug.'&content='.$content.'&img='.$image.'&supp='.$supplierid.'&cate='.$category.'&at='.$createdAt.'';
+            require_once 'app/controllers/PostController.php';
+            $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
+            $postController = new PostController();
+            $post = $postController->getPostDetail($id);
+            
             ?>
 
             <div class="col px-3 py-3 bg-light">
                 <div class="mt-4">
-                    <h3 class="mt-3 mb-3"><?php echo $title ?>
+                    <h3 class="mt-3 mb-3"><?php echo $post['title'] ?>
                     </h3>
 
                     <div class="row pt-1">
@@ -38,7 +42,7 @@
                                 <a class="btn btn-danger mx-1 drop-post" data-post-id='<?php echo $id ?>'
                                     data-bs-toggle='modal' data-bs-target='#deletePost'><i
                                         class='mx-1 bi bi-trash'></i>Xóa</a>
-                                <a class="btn btn-primary" href="<?php echo $hrefEdit ?>"><i
+                                <a class="btn btn-primary" href="<?php echo 'edit?id='.$id ?>"><i
                                         class='mx-1 bi bi-pencil-square'></i>Sửa</a>
                             </div>
 
@@ -48,18 +52,18 @@
 
                                 <div class="form-group">
                                     <label class="label_input" for="title">Tiêu đề</label>
-                                    <input type="text" class="form-control" value="<?php echo $title ?>" id="title"
-                                        name="title" readonly>
+                                    <input type="text" class="form-control" value="<?php echo $post['title'] ?>"
+                                        id="title" name="title" readonly>
                                 </div>
                                 <div class="form-group mt-2">
                                     <label class="label_input" for="description">Mô tả</label>
-                                    <input type="text" value="<?php echo $description ?>" class="form-control"
+                                    <input type="text" value="<?php echo $post['description'] ?>" class="form-control"
                                         id="description" name="description" readonly>
                                 </div>
                                 <div class="form-group mt-2">
                                     <label class="label_input" for="slug">Slug</label>
-                                    <input type="text" value="<?php echo $slug ?>" class="form-control" id="slug"
-                                        name="slug" readonly>
+                                    <input type="text" value="<?php echo $post['slug'] ?>" class="form-control"
+                                        id="slug" name="slug" readonly>
                                 </div>
 
                                 <div class="form-group mt-2">
@@ -70,12 +74,12 @@
                                 <div class="row form-group mt-2 d-flex">
                                     <div class="col">
                                         <label class="label_input" for="supp">Nhà cung cấp</label>
-                                        <input type="text" value="<?php echo $listSupplier[$supplierid] ?? '';?>"
+                                        <input type="text" value="<?php echo $listSupplier[ $post['supplierId']] ?>"
                                             class="form-control" id="supp" name="supp" readonly>
                                     </div>
                                     <div class="col">
                                         <label class="label_input" for="cate">Danh mục</label>
-                                        <input type="text" value="<?php echo $categories[$category] ?? '';?>"
+                                        <input type="text" value="<?php echo $categories[ $post['categories_post']] ?>"
                                             class="form-control" id="cate" name="cate" readonly>
                                     </div>
                                 </div>
@@ -89,7 +93,7 @@
                                     <hr>
                                 </div>
                                 <div class="px-4 mb-5 wrap_img_detail">
-                                    <img src="<?php echo $image ?>" alt="">
+                                    <img src="<?php echo $post['image'] ?>" alt="">
                                 </div>
                             </div>
                             <div class="card">
@@ -99,10 +103,10 @@
                                 </div>
                                 <div class="px-3">
                                     <p class="label_input">Thời gian tạo: <span
-                                            class="float-end date_value"><?php echo convertDateFormat($createdAt) ?></span>
+                                            class="float-end date_value"><?php echo convertDateFormat($post['createdAt']) ?></span>
                                     </p>
                                     <p class="label_input">Thời gian cập nhật: <span
-                                            class="float-end date_value"><?php echo convertDateFormat($updatedAt) ?></span>
+                                            class="float-end date_value"><?php echo convertDateFormat( $post['updateAt']) ?></span>
                                     </p>
                                 </div>
                             </div>
@@ -116,7 +120,7 @@
 
     </div>
     <script>
-    const phpContentValue = "<?php echo $content ?>";
+    const phpContentValue = "<?php echo $post['content'] ?>";
     </script>
     <script src="../../public/js/admin/posts/detail.js"> </script>
     <script src="../../public\js\bootstrap\bootstrap.bundle.min.js"> </script>

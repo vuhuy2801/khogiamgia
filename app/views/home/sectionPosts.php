@@ -15,7 +15,7 @@
             include_once 'app/views/component/itemPost.php';
             require_once 'app/controllers/PostController.php';
             $postController = new PostController();
-            $posts = $postController->getListOfPosts();
+            $posts = $postController->getListPostsUser();
             foreach ($posts as $post) {
                 $imgSrc = $post['image'];
                 $postDate = $post['createdAt'];

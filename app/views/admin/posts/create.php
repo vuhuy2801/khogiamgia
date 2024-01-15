@@ -91,11 +91,17 @@
                                     </p>
                                     <hr>
                                 </div>
-                                <div class="px-4 mb-5 ">
-                                    <form action="upload" class="dropzone text-center" id="myDropzone"
-                                        enctype="multipart/form-data">
-                                    </form>
+                                <div class="px-4 mb-5">
+                                    <div class="dropzone-container">
+                                        <form action="upload" class="dropzone text-center" id="myDropzone"
+                                            enctype="multipart/form-data"></form>
+                                        <button id="deleteImageBtn" style="display:none;"><i
+                                                class="bi bi-trash"></i></button>
+                                    </div>
                                 </div>
+
+
+
                             </div>
                             <div class="card">
                                 <div class="card-body">
