@@ -120,9 +120,16 @@
             </div>
         </div>
     </div>
+    <script>
+    const now = dayjs();
+    const formattedTime = now.format('DD/MM/YY HH:mm');
+    </script>
 
     <script src="../../public/js/admin/posts/show.js"> </script>
     <script src="../../public\js\bootstrap\bootstrap.bundle.min.js"> </script>
+    <script src="
+    https://cdn.jsdelivr.net/npm/dayjs@1.11.10/dayjs.min.js
+    "></script>
 
 
 </body>

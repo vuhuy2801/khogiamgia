@@ -53,6 +53,8 @@ class PostController {
   
     public function upload()
     {
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+
         $targetDirectory = 'public/uploads/posts/' . date('d-m-Y') . '/';
         
         $originalFileName = pathinfo($_FILES['file']['name'], PATHINFO_FILENAME); // lấy tên file ảnh

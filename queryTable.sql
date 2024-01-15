@@ -1,5 +1,6 @@
 Create schema dbVoucher;
 use dbVoucher;
+
 -- table Category
 CREATE TABLE IF NOT EXISTS Category (
     categoryId INT PRIMARY KEY AUTO_INCREMENT,
@@ -24,7 +25,7 @@ CREATE TABLE IF NOT EXISTS Post (
     description NVARCHAR(1555),
     categories_post INT,
     createdAt DATETIME,
-    updateAt DATE,
+    updateAt DATETIME,
     status INT
 );
 

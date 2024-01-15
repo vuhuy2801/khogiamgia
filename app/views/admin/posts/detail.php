@@ -120,7 +120,10 @@
 
     </div>
     <script>
-    const phpContentValue = "<?php echo $post['content'] ?>";
+    const dataPost = {
+        content: `<?php echo $post['content'] ?>`,
+        image: "<?php echo $post['image'] ?>",
+    }
     </script>
     <script src="../../public/js/admin/posts/detail.js"> </script>
     <script src="../../public\js\bootstrap\bootstrap.bundle.min.js"> </script>

@@ -26,7 +26,7 @@
             require_once 'app/controllers/PostController.php';
             $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
             $postController = new PostController();
-            $post = $postController->getPostDetail($id);
+            $post= $postController->getPostDetail($id);
             ?>
 
 
@@ -137,7 +137,7 @@
                                             class="float-end date_value"><?php  echo convertDateFormat($post['createdAt'])  ?></span>
                                     </p>
                                     <p class="label_input">Thời gian cập nhật: <span
-                                            class="float-end date_value"><?php echo $currentDateTime ?></span>
+                                            class="float-end date_value update_at"></span>
                                     </p>
                                 </div>
                             </div>
@@ -150,13 +150,24 @@
 
 
     </div>
-    <script src="../../public\js\bootstrap\bootstrap.bundle.min.js"> </script>
     <script>
-    const phpContentValue = "<?php echo $post['content'] ?>";
-    const srcImg = "<?php echo $post['image'] ?>";
+    //data post php to json format
+    const dataPost = {
+        content: `<?php echo $post['content'] ?>`,
+        image: "<?php echo $post['image'] ?>",
+    }
     </script>
-    <script src="../../public/js/admin/posts/edit.js"> </script>
 
+    <script src="../../public\js\bootstrap\bootstrap.bundle.min.js"> </script>
+    <script src="../../public\js\admin\posts\edit.js"> </script>
+    <script src="
+    https://cdn.jsdelivr.net/npm/dayjs@1.11.10/dayjs.min.js
+    "></script>
+    <script>
+    const now = dayjs();
+    const formattedTime = now.format('hh:mm A DD/MM/YY');
+    document.querySelector('.update_at').textContent = formattedTime;
+    </script>
 </body>
 
 </html>
