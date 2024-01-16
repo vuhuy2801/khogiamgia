@@ -18,7 +18,7 @@ class AuthenticationController
             print_r($_SESSION['user']);
             header('Location: /admin/trang-chu/show');
         } else {
-            $_SESSION['error'] = 'Sai tài khoản hoặc mật khẩu'. $user['password'];
+            $_SESSION['error'] = 'Sai tài khoản hoặc mật khẩu';
             header('Location: /login');
         }
     }
