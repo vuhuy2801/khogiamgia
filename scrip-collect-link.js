@@ -2,6 +2,7 @@
     /* <li class="col-xs-2-4 shopee-search-item-result__item" data-sqe="item"><a data-sqe="link" href="/Combo-3-quần-lót-nam-dáng-Trunk-Bamboo-kháng-khuẩn-Coolmate-i.24710134.3431453055?sp_atk=a78f92c7-b6c1-4343-aef6-ea61f0bbd268&amp;xptdk=a78f92c7-b6c1-4343-aef6-ea61f0bbd268"> */
 }
 let dataLink = [];
+
 // emulate scroll to 5000px
 // window.scrollTo({
 //     top: 500, // Vị trí muốn cuộn đến (đơn vị: pixel)
@@ -51,6 +52,7 @@ setTimeout(() => {
             dataLink.push(item.href);
         });
     console.log("đang thu thập dữ liệu...");
+    elmShopeeIconButtonRight.click();
 }, 10000);
 
 scrollToBottom();
@@ -98,11 +100,3 @@ elmShopeeIconButtonRight.onclick = () => {
 // });
 
 
-// find data is duplicate
-let dataLinkDuplicate = [];
-dataLink.forEach((item, index) => {
-    if (dataLink.indexOf(item) !== index) {
-        dataLinkDuplicate.push(item);
-    }
-});
-console.log(dataLinkDuplicate);

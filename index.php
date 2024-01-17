@@ -53,6 +53,12 @@ $router->get('/test', function () {
     $InfoProductShopee->showInFo();
 });
 
+$router->get('/addProduct', function () {
+    require 'app\controllers\ProductController.php';
+    $ProductController = new ProductController();
+    $ProductController->addProduct();
+});
+
 
 
 $router->get('/get-current-price-all-product', function () {
