@@ -141,7 +141,6 @@ class User implements UserService
         }
     }
 
-
     public function Delete(): bool
     {
         $connection = $this->db->getConnection();
@@ -160,14 +159,14 @@ class User implements UserService
     public function Detail($userId)
     {
         $connection = $this->db->getConnection();
-        $query = "CALL GetDetailUser(?)";
-        try {
+        if ($connection) {
+            $query = "select * from user where username = ?";
             $statement = $connection->prepare($query);
-            $statement->bindParam(1, $userId);
+            $statement->bindParam(1, $username);
             $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $result;
-        } catch (PDOException $e) {
+        } else {
             return false;
         }
     }

@@ -7,7 +7,7 @@ $noiDungUrl = "../bai-viet/show";
 $bannerUrl = "../banner/show";
 $nhaCungCapUrl = "../nha-cung-cap/show";
 $thongKeUrl = "../thong-ke/show";
-$dangXuatUrl = "#";
+$dangXuatUrl = "/dang-xuat";
 
 //text variables
 $trangChuText = "Trang chủ";
@@ -35,43 +35,59 @@ $currentPage = $_SERVER['REQUEST_URI'];
                 <li
                     class="wrap-item py-2 nav-item mt-5 <?php echo strpos($currentPage, 'trang-chu') !== false ? 'active' : ''; ?>">
                     <a href="<?php echo $homeUrl ?>" class="nav-link align-middle px-0 text-dark">
-                        <span class="ms-1 d-none d-sm-inline"><?= $trangChuText ?></span>
+                        <span class="ms-1 d-none d-sm-inline">
+                            <?= $trangChuText ?>
+                        </span>
                     </a>
                 </li>
 
                 <li
                     class="wrap-item py-2 nav-item <?php echo strpos($currentPage, 'ma-giam-gia') !== false ? 'active' : ''; ?>">
                     <a href="<?php echo $maGiamGiaUrl ?>" class="nav-link px-0 align-middle text-dark">
-                        <span class="ms-1 d-none d-sm-inline"><?= $maGiamGiaText ?></span></a>
+                        <span class="ms-1 d-none d-sm-inline">
+                            <?= $maGiamGiaText ?>
+                        </span></a>
                 </li>
                 <li
                     class="wrap-item py-2 nav-item <?php echo strpos($currentPage, 'theo-doi-san-pham') !== false ? 'active' : ''; ?>">
                     <a href="<?php echo $theoDoiGiaSPUrl ?>" class="nav-link px-0 align-middle text-dark">
-                        </i> <span class="ms-1 d-none d-sm-inline"><?= $theoDoiGiaSpText ?></span></a>
+                        </i> <span class="ms-1 d-none d-sm-inline">
+                            <?= $theoDoiGiaSpText ?>
+                        </span></a>
                 </li>
                 <li
                     class="wrap-item py-2 nav-item <?php echo strpos($currentPage, 'bai-viet') !== false ? 'active' : ''; ?>">
                     <a href="<?php echo $noiDungUrl ?>" class="nav-link px-0 align-middle text-dark">
-                        </i> <span class="ms-1 d-none d-sm-inline"><?= $noiDungText ?></span></a>
+                        </i> <span class="ms-1 d-none d-sm-inline">
+                            <?= $noiDungText ?>
+                        </span></a>
                 </li>
                 <li
                     class="wrap-item py-2 nav-item <?php echo strpos($currentPage, 'nha-cung-cap') !== false ? 'active' : ''; ?>">
                     <a href="<?php echo $nhaCungCapUrl ?>" class="nav-link px-0 align-middle text-dark">
-                        </i> <span class="ms-1 d-none d-sm-inline"><?= $nhaCungCapText ?></span></a>
+                        </i> <span class="ms-1 d-none d-sm-inline">
+                            <?= $nhaCungCapText ?>
+                        </span></a>
                 </li>
                 <li
                     class="wrap-item py-2 nav-item <?php echo strpos($currentPage, 'banner') !== false ? 'active' : ''; ?>">
                     <a href="<?php echo $bannerUrl ?>" class="nav-link px-0 align-middle text-dark">
-                        </i> <span class="ms-1 d-none d-sm-inline"><?= $bannerText ?></span></a>
+                        </i> <span class="ms-1 d-none d-sm-inline">
+                            <?= $bannerText ?>
+                        </span></a>
                 </li>
                 <li
                     class="wrap-item py-2 nav-item <?php echo strpos($currentPage, 'thong-ke') !== false ? 'active' : ''; ?>">
                     <a href="<?php echo $thongKeUrl ?>" class="nav-link px-0 align-middle text-dark">
-                        </i> <span class="ms-1 d-none d-sm-inline"><?= $thongKeText ?></span></a>
+                        </i> <span class="ms-1 d-none d-sm-inline">
+                            <?= $thongKeText ?>
+                        </span></a>
                 </li>
                 <li class="wrap-item py-2 nav-item">
-                    <a href="<?php  ?>" class="nav-link px-0 align-middle text-dark">
-                        </i> <span class="ms-1 d-none d-sm-inline"><?= $dangXuat ?></span></a>
+                    <a href="<?php echo $dangXuatUrl ?>" class="nav-link px-0 align-middle text-dark">
+                        </i> <span class="ms-1 d-none d-sm-inline">
+                            <?= $dangXuat ?>
+                        </span></a>
                 </li>
 
             </ul>
