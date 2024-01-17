@@ -21,7 +21,7 @@
             require_once 'app/views/admin/posts/deleteModal.php';
             require_once 'lib/convertDate.php';
             require_once 'app/views/admin/posts/generalProcessing.php';
-            require_once 'app/controllers/PostController.php';
+            require_once 'app/controllers/admin/PostController.php';
             $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
             $postController = new PostController();
             $post = $postController->getPostDetail($id);

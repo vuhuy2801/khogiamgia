@@ -1,5 +1,5 @@
 <?php
-require_once 'app/controllers/SupplierController.php';
+require_once 'app/controllers/admin/SupplierController.php';
 date_default_timezone_set('Asia/Ho_Chi_Minh');
  $currentDateTime = date('s-i-H d-m-Y'); 
  $categories = array(

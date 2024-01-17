@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../models/SupplierModel.php';
+require_once __DIR__ . '/../../models/SupplierModel.php';
 
 class SupplierController {
     private $supplierData;
