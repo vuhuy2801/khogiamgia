@@ -87,13 +87,31 @@ CREATE TABLE IF NOT EXISTS Banner (
     updatedAt DATETIME
 );
 -- table user
+
 CREATE TABLE IF NOT EXISTS User (
-    userName NVARCHAR(25) PRIMARY KEY,
-    email NVARCHAR(25),
-    password NVARCHAR(25)
+	userId int  PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    userName NVARCHAR(255),
+    email NVARCHAR(255),
+    password NVARCHAR(255),
+    fullName nvarchar(255) NOT NULL,
+    roleId int NOT NULL,
+    status int NOT NULL,
+    createdAt DATETIME,
+    updatedAt DATETIME
 );
 
+CREATE TABLE IF NOT EXISTS Role (
+	roleId int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	roleName nvarchar(255) NOT NULL
+);
+
+
 -- FOREIGN KEY 
+ALTER TABLE User
+ADD CONSTRAINT fk_role
+FOREIGN KEY (roleId)
+REFERENCES Role(roleId);
+
 ALTER TABLE Post
 ADD CONSTRAINT fk_supplier
 FOREIGN KEY (supplierId)

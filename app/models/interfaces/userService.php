@@ -1,8 +1,6 @@
 <?php
 interface UserService {
     public function Add(): bool;
-    public function Edit(): bool;
     public function Delete(): bool;
-    public function List(): array;
+    public function Detail($id);
 }
-?>

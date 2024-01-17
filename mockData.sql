@@ -76,9 +76,14 @@ INSERT INTO Banner (image, title, address_target, status, createdAt, updatedAt) 
     ('banner3.jpg', 'Giảm giá lên đến 50%', 'https://example.com/up_to_50_off', 0, '2024-01-05', '2024-01-06');
 
 
-INSERT INTO User (userName, email, password) VALUES 
-    ('john_doe', 'john@example.com', 'password123'),
-    ('jane_smith', 'jane@example.com', 'securepass456'),
-    ('alex_jones', 'alex@example.com', 'password789'),
-    ('emily_wilson', 'emily@example.com', 'pass123word'),
-    ('michael_brown', 'michael@example.com', 'strongpass567');
+INSERT INTO Role (roleName) VALUES
+('Admin'),
+('User'),
+('Guest');
+
+
+INSERT INTO User (userName, email, password, fullName, roleId, status, createdAt, updatedAt) VALUES
+('john_doe', 'john.doe@example.com', 'password123', 'John Doe', 1, 1, NOW(), NOW()),
+('jane_smith', 'jane.smith@example.com', 'password456', 'Jane Smith', 2, 1, NOW(), NOW()),
+('guest_user', 'guest@example.com', 'guestpassword', 'Guest User', 3, 1, NOW(), NOW());
+

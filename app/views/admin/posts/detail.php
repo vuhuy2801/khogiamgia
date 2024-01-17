@@ -35,7 +35,7 @@
 
                     <div class="row pt-1">
                         <div class="d-flex justify-content-between px-3 mb-4">
-                            <a href="show" class="my-auto text-decoration-none "><i
+                            <a href="show" class="my-auto text-decoration-none back_home"><i
                                     class="bi bi-arrow-left mx-1"></i>Quay
                                 lại</a>
                             <div>

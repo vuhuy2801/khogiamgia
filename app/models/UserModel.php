@@ -1,87 +1,149 @@
 <?php
 require_once __DIR__ . '/../config/DbConnection.php';
 require_once __DIR__ . '/interfaces/userService.php';
-class User implements UserService {
+class User implements UserService
+{
     private $db;
     private $userId;
     private $userName;
     private $email;
     private $password;
+    private $fullName;
+    private $roleId;
+    private $status;
+    private $createdAt;
+    private $updatedAt;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->db = new DBConnection();
     }
 
     // Getter and Setter for $userId
-    public function getUserId() {
+    public function getUserId()
+    {
         return $this->userId;
     }
 
-    public function setUserId($userId) {
+    public function setUserId($userId)
+    {
         $this->userId = $userId;
     }
 
     // Getter and Setter for $userName
-    public function getUserName() {
+    public function getUserName()
+    {
         return $this->userName;
     }
 
-    public function setUserName($userName) {
+    public function setUserName($userName)
+    {
         $this->userName = $userName;
     }
 
     // Getter and Setter for $email
-    public function getEmail() {
+    public function getEmail()
+    {
         return $this->email;
     }
 
-    public function setEmail($email) {
+    public function setEmail($email)
+    {
         $this->email = $email;
     }
 
     // Getter and Setter for $password
-    public function getPassword() {
+    public function getPassword()
+    {
         return $this->password;
     }
 
-    public function setPassword($password) {
+    public function setPassword($password)
+    {
         $this->password = $password;
     }
-    
 
-    public function Add(): bool {
+    // Getter and Setter for $fullName
+    public function getFullName()
+    {
+        return $this->fullName;
+    }
+
+    public function setFullName($fullName)
+    {
+        $this->fullName = $fullName;
+    }
+
+    // Getter and Setter for $roleId
+    public function getRoleId()
+    {
+        return $this->roleId;
+    }
+
+    public function setRoleId($roleId)
+    {
+        $this->roleId = $roleId;
+    }
+
+    // Getter and Setter for $status
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    // Getter and Setter for $createdAt
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    // Getter and Setter for $updatedAt
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+
+    public function Add(): bool
+    {
         $connection = $this->db->getConnection();
-        $query = "CALL AddUser(?,?,?)";
+        $query = "CALL AddUser(?, ?, ?, ?, ?, ?, ?, ?)";
         $statement = $connection->prepare($query);
-        $statement->bindParam(1, $this->userName);
-        $statement->bindParam(2, $this->email);
-        $statement->bindParam(3, $this->password);
+        $statement->bindParam(1, $this->userName, PDO::PARAM_STR);
+        $statement->bindParam(2, $this->email, PDO::PARAM_STR);
+        $statement->bindParam(3, $this->password, PDO::PARAM_STR);
+        $statement->bindParam(4, $this->fullName, PDO::PARAM_STR);
+        $statement->bindParam(5, $this->roleId, PDO::PARAM_INT);
+        $statement->bindParam(6, $this->status, PDO::PARAM_INT);
+        $statement->bindParam(7, $this->createdAt, PDO::PARAM_STR);
+        $statement->bindParam(8, $this->updatedAt, PDO::PARAM_STR);
+
         try {
             $statement->execute();
             return true;
         } catch (PDOException $e) {
             return false;
         }
-
     }
 
-    public function Edit(): bool {
-        $connection = $this->db->getConnection();
-        $query = "CALL UpdateUser(?,?,?,?)";
-        $statement = $connection->prepare($query);
-        $statement->bindParam(1, $this->userId);
-        $statement->bindParam(2, $this->userName);
-        $statement->bindParam(3, $this->email);
-        $statement->bindParam(4, $this->password);
-        try {
-            $statement->execute();
-            return true;
-        } catch (PDOException $e) {
-            return false;
-        }
-    }
 
-    public function Delete(): bool {
+    public function Delete(): bool
+    {
         $connection = $this->db->getConnection();
         $query = "CALL DeleteUser(?)";
         $statement = $connection->prepare($query);
@@ -94,20 +156,9 @@ class User implements UserService {
         }
     }
 
-    public function List(): array {
-        $connection = $this->db->getConnection();
-        if ($connection){
-            $query = "CALL GetAllUsers()";
-            $statement = $connection->prepare($query);
-            $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-            return $result;
-        }else{
-            return [];
-        }
-    }
 
-    public function Detail($userId) {
+    public function Detail($userId)
+    {
         $connection = $this->db->getConnection();
         $query = "CALL GetDetailUser(?)";
         try {
@@ -116,9 +167,8 @@ class User implements UserService {
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $result;
-        }catch (PDOException $e) {
+        } catch (PDOException $e) {
             return false;
         }
     }
 }
-?>
