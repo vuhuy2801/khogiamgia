@@ -162,7 +162,7 @@ class User implements UserService
         if ($connection) {
             $query = "select * from user where username = ?";
             $statement = $connection->prepare($query);
-            $statement->bindParam(1, $username);
+            $statement->bindParam(1, $userId);
             $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $result;
@@ -170,4 +170,20 @@ class User implements UserService
             return false;
         }
     }
+
+    public function getUserByUsername($username)
+    {
+        $connection = $this->db->getConnection();
+        if ($connection) {
+            $query = "select * from user where username = ?";
+            $statement = $connection->prepare($query);
+            $statement->bindParam(1, $username);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        } else {
+            return [];
+        }
+    }
+
 }
