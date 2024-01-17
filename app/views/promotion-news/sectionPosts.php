@@ -47,10 +47,11 @@
                 $end = $start + $postsPerPage;
                 $paginatedPosts = array_slice($posts, $start, $postsPerPage);
     
+                $hidePagination = $totalPages <= 1;
               
                
                 foreach ($paginatedPosts as $index => $post) {
-                    $imgSrc = $post['image'];
+                    $imgSrc ='/'. $post['image'];
                     $postDate = $post['createdAt'];
                     $postTitle = $post['title'];
                     $postLink = "new.html?slug=" . $post['slug'];
@@ -63,7 +64,8 @@
 
         </div>
 
-        <nav class="  py-2" aria-label="Page navigation example">
+        <nav class="  py-2" aria-label="Page navigation example"
+            <?php echo $hidePagination ? 'style="display: none;"' : ''; ?>>
             <ul class="pagination justify-content-center">
                 <li class="page-item <?php echo ($currentPage == 1) ? 'disabled' : ''; ?>">
                     <a class="page-link"
