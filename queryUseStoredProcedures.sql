@@ -18,7 +18,7 @@ CALL UpdatePost(34090, 'Updated Post Title', 'https://api.vuhuy.site/uploads/sma
 CALL DeletePost(84558);
 CALL GetListPosts();
 CALL GetListPostsUser();
-CALL GetPostDetail(11547);
+CALL GetPostDetail(60128);
 CALL GetPostsByCategory(1);
 CALL SearchPostByTitle('n');
 CALL GetPostsBySupplierId(3);
@@ -80,9 +80,8 @@ CALL DeleteBanner(5);
 CALL GetListBanners();
 CALL GetDetailBanner(1);
 -- User 
-CALL AddUser('username2', 'email1@example.com', 'password1');
-CALL UpdateUser('username2', 'new_email@example.com', 'new_password');
-CALL DeleteUser('username2');
+CALL AddUser('new_user', 'new_user@example.com', 'new_password', 'New User', 2, 1,'2024-10-1','2024-10-1');
+CALL DeleteUser(4);
 CALL GetAllUsers();
-CALL GetDetailUser('username2');
+CALL GetDetailUser(3);
 

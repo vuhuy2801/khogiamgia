@@ -804,45 +804,35 @@ DELIMITER ;
 DELIMITER //
 
 CREATE PROCEDURE AddUser(
-    IN in_userName NVARCHAR(25),
-    IN in_email NVARCHAR(25),
-    IN in_password NVARCHAR(25)
+    IN p_userName NVARCHAR(255),
+    IN p_email NVARCHAR(255),
+    IN p_password NVARCHAR(255),
+    IN p_fullName NVARCHAR(255),
+    IN p_roleId INT,
+    IN p_status INT,
+    IN p_createAt DATETIME,
+    IN p_updateAt DATETIME
 )
 BEGIN
-    INSERT INTO User (userName, email, password)
-    VALUES (in_userName, in_email, in_password);
-END;
+    INSERT INTO User (userName, email, password, fullName, roleId, status, createdAt, updatedAt)
+    VALUES (p_userName, p_email, p_password, p_fullName, p_roleId, p_status, p_createAt, p_updateAt);
+END 
 //
 
 DELIMITER ;
 
-DELIMITER //
-
-CREATE PROCEDURE UpdateUser(
-    IN in_userName NVARCHAR(25),
-    IN in_email NVARCHAR(25),
-    IN in_password NVARCHAR(25)
-)
-BEGIN
-    UPDATE User
-    SET  email = in_email, password = in_password
-    WHERE userName = in_userName;
-END;
-//
-
-DELIMITER ;
 
 DELIMITER //
 
 CREATE PROCEDURE DeleteUser(
-    IN in_userName NVARCHAR(25)
+    IN p_userId INT
 )
 BEGIN
-    DELETE FROM User WHERE userName = in_userName;
-END;
-//
+    DELETE FROM User WHERE userId = p_userId;
+END //
 
 DELIMITER ;
+
 
 DELIMITER //
 
@@ -856,10 +846,12 @@ DELIMITER ;
 
 DELIMITER //
 
-CREATE PROCEDURE GetDetailUser(In userName NVARCHAR(25))
+CREATE PROCEDURE GetDetailUser( IN p_userId INT)
 BEGIN
-    SELECT * FROM User where user.userName = userName;
+    SELECT * FROM User WHERE userId = p_userId;
 END;
 //
 
 DELIMITER ;
+
+

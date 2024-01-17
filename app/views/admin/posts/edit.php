@@ -21,9 +21,8 @@
             
             require_once 'app/views/partials/sidebar.php';
             require_once 'lib/convertDate.php';
-            require_once 'app/controllers/SupplierController.php';
             require_once 'app/views/admin/posts/generalProcessing.php';
-            require_once 'app/controllers/PostController.php';
+            require_once 'app/controllers/admin/PostController.php';
             $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
             $postController = new PostController();
             $post= $postController->getPostDetail($id);
@@ -31,13 +30,23 @@
 
 
             <div class="col px-3 py-3 bg-light">
+                <div class="toast toast_update align-items-center text-bg-primary border-0 position-absolute start-50 translate-middle"
+                    role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            Sửa bài viết thành công ! <span></span>
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                            aria-label="Close"></button>
+                    </div>
+                </div>
                 <div class="mt-4">
                     <h3 class="mt-3 mb-3"><?php echo $post['title'] ?>
                     </h3>
 
                     <div class="row pt-1">
                         <div class="d-flex justify-content-between px-3 mb-4">
-                            <a href="show" class="my-auto text-decoration-none "><i
+                            <a href="show" class="my-auto text-decoration-none back_home"><i
                                     class="bi bi-arrow-left mx-1"></i>Quay
                                 lại</a>
                             <div class="justify-content-center">

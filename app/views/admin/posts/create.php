@@ -14,6 +14,7 @@
 
 
 <body>
+
     <div class="container-fluid">
         <div class="row flex-nowrap">
             <?php
@@ -22,13 +23,23 @@
         ?>
 
             <div class="col px-3 py-3 bg-light">
+                <div class="toast toast_create align-items-center text-bg-primary border-0 position-absolute start-50 translate-middle"
+                    role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            Thêm bài viết thành công ! <span></span>
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                            aria-label="Close"></button>
+                    </div>
+                </div>
                 <div class="mt-4">
                     <h3 class="mt-3 mb-3">Thêm bài viết</h3>
 
                     <div class="row pt-1">
                         <div class="d-flex justify-content-between px-3 mb-4">
-                            <a href="show" class="my-auto text-decoration-none "><i
-                                    class="bi bi-arrow-left mx-1"></i>Quay
+                            <a href="show" class="my-auto text-decoration-none back_home"><i
+                                    class="bi bi-arrow-left mx-1 "></i>Quay
                                 lại</a>
                             <button id="btnSubmit" class="btn btn-primary"><i class="bi bi-check2 mx-1"></i>Tạo</button>
                         </div>
@@ -122,7 +133,10 @@
                 </div>
             </div>
         </div>
+
     </div>
+
+
 
 
     <script src="../../public/js/admin/posts/create.js"></script>
@@ -130,12 +144,15 @@
     <script src="
     https://cdn.jsdelivr.net/npm/dayjs@1.11.10/dayjs.min.js
     "></script>
+
     <script>
     const now = dayjs();
     const formattedTime = now.format('hh:mm A DD/MM/YY');
-
     document.querySelector('.create_at').textContent = formattedTime;
     document.querySelector('.update_at').textContent = formattedTime;
     </script>
+    <script src="../../public\js\jquery\jquery-3.6.3.min.js"> </script>
+
+
 
 </body>

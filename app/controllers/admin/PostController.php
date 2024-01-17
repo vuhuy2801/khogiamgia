@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../models/PostModel.php';
+require_once __DIR__ . '/../../models/PostModel.php';
 
 
 class PostController {
@@ -105,6 +105,8 @@ class PostController {
             $this->postData->setCategoriesPost($_POST['category_post']);
         }
         if ($this->postData->Add()){
+           
+            
             header('Location: ../bai-viet/show');
         }else{
             echo "Thêm bài viết thất bại";

@@ -45,6 +45,8 @@
   margin-top: 6px;
   padding-top: 21px;
   padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 6px;
 }
 
 #item_head_table {
@@ -93,6 +95,12 @@
   color: #424242;
 }
 
+.pagination .page-item.disabled .page-link {
+  border: none;
+  background-color: #f8f9fa;
+  color: #9b9b9b;
+}
+
 .pagination .page-item.active .page-link {
   background-color: #1266f1;
   color: #fff;
@@ -103,14 +111,9 @@
   background-color: #e7e7ea;
 }
 
-#searchBtn {
-  margin-left: 2px;
-  background-color: #fff;
-  border: 1px solid #ced4da;
-}
-
 #searchBtn:hover {
-  color: #1266f1;
+  color: #000000;
+  background-color: #ffff;
 }
 
 .input-group {
@@ -192,6 +195,24 @@
   position: relative;
 }
 
+.container_search {
+  position: relative;
+}
+
+#searchBtn {
+  position: absolute;
+  color: #000000;
+  right: 6px;
+  z-index: 11111;
+  top: 1px;
+  border: none;
+}
+
+.input-search {
+  border-radius: 6px !important;
+  background-color: #ffffff;
+}
+
 #deleteImageBtn {
   position: absolute;
   top: 10px;
@@ -203,4 +224,18 @@
   cursor: pointer;
   z-index: 1111;
   border-radius: 6px;
+}
+
+.toast_create,
+.toast_update {
+  top: 5%;
+}
+
+.back_home {
+  color: #2597ff;
+  font-weight: 700;
+}
+
+.bi-arrow-left::before {
+  font-weight: bold !important;
 }

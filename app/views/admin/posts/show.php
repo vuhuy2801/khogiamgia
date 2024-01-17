@@ -22,18 +22,18 @@
                 require_once 'app/views/admin/posts/deleteModal.php';
                 require_once 'lib/convertDate.php';
                 require_once 'app/views/admin/posts/generalProcessing.php';
-                require_once 'app/controllers/PostController.php';
+                require_once 'app/controllers/admin/PostController.php';
             ?>
 
             <!-- end sidebar -->
-            <div class="col px-3 py-3 wrap_dasboard">
+            <div class="col px-3 py-3 wrap_dasboard position-relative">
                 <div class="mt-5 d-flex justify-content-between align-items-center">
                     <h3 class="mb-0">
                         Danh sách bài viết
                     </h3>
 
                     <div class="d-flex align-items-center">
-                        <div class="input-group mx-3">
+                        <div class="input-group mx-3 container_search">
                             <input type="text" class="form-control input-search" placeholder="Tìm kiếm...">
                             <div class="input-group-append">
                                 <button id="searchBtn" class="btn btn-outline-secondary" type="button">
@@ -75,6 +75,7 @@
                                 $start = ($currentPage - 1) * $postsPerPage;
                                 $end = $start + $postsPerPage;
                                 $paginatedPosts = array_slice($posts, $start, $postsPerPage);
+                                $hidePagination = $totalPages <= 1;
                                 
                                 foreach ($paginatedPosts as $index => $post) {
                                     echo "<tr>";
@@ -94,7 +95,8 @@
                                      echo "</tr>" ; } ?>
                         </tbody>
                     </table>
-                    <nav class="  py-2" aria-label="Page navigation example">
+                    <nav class="  py-2" aria-label="Page navigation example"
+                        <?php echo $hidePagination ? 'style="display: none;"' : ''; ?>>
                         <ul class="pagination justify-content-center">
                             <li class="page-item <?php echo ($currentPage == 1) ? 'disabled' : ''; ?>">
                                 <a class="page-link"
@@ -119,7 +121,11 @@
 
             </div>
         </div>
+
     </div>
+    <script src="
+    https://cdn.jsdelivr.net/npm/dayjs@1.11.10/dayjs.min.js
+    "></script>
     <script>
     const now = dayjs();
     const formattedTime = now.format('DD/MM/YY HH:mm');
@@ -127,9 +133,7 @@
 
     <script src="../../public/js/admin/posts/show.js"> </script>
     <script src="../../public\js\bootstrap\bootstrap.bundle.min.js"> </script>
-    <script src="
-    https://cdn.jsdelivr.net/npm/dayjs@1.11.10/dayjs.min.js
-    "></script>
+
 
 
 </body>

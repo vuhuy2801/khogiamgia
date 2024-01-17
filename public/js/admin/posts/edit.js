@@ -4,22 +4,157 @@ const formSubmit = document.getElementById("formSubmit");
 const titleInput = document.getElementById("title");
 const slugInput = document.getElementById("slug");
 const imageInput = document.getElementById("image");
-// console.log(phpContentValue);
-// const parser = new DOMParser();
-// const parsedContent = parser.parseFromString(phpContentValue, "text/html");
-// const plainTextContent = parsedContent.body.textContent;
-// console.log(parsedContent);
-// editorTextarea.value = plainTextContent;
-btnSubmit.addEventListener("click", () => {
-  formSubmit.submit();
+
+document.getElementById("title").addEventListener("change", function () {
+  const titleValue = this.value.trim();
+  if (titleValue === "") {
+    showError("title", "Vui lòng nhập tiêu đề");
+  } else {
+    hideError("title");
+  }
 });
+
+document.getElementById("description").addEventListener("change", function () {
+  const descriptionValue = this.value.trim();
+  if (descriptionValue === "") {
+    showError("title", "Vui lòng nhập mô tả");
+  } else {
+    hideError("description");
+  }
+});
+
+document.getElementById("slug").addEventListener("change", function () {
+  const slugValue = this.value;
+  console.log(slugValue);
+  if (slugValue === "") {
+    showError("slug", "Vui lòng nhập slug");
+  } else {
+    hideError("slug");
+  }
+});
+
+document.getElementById("supplierId").addEventListener("change", function () {
+  hideError("supplierId");
+});
+
+document
+  .getElementById("category_post")
+  .addEventListener("change", function () {
+    hideError("category_post");
+  });
+
+btnSubmit.addEventListener("click", () => {
+  clearAllErrors();
+  //get value
+  const title = document.getElementById("title").value.trim();
+  const description = document.getElementById("description").value.trim();
+  const slug = document.getElementById("slug").value.trim();
+  const supplierId = document.getElementById("supplierId").value;
+  const categoryPost = document.getElementById("category_post").value;
+  let isValid = true;
+
+  if (title === "") {
+    showError("title", "Vui lòng nhập tiêu đề");
+    isValid = false;
+  } else {
+    hideError("title");
+  }
+
+  if (description === "") {
+    showError("description", "Vui lòng nhập mô tả");
+    isValid = false;
+  } else {
+    hideError("description");
+  }
+
+  if (slug === "") {
+    isValid = false;
+  }
+
+  if (supplierId === "Chọn nhà cung cấp") {
+    showError("supplierId", "Vui lòng chọn nhà cung cấp");
+    isValid = false;
+  } else {
+    hideError("supplierId");
+  }
+
+  if (categoryPost === "Danh mục") {
+    showError("category_post", "Vui lòng chọn danh mục");
+    isValid = false;
+  } else {
+    hideError("category_post");
+  }
+
+  if (!isValid) {
+    event.preventDefault();
+  } else {
+    $(".toast_update").toast("show");
+    const toast = $(".toast_update");
+
+    let countdown = 2;
+    const countdownInterval = setInterval(function () {
+      toast.find("span").html("Rời đi sau " + countdown + " giây");
+      countdown--;
+
+      if (countdown < 0) {
+        clearInterval(countdownInterval);
+        formSubmit.submit();
+      }
+    }, 1000);
+  }
+});
+
+// Hiển thị thông báo lỗi
+function showError(inputId, errorMessage) {
+  const inputElement = document.getElementById(inputId);
+  const errorElement = document.createElement("div");
+  errorElement.className = "invalid-feedback";
+  errorElement.innerText = errorMessage;
+  inputElement.classList.add("is-invalid");
+  inputElement.parentNode.appendChild(errorElement);
+}
+
+// Ẩn thông báo lỗi
+function hideError(inputId) {
+  const inputElement = document.getElementById(inputId);
+  inputElement.classList.remove("is-invalid");
+  const errorElement =
+    inputElement.parentNode.querySelector(".invalid-feedback");
+  if (errorElement) {
+    errorElement.remove();
+  }
+  if (inputElement.value.trim() !== "") {
+    inputElement.addEventListener("onchange", function () {
+      console.log("change");
+      hideError(inputId);
+    });
+  }
+}
+// clear lỗi
+function clearAllErrors() {
+  const errorElements = document.querySelectorAll(".invalid-feedback");
+  errorElements.forEach(function (errorElement) {
+    errorElement.remove();
+  });
+
+  const invalidInputs = document.querySelectorAll(".is-invalid");
+  invalidInputs.forEach(function (invalidInput) {
+    invalidInput.classList.remove("is-invalid");
+  });
+}
 
 function intEditor(content) {
   ClassicEditor.create(document.querySelector("#editor"))
     .then((editor) => {
-      // editor.enableReadOnlyMode("editor");
       editor.setData(content);
-      console.log(editor);
+      editor.model.document.on("change:data", () => {
+        let data = editor.getData().trim();
+        if (data == "") {
+          showError("editor", "Vui lòng nhập nội dung");
+        } else {
+          hideError("editor");
+        }
+      });
     })
     .catch((error) => {
       console.error(error);
