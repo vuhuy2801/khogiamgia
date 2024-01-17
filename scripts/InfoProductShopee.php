@@ -107,48 +107,98 @@ class InfoProductShopee
 
     public function getBasicInfo($linkProduct)
     {
+        // mock json 
+        // {
+        //     "@context": "http://schema.org",
+        //     "@type": "Product",
+        //     "name": "Chuột game không dây Logitech G304 - nhẹ, 6 nút lập trình, onboard memory, pin 250h",
+        //     "description": "\n- Thương hiệu Logitech\n- Sản xuất tại Trung Quốc\n- Bảo hành chính hãng 2 năm\n=======================\nTHÔNG TIN CHI TIẾT\n- Thiết kế nhỏ gọn, thao tác linh hoạt\n- Độ phân giải quang học 200 - 12000 DPI.\n- Tốc độ phản hồi 1ms, tốc độ xử lý tối đa 400 IPS\n- 6 nút lập trình tiện dụng\n- Công nghệ không dây Lightspeed\n- Cảm biến Hero thế hệ mới\nTHÔNG SỐ KỸ THUẬT THỰC TẾ\n- Chiều cao: 116,6 mm\n- Chiều rộng: 62,15 mm\n- Chiều dày: 38,2 mm\n- Trọng lượng: 99 g\n===========================\nG304 là chuột chơi game không dây LIGHTSPEED được thiết kế cho hiệu suất thực sự với các đột phá công nghệ mới nhất ở mức giá thành phù hợp. Đó là chơi game không dây thế hệ mới, hiện đã sẵn sàng cho mọi game thủ\nCẢM BIẾN HERO\nHERO là cảm biến quang học đổi mới được thiết kế bởi Logitech G để mang lại hiệu suất đẳng cấp dẫn đầu và tiết kiệm năng lượng tới 10 lần (so với hệ thệ trước). Cảm biến HERO mang lại hiệu suất ổn định và chính xác vượt trội với khả năng làm mượt, lọc và tăng tốc từ 200 tới 12.000 DPI. G304 có thể lưu tới 5 cấu hình với tối đa 5 cấp độ DPI trên bộ nhớ tích hợp.\nKHÔNG DÂY LIGHTSPEED\nThông qua chế tạo và thiết kế đầu cuối, Logitech G đã phát triển một giải pháp không dây mạnh mẽ để giải quyết vấn đề cơ bản của độ trễ, độ ổn định và khả năng kết nối. Kết quả cuối cùng là LIGHTSPEED, giải pháp không dây cấp độ chuyên gia đạt được hiệu suất như có dây.\nTHỜI GIAN SỬ DỤNG PIN SIÊU DÀI\nCảm biến HERO và công nghệ LIGHTSPEED không dây đem lại hiệu suất đỉnh cao cho phép bạn chơi game trong hàng tháng. Nó đem lại tới 250 giờ hoạt động chỉ trên một quả pin AA. Nó có thể được điều chỉnh để sử dụng trong tới 9 tháng ở mức thông thường trong chế độ Bền. Có thể chọn chế độ này qua Phần mềm Chơi game của Logitech.\nSIÊU NHẸ\nTại Logitech G, chuột chơi game không dây không cần thiết phải nặng. G304 rất nhẹ, chỉ có 99 gram, nhờ có thiết kế cơ học trọng lượng nhẹ và đặc điểm sử dụng pin siêu hiệu quả.\n6 NÚT CÓ THỂ LẬP TRÌNH\nCác phím chính của G304, cả ở bên trái và phải, được đánh giá 10 triệu lần nhấp. G304 cũng có nút giữa, nút DPI và hai nút bên có thể được lập trình tùy theo sở thích của bạn bằng G HUB của Logitech\nỨNG LỰC NÚT CƠ HỌC\nHệ thống ứng lực cho nút cơ học với các nút tách biệt nâng cao sự ổn định của các nút chuột trái, phải và giúp giảm lực cần thiết để nhấp chuột. Điều này tạo ra hiệu suất nút nhanh chóng, đáng tin cậy mà bạn có thể tin tưởng ngay cả ở những cuộc thi đấu căng thẳng nhất.\nCHƠI Ở BẤT CỨ ĐÂU\nThiết kế bền bỉ, trọng lượng nhẹ với kích thước nhỏ gọn và khoang chứa đầu thu nano USB tích hợp khiến cho G304 trở thành người bạn đồng hành tuyệt vời.\nChú ý \n- Mổi sản phẩm Logitech có 2 cấp độ số Serial khác nhau. 1 số trên bao bì (ngoài vỏ hộp) và 1 số bên trên sản phẩm. Hai số Serial này hoàn toàn khác nhau. Do chính sách quản lí riêng của - Logitech nên đây là vấn đề hoàn toàn bình thường\nLogitech bảo hành điện tử theo mã số đơn hàng (Ngoài ra còn bảo hành theo mã số seri từng sản phẩm) nên sẽ không có phiếu bảo hành đi kèm\n- Tất cả sản phẩm Logitech đều có thể còn hoặc không còn niêm phong của nhà sản xuất tùy vào từng đợt hàng, chính sách của các đơn vị nhập khẩu, phân phối và quá trình kiểm tra sản phẩm.",
+        //     "url": "https://shopee.vn/Chuột-game-không-dây-Logitech-G304-nhẹ-6-nút-lập-trình-onboard-memory-pin-250h-i.52679373.4501796479",
+        //     "productID": "4501796479",
+        //     "image": "https://down-vn.img.susercontent.com/file/sg-11134201-22100-cishggrmcriv0c",
+        //     "brand": "Logitech",
+        //     "offers": {
+        //         "@type": "Offer",
+        //         "price": "799000.00",
+        //         "priceCurrency": "VND",
+        //         "seller": {
+        //             "@context": "http://schema.org",
+        //             "@type": "Organization",
+        //             "name": "LOGITECH OFFICIAL SHOP",
+        //             "url": "https://shopee.vn/logitech_officialshop?entryPoint=ShopByPDP",
+        //             "image": "https://down-vn.img.susercontent.com/file/97e16ce2497766d89209dc6348283b5f",
+        //             "aggregateRating": {
+        //                 "@type": "AggregateRating",
+        //                 "bestRating": 5,
+        //                 "worstRating": 1,
+        //                 "ratingCount": "138148",
+        //                 "ratingValue": "4.91"
+        //             }
+        //         },
+        //         "itemCondition": "NewCondition",
+        //         "availability": "http://schema.org/InStock"
+        //     },
+        //     "aggregateRating": {
+        //         "@type": "AggregateRating",
+        //         "bestRating": 5,
+        //         "worstRating": 1,
+        //         "ratingCount": "3205",
+        //         "ratingValue": "4.93"
+        //     }
+        // }
+
+        // offers AggregateOffer
+        // "offers": {
+        //     "@type": "AggregateOffer",
+        //     "lowPrice": "99000.00",
+        //     "highPrice": "148000.00",
+        //     "priceCurrency": "VND",
+        //     "seller": {
+        //         "@context": "http://schema.org",
+        //         "@type": "Organization",
+        //         "name": "GARUDA_OFFICIAL",
+        //         "url": "https://shopee.vn/garuda_official",
+        //         "image": "https://down-vn.img.susercontent.com/file/vn-11134216-7r98o-lq8l2pulx13m33",
+        //         "aggregateRating": {
+        //             "@type": "AggregateRating",
+        //             "bestRating": 5,
+        //             "worstRating": 1,
+        //             "ratingCount": "1407",
+        //             "ratingValue": "4.88"
+        //         }
+        //     },
+        //     "itemCondition": "NewCondition",
+        //     "availability": "http://schema.org/InStock"
+        // },
+
         $this->link = $linkProduct;
         $dom = file_get_html($linkProduct);
         date_default_timezone_set('Asia/Bangkok');
         $this->date = date('Y-m-d H:i:s');
-        $string_id = $dom->find('.ha5ReG a', 0);
-        if ($string_id == null) {
+        // script[data-rh="true"][type="application/ld+json"]
+        $script = $dom->find('script[data-rh="true"][type="application/ld+json"]', 1)->innertext;
+        // if $script is null
+        if ($script == null) {
             return false;
+        }
+        $script = json_decode($script, true);
+        $this->id = $script['productID'];
+        $this->name = $script['name'];
+        //if AggregateOffer
+        if ($script['offers']['@type'] == "AggregateOffer") {
+            $this->price = $script['offers']['lowPrice'];
         } else {
-            $string_id = $string_id->href;
+            $this->price = $script['offers']['price'];
         }
-        $this->id = explode("/", $string_id)[4];
-        $this->name = $dom->find('._5f9gl5 span', 0)->plaintext;
-        if ($dom->find('.Ybrg9j', 0) != null) {
-            $this->price = $dom->find('.Ybrg9j', 0)->plaintext;
-        } else if ($dom->find('.jS-qN8', 0) != null) {
-            $this->price = $dom->find('.jS-qN8', 0)->plaintext;
-        } else {
-            $this->price = $dom->find('.TVzooJ', 0)->plaintext;
-        }
-        $this->price = str_replace(['₫', '.', 'đ'], ['', '', ''], $this->price);
-        $this->vote_rate = $dom->find('.sbAxkj', 0)->plaintext;
-        $soldCount = $dom->find('.product-review__sold-count', 0)->plaintext;
-        $soldCount = str_replace(['Đã bán', ',', 'k'], ['', '', '00'], $soldCount);
-        $this->sold = (int) $soldCount;
-        if ((int) $soldCount) {
-            $this->sold = $soldCount;
-        }
-        $arr_mota = $dom->find('._3cIWQC');
-        $strMoTa = "";
-        foreach ($arr_mota as $mota) {
-            $strMoTa .= $mota->plaintext . "\n";
-        }
-        $this->description = $strMoTa;
-        // $this->advice = $this->getAdviceByGemini($strMoTa);
-        // if .7D4JtJ use .AC2nRJ 
-        if ($dom->find('._7D4JtJ', 0) == null) {
-            $this->image = $dom->find('.AC2nRJ', 0)->src;
-        } else {
-            $this->image = $dom->find('._7D4JtJ', 0)->src;
-        }
-
+        // 799000.00 to 799000
+        $this->price = str_replace(['.00'], [''], $this->price);
+        $this->image = $script['image'];
+        $this->description = $script['description'];
+        $this->vote_rate = $script['aggregateRating']['ratingValue'];
+        $this->sold = $script['aggregateRating']['ratingCount'];
+        // $this->advice = $this->getAdviceByGemini($this->description);
         return $this;
+
     }
     public function getCurrentPrice($link)
     {
@@ -404,9 +454,9 @@ class InfoProductShopee
         echo "Lượt bán:" . $this->sold;
         echo "<br>";
         // echo "mô tả:" . $this->description;
-        
+
         echo "<br>";
-        echo "lời khuyên" . $this->getAdviceByGemini($this->description);
+        // echo "lời khuyên" . $this->getAdviceByGemini($this->description);
         // echo "<br>";
     }
 
