@@ -82,8 +82,12 @@ INSERT INTO Role (roleName) VALUES
 ('Guest');
 
 
-INSERT INTO User (userName, email, password, fullName, roleId, status, createdAt, updatedAt) VALUES
-('john_doe', 'john.doe@example.com', 'password123', 'John Doe', 1, 1, NOW(), NOW()),
-('jane_smith', 'jane.smith@example.com', 'password456', 'Jane Smith', 2, 1, NOW(), NOW()),
-('guest_user', 'guest@example.com', 'guestpassword', 'Guest User', 3, 1, NOW(), NOW());
+INSERT INTO User (userName, email, password, fullName, status, role, createdAt, updatedAt)
+VALUES
+('user1', 'user1@example.com', 'password1', 'John Doe', 1, 1, NOW(), NOW()),
+('user2', 'user2@example.com', 'password2', 'Jane Smith', 1, 2, NOW(), NOW()),
+('user3', 'user3@example.com', 'password3', 'Bob Johnson', 1, 2, NOW(), NOW()),
+('admin1', 'admin1@example.com', 'adminpass1', 'Admin One', 1, 3, NOW(), NOW()),
+('admin2', 'admin2@example.com', 'adminpass2', 'Admin Two', 1, 3, NOW(), NOW());
+
 
