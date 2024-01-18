@@ -4,11 +4,10 @@
 <head>
     <link rel="stylesheet" href="/public/css/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
     <link rel="stylesheet" href="/public/css/sidebar.css">
-    <link rel="stylesheet" href="/public/css/admin/posts.css">
+    <link rel="stylesheet" href="/public/css/admin/suppliers.css">
 
 </head>
 
@@ -19,7 +18,6 @@
         <div class="row flex-nowrap">
             <?php
             require_once 'app/views/partials/sidebar.php';
-            require_once 'app/views/admin/posts/generalProcessing.php';
         ?>
 
             <div class="col px-3 py-3 bg-light">
@@ -27,14 +25,14 @@
                     role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="d-flex">
                         <div class="toast-body">
-                            Thêm bài viết thành công ! <span></span>
+                            Thêm nhà cung cấp thành công ! <span></span>
                         </div>
                         <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
                             aria-label="Close"></button>
                     </div>
                 </div>
                 <div class="mt-4">
-                    <h3 class="mt-3 mb-3">Thêm bài viết</h3>
+                    <h3 class="mt-3 mb-3">Thêm nhà cung cấp</h3>
 
                     <div class="row pt-1">
                         <div class="d-flex justify-content-between px-3 mb-4">
@@ -47,52 +45,17 @@
                             <form class="bg-body rounded-3 px-3 pt-3 pb-5" id="formSubmit" method="POST" action="add">
 
                                 <div class="form-group">
-                                    <label class="label_input" for="title">Tiêu đề</label>
-                                    <input type="text" class="form-control" id="title" name="title">
+                                    <label class="label_input" for="supplierName">Tên nhà cung cấp</label>
+                                    <input type="text" class="form-control" id="supplierName" name="supplierName">
                                 </div>
                                 <div class="form-group mt-2">
-                                    <label class="label_input" for="description">Mô tả</label>
-                                    <input type="text" class="form-control" id="description" name="description">
+                                    <label class="label_input" for="link_target">Link tham chiếu</label>
+                                    <input type="text" class="form-control" id="link_target" name="link_target">
                                 </div>
-                                <div class="form-group mt-2">
-                                    <label class="label_input" for="slug">Slug</label>
-                                    <input type="text" class="form-control" id="slug" name="slug">
-                                </div>
-
-                                <div class="form-group mt-2">
-                                    <label class="label_input" for="content">Nội dung</label>
-                                    <textarea id="editor" class="form-control" id="content" name="content"></textarea>
-                                </div>
-
                                 <div class="form-group mt-2">
                                     <input type="hidden" class="form-control" id="image" name="image">
                                 </div>
 
-                                <div class="row">
-                                    <div class="form-group col mt-3">
-
-                                        <select class="form-select form-select-sm mb-3" name="supplierId"
-                                            id="supplierId">
-                                            <option selected>Chọn nhà cung cấp</option>
-                                            <?php 
-                                                foreach ($suppliers as $index => $supplier) {
-                                                    echo "<option value=".$supplier['supplierId'].">".$supplier['supplierName']."</option>";
-                                                }
-                                            ?>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group col mt-3">
-                                        <select class="form-select form-select-sm mb-3" name="category_post"
-                                            id="category_post">
-                                            <option selected>Danh mục</option>
-                                            <option value="1">Khuyến mại</option>
-                                            <option value="2">Hướng dẫn</option>
-                                            <option value="3">Kinh nghiệm mua sắm</option>
-                                            <option value="4">Khác</option>
-                                        </select>
-                                    </div>
-                                </div>
                             </form>
                         </div>
                         <div class="col-4">
@@ -139,7 +102,7 @@
 
 
 
-    <script src="/public/js/admin/posts/create.js"></script>
+    <script src="/public/js/admin/suppliers/create.js"></script>
     <script src="/public/js/bootstrap/bootstrap.bundle.min.js"> </script>
     <script src="
     https://cdn.jsdelivr.net/npm/dayjs@1.11.10/dayjs.min.js

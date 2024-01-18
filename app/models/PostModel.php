@@ -1,7 +1,6 @@
 <?php
-require_once __DIR__ . '/../config/DbConnection.php';
-require_once __DIR__ . '/interfaces/PostService.php';
-
+require_once 'app/config/DbConnection.php';
+require_once 'app/models/interfaces/PostService.php';
 
 class Post implements PostService {
     private $postId;

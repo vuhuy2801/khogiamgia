@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../config/DbConnection.php';
-require_once __DIR__ . '/interfaces/ProductPriceService.php';
+require_once 'app/config/DbConnection.php';
+require_once 'app/models/interfaces/ProductPriceService.php';
 
 class ProductPrice implements productPriceService
 {

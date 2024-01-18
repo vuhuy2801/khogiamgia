@@ -16,7 +16,7 @@ document.getElementById("title").addEventListener("change", function () {
 document.getElementById("description").addEventListener("change", function () {
   const descriptionValue = this.value.trim();
   if (descriptionValue === "") {
-    showError("title", "Vui lòng nhập mô tả");
+    showError("description", "Vui lòng nhập mô tả");
   } else {
     hideError("description");
   }

@@ -51,7 +51,7 @@
               
                
                 foreach ($paginatedPosts as $index => $post) {
-                    $imgSrc ='/'. $post['image'];
+                    $imgSrc = $post['image'];
                     $postDate = $post['createdAt'];
                     $postTitle = $post['title'];
                     $postLink = "new.html?slug=" . $post['slug'];
