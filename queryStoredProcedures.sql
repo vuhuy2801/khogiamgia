@@ -813,14 +813,14 @@ CREATE PROCEDURE AddUser(
     IN p_email NVARCHAR(255),
     IN p_password NVARCHAR(255),
     IN p_fullName NVARCHAR(255),
-    IN p_roleId INT,
     IN p_status INT,
+	IN p_role INT,
     IN p_createAt DATETIME,
     IN p_updateAt DATETIME
 )
 BEGIN
-    INSERT INTO User (userName, email, password, fullName, roleId, status, createdAt, updatedAt)
-    VALUES (p_userName, p_email, p_password, p_fullName, p_roleId, p_status, p_createAt, p_updateAt);
+    INSERT INTO User (userName, email, password, fullName, status,role, createdAt, updatedAt)
+    VALUES (p_userName, p_email, p_password, p_fullName, p_status,p_role, p_createAt, p_updateAt);
 END 
 //
 
