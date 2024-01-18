@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nhà cung cấp</title>
-    <link rel="stylesheet" href="../../public/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/css/bootstrap/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../../public/css/sidebar.css">
-    <link rel="stylesheet" href="../../public/css/admin/suppliers.css">
+    <link rel="stylesheet" href="/public/css/sidebar.css">
+    <link rel="stylesheet" href="/public/css/admin/suppliers.css">
 </head>
+
 
 <body>
     <div class="container-fluid">
@@ -18,21 +19,20 @@
         <div class="row flex-nowrap">
             <?php
                 require_once 'app/views/partials/sidebar.php';
-                require_once 'app/views/admin/posts/deleteModal.php';
-                require_once 'app/views/admin/component/convertDate.php';
-                require_once 'app/views/admin/posts/generalProcessing.php';
-                require_once 'app/controllers/PostController.php';
+                require_once 'app/views/admin/suppliers/deleteModal.php';
+                require_once 'lib/convertDate.php';
+                require_once 'app/controllers/admin/SupplierController.php';
             ?>
 
             <!-- end sidebar -->
-            <div class="col px-3 py-3 wrap_dasboard">
+            <div class="col px-3 py-3 wrap_dasboard position-relative">
                 <div class="mt-5 d-flex justify-content-between align-items-center">
                     <h3 class="mb-0">
-                        Danh sách bài viết
+                        Danh sách nhà cung cấp
                     </h3>
 
                     <div class="d-flex align-items-center">
-                        <div class="input-group mx-3">
+                        <div class="input-group mx-3 container_search">
                             <input type="text" class="form-control input-search" placeholder="Tìm kiếm...">
                             <div class="input-group-append">
                                 <button id="searchBtn" class="btn btn-outline-secondary" type="button">
@@ -52,49 +52,44 @@
                     <table class="table table-hover mb-4">
                         <thead class='head_item'>
                             <tr>
-                                <th class="table_item_id" scope="col">ID BÀI VIẾT</th>
-                                <th class="table_item_title" scope="col">TIÊU ĐỀ</th>
-                                <th class="table_item_image" scope="col">HÌNH ẢNH</th>
-                                <th class="table_item" scope="col">DANH MỤC</th>
-                                <th class="table_item" scope="col">THỜI GIAN TẠO</th>
-                                <th class="table_item" scope="col">TRẠNG THÁI</th>
+                                <th class="table_item_id" scope="col">ID NHÀ CUNG CẤP</th>
+                                <th class="table_item" scope="col">TÊN NHÀ CUNG CẤP</th>
+                                <th class="table_item_image" scope="col">LOGO</th>
+                                <th class="table_item_link" scope="col">LINK THAM CHIẾU</th>
                                 <th class="table_item" scope="col">THAO TÁC</th>
                             </tr>
                         </thead>
                         <tbody class="body_item">
                             <?php
-                                $postController = new PostController();
-                                $posts = $postController->getListOfPosts();
-                                $postsPerPage = 5;
-                                $totalPosts = count($posts);
+                                $supplierController = new SupplierController();
+                                $suppliers = $supplierController->getListOfSuppliers();
+                                $suppliersPerPage = 5;
+                                $totalSuppliers = count($suppliers);
                             
                                 $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
-                                $totalPages = ceil($totalPosts / $postsPerPage);
+                                $totalPages = ceil($totalSuppliers / $suppliersPerPage);
 
-                                $start = ($currentPage - 1) * $postsPerPage;
-                                $end = $start + $postsPerPage;
-                                $paginatedPosts = array_slice($posts, $start, $postsPerPage);
+                                $start = ($currentPage - 1) * $suppliersPerPage;
+                                $end = $start + $suppliersPerPage;
+                                $paginatedSuppliers = array_slice($suppliers, $start, $suppliersPerPage);
+                                $hidePagination = $totalPages <= 1;
                                 
-                                foreach ($paginatedPosts as $index => $post) {
+                                foreach ($paginatedSuppliers as $index => $supplier) {
                                     echo "<tr>";
-                                    echo "<td class='item_table' scope='row'>" . $post['postId'] . "</td>";
-                                    echo "<td class='item_table_title'>" . $post['title'] . "</td>";
-                                    echo "<td class='item_table'> <img class='w-100 item_image' src='". $post['image'] ."' alt=''></td>";
-                                    echo "<td class='item_table'>" . $categories[ $post['categories_post']] . "</td>";
-                                    echo "<td class='item_table'>" . convertDateFormat( $post['createdAt']) . "</td>";
-                                    $statusClass = ($post['status'] == 0) ? 'status-inactive' : 'status-active';
-                                    echo "<td class='item_table '><p class='item_status my-0 rounded-3 " . $statusClass . "'>" . $statuses[$post['status']] . "</p></td>";
-                        
+                                    echo "<td class='item_table' scope='row'>" . $supplier['supplierId'] . "</td>";
+                                    echo "<td class='item_table'>" . $supplier['supplierName'] . "</td>";
+                                    echo "<td class='item_table'> <img class='w-100 item_image' src='". $supplier['logoSupplier'] ."' alt=''></td>";
+                                    echo "<td class='item_table'>" .  $supplier['address_target'] . "</td>";                               
                                     echo "<td class='item_table'>
-                                        <a class='px-1 action_detail' href='detail?id=" . urlencode($post['postId']) . "&title=" . urlencode($post['title']) . "&img=" . urlencode($post['image']) . "&supp=" . urlencode($post['supplierId']) . "&content=" . urlencode($post['content']) . "&des=" . urlencode($post['description']) . "&cate=" . urlencode($post['categories_post']) . "&slug=" . urlencode($post['slug']) . "&at=" . urlencode($post['createdAt']). "&upat=" . urlencode($post['updateAt']) . "&status=" . urlencode($post['status'])  . "'><i class='bi bi-eye-fill'></i></a>
-                                        <a class='px-1 action_edit' href='edit?id=" . urlencode($post['postId']) . "&title=" . urlencode($post['title']) . "&img=" . urlencode($post['image']) . "&supp=" . urlencode($post['supplierId']) . "&content=" . urlencode($post['content']) . "&des=" . urlencode($post['description']) . "&cate=" . urlencode($post['categories_post']) . "&slug=" . urlencode($post['slug']) . "&at=" . urlencode($post['createdAt']). "&upat=" . urlencode($post['updateAt']) . "&status=" . urlencode($post['status'])  ."'><i class='bi bi-pencil-square'></i></a>
-                                        <a href='' class='delete-post px-1' data-post-id='" . urlencode($post['postId']) . "' data-bs-toggle='modal' data-bs-target='#deletePost'><i class='bi bi-trash'></i></a>
+                                        <a class='px-1 action_detail' href='detail?id=" . urlencode($supplier['supplierId']) .  "'><i class='bi bi-eye-fill'></i></a>
+                                        <a class='px-1 action_edit' href='edit?id=" . urlencode($supplier['supplierId']) ."'><i class='bi bi-pencil-square'></i></a>
+                                        <a href='' class='delete-supplier px-1' data-supplier-id='" . urlencode($supplier['supplierId']) . "' data-bs-toggle='modal' data-bs-target='#deleteSupplier'><i class='bi bi-trash'></i></a>
                                      </td>";
-                                
                                      echo "</tr>" ; } ?>
                         </tbody>
                     </table>
-                    <nav class="  py-2" aria-label="Page navigation example">
+                    <nav class="  py-2" aria-label="Page navigation example"
+                        <?php echo $hidePagination ? 'style="display: none;"' : ''; ?>>
                         <ul class="pagination justify-content-center">
                             <li class="page-item <?php echo ($currentPage == 1) ? 'disabled' : ''; ?>">
                                 <a class="page-link"
@@ -115,14 +110,15 @@
 
                 <!-- Button trigger modal -->
 
-                <form name="delete-post-form" method="POST"></form>
+                <form name="delete-supplier-form" method="POST"></form>
 
             </div>
         </div>
-    </div>
 
-    <script src="../../public/js/admin/posts/show.js"> </script>
-    <script src="../../public\js\bootstrap\bootstrap.bundle.min.js"> </script>
+    </div>
+    <script src="/public/js/admin/suppliers/show.js"> </script>
+    <script src="/public/js/bootstrap/bootstrap.bundle.min.js"> </script>
+
 
 
 </body>

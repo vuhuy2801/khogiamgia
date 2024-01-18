@@ -58,11 +58,13 @@ DELIMITER //
 CREATE PROCEDURE AddSupplier(
     IN supplier_name NVARCHAR(255),
     IN supplier_address_target NVARCHAR(255),
-    IN supplier_logo NVARCHAR(255)
+    IN supplier_logo NVARCHAR(255),
+    IN supplier_createdAt DATETIME,
+    IN supplier_updatedAt DATETIME
 )
 BEGIN
-    INSERT INTO Supplier (supplierName, address_target, logoSupplier)
-    VALUES (supplier_name, supplier_address_target, supplier_logo);
+    INSERT INTO Supplier (supplierName, address_target, logoSupplier, createdAt, updatedAt)
+    VALUES (supplier_name, supplier_address_target, supplier_logo,supplier_createdAt,supplier_updatedAt);
 END;
 //
 
@@ -74,13 +76,16 @@ CREATE PROCEDURE UpdateSupplier(
     IN supplier_id INT,
     IN new_supplier_name NVARCHAR(255),
     IN new_supplier_address_target NVARCHAR(255),
-    IN new_supplier_logo NVARCHAR(255)
+    IN new_supplier_logo NVARCHAR(255),
+	IN new_supplier_updatedAt DATETIME
 )
 BEGIN
     UPDATE Supplier
     SET supplierName = new_supplier_name,
         address_target = new_supplier_address_target,
-        logoSupplier = new_supplier_logo
+        logoSupplier = new_supplier_logo,
+        updatedAt = new_supplier_updatedAt,
+        createdAt = IFNULL(createdAt, createdAt)
     WHERE supplierId = supplier_id;
 END;
 //
@@ -104,7 +109,7 @@ DELIMITER //
 
 CREATE PROCEDURE GetListSuppliers()
 BEGIN
-    SELECT * FROM Supplier;
+    SELECT supplierId,supplierName,address_target,logoSupplier FROM Supplier;
 END;
 //
 

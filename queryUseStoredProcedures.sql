@@ -6,11 +6,11 @@ CALL DeleteCategory(11);
 CALL GetListCategories();
 -- Supplier
 CALL AddSupplier('Supplier A', 'abc.com', 'logo_supplier_a.png');
-CALL UpdateSupplier(1, 'Shopee', '789 Elm Street, City Z', 'new_logo_supplier_a.png');
-CALL DeleteSupplier(6);
+CALL UpdateSupplier(2, 'Tiki', 'https://tiki.vn/', 'https://upload.wikimedia.org/wikipedia/commons/6/64/Logo_Tiki.png');
+CALL DeleteSupplier(3);
 CALL GetListSuppliers();
 CALL GetListNameSuppliers();
-CALL GetDetailSupplier(1);
+CALL GetDetailSupplier(7);
 CALL SearchSupplier('ti');
 -- Post
 CALL AddPost('New Post Title', 'image_path.jpg','abc', 1, 'Post content...', 'Post description...', 2, '2023-12-20','2023-12-20', 1);
@@ -18,7 +18,7 @@ CALL UpdatePost(34090, 'Updated Post Title', 'https://api.vuhuy.site/uploads/sma
 CALL DeletePost(84558);
 CALL GetListPosts();
 CALL GetListPostsUser();
-CALL GetPostDetail(60128);
+CALL GetPostDetail(63596);
 CALL GetPostsByCategory(1);
 CALL SearchPostByTitle('n');
 CALL GetPostsBySupplierId(3);
@@ -85,3 +85,4 @@ CALL DeleteUser(4);
 CALL GetAllUsers();
 CALL GetDetailUser(3);
 
+select * from user where userId = 3;

@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="../../public/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/css/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
-    <link rel="stylesheet" href="../../public/css/sidebar.css">
-    <link rel="stylesheet" href="../../public/css/admin/posts.css">
+    <link rel="stylesheet" href="/public/css/sidebar.css">
+    <link rel="stylesheet" href="/public/css/admin/posts.css">
     <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -48,7 +48,7 @@
 
                         </div>
                         <div class="col-8">
-                            <form class="bg-body rounded-3 px-3 pt-3 pb-5" id="formSubmit" method="POST" action="add">
+                            <form class="bg-body rounded-3 px-3 pt-3 pb-5" id="formSubmit">
 
                                 <div class="form-group">
                                     <label class="label_input" for="title">Tiêu đề</label>
@@ -125,8 +125,8 @@
         image: "<?php echo $post['image'] ?>",
     }
     </script>
-    <script src="../../public/js/admin/posts/detail.js"> </script>
-    <script src="../../public\js\bootstrap\bootstrap.bundle.min.js"> </script>
+    <script src="/public/js/admin/posts/detail.js"> </script>
+    <script src="/public/js/bootstrap/bootstrap.bundle.min.js"> </script>
 
 
 </body>
