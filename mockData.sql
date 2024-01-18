@@ -14,8 +14,8 @@ INSERT INTO Category (categoryName) VALUES
 
 
 INSERT INTO Supplier (supplierName, address_target, logoSupplier) VALUES 
-    ('Shopee', 'Số 123 Đường ABC, Quận XYZ, Thành phố HCM', 'logo_dienmayxanh.png'),
-    ('Tiki', 'Số 456 Đường DEF, Quận UVW, Thành phố Hà Nội', 'logo_nguyenkim.png'),
+    ('Shopee', 'https://shopee.vn/', 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Shopee.svg/2560px-Shopee.svg.png'),
+    ('Tiki', 'https://tiki.vn/', 'https://upload.wikimedia.org/wikipedia/commons/6/64/Logo_Tiki.png'),
     ('Tiktok Shop', 'Số 789 Đường GHI, Quận JKL, Thành phố Đà Nẵng', 'logo_lotte.png'),
     ('Lazada', 'Số 321 Đường MNO, Quận PQR, Thành phố Hải Phòng', 'logo_fptshop.png'),
     ('Thế giới di động', 'Số 654 Đường STU, Quận VWX, Thành phố Cần Thơ', 'logo_thegioididong.png');

@@ -2,97 +2,85 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="/public/css/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+    <link rel="stylesheet" href="/public/css/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="/public/css/sidebar.css">
     <link rel="stylesheet" href="/public/css/admin/posts.css">
-
 </head>
-
 
 <body>
 
     <div class="container-fluid">
         <div class="row flex-nowrap">
             <?php
+            
             require_once 'app/views/partials/sidebar.php';
-            require_once 'app/views/admin/posts/generalProcessing.php';
-        ?>
+            require_once 'lib/convertDate.php';
+            require_once 'app/controllers/admin/SupplierController.php';
+            $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
+            $supplierController = new SupplierController();
+            $supplier = $supplierController->getDetail($id);
+            ?>
+
 
             <div class="col px-3 py-3 bg-light">
-                <div class="toast toast_create align-items-center text-bg-primary border-0 position-absolute start-50 translate-middle"
+                <div class="toast toast_update align-items-center text-bg-primary border-0 position-absolute start-50 translate-middle"
                     role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="d-flex">
                         <div class="toast-body">
-                            Thêm bài viết thành công ! <span></span>
+                            Sửa nhà cung cấp thành công ! <span></span>
                         </div>
                         <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
                             aria-label="Close"></button>
                     </div>
                 </div>
                 <div class="mt-4">
-                    <h3 class="mt-3 mb-3">Thêm bài viết</h3>
+                    <h3 class="mt-3 mb-3"><?php echo $supplier['supplierName'] ?>
+                    </h3>
 
                     <div class="row pt-1">
                         <div class="d-flex justify-content-between px-3 mb-4">
                             <a href="show" class="my-auto text-decoration-none back_home"><i
-                                    class="bi bi-arrow-left mx-1 "></i>Quay
+                                    class="bi bi-arrow-left mx-1"></i>Quay
                                 lại</a>
-                            <button id="btnSubmit" class="btn btn-primary"><i class="bi bi-check2 mx-1"></i>Tạo</button>
+                            <div class="justify-content-center">
+                                <a id="btnSubmit" class="btn btn-primary"><i class="mx-1 bi bi-save"></i>Lưu</a>
+                            </div>
+
                         </div>
                         <div class="col-8">
-                            <form class="bg-body rounded-3 px-3 pt-3 pb-5" id="formSubmit" method="POST" action="add">
-
+                            <form class="bg-body rounded-3 px-3 pt-3 pb-5" id="formSubmit" method="POST"
+                                action="update">
                                 <div class="form-group">
-                                    <label class="label_input" for="title">Tiêu đề</label>
-                                    <input type="text" class="form-control" id="title" name="title">
+                                    <input type="hidden" value="<?php echo $supplier['supplierId'] ?>"
+                                        class="form-control" id="supplierId" name="supplierId">
+                                </div>
+                                <div class="form-group">
+                                    <label class="label_input" for="supplierName">Tên nhà cung cấp</label>
+                                    <input type="text" class="form-control"
+                                        value="<?php echo $supplier['supplierName'] ?>" id="supplierName"
+                                        name="supplierName" readonly>
                                 </div>
                                 <div class="form-group mt-2">
-                                    <label class="label_input" for="description">Mô tả</label>
-                                    <input type="text" class="form-control" id="description" name="description">
-                                </div>
-                                <div class="form-group mt-2">
-                                    <label class="label_input" for="slug">Slug</label>
-                                    <input type="text" class="form-control" id="slug" name="slug">
-                                </div>
-
-                                <div class="form-group mt-2">
-                                    <label class="label_input" for="content">Nội dung</label>
-                                    <textarea id="editor" class="form-control" id="content" name="content"></textarea>
+                                    <label class="label_input" for="link_target">Link tham chiếu</label>
+                                    <input type="text" value="<?php echo $supplier['address_target'] ?>"
+                                        class="form-control" id="link_target" name="link_target" readonly>
                                 </div>
 
                                 <div class="form-group mt-2">
                                     <input type="hidden" class="form-control" id="image" name="image">
                                 </div>
 
-                                <div class="row">
-                                    <div class="form-group col mt-3">
-
-                                        <select class="form-select form-select-sm mb-3" name="supplierId"
-                                            id="supplierId">
-                                            <option selected>Chọn nhà cung cấp</option>
-                                            <?php 
-                                                foreach ($suppliers as $index => $supplier) {
-                                                    echo "<option value=".$supplier['supplierId'].">".$supplier['supplierName']."</option>";
-                                                }
-                                            ?>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group col mt-3">
-                                        <select class="form-select form-select-sm mb-3" name="category_post"
-                                            id="category_post">
-                                            <option selected>Danh mục</option>
-                                            <option value="1">Khuyến mại</option>
-                                            <option value="2">Hướng dẫn</option>
-                                            <option value="3">Kinh nghiệm mua sắm</option>
-                                            <option value="4">Khác</option>
-                                        </select>
-                                    </div>
+                                <div class="form-group mt-2">
+                                    <input type="hidden" class="form-control"
+                                        value="<?php echo $supplier['logoSupplier'] ?>" id="fakeImage" name="fakeImage">
                                 </div>
+
+
                             </form>
                         </div>
                         <div class="col-4">
@@ -102,17 +90,14 @@
                                     </p>
                                     <hr>
                                 </div>
-                                <div class="px-4 mb-5">
+                                <div class="px-4 mb-5 ">
                                     <div class="dropzone-container">
-                                        <form action="upload" class="dropzone text-center rounded-3" id="myDropzone"
+                                        <form action="upload" class="dropzone text-center" id="myDropzone"
                                             enctype="multipart/form-data"></form>
-                                        <button id="deleteImageBtn" style="display:none;"><i
+                                        <button id="deleteImageBtn" style="display:block;"><i
                                                 class="bi bi-trash"></i></button>
                                     </div>
                                 </div>
-
-
-
                             </div>
                             <div class="card">
                                 <div class="card-body">
@@ -121,7 +106,7 @@
                                 </div>
                                 <div class="px-3">
                                     <p class="label_input">Thời gian tạo: <span
-                                            class="float-end date_value create_at"></span>
+                                            class="float-end date_value"><?php  echo convertDateFormat($supplier['createdAt'])  ?></span>
                                     </p>
                                     <p class="label_input">Thời gian cập nhật: <span
                                             class="float-end date_value update_at"></span>
@@ -134,25 +119,25 @@
             </div>
         </div>
 
+
+
     </div>
+    <script>
+    const dataSupplier = {
+        image: "<?php echo $supplier['logoSupplier'] ?>",
+    }
+    </script>
 
-
-
-
-    <script src="/public/js/admin/posts/create.js"></script>
     <script src="/public/js/bootstrap/bootstrap.bundle.min.js"> </script>
+    <script src="/public/js/admin/suppliers/edit.js"> </script>
     <script src="
     https://cdn.jsdelivr.net/npm/dayjs@1.11.10/dayjs.min.js
     "></script>
-
     <script>
     const now = dayjs();
     const formattedTime = now.format('hh:mm A DD/MM/YY');
-    document.querySelector('.create_at').textContent = formattedTime;
     document.querySelector('.update_at').textContent = formattedTime;
     </script>
-    <script src="/public/js/jquery/jquery-3.6.3.min.js"> </script>
-
-
-
 </body>
+
+</html>

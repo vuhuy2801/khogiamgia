@@ -1,12 +1,14 @@
 <?php
-require_once __DIR__ . '/../config/DbConnection.php';
-require_once __DIR__ . '/interfaces/supplierService.php';
+require_once 'app/config/DbConnection.php';
+require_once 'app/models/interfaces/supplierService.php';
 
 class Supplier implements SupplierService {
     private $supplierId;
     private $supplierName;
     private $address_target;
     private $logoSupplier; 
+    private $createdAt; 
+    private $updatedAt; 
     private $db;
     public function __construct() {
         $this->db = new DBConnection();
@@ -37,6 +39,22 @@ class Supplier implements SupplierService {
         $this->logoSupplier=$value;
     }
 
+    public function setCreatedAt($value) {
+        $this->createdAt = $value;
+    }
+
+    public function getCreatedAt() {
+        return $this->createdAt;
+    }
+
+    public function setUpdatedAt($value) {
+        $this->updatedAt = $value;
+    }
+
+    public function getUpdatedAt() {
+        return $this->updatedAt;
+    }
+
     public function List(): array{
         $connection = $this->db->getConnection();
         if($connection){
@@ -59,7 +77,7 @@ class Supplier implements SupplierService {
             $statement = $connection->prepare($query);
             $statement->bindParam(1, $supplierId, PDO::PARAM_INT);
             $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $result;
         }catch (PDOException $e) {
             return false;
@@ -80,11 +98,13 @@ class Supplier implements SupplierService {
     }
     public function Add(): bool{
         $connection = $this->db->getConnection();
-            $query = "CALL AddSupplier(?,?,?)";
+            $query = "CALL AddSupplier(?,?,?,?,?)";
             $staement = $connection->prepare($query);
             $staement->bindParam(1,$this->supplierName);
             $staement->bindParam(2,$this->address_target);
             $staement->bindParam(3,$this->logoSupplier);
+            $staement->bindParam(4,$this->createdAt);
+            $staement->bindParam(5,$this->updatedAt);
             try {
                 $staement->execute();
                 return true;
@@ -95,17 +115,18 @@ class Supplier implements SupplierService {
     
     public function Edit(): bool{
         $connection = $this->db->getConnection();
-            $query = "CALL UpdateSupplier(?,?,?,?)";
+            $query = "CALL UpdateSupplier(?,?,?,?,?)";
             $staement = $connection->prepare($query);
             $staement->bindParam(1,$this->supplierId);
             $staement->bindParam(2,$this->supplierName);
             $staement->bindParam(3,$this->address_target);
             $staement->bindParam(4,$this->logoSupplier);
+            $staement->bindParam(5,$this->updatedAt);
             try {
                 $staement->execute();
                 return true;
             } catch (\Throwable $th) {
-                return false;
+                return false; 
             }
     }
     public function Delete(): bool{

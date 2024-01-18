@@ -11,13 +11,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="../public/css/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="../public/css/general.css">
-    <link rel="stylesheet" href="../public/css/header.css">
-    <link rel="stylesheet" href="../public/css/footer.css">
-    <link rel="stylesheet" href="../public\css\posts.css">
-    <link rel="stylesheet" href="../public/css/promotion-news.css">
-    <link rel="stylesheet" href="../public/css/guidance.css">
+    <link rel="stylesheet" href="/public/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/css/general.css">
+    <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/footer.css">
+    <link rel="stylesheet" href="/public/css/posts.css">
+    <link rel="stylesheet" href="/public/css/promotion-news.css">
+    <link rel="stylesheet" href="/public/css/guidance.css">
 
 </head>
 
@@ -34,7 +34,7 @@
         </div>
         <div class="mt-4">
             <?php
-            $urlImage ='../public/images/banner/mgg.png';
+            $urlImage ='/public/images/banner/mgg.png';
             require_once 'app/views/guidance/sectionBanners.php';
             require_once 'app/views/guidance/sectionSupplier.php';
             $supplierId = 1;

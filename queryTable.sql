@@ -11,7 +11,9 @@ CREATE TABLE IF NOT EXISTS Supplier (
     supplierId INT PRIMARY KEY AUTO_INCREMENT,
     supplierName NVARCHAR(255),
     address_target NVARCHAR(255),
-    logoSupplier NVARCHAR(255)
+    logoSupplier NVARCHAR(255),
+    createdAt DATETIME,
+    updatedAt DATETIME
 );
 
 -- table Post

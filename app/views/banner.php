@@ -11,12 +11,12 @@
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <a href="#" target="_blank">
-                        <img src="../../../public\images\banner.png" alt="" />
+                        <img src="/public/images/banner.png" alt="" />
                     </a>
                 </div>
                 <div class="carousel-item">
                     <a href="#" target="_blank">
-                        <img src="../../../public\images\1,91-1-banner-quang-cao1.png" alt="" />
+                        <img src="/public/images/1,91-1-banner-quang-cao1.png" alt="" />
                     </a>
                 </div>
             </div>

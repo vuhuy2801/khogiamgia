@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../models/PostModel.php';
+require_once 'app/models/PostModel.php';
 
 
 class PostController {
@@ -83,30 +83,20 @@ class PostController {
     public function addPost() {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $this->postData->setContent($_POST['content']);
+        $this->postData->setTitle($_POST['title']);
+        $this->postData->setDescription($_POST['description']);
+        $this->postData->setSupplierId($_POST['supplierId']);
+        $this->postData->setCategoriesPost($_POST['category_post']);
         $this->postData->setCreatedAt(date('Y-m-d H:i:s'));
         $this->postData->setUpdateAt(date('Y-m-d H:i:s'));
         $this->postData->setStatus(1);
         $this->postData->setSlug($_POST['slug']);
         $imageName = ($_POST['image']);
-        $targetDirectory = '../../public/uploads/posts/' . date('d-m-Y') . '/';
+        $targetDirectory = '/public/uploads/posts/' . date('d-m-Y') . '/';
         $imageUrl = $targetDirectory . $imageName;
         $this->postData->setImage($imageUrl);
     
-        if (isset($_POST['title'])) {
-            $this->postData->setTitle($_POST['title']);
-        }
-        if (isset($_POST['description'])) {
-            $this->postData->setDescription($_POST['description']);
-        }
-        if (isset($_POST['supplierId'])) {
-            $this->postData->setSupplierId($_POST['supplierId']);
-        }
-        if (isset($_POST['category_post'])) {
-            $this->postData->setCategoriesPost($_POST['category_post']);
-        }
         if ($this->postData->Add()){
-           
-            
             header('Location: ../bai-viet/show');
         }else{
             echo "Thêm bài viết thất bại";
@@ -116,37 +106,23 @@ class PostController {
 
     public function updatePost() {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
-
         $this->postData->setContent($_POST['content']);
         $this->postData->setUpdateAt(date('Y-m-d H:i:s'));
         $this->postData->setStatus(1);
         $this->postData->setSlug($_POST['slug']);
-
+        $this->postData->setPostId($_POST['postId']);
+        $this->postData->setTitle($_POST['title']);
+        $this->postData->setDescription($_POST['description']);
+        $this->postData->setSupplierId($_POST['supplierId']);
+        $this->postData->setCategoriesPost($_POST['category_post']);
         $imageName = ($_POST['image']);
         $imageFake = ($_POST['fakeImage']);
         if ($imageName == "") {
             $this->postData->setImage($imageFake);
-        }else { $targetDirectory = '../../public/uploads/posts/' . date('d-m-Y') . '/';
+        }else { $targetDirectory = '/public/uploads/posts/' . date('d-m-Y') . '/';
             $imageUrl = $targetDirectory . $imageName;
             
             $this->postData->setImage($imageUrl);
-        }
-       
-        
-        if (isset($_POST['postId'])) {
-            $this->postData->setPostId($_POST['postId']);
-        }
-        if (isset($_POST['title'])) {
-            $this->postData->setTitle($_POST['title']);
-        }
-        if (isset($_POST['description'])) {
-            $this->postData->setDescription($_POST['description']);
-        }
-        if (isset($_POST['supplierId'])) {
-            $this->postData->setSupplierId($_POST['supplierId']);
-        }
-        if (isset($_POST['category_post'])) {
-            $this->postData->setCategoriesPost($_POST['category_post']);
         }
         if ($this->postData->Edit()){
             header('Location: ../bai-viet/show');
@@ -170,5 +146,3 @@ class PostController {
    
  
 }
-
-?>

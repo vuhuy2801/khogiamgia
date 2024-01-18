@@ -11,7 +11,7 @@
                     <div class="testimonial-item">
                         <div class="profile mt-auto">
                             <a href="#" target="_blank">
-                                <img src="public\images\logo\ladaza.png" class="testimonial-img" alt="" />
+                                <img src="public/images/logo/ladaza.png" class="testimonial-img" alt="" />
                             </a>
                         </div>
                     </div>
@@ -21,7 +21,7 @@
                     <div class="testimonial-item">
                         <div class="profile mt-auto">
                             <a href="https://www.misa.vn/cong-ty/" target="_blank">
-                                <img src="public\images\logo\shopee.png" class="testimonial-img" alt="" />
+                                <img src="public/images/logo/shopee.png" class="testimonial-img" alt="" />
                             </a>
                         </div>
                     </div>
@@ -31,7 +31,7 @@
                     <div class="testimonial-item">
                         <div class="profile mt-auto">
                             <a href="#" target="_blank">
-                                <img src="public\images\logo\shopeefood.png" class="testimonial-img" alt="" />
+                                <img src="public/images/logo/shopeefood.png" class="testimonial-img" alt="" />
                             </a>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                     <div class="testimonial-item">
                         <div class="profile mt-auto">
                             <a href="#" target="_blank">
-                                <img src="public\images\logo\tiki.png" class="testimonial-img" alt="" />
+                                <img src="public/images/logo/tiki.png" class="testimonial-img" alt="" />
                             </a>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                     <div class="testimonial-item">
                         <div class="profile mt-auto">
                             <a href="#" target="_blank">
-                                <img src="public\images\logo\tiktok.png" class="testimonial-img" alt="" />
+                                <img src="public/images/logo/tiktok.png" class="testimonial-img" alt="" />
                             </a>
                         </div>
                     </div>

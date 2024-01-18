@@ -30,16 +30,16 @@
         <div class="container text-center mt-5">
             <div class="row align-items-start">
                 <div class="col-3">
-                    <a href=""> <img src="../public/images/typeVoucher/shopee-removebg-preview.png" alt=""> </a>
+                    <a href=""> <img src="/public/images/typeVoucher/shopee-removebg-preview.png" alt=""> </a>
                 </div>
                 <div class="col-3">
-                    <a href=""> <img src="../public/images/typeVoucher/freeship-removebg-preview.png" alt=""> </a>
+                    <a href=""> <img src="/public/images/typeVoucher/freeship-removebg-preview.png" alt=""> </a>
                 </div>
                 <div class="col-3">
-                    <a href=""> <img src="../public/images/typeVoucher/shop-removebg-preview.png" alt=""> </a>
+                    <a href=""> <img src="/public/images/typeVoucher/shop-removebg-preview.png" alt=""> </a>
                 </div>
                 <div class="col-3">
-                    <a href=""> <img src="../public/images/typeVoucher/khac-removebg-preview.png" alt=""> </a>
+                    <a href=""> <img src="/public/images/typeVoucher/khac-removebg-preview.png" alt=""> </a>
                 </div>
             </div>
         </div>

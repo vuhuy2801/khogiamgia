@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../config/DbConnection.php';
-require_once __DIR__ . '/interfaces/userService.php';
+require_once 'app/config/DbConnection.php';
+require_once 'app/models/interfaces/userService.php';
 class User implements UserService
 {
     private $db;
