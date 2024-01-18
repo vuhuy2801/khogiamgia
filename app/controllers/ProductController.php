@@ -1,8 +1,8 @@
 <?php
 // File: controllers/ProductController.php
-include_once 'scripts\InfoProductShopee.php';
-include_once 'app\models\ProductModel.php';
-include_once 'app\models\ProductPriceModel.php';
+include_once 'scripts/InfoProductShopee.php';
+include_once 'app/models/ProductModel.php';
+include_once 'app/models/ProductPriceModel.php';
 class ProductController
 {
     private $InfoProductShopee;

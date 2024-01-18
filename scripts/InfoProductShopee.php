@@ -3,7 +3,7 @@
 use RPurinton\GeminiPHP\GeminiClient;
 use RPurinton\GeminiPHP\GeminiPrompt;
 
-include_once('lib\simple_html_dom.php');
+include_once('lib/simple_html_dom.php');
 class InfoProductShopee
 {
     private $date;

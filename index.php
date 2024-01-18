@@ -45,7 +45,7 @@ $router->get('/', function () {
 });
 
 $router->get('/test', function () {
-    require 'scripts\InfoProductShopee.php';
+    require 'scripts/InfoProductShopee.php';
     $InfoProductShopee = new InfoProductShopee();
     // $InfoProductShopee->getCurrentPrice();
     // $InfoProductShopee->showCurrentPrice();
@@ -54,7 +54,7 @@ $router->get('/test', function () {
 });
 
 $router->get('/addProduct', function () {
-    require 'app\controllers\ProductController.php';
+    require 'app/controllers/ProductController.php';
     $ProductController = new ProductController();
     $ProductController->addProduct();
 });
@@ -62,7 +62,7 @@ $router->get('/addProduct', function () {
 
 
 $router->get('/get-current-price-all-product', function () {
-    require 'app\controllers\ProductController.php';
+    require 'app/controllers/ProductController.php';
     $ProductController = new ProductController();
     // $ProductController->index();
     $ProductController->getCurrentPriceAllProduct();
@@ -70,20 +70,20 @@ $router->get('/get-current-price-all-product', function () {
 
 
 $router->get('/api/lich-su-gia', function () {
-    require 'app\controllers\ProductController.php';
+    require 'app/controllers/ProductController.php';
     $ProductController = new ProductController();
     $ProductController->getHistoryPriceProduct();
 });
 
 // api get Advice product
 $router->post('/api/lay-loi-khuyen', function () {
-    require 'app\controllers\ProductController.php';
+    require 'app/controllers/ProductController.php';
     $ProductController = new ProductController();
     $ProductController->getAdviceProduct();
 });
 
 $router->get('theo-doi-gia', function () {
-    require 'app\controllers\ProductController.php';
+    require 'app/controllers/ProductController.php';
     $ProductController = new ProductController();
     $ProductController->showHistoryPriceProduct();
 });
@@ -105,17 +105,17 @@ $router->get('/ma-giam-gia', function () {
 
 
 $router->get('/login', function () {
-    require_once 'app\controllers\AuthenticationController.php';
+    require_once 'app/controllers/AuthenticationController.php';
     $AuthenticationController = new AuthenticationController();
     $AuthenticationController->loginView();
 });
 $router->post('/login', function () {
-    require_once 'app\controllers\AuthenticationController.php';
+    require_once 'app/controllers/AuthenticationController.php';
     $AuthenticationController = new AuthenticationController();
     $AuthenticationController->handleLogin();
 });
 $router->get('/dang-xuat', function () {
-    require_once 'app\controllers\AuthenticationController.php';
+    require_once 'app/controllers/AuthenticationController.php';
     $AuthenticationController = new AuthenticationController();
     $AuthenticationController->logout();
 });
@@ -187,7 +187,7 @@ $router->get('/huong-dan/chi-tiet', function () {
 
 // router home admin
 $router->get('/admin/trang-chu/show', function () {
-    require 'app\controllers\admin\HomeAdminController.php';
+    require 'app/controllers/admin/HomeAdminController.php';
     $HomeAdminController = new HomeAdminController();
     $HomeAdminController->index();
 });
