@@ -19,15 +19,26 @@ class ProductController
         echo "Theo dõi giá sản phẩm";
 
     }
-    public function getCurrentPriceAllProduct()
+    public function getCurrentPriceProduct()
     {
         // $InfoProductShopee = new InfoProductShopee();
         // productID| productName |image| link |rateCount |soldCount |status|
+        // get current offset product form tem_offset-product.txt
+        $offset = file_get_contents('tem_offset-product.txt');
+        $offset = (int) $offset;
+        // get list product from database
+        $countProduct = $this->ProductModel->CountProduct();
 
-        $listProduct = $this->ProductModel->List();
+        if ($countProduct - $offset < 10) {
+            $offset = 0;
+            file_put_contents('tem_offset-product.txt', $offset);
+            return;
+        }
+
+        $listProduct = $this->ProductModel->GetLimitProduct($offset);
         try {
             foreach ($listProduct as $product) {
-                $currentPrice = $this->InfoProductShopee->getCurrentPrice($product['link']);
+                $currentPrice = $this->InfoProductShopee->getBasicInfo($product['link']);
                 echo $currentPrice->getID() . "<br>";
                 $this->ProductPriceModel->setProductID($currentPrice->getId());
                 $this->ProductPriceModel->setCurrentPrice($currentPrice->getPrice());
@@ -39,6 +50,9 @@ class ProductController
             echo "lỗi  <br>";
             echo 'Caught exception: ', $e->getMessage(), "\n";
         }
+        // update offset
+        $offset = $offset + 10;
+        file_put_contents('tem_offset-product.txt', $offset);
 
     }
     // public function getCurrentPrice($id){

@@ -33,8 +33,6 @@ $router->get('/all-link', function () {
     echo "<a href='/admin/bai-viet/add'>Admin/ Bài viết/ Add</a><br>";
     echo "<a href='/admin/bai-viet/update'>Admin/ Bài viết/ Update</a><br>";
     echo "<a href='/admin/bai-viet/delete/1'>Admin/ Bài viết/ Delete</a><br>";
-
-
 });
 
 $router->get('/', function () {
@@ -61,11 +59,11 @@ $router->get('/addProduct', function () {
 
 
 
-$router->get('/get-current-price-all-product', function () {
+$router->get('/get-current-price-product', function () {
     require 'app/controllers/ProductController.php';
     $ProductController = new ProductController();
     // $ProductController->index();
-    $ProductController->getCurrentPriceAllProduct();
+    $ProductController->getCurrentPriceProduct();
 });
 
 
