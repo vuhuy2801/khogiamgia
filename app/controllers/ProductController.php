@@ -1,8 +1,8 @@
 <?php
 // File: controllers/ProductController.php
-include_once 'scripts\InfoProductShopee.php';
-include_once 'app\models\ProductModel.php';
-include_once 'app\models\ProductPriceModel.php';
+include_once 'scripts/InfoProductShopee.php';
+include_once 'app/models/ProductModel.php';
+include_once 'app/models/ProductPriceModel.php';
 class ProductController
 {
     private $InfoProductShopee;
@@ -19,15 +19,26 @@ class ProductController
         echo "Theo dõi giá sản phẩm";
 
     }
-    public function getCurrentPriceAllProduct()
+    public function getCurrentPriceProduct()
     {
         // $InfoProductShopee = new InfoProductShopee();
         // productID| productName |image| link |rateCount |soldCount |status|
+        // get current offset product form tem_offset-product.txt
+        $offset = file_get_contents('tem_offset-product.txt');
+        $offset = (int) $offset;
+        // get list product from database
+        $countProduct = $this->ProductModel->CountProduct();
 
-        $listProduct = $this->ProductModel->List();
+        if ($countProduct - $offset < 10) {
+            $offset = 0;
+            file_put_contents('tem_offset-product.txt', $offset);
+            return;
+        }
+
+        $listProduct = $this->ProductModel->GetLimitProduct($offset);
         try {
             foreach ($listProduct as $product) {
-                $currentPrice = $this->InfoProductShopee->getCurrentPrice($product['link']);
+                $currentPrice = $this->InfoProductShopee->getBasicInfo($product['link']);
                 echo $currentPrice->getID() . "<br>";
                 $this->ProductPriceModel->setProductID($currentPrice->getId());
                 $this->ProductPriceModel->setCurrentPrice($currentPrice->getPrice());
@@ -39,6 +50,9 @@ class ProductController
             echo "lỗi  <br>";
             echo 'Caught exception: ', $e->getMessage(), "\n";
         }
+        // update offset
+        $offset = $offset + 10;
+        file_put_contents('tem_offset-product.txt', $offset);
 
     }
     // public function getCurrentPrice($id){
@@ -167,7 +181,7 @@ class ProductController
 
     public function getAdviceProduct()
     {
-        $_POST = json_decode(file_get_contents("php://input"),true);
+        $_POST = json_decode(file_get_contents("php://input"), true);
         header('Content-Type: application/json');
         // get data post form user
         // {
@@ -181,6 +195,46 @@ class ProductController
         }
         $adviceContent = $this->InfoProductShopee->getAdviceByGemini($description);
         echo $adviceContent;
+    }
+
+    public function addProduct()
+    {
+        // get list form list-link-product-shopee.txt is array
+        // select 10 link in list-link-product-shopee.txt and remove selected 10 link in file
+        $listLinkProduct = file_get_contents('list-link-product-shopee.txt');
+        $listLinkProduct = explode("\n", $listLinkProduct);
+        $selectedLinks = array_slice($listLinkProduct, 0, 10);
+        $remainingLinks = implode("\n", array_slice($listLinkProduct, 10));
+        file_put_contents('list-link-product-shopee.txt', $remainingLinks);
+        // get info product from link
+        if (is_array($selectedLinks)) {
+            foreach ($selectedLinks as $link) {
+                $this->InfoProductShopee->getBasicInfo($link);
+                // $this->InfoProductShopee->showInFo();
+                // check id product exist in database
+                $this->ProductModel->setProductID($this->InfoProductShopee->getId());
+                if (!$this->ProductModel->isExist()) {
+                    // handle add new product
+                    $this->ProductModel->setProductName($this->InfoProductShopee->getName());
+                    $this->ProductModel->setImage($this->InfoProductShopee->getImage());
+                    $this->ProductModel->setLink($this->InfoProductShopee->getLink());
+                    $this->ProductModel->setRateCount($this->InfoProductShopee->getVoteRate());
+                    $this->ProductModel->setSoldCount($this->InfoProductShopee->getSold());
+                    $this->ProductModel->setStatus(1);
+                    $this->ProductModel->Add();
+                    // handle add new price
+                    $this->ProductPriceModel->setProductID($this->InfoProductShopee->getId());
+                    $this->ProductPriceModel->setCurrentPrice($this->InfoProductShopee->getPrice());
+                    $this->ProductPriceModel->setDate(date("Y-m-d"));
+                    $this->ProductPriceModel->Add();
+                    echo "Thêm sản phẩm" . $this->InfoProductShopee->getName() . " thành công <br>";
+                } else {
+                    echo "Sản phẩm " . $this->InfoProductShopee->getName() . " đã tồn tại <br>";
+
+                }
+            }
+        }
+
     }
 
     public function showHistoryPriceProduct()

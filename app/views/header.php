@@ -4,8 +4,9 @@ $logoUrl = "https://api.vuhuy.site/uploads/LOGO_2bd919edea.png";
 $homeUrl = "/trang-chu";
 $maGiamGiaUrl = "#";
 $theoDoiGiaSPUrl = "/theo-doi-gia";
-$tinKhuyenMaiUrl = "#";
-$huongDanUrl = "#";
+$tinKhuyenMaiUrl = "/tin-khuyen-mai/shopee";
+$huongDanUrl = "/huong-dan/shopee";
+$adminUrl = "/admin/trang-chu/show";
 
 // Text variables
 $trangChuText = "Trang chủ";
@@ -13,7 +14,7 @@ $maGiamGiaText = "Mã giảm giá";
 $theoDoiGiaSpText = "Theo dõi giá sản phẩm";
 $tinKhuyenMaiText = "Tin khuyến mại";
 $huongDanText = "Hướng dẫn";
-
+$adminText = "Admin";
 ?>
 
 <!-- Nav -->
@@ -58,6 +59,14 @@ $huongDanText = "Hướng dẫn";
                         <?php echo $huongDanText; ?>
                     </a>
                 </li>
+
+                <?php
+                // if login
+                if (isset($_SESSION['user'])) {
+                    echo ' <li><a class="nav-link scrollto" href="' . $adminUrl . '">' . $adminText . '</a> </li>';
+                }
+                ?>
+
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>

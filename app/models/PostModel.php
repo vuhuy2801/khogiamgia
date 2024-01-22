@@ -1,6 +1,6 @@
 <?php
 require_once 'app/config/DbConnection.php';
-require_once 'app/models/interfaces/PostService.php';
+require_once 'app/models/interfaces/postService.php';
 
 class Post implements PostService {
     private $postId;
