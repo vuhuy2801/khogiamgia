@@ -141,7 +141,7 @@ class Banner implements BannerService {
             $statement = $connection->prepare($query);
             $statement->bindParam(1, $bannerId, PDO::PARAM_INT);
             $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $result;
         }catch (PDOException $e) {
             return false;

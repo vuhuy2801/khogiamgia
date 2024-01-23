@@ -20,4 +20,3 @@ class DbConnection {
         return $this->conn;
     }
 }
-?>

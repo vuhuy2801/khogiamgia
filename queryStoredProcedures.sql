@@ -347,21 +347,21 @@ DELIMITER //
 
 CREATE PROCEDURE AddVoucher(
 	In voucher_id NVARCHAR(15),
-    IN voucher_name NVARCHAR(55),
+    IN voucher_name NVARCHAR(255),
     IN voucher_quantity INT,
     IN voucher_expressAt DATE,
     IN voucher_expiresAt DATE,
-    IN voucher_conditionOrder NVARCHAR(155),
-    IN voucher_conditionOfUse NVARCHAR(155),
+    IN voucher_conditionOrder NVARCHAR(255),
+    IN voucher_conditionOfUse NVARCHAR(255),
     IN voucher_categoryId INT,
     IN voucher_createdAt DATETIME,
     IN voucher_updatedAt DATETIME,
     IN voucher_is_trend TINYINT,
     IN voucher_supplierId INT,
     IN voucher_status INT,
-    IN voucher_address_target NVARCHAR(55),
+    IN voucher_address_target NVARCHAR(255),
     IN voucher_discountType INT,
-    IN voucher_maximumDiscount NVARCHAR(55),
+    IN voucher_maximumDiscount NVARCHAR(255),
     IN voucher_is_inWallet TINYINT
 )
 BEGIN
@@ -384,20 +384,20 @@ DELIMITER //
 
 CREATE PROCEDURE UpdateVoucher(
     In new_voucher_id NVARCHAR(15),
-    IN new_voucher_name NVARCHAR(55),
+    IN new_voucher_name NVARCHAR(255),
     IN new_voucher_quantity INT,
     IN new_voucher_expressAt DATE,
     IN new_voucher_expiresAt DATE,
-    IN new_voucher_conditionOrder NVARCHAR(155),
-    IN new_voucher_conditionOfUse NVARCHAR(155),
+    IN new_voucher_conditionOrder NVARCHAR(255),
+    IN new_voucher_conditionOfUse NVARCHAR(255),
     IN new_voucher_categoryId INT,
     IN new_voucher_updatedAt DATETIME,
     IN new_voucher_is_trend TINYINT,
     IN new_voucher_supplierId INT,
     IN new_voucher_status INT,
-    IN new_voucher_address_target NVARCHAR(55),
+    IN new_voucher_address_target NVARCHAR(255),
     IN new_voucher_discountType INT,
-    IN new_voucher_maximumDiscount NVARCHAR(55),
+    IN new_voucher_maximumDiscount NVARCHAR(255),
     IN new_voucher_is_inWallet TINYINT
 )
 BEGIN
@@ -587,11 +587,13 @@ CREATE PROCEDURE AddProduct(
     IN in_link TEXT,
 	IN in_rateCount FLOAT(15),
 	IN in_soldCount FLOAT(15),
+    IN in_createdAt datetime,
+	IN in_updatedAt datetime,
     IN in_status INT
 )
 BEGIN
-    INSERT INTO Product (productId,productName, image, link, rateCount, soldCount, status)
-    VALUES (in_productId,in_productName, in_image, in_link, in_rateCount, in_soldCount, in_status);
+    INSERT INTO Product (productId,productName, image, link, rateCount, soldCount, createdAt, updatedAt, status)
+    VALUES (in_productId,in_productName, in_image, in_link, in_rateCount, in_soldCount,in_createdAt,in_updatedAt, in_status);
 END;
 //
 
@@ -606,11 +608,12 @@ CREATE PROCEDURE UpdateProduct(
 	IN in_link TEXT,
 	IN in_rateCount FLOAT(15),
 	IN in_soldCount FLOAT(15),
+    IN in_updatedAt datetime,
 	IN in_status INT
 )
 BEGIN
     UPDATE Product
-    SET productName = in_productName, image = in_image, link = in_link, rateCount = in_rateCount, soldCount = in_soldCount, status = in_status
+    SET productName = in_productName, image = in_image, link = in_link, rateCount = in_rateCount, soldCount = in_soldCount, updatedAt = in_updatedAt, status = in_status,createdAt = IFNULL(createdAt, createdAt)
     WHERE productID = in_productID;
 END;
 //
@@ -670,14 +673,13 @@ DELIMITER ;
 
 DELIMITER //
 
-CREATE PROCEDURE GetProductWithPriceById(
+CREATE PROCEDURE GetPriceById(
     IN in_productId NVARCHAR(255)
 )
 BEGIN
-    SELECT P.*, PP.currentPrice, PP.date
-    FROM Product P
-    LEFT JOIN ProductPrice PP ON P.productID = PP.productID
-    WHERE P.productId = in_productId;
+    SELECT currentPrice, date
+    FROM ProductPrice
+    WHERE productId = in_productId;
 END;
 //
 
@@ -736,7 +738,7 @@ DELIMITER //
 CREATE PROCEDURE AddBanner(
     IN in_image NVARCHAR(255),
     IN in_title NVARCHAR(255),
-    IN in_address_target NVARCHAR(55),
+    IN in_address_target NVARCHAR(255),
     IN in_status INT,
     IN in_createdAt DATETIME,
     IN in_updateAt DATETIME
@@ -755,7 +757,7 @@ CREATE PROCEDURE UpdateBanner(
     IN in_bannerId INT,
     IN in_image NVARCHAR(255),
 	IN in_title NVARCHAR(255),
-    IN in_address_target NVARCHAR(55),
+    IN in_address_target NVARCHAR(255),
     IN in_status INT,
     IN in_updateAt DATETIME
 )

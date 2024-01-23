@@ -34,21 +34,21 @@ CREATE TABLE IF NOT EXISTS Post (
 -- table Voucher
 CREATE TABLE IF NOT EXISTS Voucher (
     voucherId NVARCHAR(15) PRIMARY KEY,
-    voucherName NVARCHAR(55),
+    voucherName NVARCHAR(255),
     quantity INT,
     expressAt DATE,
     expiresAt DATE,
-    orderConditions NVARCHAR(155),
-    conditionsOfUse NVARCHAR(155),
+    orderConditions NVARCHAR(255),
+    conditionsOfUse NVARCHAR(255),
     categoryId INT,
     createdAt DATETIME,
     updatedAt DATETIME,
     is_trend TINYINT(1),
     supplierId INT,
     status INT,
-    address_target NVARCHAR(55),
+    address_target NVARCHAR(255),
     discountType INT,
-    maximumDiscount NVARCHAR(55),
+    maximumDiscount NVARCHAR(255),
     is_inWallet TINYINT(1)
 );
 
@@ -67,8 +67,11 @@ CREATE TABLE IF NOT EXISTS Product (
     link TEXT,
     rateCount FLOAT(15),
     soldCount Float(15),
+	createdAt DATETIME,
+    updatedAt DATETIME,
     status INT
 );
+
 
 -- table ProductPrice
 CREATE TABLE IF NOT EXISTS ProductPrice (
@@ -83,7 +86,7 @@ CREATE TABLE IF NOT EXISTS Banner (
     bannerId INT PRIMARY KEY AUTO_INCREMENT,
     image NVARCHAR(255),
     title NVARCHAR(255),
-    address_target NVARCHAR(55),
+    address_target NVARCHAR(255),
     status INT,
     createdAt DATETIME,
     updatedAt DATETIME
