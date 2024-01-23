@@ -86,6 +86,13 @@ $router->get('theo-doi-gia', function () {
     $ProductController->showHistoryPriceProduct();
 });
 
+// bài viết
+$router->get('/bai-viet/([a-z0-9_-]+)', function ($slug) {
+    require 'app/controllers/PostController.php';
+    $PostController = new PostController();
+    $PostController->getPostDetailBySlug($slug);
+});
+
 
 
 

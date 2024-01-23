@@ -20,7 +20,7 @@
                 $imgSrc = $post['image'];
                 $postDate = $post['createdAt'];
                 $postTitle = $post['title'];
-                $postLink = "new.html?slug=" . $post['slug'];
+                $postLink = "bai-viet/" . $post['slug'];
                 $description = $post['description'];
                 echo itemPostBox($imgSrc, $postDate, $postTitle, $postLink, $description);
             }

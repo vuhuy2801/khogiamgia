@@ -250,6 +250,34 @@ class Post implements PostService {
             return false;
         }
     }
+
+    // getpostdetailbyslug
+    public function GetPostDetailBySlug($slug) {
+        $connection = $this->db->getConnection();
+        $query = "SELECT * FROM post WHERE slug = '$slug'";
+        try {
+            $statement = $connection->prepare($query);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+
+    public function GetCategory($categoryId) {
+        $connection = $this->db->getConnection();
+        $query = "SELECT categoryName FROM `category` WHERE categoryId = $categoryId";
+        try {
+            $statement = $connection->prepare($query);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
     
 
     public function GetGuidancePostsBySupplierId($id): array {
