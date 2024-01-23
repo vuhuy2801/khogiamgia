@@ -49,7 +49,7 @@ $currentPage = $_SERVER['REQUEST_URI'];
                         </span></a>
                 </li>
                 <li
-                    class="wrap-item py-2 nav-item <?php echo strpos($currentPage, 'theo-doi-san-pham') !== false ? 'active' : ''; ?>">
+                    class="wrap-item py-2 nav-item <?php echo strpos($currentPage, 'theo-doi-gia-san-pham') !== false ? 'active' : ''; ?>">
                     <a href="<?php echo $theoDoiGiaSPUrl ?>" class="nav-link px-0 align-middle text-dark">
                         </i> <span class="ms-1 d-none d-sm-inline">
                             <?= $theoDoiGiaSpText ?>

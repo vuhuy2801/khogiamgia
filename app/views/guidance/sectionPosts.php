@@ -17,7 +17,7 @@
            
                 $postController = new PostController();
                 $posts = $postController->getListGuidanceWithSupplier($supplierId);
-                $postsPerPage = 5;
+                $postsPerPage = 6;
                 $totalPosts = count($posts);
     
                 $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;

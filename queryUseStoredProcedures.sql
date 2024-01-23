@@ -76,9 +76,9 @@ CALL UpdateBanner(1, 'banner_image.jpg',
     'https://example.com/banner_target',
     1,
     '2024-01-06'); 
-CALL DeleteBanner(5); 
+CALL DeleteBanner(4); 
 CALL GetListBanners();
-CALL GetDetailBanner(1);
+CALL GetDetailBanner(6);
 -- User 
 CALL AddUser('new_user', 'new_user@example.com', 'new_password', 'New User', 2, 1,'2024-10-1','2024-10-1');
 CALL DeleteUser(4);

@@ -290,4 +290,158 @@ $router->post('/admin/nha-cung-cap/delete/(\d+)', function ($supplierId) {
     $SupplierController->delete($supplierId);
 });
 
+// Router admin handel banners
+$router->get('/admin/banner/show', function () {
+    require 'app/controllers/admin/BannerController.php';
+    $BannerController = new BannerController();
+    $BannerController->index();
+});
+
+
+$router->get('/admin/banner/detail', function () {
+    require 'app/controllers/admin/BannerController.php';
+    $BannerController = new BannerController();
+    $BannerController->detail();
+});
+
+$router->get('/admin/banner/create', function () {
+    require 'app/controllers/admin/BannerController.php';
+    $BannerController = new BannerController();
+    $BannerController->create();
+});
+
+
+$router->get('/admin/banner/edit', function () {
+    require 'app/controllers/admin/BannerController.php';
+    $BannerController = new BannerController();
+    $BannerController->edit();
+});
+
+
+$router->post('/admin/banner/upload', function () {
+    require 'app/controllers/admin/BannerController.php';
+    $BannerController = new BannerController();
+    $BannerController->upload();
+}); 
+$router->post('/admin/banner/add', function () {
+    require 'app/controllers/admin/BannerController.php';
+    $BannerController = new BannerController();
+    $BannerController->add();
+});
+
+$router->post('/admin/banner/update', function () {
+    require 'app/controllers/admin/BannerController.php';
+    $BannerController = new BannerController();
+    $BannerController->update();
+});
+
+$router->post('/admin/banner/delete/(\d+)', function ($bannerId) {
+    require 'app/controllers/admin/BannerController.php';
+    $BannerController = new BannerController();
+    $BannerController->delete($bannerId);
+});
+
+// Router admin handel product
+$router->get('/admin/theo-doi-gia-san-pham/show', function () {
+    require 'app/controllers/admin/ProductController.php';
+    $ProductController = new ProductController();
+    $ProductController->index();
+});
+
+
+$router->get('/admin/theo-doi-gia-san-pham/detail', function () {
+    require 'app/controllers/admin/ProductController.php';
+    $ProductController = new ProductController();
+    $ProductController->detail();
+});
+
+$router->get('/admin/theo-doi-gia-san-pham/create', function () {
+    require 'app/controllers/admin/ProductController.php';
+    $ProductController = new ProductController();
+    $ProductController->create();
+});
+
+
+$router->get('/admin/theo-doi-gia-san-pham/edit', function () {
+    require 'app/controllers/admin/ProductController.php';
+    $ProductController = new ProductController();
+    $ProductController->edit();
+});
+
+
+$router->post('/admin/theo-doi-gia-san-pham/upload', function () {
+    require 'app/controllers/admin/ProductController.php';
+    $ProductController = new ProductController();
+    $ProductController->upload();
+}); 
+$router->post('/admin/theo-doi-gia-san-pham/add', function () {
+    require 'app/controllers/admin/ProductController.php';
+    $ProductController = new ProductController();
+    $ProductController->add();
+});
+
+$router->post('/admin/theo-doi-gia-san-pham/update', function () {
+    require 'app/controllers/admin/ProductController.php';
+    $ProductController = new ProductController();
+    $ProductController->update();
+});
+
+$router->post('/admin/theo-doi-gia-san-pham/delete/(\w+)', function ($productId) {
+    require 'app/controllers/admin/ProductController.php';
+    $ProductController = new ProductController();
+    $ProductController->delete($productId);
+});
+
+// Router admin handel voucher
+$router->get('/admin/ma-giam-gia/show', function () {
+    require 'app/controllers/admin/VoucherController.php';
+    $VoucherController = new VoucherController();
+    $VoucherController->index();
+});
+
+
+$router->get('/admin/ma-giam-gia/detail', function () {
+    require 'app/controllers/admin/ProductController.php';
+    $ProductController = new ProductController();
+    $ProductController->detail();
+});
+
+$router->get('/admin/ma-giam-gia/create', function () {
+    require 'app/controllers/admin/ProductController.php';
+    $ProductController = new ProductController();
+    $ProductController->create();
+});
+
+
+$router->get('/admin/ma-giam-gia/edit', function () {
+    require 'app/controllers/admin/ProductController.php';
+    $ProductController = new ProductController();
+    $ProductController->edit();
+});
+
+
+$router->post('/admin/ma-giam-gia/upload', function () {
+    require 'app/controllers/admin/ProductController.php';
+    $ProductController = new ProductController();
+    $ProductController->upload();
+}); 
+$router->post('/admin/ma-giam-gia/add', function () {
+    require 'app/controllers/admin/ProductController.php';
+    $ProductController = new ProductController();
+    $ProductController->add();
+});
+
+$router->post('/admin/ma-giam-gia/update', function () {
+    require 'app/controllers/admin/ProductController.php';
+    $ProductController = new ProductController();
+    $ProductController->update();
+});
+
+$router->post('/admin/ma-giam-gia/delete/(\w+)', function ($productId) {
+    require 'app/controllers/admin/ProductController.php';
+    $ProductController = new ProductController();
+    $ProductController->delete($productId);
+});
+
+
 $router->run();

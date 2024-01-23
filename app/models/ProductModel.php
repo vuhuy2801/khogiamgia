@@ -9,9 +9,12 @@ class Product implements ProductService
     private $productName;
     private $image;
     private $rateCount;
+    private $createdAt;
+    private $updatedAt;
     private $link;
     private $status;
     private $soldCount;
+
 
     public function __construct()
     {
@@ -78,6 +81,21 @@ class Product implements ProductService
         return $this->status;
     }
 
+    public function getCreatedAt() {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt($value) {
+        $this->createdAt = $value;
+    }
+    public function getUpdateAt() {
+        return $this->updatedAt;
+    }
+
+    public function setUpdateAt($value) {
+        $this->updatedAt = $value;
+    }
+
     public function setStatus($status)
     {
         $this->status = $status;
@@ -100,7 +118,7 @@ class Product implements ProductService
         // INSERT INTO Product (productID, productName, image, link, rateCount, soldCount, status)
         // VALUES (in_productID, in_productName, in_image, in_link, in_rateCount, in_soldCount, in_status);
         $connection = $this->db->getConnection();
-        $query = "CALL AddProduct(?,?,?,?,?,?,?)";
+        $query = "CALL AddProduct(?,?,?,?,?,?,?,?,?)";
         $staement = $connection->prepare($query);
         $staement->bindParam(1, $this->productID);
         $staement->bindParam(2, $this->productName);
@@ -108,7 +126,9 @@ class Product implements ProductService
         $staement->bindParam(4, $this->link);
         $staement->bindParam(5, $this->rateCount);
         $staement->bindParam(6, $this->soldCount);
-        $staement->bindParam(7, $this->status);
+        $staement->bindParam(7, $this->createdAt);
+        $staement->bindParam(8, $this->updatedAt);
+        $staement->bindParam(9, $this->status);
         try {
             $staement->execute();
             return true;
@@ -120,7 +140,7 @@ class Product implements ProductService
     public function Edit(): bool
     {
         $connection = $this->db->getConnection();
-        $query = "CALL UpdateProduct(?,?,?,?,?,?,?)";
+        $query = "CALL UpdateProduct(?,?,?,?,?,?,?,?)";
         $staement = $connection->prepare($query);
         $staement->bindParam(1, $this->productID);
         $staement->bindParam(2, $this->productName);
@@ -128,7 +148,8 @@ class Product implements ProductService
         $staement->bindParam(4, $this->rateCount);
         $staement->bindParam(5, $this->link);
         $staement->bindParam(6, $this->soldCount);
-        $staement->bindParam(7, $this->status);
+        $staement->bindParam(7, $this->updatedAt);
+        $staement->bindParam(8, $this->status);
         try {
             $staement->execute();
             return true;
@@ -187,7 +208,7 @@ class Product implements ProductService
             $statement = $connection->prepare($query);
             $statement->bindParam(1, $productId);
             $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $result;
         }catch (PDOException $e) {
             return false;
@@ -210,12 +231,12 @@ class Product implements ProductService
         }
     }
 
-    public function GetProductWithPriceByLink(): array
+    public function GetProductWithPriceById($id)
     {
         $connection = $this->db->getConnection();
-        $query = "CALL GetProductWithPriceById(?)";
+        $query = "CALL GetPriceById(?)";
         $staement = $connection->prepare($query);
-        $staement->bindParam(1, $this->productID);
+        $staement->bindParam(1, $id);
         try {
             $staement->execute();
             $result = $staement->fetchAll(PDO::FETCH_ASSOC);
