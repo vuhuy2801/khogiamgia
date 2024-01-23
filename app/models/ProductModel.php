@@ -201,7 +201,8 @@ class Product implements ProductService
         return [];
     }
 
-    public function Detail($productId) {
+    public function Detail($productId)
+    {
         $connection = $this->db->getConnection();
         $query = "CALL GetProductDetail(?)";
         try {
@@ -210,7 +211,7 @@ class Product implements ProductService
             $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $result;
-        }catch (PDOException $e) {
+        } catch (PDOException $e) {
             return false;
         }
     }
@@ -246,6 +247,36 @@ class Product implements ProductService
         }
 
     }
+    //get limit 10 product
+    public function GetLimitProduct($offSet): array
+    {
+        $connection = $this->db->getConnection();
+        $query = "SELECT link FROM product LIMIT 10 OFFSET $offSet";
+        $staement = $connection->prepare($query);
+        try {
+            $staement->execute();
+            $result = $staement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            return [];
+        }
+
+    }
+    //count product
+    public function CountProduct(): int
+    {
+        $connection = $this->db->getConnection();
+        $query = "SELECT COUNT(*) FROM product";
+        $staement = $connection->prepare($query);
+        try {
+            $staement->execute();
+            $result = $staement->fetchColumn();
+            return $result;
+        } catch (PDOException $e) {
+            return 0;
+        }
+
+    }
     //isExist
     public function isExist(): bool
     {
@@ -265,7 +296,7 @@ class Product implements ProductService
             return false;
         }
     }
-    
+
 }
 
 ?>

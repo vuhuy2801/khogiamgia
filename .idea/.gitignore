@@ -8,3 +8,5 @@
 /dataSources.local.xml
 /vendor/
 /.env
+# no commit /public/uploads/ folder
+/public/uploads/

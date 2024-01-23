@@ -12,7 +12,7 @@
         </div>
         <div class="row list-promotion justify-content-center gap-2">
             <?php
-            require_once 'app\views\component\itemPromotion.php';
+            require_once 'app/views/component/itemPromotion.php';
             echo itemPromotion('Free Ship', '2023-12-22', '10%', '100,000vnđ', '20,000vnđ', 'Mã nhập tay', 99, 'Thời trang', 'Mã giảm giá sử dụng 1 lần');
             echo itemPromotion('Free Ship', '2023-12-23', '15%', '120,000vnđ', '25,000vnđ', 'Có sẵn trong ví', 80, 'Điện tử', 'Khuyến mãi đặc biệt');
             echo itemPromotion('Voucher extra', '2023-12-24', '20%', '150,000vnđ', '30,000vnđ', 'Mã nhập tay', 75, 'Đồ gia dụng', 'Giảm giá cuối năm');
