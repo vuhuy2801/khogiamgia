@@ -90,8 +90,8 @@
                                 echo "<td class='item_table' scope='row'>" . $product['productID'] . "</td>";
                                 echo "<td class='item_table_title'>" . $product['productName'] . "</td>";
                                 echo "<td class='item_table'> <img class='w-100 item_image' src='" . $product['image'] . "' alt=''></td>";
-                                echo "<td class='item_table'>" . $product['soldCount'] . 'K' . "</td>";
-                                echo "<td class='item_table'>" . $product['rateCount'] . 'K' . "</td>";
+                                echo "<td class='item_table'>" . $product['soldCount'] . "sp" . "</td>";
+                                echo "<td class='item_table'>" . $product['rateCount']  . " sao". "</td>";
                                 $statusClass = ($product['status'] == 0) ? 'status-inactive' : 'status-active';
                                 echo "<td class='item_table '><p class='item_status my-0 rounded-3 " . $statusClass . "'>" . $statusProduct[$product['status']] . "</p></td>";
 
