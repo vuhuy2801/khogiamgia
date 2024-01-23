@@ -18,11 +18,11 @@
         <!-- end -->
         <div class="row flex-nowrap">
             <?php
-                require_once 'app/views/partials/sidebar.php';
-                require_once 'app/views/admin/products/deleteModal.php';
-                require_once 'lib/convertDate.php';
-                require_once 'app/views/admin/products/generalProcessing.php';
-                require_once 'app/controllers/admin/ProductController.php';
+            require_once 'app/views/partials/sidebar.php';
+            require_once 'app/views/admin/products/deleteModal.php';
+            require_once 'lib/convertDate.php';
+            require_once 'app/views/admin/products/generalProcessing.php';
+            require_once 'app/controllers/admin/ProductController.php';
             ?>
 
             <!-- end sidebar -->
@@ -64,53 +64,58 @@
                         </thead>
                         <tbody class="body_item">
                             <?php
-                                $productController = new ProductController();
-                                $products = $productController->getListOfProduct();
-                                $productsPerPage = 5;
-                                $totalProducts = count($products);
-                            
-                                $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
-                                $totalPages = ceil($totalProducts / $productsPerPage);
+                            $productController = new ProductController();
+                            $currentPage = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 
-                                $start = ($currentPage - 1) * $productsPerPage;
-                                $end = $start + $productsPerPage;
-                                $paginatedProducts = array_slice($products, $start, $productsPerPage);
-                                $hidePagination = $totalPages <= 1;
-                                
-                                foreach ($paginatedProducts as $index => $product) {
-                                    echo "<tr>";
-                                    echo "<td class='item_table' scope='row'>" . $product['productID'] . "</td>";
-                                    echo "<td class='item_table_title'>" . $product['productName'] . "</td>";
-                                    echo "<td class='item_table'> <img class='w-100 item_image' src='". $product['image'] ."' alt=''></td>";
-                                    echo "<td class='item_table'>" . $product['soldCount'] .'K'. "</td>";
-                                    echo "<td class='item_table'>" . $product['rateCount'] .'K'. "</td>";
-                                    $statusClass = ($product['status'] == 0) ? 'status-inactive' : 'status-active';
-                                    echo "<td class='item_table '><p class='item_status my-0 rounded-3 " . $statusClass . "'>" . $statusProduct[$product['status']] . "</p></td>";
-                        
-                                    echo "<td class='item_table'>
-                                        <a class='px-1 action_detail' href='detail?id=" . urlencode($product['productID']) .  "'><i class='bi bi-eye-fill'></i></a>
-                                        <a class='px-1 action_edit' href='edit?id=" . urlencode($product['productID']) ."'><i class='bi bi-pencil-square'></i></a>
+
+                            $limit = 5;
+                            $totalProducts = $productController->getTotalProduct();
+                            $totalPages = ceil($totalProducts / $limit);
+                            if ($currentPage > $totalPages || $currentPage < 1) {
+                                echo "Không có trang này";
+                                return;
+                            }
+
+
+                            $offset = ($currentPage - 1) * $limit;
+                            $products = $productController->getListOfProduct($offset, $limit);
+
+                            // $start = ($currentPage - 1) * $productsPerPage;
+                            // $end = $start + $productsPerPage;
+                            // $paginatedProducts = array_slice($products, $start, $productsPerPage);
+                            $hidePagination = $totalPages <= 1;
+
+                            foreach ($products as $index => $product) {
+                                echo "<tr>";
+                                echo "<td class='item_table' scope='row'>" . $product['productID'] . "</td>";
+                                echo "<td class='item_table_title'>" . $product['productName'] . "</td>";
+                                echo "<td class='item_table'> <img class='w-100 item_image' src='" . $product['image'] . "' alt=''></td>";
+                                echo "<td class='item_table'>" . $product['soldCount'] . 'K' . "</td>";
+                                echo "<td class='item_table'>" . $product['rateCount'] . 'K' . "</td>";
+                                $statusClass = ($product['status'] == 0) ? 'status-inactive' : 'status-active';
+                                echo "<td class='item_table '><p class='item_status my-0 rounded-3 " . $statusClass . "'>" . $statusProduct[$product['status']] . "</p></td>";
+
+                                echo "<td class='item_table'>
+                                        <a class='px-1 action_detail' href='detail?id=" . urlencode($product['productID']) . "'><i class='bi bi-eye-fill'></i></a>
+                                        <a class='px-1 action_edit' href='edit?id=" . urlencode($product['productID']) . "'><i class='bi bi-pencil-square'></i></a>
                                         <a href='' class='delete-product px-1' data-product-id='" . urlencode($product['productID']) . "' data-bs-toggle='modal' data-bs-target='#deleteProduct'><i class='bi bi-trash'></i></a>
                                      </td>";
-                                     echo "</tr>" ; } ?>
+                                echo "</tr>";
+                            } ?>
                         </tbody>
                     </table>
-                    <nav class="  py-2" aria-label="Page navigation example"
-                        <?php echo $hidePagination ? 'style="display: none;"' : ''; ?>>
+                    <nav class="py-2">
                         <ul class="pagination justify-content-center">
-                            <li class="page-item <?php echo ($currentPage == 1) ? 'disabled' : ''; ?>">
-                                <a class="page-link"
-                                    href="?page=<?php echo ($currentPage > 1) ? ($currentPage - 1) : 1; ?>">Previous</a>
-                            </li>
-                            <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
-                            <li class="page-item <?php echo ($currentPage == $i) ? 'active' : ''; ?>">
-                                <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                            </li>
-                            <?php endfor; ?>
-                            <li class="page-item <?php echo ($currentPage == $totalPages) ? 'disabled' : ''; ?>">
-                                <a class="page-link"
-                                    href="?page=<?php echo ($currentPage < $totalPages) ? ($currentPage + 1) : $totalPages; ?>">Next</a>
-                            </li>
+                            <?php
+                            if ($hidePagination) {
+                                return;
+                            }
+                            include 'app/views/partials/pagination.php';
+
+                            ?>
+
+
+
                         </ul>
                     </nav>
                 </div>
@@ -127,8 +132,8 @@
     https://cdn.jsdelivr.net/npm/dayjs@1.11.10/dayjs.min.js
     "></script>
     <script>
-    const now = dayjs();
-    const formattedTime = now.format('DD/MM/YY HH:mm');
+        const now = dayjs();
+        const formattedTime = now.format('DD/MM/YY HH:mm');
     </script>
 
     <script src="/public/js/admin/products/show.js"> </script>

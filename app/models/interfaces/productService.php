@@ -6,7 +6,7 @@ interface ProductService {
     public function List(): array;
     public function Search(): array;
     public function GetProductWithPriceById($id);
-    public function ListAdmin(): array;
+    public function ListAdmin($offSet, $limit): array;
     public function Detail($productId) ;
 }
 ?>

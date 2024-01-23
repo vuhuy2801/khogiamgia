@@ -188,11 +188,11 @@ class Product implements ProductService
         return [];
     }
 
-    public function ListAdmin(): array
+    public function ListAdmin($offSet, $limit): array
     {
         $connection = $this->db->getConnection();
         if ($connection) {
-            $query = "CALL GetListProducts()";
+            $query = "SELECT * FROM product LIMIT $limit OFFSET $offSet";
             $staement = $connection->prepare($query);
             $staement->execute();
             $result = $staement->fetchAll(PDO::FETCH_ASSOC);
