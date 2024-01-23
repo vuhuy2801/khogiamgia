@@ -49,10 +49,12 @@ class ProductController
         } catch (Exception $e) {
             echo "lỗi  <br>";
             echo 'Caught exception: ', $e->getMessage(), "\n";
+        } finally {
+            // update offset
+            $offset = $offset + 10;
+            file_put_contents('tem_offset-product.txt', $offset);
         }
-        // update offset
-        $offset = $offset + 10;
-        file_put_contents('tem_offset-product.txt', $offset);
+
 
     }
     // public function getCurrentPrice($id){
