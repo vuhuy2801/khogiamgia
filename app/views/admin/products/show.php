@@ -68,7 +68,7 @@
                             $currentPage = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 
 
-                            $limit = 5;
+                            $limit = 10;
                             $totalProducts = $productController->getTotalProduct();
                             $totalPages = ceil($totalProducts / $limit);
                             if ($currentPage > $totalPages || $currentPage < 1) {

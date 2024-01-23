@@ -195,7 +195,7 @@ class InfoProductShopee
         $this->image = $script['image'];
         $this->description = $script['description'];
         $this->vote_rate = $script['aggregateRating']['ratingValue'];
-        $this->sold = $script['aggregateRating']['ratingCount'];
+        $this->sold = $dom->find('.product-review__sold-count div', 0)->plaintext;
         // $this->advice = $this->getAdviceByGemini($this->description);
         return $this;
 
