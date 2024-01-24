@@ -24,6 +24,19 @@
 </head>
 
 <body>
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div class="toast align-items-center border-0" role="alert" aria-live="assertive" aria-atomic="true"
+            style="background-color: #d1e7dd; color:#0f5132;">
+            <div class="d-flex">
+                <div class="toast-body" id="toastContent">
+
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -33,13 +46,13 @@
             </div>
         </div>
     </div>
-    
+
     <?php
     $titleVoucher = "MÃ GIẢM GIÁ HOT";
 
     require_once 'app/views/banner.php';
     require_once 'app/views/home/sectionProvider.php';
-    
+
     require_once 'app/views/home/sectionPromotion.php';
     require_once 'app/views/home/sectionPosts.php';
     require_once 'app/views/footer.php';
@@ -52,6 +65,7 @@
     <script src="public/js/jquery/jquery-3.6.3.min.js"> </script>
     <script src="public/js/swiperjs/swiper-bundle.min.js"> </script>
     <script src="public/js/home.js"> </script>
+    <script src="public/js/general.js"> </script>
 
 
 </body>
