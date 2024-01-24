@@ -13,9 +13,6 @@
 
             <?php
             include_once 'app/views/component/itemPost.php';
-            require_once 'app/controllers/PostController.php';
-            $postController = new PostController();
-            $posts = $postController->getListPostsUser();
             foreach ($posts as $post) {
                 $imgSrc = $post['image'];
                 $postDate = $post['createdAt'];
@@ -27,10 +24,10 @@
             ?>
 
         </div>
+        <?php echo $isShowMore ? ' <div class="d-flex justify-content-center mt-5">
+            <button type="button" id="btnGetNews" class="btn btn-xem-them">Xem thêm</button>
+        </div>' : '' ?>
 
-        <div class="d-flex justify-content-center mt-5">
-            <button type="button" class="btn btn-xem-them">Xem thêm</button>
-        </div>
     </div>
 </section>
 <!-- End Section Posts -->

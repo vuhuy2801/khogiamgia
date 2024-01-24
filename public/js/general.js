@@ -2,6 +2,12 @@ const toastElList = document.querySelector(".toast");
 const toastElm = new bootstrap.Toast(toastElList, { delay: 2000 });
 let elmToastContent = document.querySelector("#toastContent");
 
+const api = axios.create({
+    baseURL: 'http://localhost/api/',
+    timeout: 15000,
+    headers: {'X-Custom-Header': 'foobar'}
+  });
+
 function copyCouponCode(event, couponCode, link) {
     console.log(couponCode);
     console.log(link);

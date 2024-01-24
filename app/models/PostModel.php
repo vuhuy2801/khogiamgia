@@ -2,7 +2,8 @@
 require_once 'app/config/DbConnection.php';
 require_once 'app/models/interfaces/postService.php';
 
-class Post implements PostService {
+class Post implements PostService
+{
     private $postId;
     private $title;
     private $image;
@@ -16,101 +17,125 @@ class Post implements PostService {
     private $status;
     private $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = new DBConnection();
     }
 
-    public function getPostId() {
+    public function getPostId()
+    {
         return $this->postId;
     }
 
-    public function setPostId($value) {
-        $this->postId=$value;
+    public function setPostId($value)
+    {
+        $this->postId = $value;
     }
-    public function getTitle() {
+    public function getTitle()
+    {
         return $this->title;
     }
 
-    public function setTitle($title) {
+    public function setTitle($title)
+    {
         $this->title = $title;
     }
 
-    public function getImage() {
+    public function getImage()
+    {
         return $this->image;
     }
 
 
-    public function setImage($value) {
+    public function setImage($value)
+    {
         $this->image = $value;
     }
 
-    public function getSlug() {
+    public function getSlug()
+    {
         return $this->slug;
     }
 
-    public function setSlug($value) {
+    public function setSlug($value)
+    {
         $this->slug = $value;
     }
 
-    public function getSupplierId() {
+    public function getSupplierId()
+    {
         return $this->supplierId;
     }
 
-    public function setSupplierId($value) {
+    public function setSupplierId($value)
+    {
         $this->supplierId = $value;
     }
 
-    public function getContent() {
+    public function getContent()
+    {
         return $this->content;
     }
 
-    public function setContent($value) {
+    public function setContent($value)
+    {
         $this->content = $value;
     }
 
-    public function getDescription() {
+    public function getDescription()
+    {
         return $this->description;
     }
 
-    public function setDescription($value) {
+    public function setDescription($value)
+    {
         $this->description = $value;
     }
 
-    public function getCategoriesPost() {
+    public function getCategoriesPost()
+    {
         return $this->categories_post;
     }
 
-    public function setCategoriesPost($value) {
+    public function setCategoriesPost($value)
+    {
         $this->categories_post = $value;
     }
 
-    public function getCreatedAt() {
+    public function getCreatedAt()
+    {
         return $this->createdAt;
     }
 
-    public function setCreatedAt($value) {
+    public function setCreatedAt($value)
+    {
         $this->createdAt = $value;
     }
-    public function getUpdateAt() {
+    public function getUpdateAt()
+    {
         return $this->updatedAt;
     }
 
-    public function setUpdateAt($value) {
+    public function setUpdateAt($value)
+    {
         $this->updatedAt = $value;
     }
-    public function getStatus() {
+    public function getStatus()
+    {
         return $this->status;
     }
 
-    public function setStatus($value) {
+    public function setStatus($value)
+    {
         $this->status = $value;
     }
 
-    public function List(): array {
+    public function List(): array
+    {
         $connection = $this->db->getConnection();
 
-        if ($connection) {         
-            $query = "CALL GetListPosts()"; 
+        if ($connection) {
+            $query = "CALL GetListPosts()";
             $statement = $connection->prepare($query);
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -120,11 +145,12 @@ class Post implements PostService {
         }
     }
 
-    public function ListUser(): array {
+    public function ListUser(): array
+    {
         $connection = $this->db->getConnection();
 
-        if ($connection) {         
-            $query = "CALL GetListPostsUser()"; 
+        if ($connection) {
+            $query = "CALL GetListPostsUser()";
             $statement = $connection->prepare($query);
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -133,8 +159,9 @@ class Post implements PostService {
             return [];
         }
     }
-   
-    public function Add(): bool {
+
+    public function Add(): bool
+    {
         $connection = $this->db->getConnection();
         $query = "CALL AddPost(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $statement = $connection->prepare($query);
@@ -151,13 +178,14 @@ class Post implements PostService {
         try {
             $statement->execute();
             return true;
-        }catch (PDOException $e) {
+        } catch (PDOException $e) {
             return false;
         }
-       
+
     }
 
-    public function Edit(): bool {
+    public function Edit(): bool
+    {
         $connection = $this->db->getConnection();
         $query = "CALL UpdatePost(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $statement = $connection->prepare($query);
@@ -174,25 +202,27 @@ class Post implements PostService {
         try {
             $statement->execute();
             return true;
-        }catch (PDOException $e) {
+        } catch (PDOException $e) {
             return false;
         }
     }
 
-    public function Delete(): bool {
+    public function Delete(): bool
+    {
         $connection = $this->db->getConnection();
-        $query =  "CALL DeletePost(?)";
+        $query = "CALL DeletePost(?)";
         $statement = $connection->prepare($query);
         $statement->bindParam(1, $this->postId);
         try {
             $statement->execute();
             return true;
-        }catch (PDOException $e) {
+        } catch (PDOException $e) {
             return false;
         }
     }
 
-    public function Search(): array {
+    public function Search(): array
+    {
         $connection = $this->db->getConnection();
         $query = "CALL SearchPostByTitle(?)";
         $statement = $connection->prepare($query);
@@ -201,32 +231,17 @@ class Post implements PostService {
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $result;
-        }catch (PDOException $e) {
+        } catch (PDOException $e) {
             return [];
         }
     }
 
-    public function GetPostsByCategory(): array {
+    public function GetPostsByCategory(): array
+    {
         $connection = $this->db->getConnection();
         $query = "CALL GetPostsByCategory(?)";
         $statement = $connection->prepare($query);
         $statement->bindParam(1, $this->categories_post);
-        try {
-            $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-            return $result;
-        }catch (PDOException $e) {
-            return [];
-        }
-    }
-
-
-    public function GetPostsBySupplier($id): array {
-        $connection = $this->db->getConnection();
-        $query = "CALL GetPostsBySupplierId(?)";
-        $statement = $connection->prepare($query);
-        $statement->bindParam(1, $id); 
-    
         try {
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -237,7 +252,25 @@ class Post implements PostService {
     }
 
 
-    public function GetPostDetail($postId) {
+    public function GetPostsBySupplier($id): array
+    {
+        $connection = $this->db->getConnection();
+        $query = "CALL GetPostsBySupplierId(?)";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(1, $id);
+
+        try {
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            return [];
+        }
+    }
+
+
+    public function GetPostDetail($postId)
+    {
         $connection = $this->db->getConnection();
         $query = "CALL GetPostDetail(?)";
         try {
@@ -252,7 +285,8 @@ class Post implements PostService {
     }
 
     // getpostdetailbyslug
-    public function GetPostDetailBySlug($slug) {
+    public function GetPostDetailBySlug($slug)
+    {
         $connection = $this->db->getConnection();
         $query = "SELECT * FROM post WHERE slug = '$slug'";
         try {
@@ -266,7 +300,8 @@ class Post implements PostService {
     }
 
 
-    public function GetCategory($categoryId) {
+    public function GetCategory($categoryId)
+    {
         $connection = $this->db->getConnection();
         $query = "SELECT categoryName FROM `category` WHERE categoryId = $categoryId";
         try {
@@ -278,14 +313,13 @@ class Post implements PostService {
             return false;
         }
     }
-    
 
-    public function GetGuidancePostsBySupplierId($id): array {
+    public function GetListPostSortByDate($limit, $offset): array
+    {
+
         $connection = $this->db->getConnection();
-        $query = "CALL GetGuidancePostsBySupplierId(?)";
+        $query = "SELECT post.title, post.image, post.slug,post.description,post.createdAt FROM post WHERE post.status = 1 ORDER BY createdAt DESC LIMIT $limit OFFSET $offset";
         $statement = $connection->prepare($query);
-        $statement->bindParam(1, $id); 
-    
         try {
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -294,6 +328,38 @@ class Post implements PostService {
             return [];
         }
     }
-    
+
+    // get total post
+    public function GetTotalPost(): int
+    {
+        $connection = $this->db->getConnection();
+        $query = "SELECT COUNT(*) FROM post";
+        $statement = $connection->prepare($query);
+        try {
+            $statement->execute();
+            $result = $statement->fetchColumn();
+            return $result;
+        } catch (PDOException $e) {
+            return 0;
+        }
+    }
+
+
+    public function GetGuidancePostsBySupplierId($id): array
+    {
+        $connection = $this->db->getConnection();
+        $query = "CALL GetGuidancePostsBySupplierId(?)";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(1, $id);
+
+        try {
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            return [];
+        }
+    }
+
 }
 ?>

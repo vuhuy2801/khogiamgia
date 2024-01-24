@@ -64,8 +64,10 @@
     <script src="public/js/bootstrap/bootstrap.bundle.min.js"> </script>
     <script src="public/js/jquery/jquery-3.6.3.min.js"> </script>
     <script src="public/js/swiperjs/swiper-bundle.min.js"> </script>
-    <script src="public/js/home.js"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="public/js/general.js"> </script>
+    <script src="public/js/home.js"> </script>
+    
 
 
 </body>

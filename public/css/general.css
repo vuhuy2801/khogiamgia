@@ -49,6 +49,13 @@ h4 {
     color: #fff;
 }
 
+/* // disable button */
+.btn-xem-them.disabled {
+    background-color: #e45f2b !important;
+    color: #fff !important;
+    opacity: 0.5 !important;
+}
+
 /* bài viết */
 .post-box {
     box-shadow: 0px 0 30px rgba(1, 41, 112, 0.08);

@@ -94,6 +94,15 @@ $router->get('/bai-viet/([a-z0-9_-]+)', function ($slug) {
 });
 
 
+// api bài viết sắp xếp theo ngày
+$router->get('/api/bai-viets', function () {
+    require 'app/controllers/PostController.php';
+    $PostController = new PostController();
+    $PostController->getPostListApi();
+});
+
+
+
 
 
 
