@@ -1,18 +1,33 @@
 <?php
 // File: controllers/home.php
+include_once 'app/models/BannerModel.php';
 
 class HomeController
 {
-    public function index()
-    {
-      include 'app/views/home/index.php';
-      
-    }
+  private $bannerModel;
 
-    public function maGiamGia()
-    {
-        echo 'Mã giảm giá';
-    }
+  public function __construct()
+  {
+    $this->bannerModel = new Banner();
+  }
+  public function index()
+  {
+    $banner = $this->getBanner();
+    include 'app/views/home/index.php';
+
+  }
+  public function getBanner()
+  {
+    return $this->bannerModel->List();
+  }
+
+  public function maGiamGia()
+  {
+    echo 'Mã giảm giá';
+  }
+
+
+
 }
 
 
