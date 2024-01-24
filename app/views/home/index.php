@@ -11,11 +11,12 @@
         rel="stylesheet">
 
     <link rel="stylesheet" href="public/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="public/js/swiperjs/swiper-bundle.min.css">
     <link rel="stylesheet" href="public/css/general.css">
     <link rel="stylesheet" href="public/css/header.css">
     <link rel="stylesheet" href="public/css/home.css">
     <link rel="stylesheet" href="public/css/footer.css">
-    <link rel="stylesheet" href="public/js/swiperjs/swiper-bundle.min.css">
+
     <link rel="stylesheet" href="public/css/promotion.css">
     <link rel="stylesheet" href="public/css/posts.css">
 
@@ -32,15 +33,19 @@
             </div>
         </div>
     </div>
+    
     <?php
     $titleVoucher = "MÃ GIẢM GIÁ HOT";
 
     require_once 'app/views/banner.php';
     require_once 'app/views/home/sectionProvider.php';
+    
     require_once 'app/views/home/sectionPromotion.php';
     require_once 'app/views/home/sectionPosts.php';
     require_once 'app/views/footer.php';
     ?>
+
+
 
 
     <script src="public/js/bootstrap/bootstrap.bundle.min.js"> </script>
