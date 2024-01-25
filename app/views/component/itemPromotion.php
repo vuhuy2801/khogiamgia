@@ -1,11 +1,6 @@
 <?php
-echo itemPromotion('Free Ship', '2023-12-22', '10%', '100,000vnđ', '20,000vnđ', 'Mã nhập tay', 99, 'Thời trang', 'Mã giảm giá sử dụng 1 lần', 'https://shopee.vn/', 'ABC123', false);
-echo itemPromotion('Free Ship', '2023-12-23', '15%', '120,000vnđ', '25,000vnđ', 'Có sẵn trong ví', 80, 'Điện tử', 'Khuyến mãi đặc biệt', 'https://shopee.vn/', 'ABC123', true);
-echo itemPromotion('Voucher extra', '2023-12-24', '20%', '150,000vnđ', '30,000vnđ', 'Mã nhập tay', 75, 'Đồ gia dụng', 'Giảm giá cuối năm', 'https://shopee.vn/', 'ABC123', false);
-echo itemPromotion('Voucher extra', '2023-12-25', '25%', '200,000vnđ', '40,000vnđ', 'Mã nhập tay', 60, 'Thực phẩm', 'Khuyến mãi Noel', 'https://shopee.vn/', 'ABC123', false);
-echo itemPromotion('shopee live', '2023-12-26', '30%', '250,000vnđ', '50,000vnđ', 'Có sẵn trong ví', 50, 'Điện lạnh', 'Bán hết cuối năm', 'https://shopee.vn/', 'ABC123', true);
-echo itemPromotion('shopee live', '2023-12-27', '12%', '180,000vnđ', '35,000vnđ', 'Có Sẵn trong ví', 90, 'Thời trang', 'Mùa đông ấm áp', 'https://shopee.vn/', '2511EBV100K', true);
-function itemPromotion($promotionType, $endDate, $discountValue, $minPrice, $maxDiscount, $promotionHashtag, $remaining, $category, $note, $link, $promotionCode, $isOpenApp)
+
+function itemPromotion($logoUrl, $promotionType, $endDate, $discountValue, $minPrice, $maxDiscount, $promotionHashtag, $remaining, $category, $note, $link, $promotionCode, $isOpenApp)
 {
     return '
     <div class="item-promotion">
@@ -13,7 +8,7 @@ function itemPromotion($promotionType, $endDate, $discountValue, $minPrice, $max
             <div class="col-5 text-center d-flex ">
             <div>
                 <div class="item-promotion__img">
-                    <img src="public\images\logo\logo-shopee-tron.png" alt="" />
+                    <img src="' . $logoUrl . '" alt="" />
                 </div>
                 <div class="promotion-type">' . $promotionType . '</div>
                 <div class="end-date">

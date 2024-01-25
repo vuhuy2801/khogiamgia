@@ -102,10 +102,6 @@ $router->get('/api/bai-viets', function () {
 });
 
 
-
-
-
-
 $router->get('/trang-chu', function () {
     require 'app/controllers/HomeController.php';
     $HomeController = new HomeController();
@@ -142,13 +138,19 @@ $router->get('/shopee', function () {
 });
 
 $router->get('/tiki', function () {
-    echo 'tiki';
+    require 'app/controllers/VoucherController.php';
+    $VoucherController = new VoucherController();
+    $VoucherController->showTiki();
 });
 $router->get('/lazada', function () {
-    echo 'lazada';
+    require 'app/controllers/VoucherController.php';
+    $VoucherController = new VoucherController();
+    $VoucherController->showLazada();
 });
 $router->get('/tiktok-shop', function () {
-    echo 'tiktok-shop';
+    require 'app/controllers/VoucherController.php';
+    $VoucherController = new VoucherController();
+    $VoucherController->tiktokShop();
 });
 
 $router->get('/theo-doi-ma-san-pham', function () {
@@ -342,7 +344,7 @@ $router->post('/admin/banner/upload', function () {
     require 'app/controllers/admin/BannerController.php';
     $BannerController = new BannerController();
     $BannerController->upload();
-}); 
+});
 $router->post('/admin/banner/add', function () {
     require 'app/controllers/admin/BannerController.php';
     $BannerController = new BannerController();
@@ -393,7 +395,7 @@ $router->post('/admin/theo-doi-gia-san-pham/upload', function () {
     require 'app/controllers/admin/ProductController.php';
     $ProductController = new ProductController();
     $ProductController->upload();
-}); 
+});
 $router->post('/admin/theo-doi-gia-san-pham/add', function () {
     require 'app/controllers/admin/ProductController.php';
     $ProductController = new ProductController();
@@ -444,7 +446,7 @@ $router->post('/admin/ma-giam-gia/upload', function () {
     require 'app/controllers/admin/ProductController.php';
     $ProductController = new ProductController();
     $ProductController->upload();
-}); 
+});
 $router->post('/admin/ma-giam-gia/add', function () {
     require 'app/controllers/admin/ProductController.php';
     $ProductController = new ProductController();
