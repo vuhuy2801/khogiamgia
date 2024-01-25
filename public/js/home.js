@@ -43,7 +43,7 @@ function renderNew(data) {
             </div>
             <p class="post-date">${infoPost.createdAt}</p>
             <h3 class="post-title">
-                <a href="bai-viet/${infoPost.slug}">${infoPost.image}</a>
+                <a href="bai-viet/${infoPost.slug}">${infoPost.title}</a>
             </h3>
             <p class="description">${infoPost.description}</p>
         </div>
