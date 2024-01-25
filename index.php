@@ -1,7 +1,15 @@
 <?php
 require 'vendor/autoload.php';
+require_once 'app/controllers/StatisticController.php';
 session_start();
 $router = new \Bramus\Router\Router();
+
+function logUserAccess()
+{
+    $statisticController = new StatisticController();
+    $statisticController->logUserAccess();
+
+}
 
 
 $router->get('/all-link', function () {
@@ -39,16 +47,12 @@ $router->get('/', function () {
     require 'app/controllers/HomeController.php';
     $HomeController = new HomeController();
     $HomeController->index();
+    logUserAccess();
 
 });
 
 $router->get('/test', function () {
-    require 'scripts/InfoProductShopee.php';
-    $InfoProductShopee = new InfoProductShopee();
-    // $InfoProductShopee->getCurrentPrice();
-    // $InfoProductShopee->showCurrentPrice();
-    $InfoProductShopee->getBasicInfo('https://shopee.vn/Chu%E1%BB%99t-kh%C3%B4ng-d%C3%A2y-Logitech-M330-Silent-Plus-Gi%E1%BA%A3m-%E1%BB%93n-USB-thu%E1%BA%ADn-tay-ph%E1%BA%A3i-PC-Laptop-i.52679373.4412815704?publish_id=&sp_atk=828ec42d-8251-40da-9482-f87f8a115128&xptdk=828ec42d-8251-40da-9482-f87f8a115128');
-    $InfoProductShopee->showInFo();
+
 });
 
 $router->get('/addProduct', function () {
@@ -84,6 +88,7 @@ $router->get('theo-doi-gia', function () {
     require 'app/controllers/ProductController.php';
     $ProductController = new ProductController();
     $ProductController->showHistoryPriceProduct();
+    logUserAccess();
 });
 
 // bài viết
@@ -91,6 +96,7 @@ $router->get('/bai-viet/([a-z0-9_-]+)', function ($slug) {
     require 'app/controllers/PostController.php';
     $PostController = new PostController();
     $PostController->getPostDetailBySlug($slug);
+    logUserAccess();
 });
 
 
@@ -106,6 +112,7 @@ $router->get('/trang-chu', function () {
     require 'app/controllers/HomeController.php';
     $HomeController = new HomeController();
     $HomeController->index();
+    logUserAccess();
 });
 
 
@@ -135,22 +142,26 @@ $router->get('/shopee', function () {
     require 'app/controllers/VoucherController.php';
     $VoucherController = new VoucherController();
     $VoucherController->showShoppee();
+    logUserAccess();
 });
 
 $router->get('/tiki', function () {
     require 'app/controllers/VoucherController.php';
     $VoucherController = new VoucherController();
     $VoucherController->showTiki();
+    logUserAccess();
 });
 $router->get('/lazada', function () {
     require 'app/controllers/VoucherController.php';
     $VoucherController = new VoucherController();
     $VoucherController->showLazada();
+    logUserAccess();
 });
 $router->get('/tiktok-shop', function () {
     require 'app/controllers/VoucherController.php';
     $VoucherController = new VoucherController();
     $VoucherController->tiktokShop();
+    logUserAccess();
 });
 
 $router->get('/theo-doi-ma-san-pham', function () {
@@ -161,32 +172,38 @@ $router->get('/tin-khuyen-mai/shopee', function () {
     require 'app/controllers/NewsPromotionController.php';
     $NewsPromotionController = new NewsPromotionController();
     $NewsPromotionController->shopeeShow();
+    logUserAccess();
 });
 $router->get('/tin-khuyen-mai/tiktok', function () {
     require 'app/controllers/NewsPromotionController.php';
     $NewsPromotionController = new NewsPromotionController();
     $NewsPromotionController->tiktokShow();
+    logUserAccess();
 });
 $router->get('/tin-khuyen-mai/lazada', function () {
     require 'app/controllers/NewsPromotionController.php';
     $NewsPromotionController = new NewsPromotionController();
     $NewsPromotionController->lazadaShow();
+    logUserAccess();
 });
 
 $router->get('/huong-dan/shopee', function () {
     require 'app/controllers/GuidanceController.php';
     $GuidanceController = new GuidanceController();
     $GuidanceController->shopeeShow();
+    logUserAccess();
 });
 $router->get('/huong-dan/lazada', function () {
     require 'app/controllers/GuidanceController.php';
     $GuidanceController = new GuidanceController();
     $GuidanceController->lazadaShow();
+    logUserAccess();
 });
 $router->get('/huong-dan/tiktokshop', function () {
     require 'app/controllers/GuidanceController.php';
     $GuidanceController = new GuidanceController();
     $GuidanceController->tiktokShow();
+    logUserAccess();
 });
 
 $router->get('/ma-giam-gia/nha-cung-cap', function () {
@@ -463,6 +480,13 @@ $router->post('/admin/ma-giam-gia/delete/(\w+)', function ($productId) {
     require 'app/controllers/admin/ProductController.php';
     $ProductController = new ProductController();
     $ProductController->delete($productId);
+});
+
+// Router admin statistic
+$router->get('/admin/thong-ke/show', function () {
+    require 'app/controllers/admin/StatisticController.php';
+    $StatisticControllerAdmin = new StatisticControllerAdmin();
+    $StatisticControllerAdmin->index();
 });
 
 

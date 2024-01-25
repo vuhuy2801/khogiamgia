@@ -104,6 +104,16 @@ CREATE TABLE IF NOT EXISTS User (
     updatedAt DATETIME
 );
 
+    CREATE TABLE user_access_log (
+        log_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+        user_ip VARCHAR(45),
+        visit_time DATETIME,
+        page_url VARCHAR(2048),
+        user_agent VARCHAR(512),
+        referer_url VARCHAR(2048) NULL
+    );
+
+
 
 -- FOREIGN KEY 
 ALTER TABLE Post
