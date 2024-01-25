@@ -9,8 +9,8 @@ class ProductController {
         $this->productData = new Product(); 
     }
 
-    public function getListOfProduct() {
-        return $this->productData->ListAdmin();
+    public function getListOfProduct($offSet, $limit) {
+        return $this->productData->ListAdmin($offSet, $limit);
     }
 
     public function getDetail($id) {
@@ -19,6 +19,10 @@ class ProductController {
 
     public function getPrices($id) {
         return $this->productData->GetProductWithPriceById($id);
+    }
+
+    public function getTotalProduct() {
+        return $this->productData->CountProduct();
     }
    
     public function index()

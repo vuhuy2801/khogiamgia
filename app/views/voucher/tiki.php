@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="public/css/promotion.css">
     <link rel="stylesheet" href="public/css/posts.css">
 
-    <title>Mã giảm giá shopee</title>
+    <title>Mã giảm giá tiki</title>
 </head>
 
 <body>
@@ -33,8 +33,28 @@
             </div>
         </div>
     </div>
+    <section class="banner">
+        <div class="container" data-aos="fade-up">
+            <div id="carousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+
+                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="Slide 0"></button>
+                </div>
+                <div class="carousel-inner">
+
+                    <div class="carousel-item active">
+                        <a href="#" target="_blank">
+                            <img src="/public/images/banner/tiki-banner.jpg" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
     <?php
-    $titleVoucher = "MÃ GIẢM GIÁ SHOPEE";
+    $titleVoucher = "MÃ GIẢM GIÁ TIKI";
     $vouchers = array(
         array(
             "voucherId" => "VOUCHER0012",
@@ -132,13 +152,11 @@
             "is_inWallet" => 1,
         ),
     );
-    require_once 'app/views/banner.php';
-    require_once 'app/views/voucher/sectionSideBarCategori.php';
-    
     require_once 'app/views/home/sectionPromotion.php';
-
+    
     // require_once 'app/views/home/sectionPosts.php';
-    require_once 'app/views/voucher/sectionHelpVoucher.php';
+    // require_once 'app/views/voucher/sectionHelpVoucher.php';
+    require_once 'app/views/voucher/sectionHelpLazada.php';
     require_once 'app/views/footer.php';
     ?>
 

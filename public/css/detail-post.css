@@ -1,0 +1,34 @@
+.detail-post {
+    margin-top: 186px;
+}
+
+.info-post svg {
+    width: 15px;
+    height: 15px;
+}
+
+.info-post {
+    margin: 20px 0px;
+}
+
+.info-post .author:after,
+.info-post .post-date::after {
+    content: "";
+    background: #00102e;
+    opacity: 0.2;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 10px;
+    padding: 0;
+}
+
+.thumb {
+    width: 100%;
+}
+.thumb img {
+    width: 100%;
+    object-fit: cover;
+}

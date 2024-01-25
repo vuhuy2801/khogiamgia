@@ -45,8 +45,25 @@ h4 {
 }
 
 .btn-xem-them:hover {
+    background-color: rgb(255, 48, 2) !important;
+    color: #fff !important;
+}
+
+.btn-xem-them:active {
+    background-color: rgb(255, 74, 2) !important;
+    color: #fff !important;
+}
+
+.btn-xem-them:focus {
     background-color: rgb(255, 74, 2);
-    color: #fff;
+    color: #fff !important;
+}
+
+/* // disable button */
+.btn-xem-them.disabled {
+    background-color: #e45f2b !important;
+    color: #fff !important;
+    opacity: 0.5 !important;
 }
 
 /* bài viết */

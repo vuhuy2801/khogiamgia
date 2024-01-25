@@ -1,5 +1,6 @@
 <?php
-function itemPromotion($promotionType, $endDate, $discountValue, $minPrice, $maxDiscount, $promotionCode, $remaining, $category, $note)
+
+function itemPromotion($logoUrl, $promotionType, $endDate, $discountValue, $minPrice, $maxDiscount, $promotionHashtag, $remaining, $category, $note, $link, $promotionCode, $isOpenApp)
 {
     return '
     <div class="item-promotion">
@@ -7,7 +8,7 @@ function itemPromotion($promotionType, $endDate, $discountValue, $minPrice, $max
             <div class="col-5 text-center d-flex ">
             <div>
                 <div class="item-promotion__img">
-                    <img src="public\images\logo\logo-shopee-tron.png" alt="" />
+                    <img src="' . $logoUrl . '" alt="" />
                 </div>
                 <div class="promotion-type">' . $promotionType . '</div>
                 <div class="end-date">
@@ -37,7 +38,7 @@ function itemPromotion($promotionType, $endDate, $discountValue, $minPrice, $max
                 <div class="min-price">Tối thiểu <span>' . $minPrice . '</span></div>
                 <div class="max-discount">Tối đa <span>' . $maxDiscount . '</span></div>
                 <div class="type">
-                    <span class="badge badge-promotion"># ' . $promotionCode . '</span>
+                    <span class="badge badge-promotion"># ' . $promotionHashtag . '</span>
                 </div>
             </div>
         </div>
@@ -48,10 +49,19 @@ function itemPromotion($promotionType, $endDate, $discountValue, $minPrice, $max
             </div>
             <div class="warning mt-2 mb-4"><span>Lưu ý:</span> ' . $note . '</div>
             <div class="d-flex justify-content-end">
-                <button type="button" class="btn badge-copy">Sao chép ngay</button>
+                ' . renderTypeEvent($isOpenApp, $promotionCode, $link) . '
             </div>
         </div>
     </div>
     ';
 }
+function renderTypeEvent($isOpenApp, $promotionCode, $link)
+{
+    if ($isOpenApp) {
+        return '<button type="button" class="btn badge-copy" onclick="openLink(\'' . $link . '\')">Mở App Ngay</button>';
+    } else {
+        return '<button type="button" class="btn badge-copy" onclick="copyCouponCode(event,\'' . $promotionCode . '\', \'' . $link . '\')">Sao chép ngay</button>';
+    }
+}
+
 ?>
