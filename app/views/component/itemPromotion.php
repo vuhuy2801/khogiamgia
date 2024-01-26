@@ -43,9 +43,9 @@ function itemPromotion($logoUrl, $promotionType, $endDate, $discountValue, $minP
             </div>
         </div>
         <div class="row">
-            <div class="remaining mt-2">còn lại:<span>' . $remaining . '</span></div>
+            <div class="remaining mt-2">Còn lại: <span>' . $remaining . '</span></div>
             <div class="category mt-2">
-                ngành hàng: <span>' . $category . '</span>
+                Ngành hàng: <span>' . $category . '</span>
             </div>
             <div class="warning mt-2 mb-4"><span>Lưu ý:</span> ' . $note . '</div>
             <div class="d-flex justify-content-end">
