@@ -54,13 +54,10 @@
 
     </section>
     <?php
-    $titleVoucher = "MÃ GIẢM GIÁ TIKI";
-    $vouchers = $vouchersTiki;
     require_once 'app/views/home/sectionPromotion.php';
-    
     // require_once 'app/views/home/sectionPosts.php';
     // require_once 'app/views/voucher/sectionHelpVoucher.php';
-    require_once 'app/views/voucher/sectionHelpLazada.php';
+    require_once 'app/views/voucher/sectionHelpTiki.php';
     require_once 'app/views/footer.php';
     ?>
 

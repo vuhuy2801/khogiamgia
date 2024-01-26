@@ -44,8 +44,8 @@
                 <div class="carousel-inner">
 
                     <div class="carousel-item active">
-                        <a href="#" target="_blank">
-                            <img src="/public/images/banner/lazada-banner.png" alt="">
+                        <a href="https://shopeefood.vn/" target="_blank">
+                            <img src="/public/images/banner/shopee-food-banner.jpg" alt="">
                         </a>
                     </div>
                 </div>
@@ -54,10 +54,10 @@
 
     </section>
     <?php
-    
+
 
     require_once 'app/views/home/sectionPromotion.php';
-    
+
     // require_once 'app/views/home/sectionPosts.php';
     // require_once 'app/views/voucher/sectionHelpVoucher.php';
     require_once 'app/views/voucher/sectionHelpLazada.php';

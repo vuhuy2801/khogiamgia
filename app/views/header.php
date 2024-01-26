@@ -8,6 +8,7 @@ $tinKhuyenMaiUrl = "/tin-khuyen-mai/shopee";
 $huongDanUrl = "/huong-dan/shopee";
 $adminUrl = "/admin/trang-chu/show";
 
+
 // Text variables
 $trangChuText = "Trang chủ";
 $maGiamGiaText = "Mã giảm giá";
@@ -30,7 +31,7 @@ $adminText = "Admin";
                     </a>
                 </li>
                 <li class="dropdown">
-                    <a class="nav-link scrollto <?php echo strpos($currentUrl, "/shopee") !== false || strpos($currentUrl, "/tiki") !== false || strpos($currentUrl, "/lazada") !== false || strpos($currentUrl, "/tiktok-shop") !== false ? 'active' : ''; ?>"
+                    <a class="nav-link scrollto <?php echo $currentUrl === "/shopee" || $currentUrl === "/tiki" || $currentUrl === "/lazada" || $currentUrl === "/shopee-food" ? 'active' : ''; ?>"
                         href="<?php echo $maGiamGiaUrl; ?>">
                         <?php echo $maGiamGiaText; ?>
                     </a>
@@ -38,7 +39,7 @@ $adminText = "Admin";
                         <li><a href="/shopee">shopee</a></li>
                         <li><a href="/tiki">tiki</a></li>
                         <li><a href="/lazada">lazada</a></li>
-                        <li><a href="/tiktok-shop">tiktok shop</a></li>
+                        <li><a href="/shopee-food">shopee food</a></li>
                     </ul>
                 </li>
                 <li>
@@ -54,7 +55,7 @@ $adminText = "Admin";
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link scrollto <?php echo $currentUrl === $huongDanUrl ? 'active' : ''; ?>"
+                    <a class="nav-link scrollto <?php echo $currentUrl === $huongDanUrl || $currentUrl === '/huong-dan/shopee' || $currentUrl === '/huong-dan/lazada' || $currentUrl === '/huong-dan/shopee-food' ? 'active' : ''; ?>"
                         href="<?php echo $huongDanUrl; ?>">
                         <?php echo $huongDanText; ?>
                     </a>
