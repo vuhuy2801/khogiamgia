@@ -165,7 +165,7 @@ function getAdviceProduct(description) {
     };
 
     api
-        .post("api/product/lay-loi-khuyen", data)
+        .post("/product/lay-loi-khuyen", data)
         .then(function (response) {
             elmAdviceProductContent.innerHTML = response.data;
             console.log(response);

@@ -29,6 +29,7 @@ $router->post('/api/voucher/update-used-count', function () {
     require 'app/controllers/VoucherController.php';
     $VoucherController = new VoucherController();
     $VoucherController->updateUsedCount();
+    logUserAccess();
 });
 
 

@@ -14,6 +14,7 @@ class StatisticController {
         $this->statisticModel->setRefererURL(isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null);
         $this->statisticModel->logUserAccess();
     }
+    
 
 }
 
