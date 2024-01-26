@@ -96,7 +96,67 @@ class Used implements UsedService {
         } catch (PDOException $e) {
             return [];
         }
-
+    }
+    // usedId	voucherId	usedCount	
+    
+    // addUsed
+    public function addUsed($voucherId, $usedCount) {
+        $connection = $this->db->getConnection();
+        $query = "INSERT INTO used(voucherId, usedCount) VALUES (?, ?)";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(1, $voucherId);
+        $statement->bindParam(2, $usedCount);
+        try {
+            $statement->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+    // updateUsed
+    public function updateUsed($voucherId, $usedCount) {
+        $connection = $this->db->getConnection();
+        $query = "UPDATE used SET usedCount = ? WHERE voucherId = ?";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(1, $usedCount);
+        $statement->bindParam(2, $voucherId);
+        try {
+            $statement->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+    // isExistUsed
+    public function isExistUsed($voucherId) {
+        $connection = $this->db->getConnection();
+        $query = "SELECT * FROM used WHERE voucherId = ?";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(1, $voucherId);
+        try {
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            if (count($result) > 0) {
+                return true;
+            }
+            return false;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+    // getUsedByVoucherId
+    public function getUsedByVoucherId($voucherId) {
+        $connection = $this->db->getConnection();
+        $query = "SELECT * FROM used WHERE voucherId = ?";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(1, $voucherId);
+        try {
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            return [];
+        }
     }
 }
 

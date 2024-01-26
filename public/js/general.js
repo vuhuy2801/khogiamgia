@@ -9,8 +9,6 @@ const api = axios.create({
   });
 
 function copyCouponCode(event, couponCode, link) {
-    console.log(couponCode);
-    console.log(link);
     event.target.innerHTML = couponCode;
     // show toast
     elmToastContent.innerHTML = "Sao chép thành công mã: " + couponCode;
