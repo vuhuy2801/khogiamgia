@@ -9,6 +9,10 @@ const api = axios.create({
   });
 
 function copyCouponCode(event, couponCode, link) {
+    const data = {
+        voucherId: couponCode,
+    }
+    api.post('voucher/update-used-count', data)
     event.target.innerHTML = couponCode;
     // show toast
     elmToastContent.innerHTML = "Sao chép thành công mã: " + couponCode;
@@ -27,7 +31,11 @@ function copyCouponCode(event, couponCode, link) {
     // }, 1000);
 }
 
-function openLink(link) {
+function openLink(link, voucherId) {
+    const data = {
+        voucherId: voucherId,
+    }
+    api.post('voucher/update-used-count', data)
     // toast mở link sau 2s
     elmToastContent.innerHTML = "Mở link sau 2s";
     toastElm.show();

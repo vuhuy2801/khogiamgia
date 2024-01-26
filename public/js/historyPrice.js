@@ -134,14 +134,8 @@ function getHistoryPriceProduct() {
     </div>
     `;
 
-    const instance = axios.create({
-        baseURL: "http://localhost/api/",
-        timeout: 10000,
-        headers: { "X-Custom-Header": "foobar" },
-    });
-
-    instance
-        .get(`/lich-su-gia?link=${elmLinkProduct.value}`)
+    api
+        .get(`/product/lich-su-gia?link=${elmLinkProduct.value}`)
         .then(function (response) {
             elmNotifiCation.classList.add("d-none");
             elmInfoProduct.classList.remove("d-none");
@@ -170,14 +164,8 @@ function getAdviceProduct(description) {
         description: description,
     };
 
-    const instance = axios.create({
-        baseURL: "http://localhost/api/",
-        timeout: 100000,
-        headers: { "X-Custom-Header": "foobar" },
-    });
-
-    instance
-        .post("lay-loi-khuyen", data)
+    api
+        .post("api/product/lay-loi-khuyen", data)
         .then(function (response) {
             elmAdviceProductContent.innerHTML = response.data;
             console.log(response);

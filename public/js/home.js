@@ -7,7 +7,7 @@ btnGetNews.addEventListener("click", function (event) {
     // add class disabled
     event.target.classList.add("disabled");
 
-    api.get(`bai-viets?page=${current_page}`)
+    api.get(`/post/bai-viets?page=${current_page}`)
         .then(function (response) {
             // console.log(response.data);
             renderNew(response.data.posts);
