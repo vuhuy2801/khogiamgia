@@ -18,10 +18,10 @@ $router->get('/lazada', function () {
     $VoucherController->showLazada();
     logUserAccess();
 });
-$router->get('/tiktok-shop', function () {
+$router->get('/shopee-food', function () {
     require 'app/controllers/VoucherController.php';
     $VoucherController = new VoucherController();
-    $VoucherController->tiktokShop();
+    $VoucherController->shopeeFood();
     logUserAccess();
 });
 

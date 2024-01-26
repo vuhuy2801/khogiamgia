@@ -27,23 +27,23 @@
             <div class="row">
                 <div class="col-12">
                     <?php
-                     require_once 'app/views/header.php';
-                ?>
+                    require_once 'app/views/header.php';
+                    ?>
                 </div>
             </div>
         </div>
         <div class="mt-4">
             <?php
-            $urlImage ='/public/images/banner/tiktok.jpg';
+            $urlImage = '/public/images/banner/shopee-food-banner.jpg';
             require_once 'app/views/guidance/sectionBanners.php';
             require_once 'app/views/guidance/sectionSupplier.php';
             $supplierId = 3;
             require_once 'app/views/guidance/sectionPosts.php';
-        ?>
+            ?>
         </div>
         <?php
         require_once 'app/views/footer.php';
-    ?>
+        ?>
     </div>
 </body>
 

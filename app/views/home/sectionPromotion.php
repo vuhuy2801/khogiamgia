@@ -10,7 +10,7 @@
                 </div>
             </div>
         </div>
-        <div class="row list-promotion justify-content-center gap-2">
+        <div class="row list-promotion justify-content-center gap-md-4 gap-2">
             <?php
             require_once 'app/views/component/itemPromotion.php';
             // render list voucher

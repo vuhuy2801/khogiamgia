@@ -4,9 +4,9 @@
         {
             include 'app/views/guidance/guidanceShopee.php';
         }
-        public function tiktokShow()
+        public function shopeeFoodShow()
         {
-            include 'app/views/guidance/guidanceTiktok.php';
+            include 'app/views/guidance/guidanceShopeeFood.php';
         }
         public function lazadaShow()
         {

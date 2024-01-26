@@ -1,16 +1,20 @@
 .item-promotion {
     padding: 24px 20px 10px 20px;
-    max-width: 400px;
+    max-width: 350px;
     /* width: 100%; */
-    font-size: 14px;
+    font-size: 12px;
     line-height: 20px;
     background-color: #ffffff;
     border-radius: 16px;
 }
 
+.item-promotion button{
+    font-size: 12px !important;
+}
+
 .section-promotion {
     padding: 35px 0px;
-}
+}   
 
 @media (max-width: 768px) {
     .section-promotion {
@@ -76,7 +80,7 @@
 }
 
 .badge-promotion {
-    margin-top: 15px;
+    margin-top: 4px;
     text-align: center;
     font-size: 12px;
     color: #0a3622;
@@ -111,3 +115,4 @@
         max-width: 370px;
     }
 }
+
