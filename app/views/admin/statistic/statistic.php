@@ -138,7 +138,7 @@
                                     <b>
                                         <?php echo $totalVoucher ?>
                                     </b>
-                                    <a class="text-end" onclick="showChartView('overviewVoucherUsed')">Xem chi tiết</a>
+                                    <a class="text-end" onclick="showChartView('overviewTotalVoucher')">Xem chi tiết</a>
                                 </div>
                             </div>
                         </div>

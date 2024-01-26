@@ -35,8 +35,8 @@ function showChartView(nameChart) {
         }
         chartWebsiteAccess();
     }
-    if (nameChart == "overviewVoucherUsed") {
-        if (currentChart == "overviewVoucherUsed") {
+    if (nameChart == "overviewTotalVoucher") {
+        if (currentChart == "overviewTotalVoucher") {
             return;
         }
         if (myChart) {
