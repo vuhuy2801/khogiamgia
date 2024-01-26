@@ -26,39 +26,14 @@ VALUES
     ('CUỘC THI VÔ ĐỊCH PHÁT TRIỂN WEB - WEB DEV CHAMPION 2023', 'https://api.vuhuy.site/uploads/small_img_index_73bc26433c.png','cuoc-thi-vo-dich-phat-trien-web-web-dev-champion-2023', 1, 'Exciting news about the latest gadgets...', 'Introducing the newest electronic devices in the market...', 1, '2023-12-20','2023-12-20', 0);
 
 
-INSERT INTO Voucher (
-    voucherId,
-    voucherName,
-    quantity,
-    expressAt,
-    expiresAt,
-    orderConditions,
-    conditionsOfUse,
-    categoryId,
-    createdAt,
-    updatedAt,
-    is_trend,
-    supplierId,
-    status,
-    address_target,
-    discountType,
-    maximumDiscount,
-    is_inWallet
-) VALUES 
-    ('VOUCHER007', 'Giảm 20%', 100, '2024-01-15', '2024-02-28', 'Áp dụng cho điện thoại Samsung', 'Chỉ áp dụng khi đặt hàng online', 1, '2024-01-01', '2024-01-05', 1, 1, 1, '123 Đường ABC, TP.HCM', 1, '200.000 VNĐ', 1),
-    ('VOUCHER008', 'Giảm 50K', 50, '2024-01-10', '2024-03-15', 'Áp dụng cho laptop Asus', 'Áp dụng cho tất cả các đơn hàng', 2, '2024-01-02', '2024-01-06', 0, 2, 1, '456 Đường DEF, Hà Nội', 2, '300.000 VNĐ', 0),
-    ('VOUCHER09', 'Giảm 20K', 80, '2024-01-20', '2024-03-10', 'Áp dụng cho đồng hồ dành cho nam', 'Chỉ áp dụng khi mua trên 2 sản phẩm', 4, '2024-01-03', '2024-01-07', 1, 3, 1, '789 Đường GHI, Đà Nẵng', 1, '150.000 VNĐ', 1),
-    ('VOUCHER0012', 'Giảm 60K', 30, '2024-01-25', '2024-02-28', 'Áp dụng cho bộ nồi đun nấu', 'Chỉ áp dụng khi mua trên 1.000.000 VNĐ', 5, '2024-01-04', '2024-01-08', 0, 4, 0, '321 Đường MNO, Hải Phòng', 2, '250.000 VNĐ', 0),
-    ('VOUCHER0045', 'Freeship', 60, '2024-01-30', '2024-03-20', 'Áp dụng cho sách giáo khoa', 'Áp dụng cho học sinh, sinh viên', 10, '2024-01-05', '2024-01-09', 1, 5, 1, '654 Đường STU, Cần Thơ', 1, '100.000 VNĐ', 1);
 
-
-INSERT INTO Used (voucherId, usedCount) VALUES 
-    ('VOUCHER001', 25),
-    ('VOUCHER002', 10),
-    ('VOUCHER003', 30),
-    ('VOUCHER004', 5),
-    ('VOUCHER005', 20);
-
+INSERT INTO Voucher (voucherId, voucherName, quantity, expressAt, expiresAt, orderConditions, conditionsOfUse, categoryId, createdAt, updatedAt, is_trend, supplierId, status, address_target, discountType, discount, maximumDiscount, minimumDiscount, is_inWallet, is_manually)
+VALUES 
+('VOUCHER0012', 'Giảm 60K', 100, '2024-01-25', '2024-02-28', 'Áp dụng cho bộ nồi đun nấu', 'Chỉ áp dụng khi mua trên 1.000.000 VNĐ', 1, '2024-01-26 10:00:00', '2024-01-26 10:00:00', 1, 1, 1, '321 Đường MNO, Hải Phòng', 1, '10%', '250.000 VNĐ', '20,000vnđ', 1, 1),
+('VOUCHER007', 'Giảm 20K', 100, '2024-01-25', '2024-02-28', 'Áp dụng cho bộ nồi đun nấu', 'Chỉ áp dụng khi mua trên 1.000.000 VNĐ', 1, '2024-01-26 10:00:00', '2024-01-26 10:00:00', 1, 5, 1, '321 Đường MNO, Hải Phòng', 1, '10%', '250.000 VNĐ', '20,000vnđ', 1, 1),
+('VOUCHER008', 'Giảm 30K', 100, '2024-01-25', '2024-02-28', 'Áp dụng cho bộ nồi đun nấu', 'Chỉ áp dụng khi mua trên 1.000.000 VNĐ', 1, '2024-01-26 10:00:00', '2024-01-26 10:00:00', 1, 4, 1, '321 Đường MNO, Hải Phòng', 1, '10%', '250.000 VNĐ', '20,000vnđ', 1, 1),
+('VOUCHER09', 'Giảm 50K', 100, '2024-01-25', '2024-02-28', 'Áp dụng cho bộ nồi đun nấu', 'Chỉ áp dụng khi mua trên 1.000.000 VNĐ', 1, '2024-01-26 10:00:00', '2024-01-26 10:00:00', 1, 3, 1, '321 Đường MNO, Hải Phòng', 1, '10%', '250.000 VNĐ', '20,000vnđ', 1, 1),
+('VOUCHER0045', 'Freeship', 100, '2024-01-25', '2024-02-28', 'Áp dụng cho bộ nồi đun nấu', 'Áp dụng cho học sinh, sinh viên', 1, '2024-01-26 10:00:00', '2024-01-26 10:00:00', 1, 2, 1, '321 Đường MNO, Hải Phòng', 1, '10%', '250.000 VNĐ', '20,000vnđ', 1, 1);
 
 INSERT INTO Product (productId,productName, image, link, rateCount, soldCount, status) VALUES 
     ('sp001','Samsung Galaxy S21', 'samsung_s21.jpg', 'https://example.com/samsung_s21', 4.5, 1000, 1),

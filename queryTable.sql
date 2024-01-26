@@ -48,8 +48,11 @@ CREATE TABLE IF NOT EXISTS Voucher (
     status INT,
     address_target NVARCHAR(255),
     discountType INT,
+    discount NVARCHAR(255),
     maximumDiscount NVARCHAR(255),
-    is_inWallet TINYINT(1)
+    minimumDiscount NVARCHAR(255),
+    is_inWallet TINYINT(1),
+    is_manually TINYINT(1)
 );
 
 -- table Use

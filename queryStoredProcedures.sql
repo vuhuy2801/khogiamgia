@@ -439,7 +439,7 @@ DELIMITER ;
 
 DELIMITER //
 
-CREATE PROCEDURE GetListVouchers()
+CREATE PROCEDURE GetListVouchersAdmin()
 BEGIN
     SELECT voucherId,voucherName,discountType,supplierId,expiresAt,status FROM Voucher;
 END;
@@ -447,6 +447,25 @@ END;
 
 DELIMITER ;
 
+DELIMITER //
+
+CREATE PROCEDURE GetListVouchersUser()
+BEGIN
+    SELECT voucherId,voucherName,supplierId,expiresAt,discount,maximumDiscount,minimumDiscount,is_manually,quantity,categoryId,conditionsOfUse,address_target,is_inWallet FROM Voucher;
+END;
+//
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE GetListVoucherBySupplier(IN in_supplierId int)
+BEGIN
+    SELECT voucherId,voucherName,supplierId,expiresAt,discount,maximumDiscount,minimumDiscount,is_manually,quantity,categoryId,conditionsOfUse,address_target,is_inWallet FROM Voucher Where supplierId = in_supplierId;
+END;
+//
+
+DELIMITER ;
 DELIMITER //
 
 CREATE PROCEDURE GetDetailVoucher(IN voucherId NVARCHAR(15))
@@ -508,6 +527,9 @@ END;
 //
 
 DELIMITER ;
+
+
+
 
 -- used
 

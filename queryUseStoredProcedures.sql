@@ -37,7 +37,8 @@ CALL UpdateVoucher(
 );
 
 CALL DeleteVoucher('VOUCHER006');
-CALL GetListVouchers();
+CALL GetListVouchersAdmin();
+CALL GetListVouchersUser();
 CALL GetDetailVoucher('VOUCHER001');
 CALL GetTrendingVouchers(1);
 CALL GetVouchersBySupplierId(2); 
@@ -52,13 +53,13 @@ CALL GetUsedAndVoucherList();
 -- Product
 CALL AddProduct('Bồn ngâm chân massage cao cấp con lăn tự động SereneLife SL12 - Tự động làm nóng, đèn hồng ngoại, thác nước, có CO-CQ', 'link_hình_ảnh', 'https://shopee.vn/product/289338775/16393652444?utm_campaign=-&utm_content=----&utm_medium=affiliates&utm_source=an_17372060085&utm_term=af2vyjn4d6mm', 10, 20, 1);
 CALL UpdateProduct(10848, 'Tên sản phẩm mới', 'link_hình_ảnh_mới','link_sản_phẩm', 30 ,40,1);
-CALL DeleteProduct(10848);
+CALL DeleteProduct('sp001');
 CALL GetListProducts();
-CALL GetProductDetail('sp002');
+CALL GetProductDetail('sp004');
 CALL SearchProduct('s');
-CALL GetProductWithPriceById('sp001');
+CALL GetPriceById('sp09123');
 -- ProductPrice
-CALL AddProductPrice('sp002', '2024-12-30', 50.99);
+CALL AddProductPrice('sp09123', '2025-1-1', 60.99);
 CALL UpdateProductPrice(3, 2, '2023-12-30', 45.99);
 CALL DeleteProductPrice(5);
 -- Banner

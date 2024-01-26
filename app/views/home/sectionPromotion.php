@@ -14,6 +14,7 @@
             <?php
             require_once 'app/views/component/itemPromotion.php';
             // render list voucher
+            
             foreach ($vouchers as $voucher) {
                 $urlImage = '';
                 switch ($voucher['supplierId']) {
@@ -32,17 +33,16 @@
                     default:
                         $urlImage = 'public/images/logo/round-logo/default.png';
                 }
-
                 echo itemPromotion(
                     $urlImage,
                     $voucher['voucherName'],
                     $voucher['expiresAt'],
-                    '20%',
+                    $voucher['discount'],
                     $voucher['maximumDiscount'],
-                    '20,000vnđ',
-                    'Mã nhập tay',
+                    $voucher['minimumDiscount'],
+                    $manually[$voucher['is_manually']],
                     $voucher['quantity'],
-                    'Thời trang',
+                    $voucher['categoryId'],
                     $voucher['conditionsOfUse'],
                     $voucher['address_target'],
                     $voucher['voucherId'],

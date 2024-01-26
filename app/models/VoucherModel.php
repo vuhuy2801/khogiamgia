@@ -206,10 +206,11 @@ class Voucher implements VoucherService {
         }
     }
 
-    public function GetListVouchersWithDiscounts(): array{
+
+    public function List(): array{
         $connection = $this->db->getConnection();
         if ($connection){
-            $query = "CALL GetListVouchersWithDiscounts()";
+            $query = "CALL GetListVouchersAdmin()";
             $statement = $connection->prepare($query);
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -217,11 +218,25 @@ class Voucher implements VoucherService {
         }
         return [];
     }
-    public function List(): array{
+
+    public function ListUser(): array{
         $connection = $this->db->getConnection();
         if ($connection){
-            $query = "CALL GetListVouchers()";
+            $query = "CALL GetListVouchersUser()";
             $statement = $connection->prepare($query);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+        return [];
+    }
+
+    public function ListVoucherBySupplier($idSupplier): array{
+        $connection = $this->db->getConnection();
+        if ($connection){
+            $query = "CALL GetListVoucherBySupplier(?)";
+            $statement = $connection->prepare($query);
+            $statement->bindParam(1, $idSupplier);
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $result;
@@ -242,6 +257,8 @@ class Voucher implements VoucherService {
             return false;
         }
     }
+
+    
     public function GetTrendingVouchers(): array{
         $connection = $this->db->getConnection();
         if ($connection){
