@@ -48,7 +48,9 @@ class VoucherController
     // update used count
     public function updateUsedCount()
     {
+        $_POST = json_decode(file_get_contents("php://input"), true);
         header('Content-Type: application/json');
+
         $voucherId = isset($_POST['voucherId']) ? $_POST['voucherId'] : null;
         if ($voucherId === null) {
             http_response_code(400);
@@ -67,7 +69,7 @@ class VoucherController
 
         } else {
             $usedVoucher = $this->usedModel->getUsedByVoucherId($voucherId);
-            $usedCount = $usedVoucher['usedCount'];
+            $usedCount = $usedVoucher[0]['usedCount'];
             $usedCount++;
             $this->usedModel->updateUsed($voucherId, $usedCount);
         }

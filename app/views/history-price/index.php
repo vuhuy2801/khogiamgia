@@ -73,7 +73,10 @@ https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js
 "></script>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="public/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="public/js/general.js"></script>
     <script src="public/js/historyPrice.js"></script>
+
 </body>
 
 </html>

@@ -145,7 +145,7 @@ class Used implements UsedService {
         }
     }
     // getUsedByVoucherId
-    public function getUsedByVoucherId($voucherId) {
+    public function getUsedByVoucherId($voucherId): array{
         $connection = $this->db->getConnection();
         $query = "SELECT * FROM used WHERE voucherId = ?";
         $statement = $connection->prepare($query);

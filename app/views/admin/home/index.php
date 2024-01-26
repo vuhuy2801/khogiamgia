@@ -60,7 +60,9 @@
                             <div class="row">
                                 <div class="col-8 statistics">
                                     <span>Số lượng sử dụng voucher hôm nay</span> <br>
-                                    <b>9999</b>
+                                    <b>
+                                        <?php echo $TotalUsedVoucherCount ?>
+                                    </b>
                                 </div>
                                 <div class="col-4 d-flex  justify-content-end ">
                                     <div class="round-icon"><i class="bi bi-basket"></i></div>
