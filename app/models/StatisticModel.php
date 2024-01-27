@@ -135,7 +135,11 @@ class StatisticModel
     public function getVisitCount24h(): array
     {
         $connection = $this->db->getConnection();
-        $query = "SELECT HOUR(visit_time) AS hour, COUNT(*) AS visit_count FROM user_access_log WHERE visit_time >= DATE_SUB(NOW(), INTERVAL 1 DAY) GROUP BY HOUR(visit_time)";
+        $query = "SELECT HOUR(visit_time) AS hour, COUNT(*) AS visit_count 
+        FROM user_access_log 
+        WHERE visit_time >= CURDATE()
+        GROUP BY HOUR(visit_time);
+        ";
         $statement = $connection->prepare($query);
         try {
             $statement->execute();
