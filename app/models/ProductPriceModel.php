@@ -110,7 +110,7 @@ class ProductPrice implements productPriceService
 
         $connection = $this->db->getConnection();
         $query = "SELECT productID, productPriceID, date, currentPrice
-        FROM productprice
+        FROM productPrice
         WHERE productID = ?
         GROUP BY date
         ORDER BY date;
@@ -126,7 +126,7 @@ class ProductPrice implements productPriceService
     {
         $connection = $this->db->getConnection();
         $query = "SELECT MIN(currentPrice) AS minPrice
-        FROM productprice
+        FROM productPrice
         WHERE productID = ?;";
         $staement = $connection->prepare($query);
         $staement->bindParam(1, $this->productID);
@@ -143,7 +143,7 @@ class ProductPrice implements productPriceService
     {
         $connection = $this->db->getConnection();
         $query = "SELECT MAX(currentPrice) AS maxPrice
-        FROM productprice
+        FROM productPrice
         WHERE productID = ?;";
         $staement = $connection->prepare($query);
         $staement->bindParam(1, $this->productID);
