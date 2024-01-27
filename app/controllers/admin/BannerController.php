@@ -6,16 +6,19 @@ include_once 'app/controllers/admin/AdminController.php';
 class BannerController extends AdminController{
     private $bannerData;
 
-    public function __construct() {
-        $this->bannerData = new Banner(); 
+    public function __construct()
+    {
+        $this->bannerData = new Banner();
     }
 
-    public function getListOfBanners() {
+    public function getListOfBanners()
+    {
         return $this->bannerData->List();
-        
+
     }
 
-    public function getDetail($id) {
+    public function getDetail($id)
+    {
         return $this->bannerData->Detail($id);
     }
 
@@ -46,7 +49,8 @@ class BannerController extends AdminController{
         include 'app/views/admin/banners/edit.php';
     }
 
-    public function delete($bannerId) {
+    public function delete($bannerId)
+    {
         $this->bannerData->setBannerID($bannerId);
         if ($this->bannerData->Delete()){
             header('Location: ../danh-sach');
@@ -61,8 +65,8 @@ class BannerController extends AdminController{
     {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
 
-        $targetDirectory = 'public/uploads/banners/' . date('d-m-Y') . '/';
-        
+        $targetDirectory = '/public/uploads/banners/' . date('d-m-Y') . '/';
+
         $originalFileName = pathinfo($_FILES['file']['name'], PATHINFO_FILENAME); // lấy tên file ảnh
         $extension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION); //lấy đuôi file ảnh
 
@@ -77,7 +81,7 @@ class BannerController extends AdminController{
         if (!file_exists($targetDirectory)) {
             mkdir($targetDirectory, 0777, true);
         }
-        
+
         if (move_uploaded_file($_FILES['file']['tmp_name'], $targetFile)) {
             echo "File đã được tải lên thành công.";
         } else {
@@ -85,13 +89,14 @@ class BannerController extends AdminController{
         }
     }
 
-    public function add() {
+    public function add()
+    {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $this->bannerData->setAddressTarget($_POST['address_target']);
         $this->bannerData->setTitle($_POST['title']);
         $this->bannerData->setStatus(1);
         $this->bannerData->setCreatedAt(date('Y-m-d H:i:s'));
-        $this->bannerData->setUpdatedAt(date('Y-m-d H:i:s'));      
+        $this->bannerData->setUpdatedAt(date('Y-m-d H:i:s'));
         $imageName = ($_POST['image']);
         $targetDirectory = '/public/uploads/banners/' . date('d-m-Y') . '/';
         $imageUrl = $targetDirectory . $imageName;
@@ -102,23 +107,25 @@ class BannerController extends AdminController{
         }else{
             echo "Thêm banner thất bại";
         }
-        
+
     }
 
-    public function update() {
+    public function update()
+    {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $this->bannerData->setBannerID($_POST['bannerId']);
         $this->bannerData->setAddressTarget($_POST['address_target']);
         $this->bannerData->setTitle($_POST['title']);
         $this->bannerData->setStatus(1);
-        $this->bannerData->setUpdatedAt(date('Y-m-d H:i:s'));    
+        $this->bannerData->setUpdatedAt(date('Y-m-d H:i:s'));
         $imageName = ($_POST['image']);
         $imageFake = ($_POST['fakeImage']);
         if ($imageName == "") {
             $this->bannerData->setImage($imageFake);
-        }else { $targetDirectory = '/public/uploads/banners/' . date('d-m-Y') . '/';
+        } else {
+            $targetDirectory = '/public/uploads/banners/' . date('d-m-Y') . '/';
             $imageUrl = $targetDirectory . $imageName;
-            
+
             $this->bannerData->setImage($imageUrl);
         }
         if ($this->bannerData->Edit()){
@@ -126,6 +133,6 @@ class BannerController extends AdminController{
         }else{
             echo "Sửa nhà cung cấp thất bại";
         }
-        
+
     }
 }

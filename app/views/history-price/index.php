@@ -3,15 +3,17 @@
 
 <head>
     <title>Lịch sử giá</title>
+    <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="public/css/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="public/css/general.css">
-    <link rel="stylesheet" href="public/css/header.css">
-    <link rel="stylesheet" href="public/css/footer.css">
-    <link rel="stylesheet" href="public/css/history-price.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/public/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/css/general.css">
+    <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/footer.css">
+    <link rel="stylesheet" href="/public/css/history-price.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 </head>
 
@@ -71,11 +73,11 @@
     <script src="
 https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js
 "></script>
-
+    <script src="/public/js/jquery/jquery-3.6.3.min.js"> </script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="public/js/bootstrap/bootstrap.bundle.min.js"></script>
-    <script src="public/js/general.js"></script>
-    <script src="public/js/historyPrice.js"></script>
+    <script src="/public/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="/public/js/general.js"></script>
+    <script src="/public/js/historyPrice.js"></script>
 
 </body>
 

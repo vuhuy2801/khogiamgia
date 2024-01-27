@@ -4,21 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="public/css/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="public/css/general.css">
-    <link rel="stylesheet" href="public/css/header.css">
-    <link rel="stylesheet" href="public/css/voucher.css">
+    <link rel="stylesheet" href="/public/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/css/general.css">
+    <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/voucher.css">
 
-    <link rel="stylesheet" href="public/css/footer.css">
-    <link rel="stylesheet" href="public/js/swiperjs/swiper-bundle.min.css">
-    <link rel="stylesheet" href="public/css/promotion.css">
-    <link rel="stylesheet" href="public/css/posts.css">
+    <link rel="stylesheet" href="/public/css/footer.css">
+    <link rel="stylesheet" href="/public/js/swiperjs/swiper-bundle.min.css">
+    <link rel="stylesheet" href="/public/css/promotion.css">
+    <link rel="stylesheet" href="/public/css/posts.css">
 
     <title>Mã giảm giá tiki</title>
 </head>
@@ -55,17 +55,16 @@
     </section>
     <?php
     require_once 'app/views/home/sectionPromotion.php';
-    // require_once 'app/views/home/sectionPosts.php';
-    // require_once 'app/views/voucher/sectionHelpVoucher.php';
     require_once 'app/views/voucher/sectionHelpTiki.php';
     require_once 'app/views/footer.php';
     ?>
 
 
-    <script src="public/js/bootstrap/bootstrap.bundle.min.js"> </script>
-    <script src="public/js/jquery/jquery-3.6.3.min.js"> </script>
-    <script src="public/js/swiperjs/swiper-bundle.min.js"> </script>
-    <script src="public/js/voucher.js"> </script>
+    <script src="/public/js/bootstrap/bootstrap.bundle.min.js"> </script>
+    <script src="/public/js/jquery/jquery-3.6.3.min.js"> </script>
+    <script src="/public/js/swiperjs/swiper-bundle.min.js"> </script>
+    <script src="/public/js/general.js"> </script>
+    <script src="/public/js/voucher.js"> </script>
 
 
 </body>
