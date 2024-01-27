@@ -27,12 +27,10 @@
                 }
 
                 // loop for render swiper slide
-               
+                $swiperSlide = '';
                 foreach ($supplier as $key => $value) {
-                    $swiperSlide = '';
-                    $swiperSlide = renderSwiperSlide($value);
+                    $swiperSlide .= renderSwiperSlide($value);
                 }
-                
                 echo $swiperSlide;
 
 

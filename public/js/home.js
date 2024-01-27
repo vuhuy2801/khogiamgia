@@ -2,28 +2,31 @@ let btnGetNews = document.querySelector("#btnGetNews");
 let elmPostList = document.querySelector("#postList");
 let current_page = 1;
 
-btnGetNews.addEventListener("click", function (event) {
-    event.target.innerHTML = "Đang tải...";
-    // add class disabled
-    event.target.classList.add("disabled");
+if(btnGetNews){
+    btnGetNews.addEventListener("click", function (event) {
+        event.target.innerHTML = "Đang tải...";
+        // add class disabled
+        event.target.classList.add("disabled");
+    
+        api.get(`/post/bai-viets?page=${current_page}`)
+            .then(function (response) {
+                // console.log(response.data);
+                renderNew(response.data.posts);
+                event.target.innerHTML = "Xem thêm";
+                // set enable button
+                event.target.classList.remove("disabled");
+    
+                current_page++;
+                if (response.data.totalPage == current_page) {
+                    event.target.style.display = "none";
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    });
+}
 
-    api.get(`/post/bai-viets?page=${current_page}`)
-        .then(function (response) {
-            // console.log(response.data);
-            renderNew(response.data.posts);
-            event.target.innerHTML = "Xem thêm";
-            // set enable button
-            event.target.classList.remove("disabled");
-
-            current_page++;
-            if (response.data.totalPage == current_page) {
-                event.target.style.display = "none";
-            }
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-});
 
 function renderNew(data) {
     let htmlPosts = "";
