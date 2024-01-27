@@ -96,7 +96,7 @@ class StatisticModel
             return $result['user_count'];
         } catch (PDOException $e) {
             // Handle the exception here
-            return false;
+            return 0;
         }
     }
 
@@ -112,7 +112,7 @@ class StatisticModel
             return $result['visit_count'];
         } catch (PDOException $e) {
             // Handle the exception here
-            return false;
+            return 0;
         }
     }
 
@@ -128,7 +128,7 @@ class StatisticModel
             return $result['visit_count'];
         } catch (PDOException $e) {
             // Handle the exception here
-            return false;
+            return 0;
         }
     }
     // get data for chartjs line chart for 24h visit count
@@ -196,7 +196,7 @@ class StatisticModel
             return $result['voucher_count'];
         } catch (PDOException $e) {
             // Handle the exception here
-            return false;
+            return 0;
         }
     }
     // get total product in db
@@ -211,7 +211,7 @@ class StatisticModel
             return $result['product_count'];
         } catch (PDOException $e) {
             // Handle the exception here
-            return false;
+            return 0;
         }
     }
     // get total post in db
@@ -226,7 +226,7 @@ class StatisticModel
             return $result['post_count'];
         } catch (PDOException $e) {
             // Handle the exception here
-            return false;
+          return 0;
         }
     }
 
@@ -244,7 +244,7 @@ class StatisticModel
             return $result['used_voucher_count'];
         } catch (PDOException $e) {
             // Handle the exception here
-            return false;
+            return 0;
         }
     }
 
@@ -258,10 +258,10 @@ class StatisticModel
         try {
             $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);
-            return $result['total_used_voucher'];
+            return intval($result['total_used_voucher']);
         } catch (PDOException $e) {
             // Handle the exception here
-            return false;
+            return 0;
         }
     }
     public function getVoucherExpiredCount(): int
@@ -275,7 +275,7 @@ class StatisticModel
             return intval($result['voucher_expired_count']);
         } catch (PDOException $e) {
             // Handle the exception here
-            return false;
+            return 0;
         }
     }
     // get count voucher not expired
@@ -290,7 +290,7 @@ class StatisticModel
             return intval($result['voucher_not_expired_count']);
         } catch (PDOException $e) {
             // Handle the exception here
-            return false;
+            return 0;
         }
     }
 
@@ -338,7 +338,7 @@ class StatisticModel
             return intval($result['total_voucher']);
         } catch (PDOException $e) {
             // Handle the exception here
-            return false;
+            return 0;
         }
     }
 
