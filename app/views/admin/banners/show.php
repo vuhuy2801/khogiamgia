@@ -10,6 +10,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/public/css/sidebar.css">
     <link rel="stylesheet" href="/public/css/admin/banners.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">
+
 </head>
 
 
@@ -42,7 +48,7 @@
                         </div>
 
                         <button id="btnAdd" class="btn btn-primary">
-                            <a class="addLink text-white" href='create'>Thêm</a>
+                            <a class="addLink text-white" href='them'>Thêm</a>
                         </button>
                     </div>
                 </div>
@@ -86,8 +92,8 @@
                                     echo "<td class='item_table '><p class='item_status my-0 rounded-3 " . $statusClass . "'>" . $statuses[$banner['status']] . "</p></td>";
                         
                                     echo "<td class='item_table'>
-                                        <a class='px-1 action_detail' href='detail?id=" . urlencode($banner['bannerId']) .  "'><i class='bi bi-eye-fill'></i></a>
-                                        <a class='px-1 action_edit' href='edit?id=" . urlencode($banner['bannerId']) ."'><i class='bi bi-pencil-square'></i></a>
+                                        <a class='px-1 action_detail' href='chi-tiet?id=" . urlencode($banner['bannerId']) .  "'><i class='bi bi-eye-fill'></i></a>
+                                        <a class='px-1 action_edit' href='cap-nhat?id=" . urlencode($banner['bannerId']) ."'><i class='bi bi-pencil-square'></i></a>
                                         <a href='' class='delete-banner px-1' data-banner-id='" . urlencode($banner['bannerId']) . "' data-bs-toggle='modal' data-bs-target='#deleteBanner'><i class='bi bi-trash'></i></a>
                                      </td>";
                                      echo "</tr>" ; } ?>

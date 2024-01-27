@@ -1,26 +1,26 @@
 <?php
 // Router admin handel banners
-$router->get('/admin/banner/show', function () {
+$router->get('/admin/banner/danh-sach', function () {
     require 'app/controllers/admin/BannerController.php';
     $BannerController = new BannerController();
     $BannerController->index();
 });
 
 
-$router->get('/admin/banner/detail', function () {
+$router->get('/admin/banner/chi-tiet', function () {
     require 'app/controllers/admin/BannerController.php';
     $BannerController = new BannerController();
     $BannerController->detail();
 });
 
-$router->get('/admin/banner/create', function () {
+$router->get('/admin/banner/them', function () {
     require 'app/controllers/admin/BannerController.php';
     $BannerController = new BannerController();
     $BannerController->create();
 });
 
 
-$router->get('/admin/banner/edit', function () {
+$router->get('/admin/banner/cap-nhat', function () {
     require 'app/controllers/admin/BannerController.php';
     $BannerController = new BannerController();
     $BannerController->edit();

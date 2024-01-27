@@ -1,26 +1,26 @@
 <?php
 // Router admin handel product
-$router->get('/admin/theo-doi-gia-san-pham/show', function () {
+$router->get('/admin/theo-doi-gia-san-pham/danh-sach', function () {
     require 'app/controllers/admin/ProductController.php';
     $ProductController = new ProductController();
     $ProductController->index();
 });
 
 
-$router->get('/admin/theo-doi-gia-san-pham/detail', function () {
+$router->get('/admin/theo-doi-gia-san-pham/chi-tiet', function () {
     require 'app/controllers/admin/ProductController.php';
     $ProductController = new ProductController();
     $ProductController->detail();
 });
 
-$router->get('/admin/theo-doi-gia-san-pham/create', function () {
+$router->get('/admin/theo-doi-gia-san-pham/them', function () {
     require 'app/controllers/admin/ProductController.php';
     $ProductController = new ProductController();
     $ProductController->create();
 });
 
 
-$router->get('/admin/theo-doi-gia-san-pham/edit', function () {
+$router->get('/admin/theo-doi-gia-san-pham/cap-nhat', function () {
     require 'app/controllers/admin/ProductController.php';
     $ProductController = new ProductController();
     $ProductController->edit();

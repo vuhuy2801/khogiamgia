@@ -1,7 +1,9 @@
 <?php
 require_once 'app/models/SupplierModel.php';
+include_once 'app/controllers/admin/AdminController.php';
 
-class SupplierController {
+
+class SupplierController extends AdminController{
     private $supplierData;
 
     public function __construct() {
@@ -23,17 +25,28 @@ class SupplierController {
     }
 
     public function index() {
+        $this->checkLogin();
+
         $suppliers = $this->supplierData->List();
         include 'app/views/admin/suppliers/show.php';
     }
     public function create() {
+        $this->checkLogin();
+
+        $titlePage = "Thêm nhà cung cấp";
         include 'app/views/admin/suppliers/create.php';
     }
     public function detail() {
+        $this->checkLogin();
+
+        $titlePage = "Chi tiết nhà cung cấp";
         $supplierData = $this->supplierData;
         include 'app/views/admin/suppliers/detail.php';
     }
     public function edit() {
+        $this->checkLogin();
+
+        $titlePage = "Sửa nhà cung cấp";
         $supplierData = $this->supplierData;
         include 'app/views/admin/suppliers/edit.php';
     }
@@ -41,7 +54,7 @@ class SupplierController {
     public function delete($supplierId) {
         $this->supplierData->setSupplierId($supplierId);
         if ($this->supplierData->Delete()){
-            header('Location: ../show');
+            header('Location: ../danh-sach');
         }else
         {
             echo "Xóa nhà cung cấp thất bại ! nhà cung cấp vẫn đang được sử dụng trong bài viết và mã giảm giá";
@@ -89,7 +102,7 @@ class SupplierController {
         $this->supplierData->setLogoSupplier($imageUrl);
     
         if ($this->supplierData->Add()){
-            header('Location: ../nha-cung-cap/show');
+            header('Location: ../nha-cung-cap/danh-sach');
         }else{
             echo "Thêm nhà cung cấp viết thất bại";
         }
@@ -112,7 +125,7 @@ class SupplierController {
             $this->supplierData->setLogoSupplier($imageUrl);
         }
         if ($this->supplierData->Edit()){
-            header('Location: ../nha-cung-cap/show');
+            header('Location: ../nha-cung-cap/danh-sach');
         }else{
             echo "Sửa nhà cung cấp thất bại";
         }

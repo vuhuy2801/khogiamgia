@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="/public/css/sidebar.css">
     <link rel="stylesheet" href="/public/css/admin/general.css">
     <link rel="stylesheet" href="/public/css/admin/home.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">
+
 </head>
 
 <body>
@@ -92,33 +98,32 @@
 https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js
 "></script>
     <script>
-        let ctx = document.getElementById('chartStatistics').getContext('2d');
-        let myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                // data time 24h
-                labels: ['00h', '01h', '02h', '03h', '04h', '05h', '06h', '07h', '08h', '09h', '10h', '11h', '12h',
-                    '13h', '14h', '15h', '16h', '17h', '18h', '19h', '20h', '21h', '22h', '23h'
-                ],
-                datasets: [{
-                    label: 'Số lượt truy cập',
-                    data: <?php echo json_encode($VisitCount24h); ?>,
-                    backgroundColor: "rgba(0, 123, 255, 0.5)",
-                    borderColor: "rgba(0, 123, 255, 1)",
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                    },
+    let ctx = document.getElementById('chartStatistics').getContext('2d');
+    let myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            // data time 24h
+            labels: ['00h', '01h', '02h', '03h', '04h', '05h', '06h', '07h', '08h', '09h', '10h', '11h', '12h',
+                '13h', '14h', '15h', '16h', '17h', '18h', '19h', '20h', '21h', '22h', '23h'
+            ],
+            datasets: [{
+                label: 'Số lượt truy cập',
+                data: <?php echo json_encode($VisitCount24h); ?>,
+                backgroundColor: "rgba(0, 123, 255, 0.5)",
+                borderColor: "rgba(0, 123, 255, 1)",
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
                 },
             },
+        },
 
-        });
-
+    });
     </script>
 
 </body>

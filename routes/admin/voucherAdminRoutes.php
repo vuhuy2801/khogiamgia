@@ -1,27 +1,27 @@
 <?php
 
 // Router admin handel voucher
-$router->get('/admin/ma-giam-gia/show', function () {
+$router->get('/admin/ma-giam-gia/danh-sach', function () {
     require 'app/controllers/admin/VoucherController.php';
     $VoucherController = new VoucherController();
     $VoucherController->index();
 });
 
 
-$router->get('/admin/ma-giam-gia/detail', function () {
+$router->get('/admin/ma-giam-gia/chi-tiet', function () {
     require 'app/controllers/admin/VoucherController.php';
     $VoucherController = new VoucherController();
     $VoucherController->detail();
 });
 
-$router->get('/admin/ma-giam-gia/create', function () {
+$router->get('/admin/ma-giam-gia/them', function () {
     require 'app/controllers/admin/VoucherController.php';
     $VoucherController = new VoucherController();
     $VoucherController->create();
 });
 
 
-$router->get('/admin/ma-giam-gia/edit', function () {
+$router->get('/admin/ma-giam-gia/cap-nhat', function () {
     require 'app/controllers/admin/VoucherController.php';
     $VoucherController = new VoucherController();
     $VoucherController->edit();

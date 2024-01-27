@@ -1,32 +1,35 @@
+* {
+  font-family: "Inter", sans-serif;
+}
 .statistics-container:first-child {
-    margin-top: 65px;
+  margin-top: 65px;
 }
 .statistics-container {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .statistics b {
-    margin: 5px 0;
-    border-bottom: 1px solid #ddd;
+  margin: 5px 0;
+  border-bottom: 1px solid #ddd;
 }
 .statistics a {
-    color: #0088cc;
-    text-decoration: none;
+  color: #0088cc;
+  text-decoration: none;
 }
 .statistics a:hover {
-    color: #005580;
-    text-decoration: underline;
-    cursor: pointer;
+  color: #005580;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 /* class disable a */
 .disable {
-    color: #999 !important;
-    cursor: default !important;
-    text-decoration: none !important;
+  color: #999 !important;
+  cursor: default !important;
+  text-decoration: none !important;
 }
 .disable:hover {
-    color: #999;
-    text-decoration: none !important;
-    cursor: default !important;
+  color: #999;
+  text-decoration: none !important;
+  cursor: default !important;
 }

@@ -1,8 +1,9 @@
 <?php
 require_once 'app/models/ProductModel.php';
+include_once 'app/controllers/admin/AdminController.php';
 
 
-class ProductController {
+class ProductController extends AdminController{
     private $productData;
 
     public function __construct() {
@@ -27,22 +28,32 @@ class ProductController {
    
     public function index()
     {
+        $this->checkLogin();
+
       include 'app/views/admin/products/show.php';
-      
     }
     public function detail()
     {
+        $this->checkLogin();
+
+        $titlePage = "Chi tiết theo dõi sản phẩm";
       include 'app/views/admin/products/detail.php';
       
     }
 
     public function create()
     {
+        $this->checkLogin();
+
+        $titlePage = "Thêm theo dõi sản phẩm";
       include 'app/views/admin/products/create.php';
     }
 
     public function edit()
     {
+        $this->checkLogin();
+
+        $titlePage = "Sửa theo dõi sản phẩm";
         include 'app/views/admin/products/edit.php';
     }
   
@@ -91,7 +102,7 @@ class ProductController {
         $this->productData->setImage($imageUrl);
     
         if ($this->productData->Add()){
-            header('Location: ../theo-doi-gia-san-pham/show');
+            header('Location: ../theo-doi-gia-san-pham/danh-sach');
         }else{
             echo "Thêm sản phẩm theo dõi thất bại";
         }
@@ -117,7 +128,7 @@ class ProductController {
             $this->productData->setImage($imageUrl);
         }
         if ($this->productData->Edit()){
-            header('Location: ../theo-doi-gia-san-pham/show');
+            header('Location: ../theo-doi-gia-san-pham/danh-sach');
         }else{
             echo "Sửa sản phẩm theo dõi thất bại";
         }
@@ -127,7 +138,7 @@ class ProductController {
     public function delete($productId) {
         $this->productData->setProductID($productId);
         if ($this->productData->Delete()){
-            header('Location: ../show');
+            header('Location: ../danh-sach');
         }else{
             echo "Xóa sản phẩm theo dõi thất bại";
         }

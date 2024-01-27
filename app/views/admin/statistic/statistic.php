@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="/public/css/sidebar.css">
     <link rel="stylesheet" href="/public/css/admin/general.css">
     <link rel="stylesheet" href="/public/css/admin/statistic.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">
+
 </head>
 
 <body>
@@ -150,11 +156,10 @@
     </div>
 
     <script>
-        var dataChartVoucher = <?php echo json_encode($chartVoucher); ?>;
-        var dataChartPost = <?php echo json_encode($chartPost); ?>;
-        var dataChartWebsite = <?php echo json_encode($chartWebsiteAccess); ?>;
-        var dataChartVoucherCountByProvider = <?php echo json_encode($chartVoucherCountByProvider); ?>;
-
+    var dataChartVoucher = <?php echo json_encode($chartVoucher); ?>;
+    var dataChartPost = <?php echo json_encode($chartPost); ?>;
+    var dataChartWebsite = <?php echo json_encode($chartWebsiteAccess); ?>;
+    var dataChartVoucherCountByProvider = <?php echo json_encode($chartVoucherCountByProvider); ?>;
     </script>
 
     <script src="/public/js/bootstrap/bootstrap.bundle.min.js"> </script>

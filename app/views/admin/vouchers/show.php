@@ -11,6 +11,11 @@
     <link rel="stylesheet" href="/public/css/sidebar.css">
     <link rel="stylesheet" href="/public/css/promotion.css">
     <link rel="stylesheet" href="/public/css/admin/vouchers.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">
 </head>
 
 
@@ -44,7 +49,7 @@
                         </div>
 
                         <button id="btnAdd" class="btn btn-primary">
-                            <a class="addLink text-white" href='create'>Thêm</a>
+                            <a class="addLink text-white" href='them'>Thêm</a>
                         </button>
                     </div>
                 </div>
@@ -88,8 +93,8 @@
                                     echo "<td class='item_table '><p class='item_status my-0 rounded-3 " . $statusClass . "'>" . $statusVoucher[$voucher['status']] . "</p></td>";
                         
                                     echo "<td class='item_table'>
-                                        <a class='px-1 action_detail' href='detail?id=" . urlencode($voucher['voucherId']) .  "'><i class='bi bi-eye-fill'></i></a>
-                                        <a class='px-1 action_edit' href='edit?id=" . urlencode($voucher['voucherId']) ."'><i class='bi bi-pencil-square'></i></a>
+                                        <a class='px-1 action_detail' href='chi-tiet?id=" . urlencode($voucher['voucherId']) .  "'><i class='bi bi-eye-fill'></i></a>
+                                        <a class='px-1 action_edit' href='cap-nhat?id=" . urlencode($voucher['voucherId']) ."'><i class='bi bi-pencil-square'></i></a>
                                         <a href='' class='delete-voucher px-1' data-voucher-id='" . urlencode($voucher['voucherId']) . "' data-bs-toggle='modal' data-bs-target='#deleteVoucher'><i class='bi bi-trash'></i></a>
                                      </td>";
                                      echo "</tr>" ; } ?>

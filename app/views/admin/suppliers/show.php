@@ -10,6 +10,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/public/css/sidebar.css">
     <link rel="stylesheet" href="/public/css/admin/suppliers.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">
+
 </head>
 
 
@@ -42,7 +48,7 @@
                         </div>
 
                         <button id="btnAdd" class="btn btn-primary">
-                            <a class="addLink text-white" href='create'>Thêm</a>
+                            <a class="addLink text-white" href='them'>Thêm</a>
                         </button>
                     </div>
                 </div>
@@ -79,8 +85,8 @@
                                     echo "<td class='item_table'> <img class='w-100 item_image' src='". $supplier['logoSupplier'] ."' alt=''></td>";
                                     echo "<td class='item_table'>" .  $supplier['address_target'] . "</td>";                               
                                     echo "<td class='item_table'>
-                                        <a class='px-1 action_detail' href='detail?id=" . urlencode($supplier['supplierId']) .  "'><i class='bi bi-eye-fill'></i></a>
-                                        <a class='px-1 action_edit' href='edit?id=" . urlencode($supplier['supplierId']) ."'><i class='bi bi-pencil-square'></i></a>
+                                        <a class='px-1 action_detail' href='chi-tiet?id=" . urlencode($supplier['supplierId']) .  "'><i class='bi bi-eye-fill'></i></a>
+                                        <a class='px-1 action_edit' href='cap-nhat?id=" . urlencode($supplier['supplierId']) ."'><i class='bi bi-pencil-square'></i></a>
                                         <a href='' class='delete-supplier px-1' data-supplier-id='" . urlencode($supplier['supplierId']) . "' data-bs-toggle='modal' data-bs-target='#deleteSupplier'><i class='bi bi-trash'></i></a>
                                      </td>";
                                      echo "</tr>" ; } ?>
