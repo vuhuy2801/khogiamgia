@@ -160,7 +160,7 @@ class User implements UserService
     {
         $connection = $this->db->getConnection();
         if ($connection) {
-            $query = "select * from user where username = ?";
+            $query = "select * from User where username = ?";
             $statement = $connection->prepare($query);
             $statement->bindParam(1, $userId);
             $statement->execute();
@@ -175,7 +175,7 @@ class User implements UserService
     {
         $connection = $this->db->getConnection();
         if ($connection) {
-            $query = "select * from user where username = ?";
+            $query = "select * from User where username = ?";
             $statement = $connection->prepare($query);
             $statement->bindParam(1, $username);
             $statement->execute();

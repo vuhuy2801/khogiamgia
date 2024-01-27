@@ -222,7 +222,7 @@ class StatisticModel
     public function getTotalPost(): int
     {
         $connection = $this->db->getConnection();
-        $query = "SELECT COUNT(*) AS post_count FROM post";
+        $query = "SELECT COUNT(*) AS post_count FROM Post";
         $statement = $connection->prepare($query);
         try {
             $statement->execute();
@@ -257,7 +257,7 @@ class StatisticModel
     public function getTotalUsedVoucher(): int
     {
         $connection = $this->db->getConnection();
-        $query = "SELECT SUM(usedCount) AS total_used_voucher FROM used";
+        $query = "SELECT SUM(usedCount) AS total_used_voucher FROM Used";
         $statement = $connection->prepare($query);
         try {
             $statement->execute();
@@ -286,7 +286,7 @@ class StatisticModel
     public function getVoucherNotExpiredCount(): int
     {
         $connection = $this->db->getConnection();
-        $query = "SELECT COUNT(*) AS voucher_not_expired_count FROM voucher WHERE expiresAt >= NOW()";
+        $query = "SELECT COUNT(*) AS voucher_not_expired_count FROM Voucher WHERE expiresAt >= NOW()";
         $statement = $connection->prepare($query);
         try {
             $statement->execute();
@@ -303,7 +303,7 @@ class StatisticModel
     public function getPostCountByCategory(): array
     {
         $connection = $this->db->getConnection();
-        $query = "SELECT COUNT(*) AS post_count, categories_post FROM post GROUP BY categories_post";
+        $query = "SELECT COUNT(*) AS post_count, categories_post FROM Post GROUP BY categories_post";
         $statement = $connection->prepare($query);
         try {
             $statement->execute();
@@ -319,7 +319,7 @@ class StatisticModel
     public function getVoucherCountByProvider(): array
     {
         $connection = $this->db->getConnection();
-        $query = "SELECT COUNT(*) AS voucher_count, supplierId FROM voucher GROUP BY supplierId";
+        $query = "SELECT COUNT(*) AS voucher_count, supplierId FROM Voucher GROUP BY supplierId";
         $statement = $connection->prepare($query);
         try {
             $statement->execute();
@@ -334,7 +334,7 @@ class StatisticModel
     public function getTotalVoucher(): int
     {
         $connection = $this->db->getConnection();
-        $query = "SELECT COUNT(*) AS total_voucher FROM voucher";
+        $query = "SELECT COUNT(*) AS total_voucher FROM Voucher";
         $statement = $connection->prepare($query);
         try {
             $statement->execute();

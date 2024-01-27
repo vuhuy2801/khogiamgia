@@ -286,7 +286,7 @@ class Product implements ProductService
     {
         $connection = $this->db->getConnection();
         // using query
-        $query = "select * from product where productID = ?";
+        $query = "select * from Product where productID = ?";
         $staement = $connection->prepare($query);
         $staement->bindParam(1, $this->productID);
         try {
@@ -305,7 +305,7 @@ class Product implements ProductService
     public function CountSearchProduct($productName): int
     {
         $connection = $this->db->getConnection();
-        $query = "SELECT COUNT(*) FROM product WHERE productName LIKE '%$productName%'";
+        $query = "SELECT COUNT(*) FROM Product WHERE productName LIKE '%$productName%'";
         $staement = $connection->prepare($query);
         try {
             $staement->execute();
@@ -319,7 +319,7 @@ class Product implements ProductService
     public function SearchProductWithPagination($productName, $offSet, $limit): array
     {
         $connection = $this->db->getConnection();
-        $query = "SELECT * FROM product WHERE productName LIKE '%$productName%' LIMIT $limit OFFSET $offSet";
+        $query = "SELECT * FROM product WHERE ProductName LIKE '%$productName%' LIMIT $limit OFFSET $offSet";
         $staement = $connection->prepare($query);
         try {
             $staement->execute();

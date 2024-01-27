@@ -318,7 +318,7 @@ class Post implements PostService
     public function GetCategory($categoryId)
     {
         $connection = $this->db->getConnection();
-        $query = "SELECT categoryName FROM `category` WHERE categoryId = $categoryId";
+        $query = "SELECT categoryName FROM `Category` WHERE categoryId = $categoryId";
         try {
             $statement = $connection->prepare($query);
             $statement->execute();
