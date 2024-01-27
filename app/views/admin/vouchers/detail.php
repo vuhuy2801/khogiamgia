@@ -6,7 +6,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
     <link rel="stylesheet" href="/public/css/sidebar.css">
-    <link rel="stylesheet" href="/public/css/admin/posts.css">
+    <link rel="stylesheet" href="/public/css/admin/vouchers.css">
+    <link rel="stylesheet" href="/public/css/promotion.css">
+
     <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -18,30 +20,19 @@
         <div class="row flex-nowrap">
             <?php
             require_once 'app/views/partials/sidebar.php';
-            require_once 'app/views/admin/products/deleteModal.php';
+            require_once 'app/views/admin/vouchers/deleteModal.php';
             require_once 'lib/convertDate.php';
-            require_once 'app/views/admin/products/generalProcessing.php';
-            require_once 'app/controllers/admin/ProductController.php';
+            require_once 'app/views/admin/vouchers/generalProcessing.php';
+            require_once 'app/controllers/admin/VoucherController.php';
+
             $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
-            $productController = new ProductController();
-            $product = $productController->getDetail($id);
-            $prices = $productController -> getPrices($id);
-            $listPrices = array();
-            $listDates = array();
-            function convertDateChart($inputDate) {
-                date_default_timezone_set('Asia/Ho_Chi_Minh');
-                $timestamp = strtotime($inputDate);
-                return date('d/m/y', $timestamp);
-            }
-            foreach ($prices as $index => $price) {
-                $listPrices[] = $price['currentPrice'];
-                $listDates[] = convertDateChart($price['date']);
-            }
+            $voucher = $voucherData->Detail($id);
+         
             ?>
 
-            <div class="col px-3 py-3 bg-light">
+            <div class="col px-3 py-3 wrapContent">
                 <div class="mt-4">
-                    <h3 class="mt-3 mb-3"><?php echo $product['productName'] ?>
+                    <h3 class="mt-3 mb-3"><?php echo $voucher['voucherName'] ?>
                     </h3>
 
                     <div class="row pt-1">
@@ -50,8 +41,8 @@
                                     class="bi bi-arrow-left mx-1"></i>Quay
                                 lại</a>
                             <div>
-                                <a class="btn btn-danger mx-1" data-product-id='<?php echo $id ?>'
-                                    data-bs-toggle='modal' data-bs-target='#deleteProduct'><i
+                                <a class="btn btn-danger mx-1" data-voucher-id='<?php echo $id ?>'
+                                    data-bs-toggle='modal' data-bs-target='#deleteVoucher'><i
                                         class='mx-1 bi bi-trash'></i>Xóa</a>
                                 <a class="btn btn-primary" href="<?php echo 'edit?id='.$id ?>"><i
                                         class='mx-1 bi bi-pencil-square'></i>Sửa</a>
@@ -59,72 +50,204 @@
 
                         </div>
                         <div class="col-8">
-                            <form class="bg-body rounded-3 px-3 pt-3 pb-5" id="formSubmit">
-
-                                <div class="form-group">
-                                    <label class="label_input" for="link">Link sản phẩm</label>
-                                    <input type="text" class="form-control" value="<?php echo $product['link'] ?>"
-                                        readonly id="link" name="link">
-                                </div>
-                                <div class="form-group mt-2">
-                                    <label class="label_input" for="productName">Tên sản phẩm</label>
-                                    <input type="text" class="form-control"
-                                        value="<?php echo $product['productName'] ?>" readonly id="productName"
-                                        name="productName">
-                                </div>
-                                <div class="form-group mt-2">
-                                    <label class="label_input" for="productId">ID sản phẩm</label>
-                                    <input type="text" class="form-control" value="<?php echo $product['productID'] ?>"
-                                        readonly id="productId" name="productId">
+                            <form class="wrap_detail rounded-3 px-3 pt-3 pb-5" id="formSubmit">
+                                <div class="row">
+                                    <div class="form-group mt-2 col">
+                                        <label class="label_input" for="voucherId">ID mã giảm giá</label>
+                                        <input readonly type="text" class="form-control" id="voucherId"
+                                            value="<?php echo $voucher['voucherId']?>" name="voucherId">
+                                    </div>
+                                    <div class="form-group mt-2 col">
+                                        <label class="label_input" for="supplierId">Nhà cung cấp</label>
+                                        <input readonly type="text" class="form-control" id="supplierId"
+                                            value="<?php echo $listSupplier[$voucher['supplierId']]?>"
+                                            name="supplierId">
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group mt-2 col">
-                                        <label class="label_input" for="soldCount">Lượt bán</label>
-                                        <input type="text" class="form-control"
-                                            value="<?php echo $product['soldCount'] ?>" readonly id="soldCount"
-                                            name="soldCount">
+                                        <label class="label_input" for="voucherName">Tên mã giảm giá</label>
+                                        <input readonly type="text" class="form-control"
+                                            value="<?php echo $voucher['voucherName']?>" id="voucherName"
+                                            name="voucherName">
                                     </div>
                                     <div class="form-group mt-2 col">
-                                        <label class="label_input" for="rateCount">Lượt đánh giá</label>
-                                        <input type="text" class="form-control"
-                                            value="<?php echo $product['rateCount'] ?>" readonly id="rateCount"
-                                            name="rateCount">
+                                        <label class="label_input" for="discountType">Loại mã giảm giá</label>
+                                        <input readonly type="text" class="form-control" id="discountType"
+                                            value="<?php echo $typeDisount[$voucher['discountType']]?>"
+                                            name="discountType">
                                     </div>
                                 </div>
-                                <div class="form-group col mt-3">
-                                    <label class="label_input" for="status">Trạng thái</label>
-                                    <input type="text" class="form-control"
-                                        value="<?php echo $statusProduct[$product['status']] ?>" readonly id="status"
-                                        name="status">
+                                <div class="row">
+                                    <div class="form-group mt-2 col">
+                                        <label class="label_input" for="quantity">Số lượng</label>
+                                        <input readonly type="text" value="<?php echo $voucher['quantity']?>"
+                                            class="form-control" id="quantity" name="quantity">
+                                    </div>
+
+                                    <div class="form-group mt-2 col">
+                                        <label class="label_input" for="categoryId">Nghành hàng</label>
+                                        <input readonly type="text" class="form-control" id="categoryId"
+                                            value="<?php echo $listCategory[$voucher['categoryId']]?>"
+                                            name="categoryId">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group mt-2 col">
+                                        <label class="label_input" for="minimumDiscount">Đơn tối thiểu</label>
+                                        <input readonly type="text" value="<?php echo $voucher['minimumDiscount']?>"
+                                            class="form-control" id="minimumDiscount" name="minimumDiscount">
+                                    </div>
+                                    <div class="form-group mt-2 col">
+                                        <label class="label_input" for="maximumDiscount">Giảm tối đa</label>
+                                        <input readonly type="text" value="<?php echo $voucher['maximumDiscount']?>"
+                                            class="form-control" id="maximumDiscount" name="maximumDiscount">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group mt-2 col">
+                                        <label class="label_input" for="conditionsOfUse">Lưu ý</label>
+                                        <input readonly type="text" value="<?php echo $voucher['conditionsOfUse']?>"
+                                            class="form-control" id="conditionsOfUse" name="conditionsOfUse">
+                                    </div>
+                                    <div class="form-group mt-2 col">
+                                        <label class="label_input" for="address_target">Link tiếp thị liên kết</label>
+                                        <input readonly type="text" value="<?php echo $voucher['address_target']?>"
+                                            class="form-control" id="address_target" name="address_target">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group mt-2 col">
+                                        <label class="label_input" for="expressAt">Ngày bắt đầu</label>
+                                        <input readonly type="text" value="<?php echo $voucher['expressAt']?>"
+                                            class="form-control" id="expressAt" name="expressAt">
+                                    </div>
+                                    <div class="form-group mt-2 col">
+                                        <label class="label_input" for="expiresAt">Ngày hết hạn</label>
+                                        <input readonly type="text" value="<?php echo $voucher['expiresAt']?>"
+                                            class="form-control" id="expiresAt" name="expiresAt">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group mt-2 col">
+                                        <label class="label_input" for="is_trend">Đang thịnh hành</label>
+
+                                        <input readonly type="text" class="form-control" id="is_trend"
+                                            value="<?php echo $yesOrNo[$voucher['is_trend']]?>" name="is_trend">
+                                    </div>
+                                    <div class="form-group mt-2 col">
+                                        <label class="label_input" for="is_inWallet">Có sẵn trong ví người dùng</label>
+                                        <input readonly type="text" class="form-control" id="is_inWallet"
+                                            value="<?php echo $yesOrNo[$voucher['is_inWallet']]?>" name="is_inWallet">
+                                    </div>
                                 </div>
                             </form>
                         </div>
                         <div class="col-4">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <p class="card-text label_right"><small class="text-body-secondary">Hình ảnh</small>
-                                    </p>
-                                    <hr>
-                                </div>
-                                <div class="px-4 mb-5 wrap_img_detail">
-                                    <img src="<?php echo $product['image'] ?>" alt="">
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-body pb-1">
-                                    <p class="label_right">Thông tin</p>
-                                    <hr>
-                                </div>
-                                <div class="px-3">
-                                    <div class="mb-3">
-                                        <canvas id="myChart"></canvas>
+                            <div class=''>
+                                <div class="mb-3 row justify-content-center align-items-center">
+                                    <div class="item-promotion">
+                                        <div class="row promotion-card">
+                                            <div class="col-5 text-center d-flex ">
+                                                <div>
+                                                    <div class="item-promotion__img">
+                                                        <?php 
+                                                         $urlImage = '';
+                                                         switch ($voucher['supplierId']) {
+                                                             case 1:
+                                                                 $urlImage = '/public/images/logo/round-logo/logo-shopee-tron.png';
+                                                                 break;
+                                                             case 2:
+                                                                 $urlImage = '/public/images/logo/round-logo/tiki.jpg';
+                                                                 break;
+                                                             case 3:
+                                                                 $urlImage = '/public/images/logo/round-logo/tiktokshop.jpg';
+                                                                 break;
+                                                             case 4:
+                                                                 $urlImage = '/public/images/logo/round-logo/logo-lazada.png';
+                                                                 break;
+                                                             default:
+                                                                 $urlImage = '/public/images/logo/round-logo/default.png';
+                                                         } 
+                                                         ?>
+                                                        <img id="imageLogo" src="<?php echo $urlImage ?>" alt="" />
+
+                                                    </div>
+                                                    <div class="promotion-type" id="typeDiscount">
+                                                        <?php echo $typeDisount[$voucher['discountType']]?></div>
+                                                    <div class="end-date" id="endDate">
+                                                        <svg width="8" height="8" viewBox="0 0 8 8" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <g clip-path="url(#clip0_223_1138)">
+                                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                    d="M4 7.5C4.92826 7.5 5.8185 7.13125 6.47487 6.47487C7.13125 5.8185 7.5 4.92826 7.5 4C7.5 3.07174 7.13125 2.1815 6.47487 1.52513C5.8185 0.868749 4.92826 0.5 4 0.5C3.07174 0.5 2.1815 0.868749 1.52513 1.52513C0.868749 2.1815 0.5 3.07174 0.5 4C0.5 4.92826 0.868749 5.8185 1.52513 6.47487C2.1815 7.13125 3.07174 7.5 4 7.5ZM8 4C8 5.06087 7.57857 6.07828 6.82843 6.82843C6.07828 7.57857 5.06087 8 4 8C2.93913 8 1.92172 7.57857 1.17157 6.82843C0.421427 6.07828 0 5.06087 0 4C0 2.93913 0.421427 1.92172 1.17157 1.17157C1.92172 0.421427 2.93913 0 4 0C5.06087 0 6.07828 0.421427 6.82843 1.17157C7.57857 1.92172 8 2.93913 8 4Z"
+                                                                    fill="black" />
+                                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                    d="M3.75 1.5C3.8163 1.5 3.87989 1.52634 3.92678 1.57322C3.97366 1.62011 4 1.6837 4 1.75V4.355L5.624 5.283C5.6799 5.31672 5.72039 5.37097 5.73682 5.43414C5.75325 5.49732 5.74431 5.56442 5.71192 5.6211C5.67954 5.67778 5.62626 5.71954 5.56349 5.73746C5.50072 5.75538 5.43343 5.74804 5.376 5.717L3.626 4.717C3.58774 4.69514 3.55593 4.66356 3.5338 4.62545C3.51168 4.58735 3.50001 4.54407 3.5 4.5V1.75C3.5 1.6837 3.52634 1.62011 3.57322 1.57322C3.62011 1.52634 3.6837 1.5 3.75 1.5Z"
+                                                                    fill="black" />
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_223_1138">
+                                                                    <rect width="8" height="8" fill="white" />
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg>
+                                                        <?php echo $voucher['expiresAt']?>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-7">
+                                                <div class="discount-value">Giảm <span class="px-2"
+                                                        id="discountValue"><?php echo $voucher['voucherName']?></span>
+                                                </div>
+                                                <div class="min-price">Đơn tối thiểu: <span
+                                                        id="minPrice"><?php echo $voucher['minimumDiscount']?></span>
+                                                </div>
+                                                <div class="max-discount">Tối đa: <span
+                                                        id="maxDiscount"><?php echo $voucher['maximumDiscount']?></span>
+                                                </div>
+                                                <div class="type">
+                                                    <span class="badge badge-promotion" id="hastag">#
+                                                        <?php echo ($voucher['is_inWallet'] == 1 ? 'Sẵn trong ví' : "Mã nhập tay");   ?></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="remaining mt-2">Còn lại: <span
+                                                    id="remaining"><?php echo $voucher['quantity']?></span></div>
+                                            <div class="category mt-2">
+                                                Ngành hàng: <span
+                                                    id="category"><?php echo $listCategory[$voucher['categoryId']]?></span>
+                                            </div>
+                                            <div class="warning mt-2 mb-4 " id="note"><span>Lưu ý: </span>
+                                                <?php echo $voucher['conditionsOfUse']?>
+                                            </div>
+                                            <div class="d-flex justify-content-end">
+                                                <button type="button" class="btn badge-copy">#<span
+                                                        id="voucherCode"><?php echo $voucher['voucherId']?></span></button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <p class="label_input">Thời gian tạo: <span
-                                            class="float-end date_value"><?php echo convertDateFormat($product['createdAt']) ?></span>
-                                    </p>
-                                    <p class="label_input">Thời gian cập nhật: <span
-                                            class="float-end date_value"><?php echo convertDateFormat( $product['updatedAt']) ?></span>
-                                    </p>
+
+
+                                </div>
+
+                                <div class='bg-body py-3 rounded-4 boxInfo'>
+                                    <div class="card-body px-3">
+                                        <p class="label_right">Thông tin</p>
+                                        <hr>
+                                    </div>
+                                    <div class="px-3">
+                                        <p class="label_input">Thời gian tạo: <span
+                                                class="float-end date_value create_at"><?php echo convertDateFormat($voucher['createdAt'])?></span>
+                                        </p>
+                                        <p class="label_input">Thời gian cập nhật: <span
+                                                class="float-end date_value update_at"><?php echo convertDateFormat($voucher['updatedAt'])?></span>
+                                        </p>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -133,44 +256,14 @@
             </div>
         </div>
 
-        <form name="delete-product-form" method="POST"></form>
+        <form name="delete-voucher-form" method="POST"></form>
 
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/public/js/admin/products/detail.js"> </script>
+    <script src="/public/js/admin/vouchers/detail.js"> </script>
     <script src="/public/js/bootstrap/bootstrap.bundle.min.js"> </script>
-    <script>
-    const ctx = document.getElementById('myChart');
-    let values = <?php echo json_encode($listPrices); ?>;
-    let labels = <?php echo json_encode($listDates); ?>;
 
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: "Giá sản phẩm",
-                data: values,
-                backgroundColor: "#B1A5FF   ",
-                borderColor: "#B1A5FF",
-                borderWidth: 3,
-
-                pointBackgroundColor: "#B1A5FF",
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            },
-
-
-        }
-    });
-    </script>
 
 </body>
 

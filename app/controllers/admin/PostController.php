@@ -1,12 +1,15 @@
 <?php
 require_once 'app/models/PostModel.php';
+require_once 'app/models/SupplierModel.php';
 
 
 class PostController {
     private $postData;
+    private $supplierData;
 
     public function __construct() {
         $this->postData = new Post(); 
+        $this->supplierData = new Supplier();
     }
 
     public function getListOfPosts() {
@@ -32,22 +35,31 @@ class PostController {
     }
     public function index()
     {
+        $suppliers = $this->supplierData->ListName();
+
+        $posts = $this->postData->List();
       include 'app/views/admin/posts/show.php';
       
     }
     public function detail()
     {
+        $suppliers = $this->supplierData->ListName();
+        $postData = $this->postData;
       include 'app/views/admin/posts/detail.php';
       
     }
 
     public function create()
     {
+        $suppliers = $this->supplierData->ListName();
       include 'app/views/admin/posts/create.php';
     }
 
     public function edit()
     {
+        $suppliers = $this->supplierData->ListName();
+
+        $postData = $this->postData;
         include 'app/views/admin/posts/edit.php';
     }
   

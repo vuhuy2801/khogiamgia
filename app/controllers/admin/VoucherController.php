@@ -1,21 +1,27 @@
 <?php
 require_once 'app/models/VoucherModel.php';
+require_once 'app/models/CategoryModel.php';
+require_once 'app/models/SupplierModel.php';
 
 
 class VoucherController {
     private $voucherData;
-
+    private $categoryModel;
+    private $supplierModal;
+   
     public function __construct() {
         $this->voucherData = new Voucher(); 
+        $this->categoryModel = new Category();
+        $this->supplierModal = new Supplier();
     }
 
     public function getListOfVoucher() {
         return $this->voucherData->List();
     }
 
-    // public function getDetail($id) {
-    //     return $this->voucherData->Detail($id);
-    // }
+    public function getDetail($id) {
+        return $this->voucherData->Detail($id);
+    }
 
     // public function getPrices($id) {
     //     return $this->voucherData->GetProductWithPriceById($id);
@@ -23,112 +29,114 @@ class VoucherController {
    
     public function index()
     {
+        $categories = $this->categoryModel->List();
+        $vouchers = $this->voucherData->List();
+        $suppliers = $this->supplierModal->List();
       include 'app/views/admin/vouchers/show.php';
       
     }
-    // public function detail()
-    // {
-    //   include 'app/views/admin/products/detail.php';
+    public function detail()
+    {
+        $categories = $this->categoryModel->List();
+        $voucherData = $this->voucherData;
+        $suppliers = $this->supplierModal->List();
+
+      include 'app/views/admin/vouchers/detail.php';
       
-    // }
+    }
 
-    // public function create()
-    // {
-    //   include 'app/views/admin/products/create.php';
-    // }
+    public function create()
+    {
+        $categories = $this->categoryModel->List();
+       
+      
+   
+        $suppliers = $this->supplierModal->ListName();
+        
+        include_once 'app/views/admin/vouchers/create.php';
+    }
 
-    // public function edit()
-    // {
-    //     include 'app/views/admin/products/edit.php';
-    // }
+    public function edit()
+    {
+        $categories = $this->categoryModel->List();
+        $voucherData = $this->voucherData;
+
+        $suppliers = $this->supplierModal->List();
+
+        include 'app/views/admin/vouchers/edit.php';
+    }
   
-    // public function upload()
-    // {
-    //     date_default_timezone_set('Asia/Ho_Chi_Minh');
-
-    //     $targetDirectory = 'public/uploads/products/' . date('d-m-Y') . '/';
-        
-    //     $originalFileName = pathinfo($_FILES['file']['name'], PATHINFO_FILENAME); // lấy tên file ảnh
-    //     $extension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION); //lấy đuôi file ảnh
-
-    //     $newFileName = $originalFileName;
-    //     $counter = 1;
-    //     while (file_exists($targetDirectory . $newFileName . '.' . $extension)) {
-    //         $newFileName = $originalFileName . '_' . $counter++;
-    //     }
-
-    //     $targetFile = $targetDirectory . $newFileName . '.' . $extension;
-
-    //     if (!file_exists($targetDirectory)) {
-    //         mkdir($targetDirectory, 0777, true);
-    //     }
-        
-    //     if (move_uploaded_file($_FILES['file']['tmp_name'], $targetFile)) {
-    //         echo "File đã được tải lên thành công.";
-    //     } else {
-    //         echo "Có lỗi khi tải file lên.";
-    //     }
-    // }
-
   
-    // public function add() {
-    //     date_default_timezone_set('Asia/Ho_Chi_Minh');
-    //     $this->voucherData->setProductID($_POST['productId']);
-    //     $this->voucherData->setProductName($_POST['productName']);
-    //     $this->voucherData->setLink($_POST['link']);
-    //     $this->voucherData->setRateCount($_POST['rateCount']);
-    //     $this->voucherData->setSoldCount(date($_POST['soldCount']));
-    //     $this->voucherData->setCreatedAt(date('Y-m-d H:i:s'));
-    //     $this->voucherData->setUpdateAt(date('Y-m-d H:i:s'));
-    //     $this->voucherData->setStatus($_POST['status']);
-    //     $imageName = ($_POST['image']);
-    //     $targetDirectory = '/public/uploads/products/' . date('d-m-Y') . '/';
-    //     $imageUrl = $targetDirectory . $imageName;
-    //     $this->voucherData->setImage($imageUrl);
-    
-    //     if ($this->voucherData->Add()){
-    //         header('Location: ../theo-doi-gia-san-pham/show');
-    //     }else{
-    //         echo "Thêm sản phẩm theo dõi thất bại";
-    //     }
-        
-    // }
 
-    // public function update() {
-    //     date_default_timezone_set('Asia/Ho_Chi_Minh');
-    //     $this->voucherData->setProductID($_POST['productId']);
-    //     $this->voucherData->setProductName($_POST['productName']);
-    //     $this->voucherData->setLink($_POST['link']);
-    //     $this->voucherData->setRateCount($_POST['rateCount']);
-    //     $this->voucherData->setSoldCount(date($_POST['soldCount']));
-    //     $this->voucherData->setUpdateAt(date('Y-m-d H:i:s'));
-    //     $this->voucherData->setStatus($_POST['status']);
-    //     $imageName = ($_POST['image']);
-    //     $imageFake = ($_POST['fakeImage']);
-    //     if ($imageName == "") {
-    //         $this->voucherData->setImage($imageFake);
-    //     }else { $targetDirectory = '/public/uploads/products/' . date('d-m-Y') . '/';
-    //         $imageUrl = $targetDirectory . $imageName;
-            
-    //         $this->voucherData->setImage($imageUrl);
-    //     }
-    //     if ($this->voucherData->Edit()){
-    //         header('Location: ../theo-doi-gia-san-pham/show');
-    //     }else{
-    //         echo "Sửa sản phẩm theo dõi thất bại";
-    //     }
+    // function format date year/month/day
+ 
+    public function add() {
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $expressAt = date('Y-m-d', strtotime($_POST['expressAt']));
+        $expiresAt = date('Y-m-d', strtotime($_POST['expiresAt']));
+        $this->voucherData->setVoucherId($_POST['voucherId']);
+        $this->voucherData->setVoucherName($_POST['voucherName']);
+        $this->voucherData->setQuantity($_POST['quantity']);
+        $this->voucherData->setExpressAt($expressAt);
+        $this->voucherData->setExpiresAt($expiresAt);
+        $this->voucherData->setMinimumDiscount(($_POST['minimunDiscount']));
+        $this->voucherData->setConditionsOfUse(($_POST['conditionsOfUse']));
+        $this->voucherData->setCategoryId(($_POST['categoryId']));
+        $this->voucherData->setCreatedAt(date('Y-m-d H:i:s'));
+        $this->voucherData->setUpdatedAt(date('Y-m-d H:i:s'));
+        $this->voucherData->setIsTrend($_POST['is_trend']);
+        $this->voucherData->setSupplierId($_POST['supplierId']);
+        $this->voucherData->setStatus(1);
+        $this->voucherData->setAddress_target($_POST['address_target']);
+        $this->voucherData->setDiscountType($_POST['discountType']);
+        $this->voucherData->setMaximunDiscount($_POST['maximumDiscount']);
+        $this->voucherData->setIs_inWallet($_POST['is_inWallet']);
         
-    // }
+        if ($this->voucherData->Add()){
+            header('Location: ../ma-giam-gia/show');
+        }else{
+            echo "Thêm mã giảm giá thất bại";
+        }
+        
+    }
 
-    // public function delete($productId) {
-    //     $this->voucherData->setProductID($productId);
-    //     if ($this->voucherData->Delete()){
-    //         header('Location: ../show');
-    //     }else{
-    //         echo "Xóa sản phẩm theo dõi thất bại";
-    //     }
+    public function update() {
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $expressAt = date('Y-m-d', strtotime($_POST['expressAt']));
+        $expiresAt = date('Y-m-d', strtotime($_POST['expiresAt']));
+        $this->voucherData->setVoucherId($_POST['voucherId']);
+        $this->voucherData->setVoucherName($_POST['voucherName']);
+        $this->voucherData->setQuantity($_POST['quantity']);
+        $this->voucherData->setExpressAt($expressAt);
+        $this->voucherData->setExpiresAt($expiresAt);
+        $this->voucherData->setMinimumDiscount(($_POST['minimunDiscount']));
+        $this->voucherData->setConditionsOfUse(($_POST['conditionsOfUse']));
+        $this->voucherData->setCategoryId(($_POST['categoryId']));
+        $this->voucherData->setUpdatedAt(date('Y-m-d H:i:s'));
+        $this->voucherData->setIsTrend($_POST['is_trend']);
+        $this->voucherData->setSupplierId($_POST['supplierId']);
+        $this->voucherData->setStatus(1);
+        $this->voucherData->setAddress_target($_POST['address_target']);
+        $this->voucherData->setDiscountType($_POST['discountType']);
+        $this->voucherData->setMaximunDiscount($_POST['maximumDiscount']);
+        $this->voucherData->setIs_inWallet($_POST['is_inWallet']);
+        if ($this->voucherData->Edit()){
+            header('Location: ../ma-giam-gia/show');
+        }else{
+            echo "Sửa mã giảm giá thất bại";
+        }
         
-    // }
+    }
+
+    public function delete($voucherId) {
+        $this->voucherData->setVoucherId($voucherId);
+        if ($this->voucherData->Delete()){
+            header('Location: ../show');
+        }else{
+            echo "Xóa mã giảm giá thất bại";
+        }
+        
+    }
 
     
    

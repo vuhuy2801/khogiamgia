@@ -18,15 +18,18 @@ class BannerController {
     }
 
     public function index() {
+        $banners = $this->bannerData->List();
         include 'app/views/admin/banners/show.php';
     }
     public function create() {
         include 'app/views/admin/banners/create.php';
     }
     public function detail() {
+        $bannerData = $this->bannerData;
         include 'app/views/admin/banners/detail.php';
     }
     public function edit() {
+        $bannerData = $this->bannerData;
         include 'app/views/admin/banners/edit.php';
     }
 

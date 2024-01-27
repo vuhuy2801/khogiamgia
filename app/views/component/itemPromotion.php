@@ -34,8 +34,8 @@ function itemPromotion($logoUrl, $promotionType, $endDate, $discountValue, $minP
                 
             </div>
             <div class="col-7">
-                <div class="discount-value">Giảm <span>' . $discountValue . '</span></div>
-                <div class="min-price">Tối thiểu <span>' . $minPrice . '</span></div>
+                <div class="discount-value">Giảm<span class="px-1">' . $discountValue . '</span></div>
+                <div class="min-price">Đơn tối thiểu <span>' . $minPrice . '</span></div>
                 <div class="max-discount">Tối đa <span>' . $maxDiscount . '</span></div>
                 <div class="type">
                     <span class="badge badge-promotion"># ' . $promotionHashtag . '</span>

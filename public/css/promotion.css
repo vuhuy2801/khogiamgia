@@ -1,113 +1,113 @@
 .item-promotion {
-    padding: 24px 20px 10px 20px;
-    max-width: 400px;
-    /* width: 100%; */
-    font-size: 14px;
-    line-height: 20px;
-    background-color: #ffffff;
-    border-radius: 16px;
+  padding: 20px 20px 20px 20px;
+  max-width: 400px;
+  /* width: 100%; */
+  font-size: 14px;
+  line-height: 20px;
+  background-color: #ffffff;
+  border-radius: 16px;
 }
 
 .section-promotion {
-    padding: 35px 0px;
+  padding: 35px 0px;
 }
 
 @media (max-width: 768px) {
-    .section-promotion {
-        padding: 0px;
-    }
+  .section-promotion {
+    padding: 0px;
+  }
 }
 
 .item-promotion .row {
-    justify-content: center;
+  justify-content: center;
 }
 
 .promotion-card {
-    padding: 10px 20px;
-    background-image: url("../../public/images/svg/Subtract.svg");
-    background-repeat: no-repeat;
-    background-size: 100%;
+  padding: 10px 20px;
+  background-image: url("../../public/images/svg/Subtract.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 .promotion-card .col-4 {
-    height: 120px;
+  height: 120px;
 }
 
 .discount-value span {
-    color: #e45f2b;
-    font-size: 32px;
-    font-weight: 700;
+  color: #e45f2b;
+  font-size: 32px;
+  font-weight: 700;
 }
 .discount-value {
-    display: flex;
-    margin: 5px 0px;
+  display: flex;
+  margin: 5px 0px;
 }
 .item-promotion__img {
-    width: 100%;
-    object-fit: cover;
+  width: 100%;
+  object-fit: cover;
 }
 .item-promotion__img img {
-    border-radius: 50%;
-    width: 57px;
+  border-radius: 50%;
+  width: 57px;
 }
 
 .promotion-type {
-    font-weight: 600;
+  font-weight: 600;
 }
 .end-date {
-    font-size: 10px;
-    font-weight: 400;
+  font-size: 10px;
+  font-weight: 400;
 }
 .min-price span,
 .max-discount span,
 .remaining span,
 .category span,
 .warning span {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 .remaining span,
 .category span,
 .warning span {
-    font-size: 16px;
+  font-size: 16px;
 }
 .warning span {
-    color: #e45f2b;
+  color: #e45f2b;
 }
 
 .badge-promotion {
-    margin-top: 15px;
-    text-align: center;
-    font-size: 12px;
-    color: #0a3622;
-    background-color: #d1e7dd;
-    padding: 4px 8px;
+  /* margin-top: 15px; */
+  text-align: center;
+  font-size: 12px;
+  color: #0a3622;
+  background-color: #d1e7dd;
+  padding: 4px 8px;
 }
 
 .badge-copy {
-    background-color: #fff3cd;
-    color: #664d03;
+  background-color: #fff3cd;
+  color: #664d03;
 }
 
 .badge-copy:hover {
-    cursor: pointer;
-    background-color: #664d03;
-    color: #fff3cd;
+  cursor: pointer;
+  background-color: #664d03;
+  color: #fff3cd;
 }
 
 .badge-open {
-    color: #0a3622;
-    background-color: #d1e7dd;
+  color: #0a3622;
+  background-color: #d1e7dd;
 }
 
 .badge-open:hover {
-    cursor: pointer;
-    background-color: #0a3622;
-    color: #d1e7dd;
+  cursor: pointer;
+  background-color: #0a3622;
+  color: #d1e7dd;
 }
 
 @media (max-width: 1400px) {
-    .item-promotion {
-        max-width: 370px;
-    }
+  .item-promotion {
+    max-width: 370px;
+  }
 }

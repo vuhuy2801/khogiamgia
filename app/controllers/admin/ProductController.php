@@ -81,7 +81,7 @@ class ProductController {
         $this->productData->setProductName($_POST['productName']);
         $this->productData->setLink($_POST['link']);
         $this->productData->setRateCount($_POST['rateCount']);
-        $this->productData->setSoldCount(date($_POST['soldCount']));
+        $this->productData->setSoldCount(($_POST['soldCount']));
         $this->productData->setCreatedAt(date('Y-m-d H:i:s'));
         $this->productData->setUpdateAt(date('Y-m-d H:i:s'));
         $this->productData->setStatus($_POST['status']);
@@ -104,7 +104,7 @@ class ProductController {
         $this->productData->setProductName($_POST['productName']);
         $this->productData->setLink($_POST['link']);
         $this->productData->setRateCount($_POST['rateCount']);
-        $this->productData->setSoldCount(date($_POST['soldCount']));
+        $this->productData->setSoldCount(($_POST['soldCount']));
         $this->productData->setUpdateAt(date('Y-m-d H:i:s'));
         $this->productData->setStatus($_POST['status']);
         $imageName = ($_POST['image']);

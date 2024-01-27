@@ -28,17 +28,17 @@ CREATE TABLE IF NOT EXISTS Post (
     categories_post INT,
     createdAt DATETIME,
     updateAt DATETIME,
-    status INT
+    status INT,
+    FOREIGN KEY (supplierId) REFERENCES Supplier(supplierId)
 );
 
 -- table Voucher
 CREATE TABLE IF NOT EXISTS Voucher (
-    voucherId NVARCHAR(15) PRIMARY KEY,
+    voucherId NVARCHAR(15) PRIMARY KEY NOT NULL,
     voucherName NVARCHAR(255),
     quantity INT,
     expressAt DATE,
     expiresAt DATE,
-    orderConditions NVARCHAR(255),
     conditionsOfUse NVARCHAR(255),
     categoryId INT,
     createdAt DATETIME,
@@ -48,18 +48,20 @@ CREATE TABLE IF NOT EXISTS Voucher (
     status INT,
     address_target NVARCHAR(255),
     discountType INT,
-    discount NVARCHAR(255),
     maximumDiscount NVARCHAR(255),
     minimumDiscount NVARCHAR(255),
     is_inWallet TINYINT(1),
-    is_manually TINYINT(1)
+    FOREIGN KEY (supplierId) REFERENCES Supplier(supplierId),
+	FOREIGN KEY (categoryId) REFERENCES Category(categoryId)
 );
+
 
 -- table Use
 CREATE TABLE IF NOT EXISTS Used (
 	usedId INT PRIMARY KEY AUTO_INCREMENT,
     voucherId NVARCHAR(15),
-    usedCount INT
+    usedCount INT,
+    FOREIGN KEY (voucherId)REFERENCES Voucher(voucherId)
 );
 
 -- table Product 
@@ -81,7 +83,8 @@ CREATE TABLE IF NOT EXISTS ProductPrice (
     productPriceID INT PRIMARY KEY AUTO_INCREMENT,
     productID NVARCHAR(255),
     date DATE,
-    currentPrice FLOAT(25)
+    currentPrice FLOAT(25),
+    FOREIGN KEY (productID) REFERENCES Product(productID)
 );
 
 -- table banner
@@ -116,33 +119,6 @@ CREATE TABLE IF NOT EXISTS User (
         referer_url VARCHAR(2048) NULL
     );
 
-
-
--- FOREIGN KEY 
-ALTER TABLE Post
-ADD CONSTRAINT fk_supplier
-FOREIGN KEY (supplierId)
-REFERENCES Supplier(supplierId);
-
-ALTER TABLE Voucher
-ADD CONSTRAINT fk_category
-FOREIGN KEY (categoryId)
-REFERENCES Category(categoryId);
-
-ALTER TABLE Voucher
-ADD CONSTRAINT fk_supplier_voucher
-FOREIGN KEY (supplierId)
-REFERENCES Supplier(supplierId);
-
-ALTER TABLE Used
-ADD CONSTRAINT fk_voucher
-FOREIGN KEY (voucherId)
-REFERENCES Voucher(voucherId);
-
-ALTER TABLE ProductPrice
-ADD CONSTRAINT fk_product
-FOREIGN KEY (productID)
-REFERENCES Product(productID);
 
 
 DELIMITER //

@@ -71,7 +71,7 @@ class Product implements ProductService
         return $this->link;
     }
 
-    public function setLink(string $link)
+    public function setLink($link)
     {
         $this->link = $link;
     }
@@ -145,8 +145,8 @@ class Product implements ProductService
         $staement->bindParam(1, $this->productID);
         $staement->bindParam(2, $this->productName);
         $staement->bindParam(3, $this->image);
-        $staement->bindParam(4, $this->rateCount);
-        $staement->bindParam(5, $this->link);
+        $staement->bindParam(4, $this->link);
+        $staement->bindParam(5, $this->rateCount);
         $staement->bindParam(6, $this->soldCount);
         $staement->bindParam(7, $this->updatedAt);
         $staement->bindParam(8, $this->status);

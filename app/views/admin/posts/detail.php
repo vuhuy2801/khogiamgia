@@ -23,12 +23,11 @@
             require_once 'app/views/admin/posts/generalProcessing.php';
             require_once 'app/controllers/admin/PostController.php';
             $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
-            $postController = new PostController();
-            $post = $postController->getPostDetail($id);
+            $post = $postData->getPostDetail($id);
             
             ?>
 
-            <div class="col px-3 py-3 bg-light">
+            <div class="col px-3 py-3 wrapContent">
                 <div class="mt-4">
                     <h3 class="mt-3 mb-3"><?php echo $post['title'] ?>
                     </h3>
@@ -48,7 +47,7 @@
 
                         </div>
                         <div class="col-8">
-                            <form class="bg-body rounded-3 px-3 pt-3 pb-5" id="formSubmit">
+                            <form class="wrap_detail rounded-3 px-3 pt-3 pb-5" id="formSubmit">
 
                                 <div class="form-group">
                                     <label class="label_input" for="title">Tiêu đề</label>

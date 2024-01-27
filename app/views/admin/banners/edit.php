@@ -22,12 +22,11 @@
             require_once 'lib/convertDate.php';
             require_once 'app/controllers/admin/BannerController.php';
             $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
-            $bannerController = new BannerController();
-            $banner = $bannerController->getDetail($id);
+            $banner = $bannerData->Detail($id);
             ?>
 
 
-            <div class="col px-3 py-3 bg-light">
+            <div class="col px-3 py-3 wrapContent">
                 <div class="toast toast_update align-items-center text-bg-primary border-0 position-absolute start-50 translate-middle"
                     role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="d-flex">
@@ -53,7 +52,7 @@
 
                         </div>
                         <div class="col-8">
-                            <form class="bg-body rounded-3 px-3 pt-3 pb-5" id="formSubmit" method="POST"
+                            <form class="wrap_detail rounded-3 px-3 pt-3 pb-5" id="formSubmit" method="POST"
                                 action="update">
                                 <div class="form-group">
                                     <input type="hidden" value="<?php echo $banner['bannerId'] ?>" class="form-control"

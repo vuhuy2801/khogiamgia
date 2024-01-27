@@ -24,10 +24,6 @@
   object-fit: contain;
 }
 
-.wrap_dasboard {
-  background-color: #f0f2f5;
-}
-
 .action_edit {
   color: #28a745;
   font-size: 24px;
@@ -48,6 +44,7 @@
   padding-left: 15px;
   padding-right: 15px;
   padding-bottom: 6px;
+  background-color: #ffffff;
 }
 
 #item_head_table {
@@ -239,4 +236,29 @@
 
 .bi-arrow-left::before {
   font-weight: bold !important;
+}
+
+.item-promotion {
+  box-shadow: 0 0 8px rgba(24, 144, 255, 0.5), 0 0 8px rgba(24, 144, 255, 0.5);
+}
+
+.boxInfo {
+  box-shadow: 0 0 8px rgba(24, 144, 255, 0.5), 0 0 8px rgba(24, 144, 255, 0.5);
+}
+
+.wrapContent {
+  background-color: #f0f2f5;
+}
+
+.selectInput {
+  height: 37.78px;
+}
+
+.wrap_detail {
+  background-color: #ffffff;
+}
+
+.delete-voucher {
+  color: #dc3545;
+  font-size: 24px;
 }

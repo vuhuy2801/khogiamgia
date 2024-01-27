@@ -346,13 +346,13 @@ DELIMITER ;
 DELIMITER //
 
 CREATE PROCEDURE AddVoucher(
-	In voucher_id NVARCHAR(15),
+    IN voucher_id NVARCHAR(15),
     IN voucher_name NVARCHAR(255),
     IN voucher_quantity INT,
     IN voucher_expressAt DATE,
     IN voucher_expiresAt DATE,
-    IN voucher_conditionOrder NVARCHAR(255),
-    IN voucher_conditionOfUse NVARCHAR(255),
+    IN voucher_minimumDiscount NVARCHAR(255),
+    IN voucher_conditionsOfUse NVARCHAR(255), 
     IN voucher_categoryId INT,
     IN voucher_createdAt DATETIME,
     IN voucher_updatedAt DATETIME,
@@ -360,22 +360,24 @@ CREATE PROCEDURE AddVoucher(
     IN voucher_supplierId INT,
     IN voucher_status INT,
     IN voucher_address_target NVARCHAR(255),
-    IN voucher_discountType INT,
+    IN voucher_discountType INT,  
     IN voucher_maximumDiscount NVARCHAR(255),
     IN voucher_is_inWallet TINYINT
 )
 BEGIN
     INSERT INTO Voucher (
-        voucherId,voucherName, quantity, expressAt, expiresAt, orderConditions,
+        voucherId, voucherName, quantity, expressAt, expiresAt, minimumDiscount,
         conditionsOfUse, categoryId, createdAt, updatedAt, is_trend,
-        supplierId, status, address_target, discountType,maximumDiscount, is_inWallet
+        supplierId, status, address_target, discountType, maximumDiscount, is_inWallet
     ) VALUES (
-        voucher_id,voucher_name, voucher_quantity, voucher_expressAt, voucher_expiresAt, voucher_conditionOrder,
-        voucher_conditionOfUse, voucher_categoryId, voucher_createdAt, voucher_updatedAt, voucher_is_trend,
-        voucher_supplierId, voucher_status, voucher_address_target, voucher_discountType,voucher_maximumDiscount, voucher_is_inWallet
+        voucher_id, voucher_name, voucher_quantity, voucher_expressAt, voucher_expiresAt, voucher_minimumDiscount,
+        voucher_conditionsOfUse, voucher_categoryId, voucher_createdAt, voucher_updatedAt, voucher_is_trend,
+        voucher_supplierId, voucher_status, voucher_address_target, voucher_discountType, voucher_maximumDiscount, voucher_is_inWallet
     );
 END;
 //
+
+
 
 DELIMITER ;
 
@@ -388,7 +390,7 @@ CREATE PROCEDURE UpdateVoucher(
     IN new_voucher_quantity INT,
     IN new_voucher_expressAt DATE,
     IN new_voucher_expiresAt DATE,
-    IN new_voucher_conditionOrder NVARCHAR(255),
+     IN voucher_minimumDiscount NVARCHAR(255),
     IN new_voucher_conditionOfUse NVARCHAR(255),
     IN new_voucher_categoryId INT,
     IN new_voucher_updatedAt DATETIME,
@@ -406,7 +408,7 @@ BEGIN
         quantity = new_voucher_quantity,
         expressAt = new_voucher_expressAt,
         expiresAt = new_voucher_expiresAt,
-        orderConditions = new_voucher_conditionOrder,
+        minimumDiscount = voucher_minimumDiscount,
         conditionsOfUse = new_voucher_conditionOfUse,
         categoryId = new_voucher_categoryId,
         updatedAt = new_voucher_updatedAt,
@@ -451,7 +453,7 @@ DELIMITER //
 
 CREATE PROCEDURE GetListVouchersUser()
 BEGIN
-    SELECT voucherId,voucherName,supplierId,expiresAt,discount,maximumDiscount,minimumDiscount,is_manually,quantity,categoryId,conditionsOfUse,address_target,is_inWallet FROM Voucher;
+    SELECT voucherId,voucherName,supplierId,expiresAt,discountType,maximumDiscount,minimumDiscount,quantity,categoryId,conditionsOfUse,address_target,is_inWallet FROM Voucher;
 END;
 //
 
@@ -461,7 +463,7 @@ DELIMITER //
 
 CREATE PROCEDURE GetListVoucherBySupplier(IN in_supplierId int)
 BEGIN
-    SELECT voucherId,voucherName,supplierId,expiresAt,discount,maximumDiscount,minimumDiscount,is_manually,quantity,categoryId,conditionsOfUse,address_target,is_inWallet FROM Voucher Where supplierId = in_supplierId;
+    SELECT voucherId,voucherName,supplierId,expiresAt,discountType,maximumDiscount,minimumDiscount,quantity,categoryId,conditionsOfUse,address_target,is_inWallet FROM Voucher Where supplierId = in_supplierId;
 END;
 //
 

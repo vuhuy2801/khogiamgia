@@ -26,7 +26,7 @@
             ?>
 
             <!-- end sidebar -->
-            <div class="col px-3 py-3 wrap_dasboard position-relative">
+            <div class="col px-3 py-3 wrap_dasboard wrapContent position-relative">
                 <div class="mt-5 d-flex justify-content-between align-items-center">
                     <h3 class="mb-0">
                         Danh sách banner
@@ -48,7 +48,7 @@
                 </div>
 
 
-                <div class="wrap_table bg-light rounded-3">
+                <div class="wrap_table wrap_detail rounded-3">
                     <table class="table table-hover mb-4">
                         <thead class='head_item'>
                             <tr>
@@ -63,8 +63,7 @@
                         </thead>
                         <tbody class="body_item">
                             <?php
-                                $bannerController = new BannerController();
-                                $banners = $bannerController->getListOfBanners();
+          
                                 $bannersPerPage = 5;
                                 $totalBanners = count($banners);
                             

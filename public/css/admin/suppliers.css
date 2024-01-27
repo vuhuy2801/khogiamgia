@@ -225,3 +225,11 @@
 .bi-arrow-left::before {
   font-weight: bold !important;
 }
+
+.wrapContent {
+  background-color: #f0f2f5;
+}
+
+.wrap_detail {
+  background-color: #ffffff;
+}
