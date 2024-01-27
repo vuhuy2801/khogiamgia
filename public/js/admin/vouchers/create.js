@@ -70,7 +70,7 @@ elmDiscountType.addEventListener("change", function () {
 });
 
 elmIs_inWallet.addEventListener("change", function () {
-  if (elmIs_inWallet.value == 1) {
+  if (elmIs_inWallet.value == 0) {
     hastagElement.innerHTML = `# Mã nhập tay`;
   } else {
     hastagElement.innerHTML = `# Mã trong ví`;
@@ -159,12 +159,59 @@ document
     }
   });
 
+document.getElementById("supplierId").addEventListener("change", function () {
+  const supplierIdValue = this.value;
+  if (supplierIdValue === "Chọn nhà cung cấp") {
+    showError("supplierId", "Vui lòng chọn nhà cung cấp");
+  } else {
+    hideError("supplierId");
+  }
+});
+
+document.getElementById("discountType").addEventListener("change", function () {
+  const discountTypeValue = this.value;
+  if (discountTypeValue === "Chọn loại mã giảm giá") {
+    showError("discountType", "Vui lòng chọn loại mã giảm giá");
+  } else {
+    hideError("discountType");
+  }
+});
+
+document.getElementById("categoryId").addEventListener("change", function () {
+  const categoryIdValue = this.value.trim();
+
+  if (categoryIdValue === "Chọn nghành hàng") {
+    showError("categoryId", "Vui lòng chọn nghành hàng");
+  } else {
+    hideError("categoryId");
+  }
+});
+
+document.getElementById("expiresAt").addEventListener("change", function () {
+  const expiresAtValue = this.value.trim();
+  let expiresDate = new Date(expiresAtValue);
+  if (expiresAtValue === "") {
+    showError("expiresAt", "Vui lòng nhập ngày hết hạn");
+  } else if (expiresDate < new Date()) {
+    showError("expiresAt", "Vui lòng nhập đúng ngày hết hạn");
+  } else {
+    hideError("expiresAt");
+  }
+});
+
 btnSubmit.addEventListener("click", () => {
   clearAllErrors();
   const voucherId = document.getElementById("voucherId").value.trim();
   const voucherName = document.getElementById("voucherName").value.trim();
   const quantity = document.getElementById("quantity").value.trim();
   const address_target = document.getElementById("address_target").value.trim();
+  const supplierIdElement = document.getElementById("supplierId").value;
+  const discountTypeElement = document.getElementById("discountType").value;
+  const categoryIdElement = document.getElementById("categoryId").value.trim();
+  const conditionsOfUseElement =
+    document.getElementById("conditionsOfUse").value;
+  const expiresAtElement = document.getElementById("expiresAt").value;
+
   const minimunDiscount = document
     .getElementById("minimunDiscount")
     .value.trim();
@@ -172,6 +219,46 @@ btnSubmit.addEventListener("click", () => {
     .getElementById("maximumDiscount")
     .value.trim();
   let isValid = true;
+
+  let expiresDate = new Date(expiresAtElement);
+
+  if (expiresAtElement === "") {
+    showError("expiresAt", "Vui lòng nhập ngày hết hạn");
+    isValid = false;
+  } else if (expiresDate < new Date()) {
+    showError("expiresAt", "Vui lòng nhập đúng ngày hết hạn");
+    isValid = false;
+  } else {
+    hideError("expiresAt");
+  }
+
+  if (categoryIdElement === "Chọn nghành hàng") {
+    showError("categoryId", "Vui lòng chọn nghành hàng");
+    let isValid = true;
+  } else {
+    hideError("categoryId");
+  }
+
+  if (discountTypeElement === "Chọn loại mã giảm giá") {
+    showError("discountType", "Vui lòng chọn loại mã giảm giá");
+    let isValid = true;
+  } else {
+    hideError("discountType");
+  }
+
+  if (supplierIdElement === "Chọn nhà cung cấp") {
+    showError("supplierId", "Vui lòng chọn nhà cung cấp");
+    let isValid = true;
+  } else {
+    hideError("supplierId");
+  }
+
+  if (conditionsOfUseElement === "") {
+    showError("conditionsOfUse", "Vui lòng nhập lưu ý mã giảm giá");
+    isValid = false;
+  } else {
+    hideError("conditionsOfUse");
+  }
 
   if (voucherId === "") {
     showError("voucherId", "Vui lòng nhập sản giảm giá");

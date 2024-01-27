@@ -10,6 +10,13 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <title> <?php echo $titlePage ?> </title>
+    <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">
+
 </head>
 
 <body>
@@ -34,14 +41,14 @@
 
                     <div class="row pt-1">
                         <div class="d-flex justify-content-between px-3 mb-4">
-                            <a href="show" class="my-auto text-decoration-none back_home"><i
+                            <a href="danh-sach" class="my-auto text-decoration-none back_home"><i
                                     class="bi bi-arrow-left mx-1"></i>Quay
                                 lại</a>
                             <div>
                                 <a class="btn btn-danger mx-1 drop-post" data-post-id='<?php echo $id ?>'
                                     data-bs-toggle='modal' data-bs-target='#deletePost'><i
                                         class='mx-1 bi bi-trash'></i>Xóa</a>
-                                <a class="btn btn-primary" href="<?php echo 'edit?id='.$id ?>"><i
+                                <a class="btn btn-primary" href="<?php echo 'cap-nhat?id='.$id ?>"><i
                                         class='mx-1 bi bi-pencil-square'></i>Sửa</a>
                             </div>
 
@@ -85,7 +92,7 @@
                             </form>
                         </div>
                         <div class="col-4">
-                            <div class="card mb-3">
+                            <div class="card mb-3 item-boxshadow">
                                 <div class="card-body">
                                     <p class="card-text label_right"><small class="text-body-secondary">Hình ảnh</small>
                                     </p>
@@ -95,7 +102,7 @@
                                     <img src="<?php echo $post['image'] ?>" alt="">
                                 </div>
                             </div>
-                            <div class="card">
+                            <div class="card item-boxshadow">
                                 <div class="card-body">
                                     <p class="label_right">Thông tin</p>
                                     <hr>

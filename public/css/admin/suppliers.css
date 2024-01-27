@@ -1,3 +1,6 @@
+* {
+  font-family: "Inter", sans-serif;
+}
 .table_item {
   width: 13%;
   text-align: center;
@@ -232,4 +235,8 @@
 
 .wrap_detail {
   background-color: #ffffff;
+}
+
+.item-boxshadow {
+  box-shadow: 0 0 8px rgba(24, 144, 255, 0.5), 0 0 8px rgba(24, 144, 255, 0.5);
 }

@@ -1,7 +1,9 @@
 <?php
 require_once 'app/models/BannerModel.php';
+include_once 'app/controllers/admin/AdminController.php';
 
-class BannerController {
+
+class BannerController extends AdminController{
     private $bannerData;
 
     public function __construct() {
@@ -18,25 +20,36 @@ class BannerController {
     }
 
     public function index() {
+        $this->checkLogin();
+
         $banners = $this->bannerData->List();
         include 'app/views/admin/banners/show.php';
     }
     public function create() {
+        $this->checkLogin();
+
+        $titlePage = "Thêm banner";
         include 'app/views/admin/banners/create.php';
     }
     public function detail() {
+        $this->checkLogin();
+
         $bannerData = $this->bannerData;
+        $titlePage = "Chi tiết banner";
         include 'app/views/admin/banners/detail.php';
     }
     public function edit() {
+        $this->checkLogin();
+
         $bannerData = $this->bannerData;
+        $titlePage = "Sửa banner";
         include 'app/views/admin/banners/edit.php';
     }
 
     public function delete($bannerId) {
         $this->bannerData->setBannerID($bannerId);
         if ($this->bannerData->Delete()){
-            header('Location: ../show');
+            header('Location: ../danh-sach');
         }else
         {
             echo "Xóa banner thất bại !";
@@ -85,7 +98,7 @@ class BannerController {
         $this->bannerData->setImage($imageUrl);
     
         if ($this->bannerData->Add()){
-            header('Location: ../banner/show');
+            header('Location: ../banner/danh-sach');
         }else{
             echo "Thêm banner thất bại";
         }
@@ -109,7 +122,7 @@ class BannerController {
             $this->bannerData->setImage($imageUrl);
         }
         if ($this->bannerData->Edit()){
-            header('Location: ../banner/show');
+            header('Location: ../banner/danh-sach');
         }else{
             echo "Sửa nhà cung cấp thất bại";
         }

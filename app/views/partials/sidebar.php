@@ -1,12 +1,12 @@
 <?php
 $logoUrl = "https://api.vuhuy.site/uploads/LOGO_2bd919edea.png";
-$homeUrl = "../trang-chu/show";
-$maGiamGiaUrl = "../ma-giam-gia/show";
-$theoDoiGiaSPUrl = "../theo-doi-gia-san-pham/show";
-$noiDungUrl = "../bai-viet/show";
-$bannerUrl = "../banner/show";
-$nhaCungCapUrl = "../nha-cung-cap/show";
-$thongKeUrl = "../thong-ke/show";
+$homeUrl = "../trang-chu/kho-giam-gia";
+$maGiamGiaUrl = "../ma-giam-gia/danh-sach";
+$theoDoiGiaSPUrl = "../theo-doi-gia-san-pham/danh-sach";
+$noiDungUrl = "../bai-viet/danh-sach";
+$bannerUrl = "../banner/danh-sach";
+$nhaCungCapUrl = "../nha-cung-cap/danh-sach";
+$thongKeUrl = "../thong-ke/kho-giam-gia";
 $dangXuatUrl = "/dang-xuat";
 
 //text variables

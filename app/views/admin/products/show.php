@@ -6,16 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Theo dõi sản phẩm</title>
     <link rel="stylesheet" href="/public/css/bootstrap/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/public/css/sidebar.css">
     <link rel="stylesheet" href="/public/css/admin/products.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">
+
 </head>
 
 
 <body>
     <div class="container-fluid">
         <!-- end -->
+
         <div class="row flex-nowrap">
             <?php
             require_once 'app/views/partials/sidebar.php';
@@ -43,7 +50,7 @@
                         </div>
 
                         <button id="btnAdd" class="btn btn-primary">
-                            <a class="addLink text-white" href='create'>Thêm</a>
+                            <a class="addLink text-white" href='them'>Thêm</a>
                         </button>
                     </div>
                 </div>
@@ -92,24 +99,24 @@
                                 echo "<td class='item_table '><p class='item_status my-0 rounded-3 " . $statusClass . "'>" . $statusProduct[$product['status']] . "</p></td>";
 
                                 echo "<td class='item_table'>
-                                        <a class='px-1 action_detail' href='detail?id=" . urlencode($product['productID']) . "'><i class='bi bi-eye-fill'></i></a>
-                                        <a class='px-1 action_edit' href='edit?id=" . urlencode($product['productID']) . "'><i class='bi bi-pencil-square'></i></a>
-                                        <a href='' class='delete-product px-1' data-product-id='" . urlencode($product['productID']) . "' data-bs-toggle='modal' data-bs-target='#deleteProduct'><i class='bi bi-trash'></i></a>
+                                        <a class='px-1 action_detail' href='chi-tiet?id=" . urlencode($product['productID']) . "'><i class='bi bi-eye-fill'></i></a>
+                                        <a class='px-1 action_edit' href='cap-nhat?id=" . urlencode($product['productID']) . "'><i class='bi bi-pencil-square'></i></a>
+                                        <a href class='delete-product px-1' data-product-id='" . urlencode($product['productID']) . "' data-bs-toggle='modal' data-bs-target='#deleteProduct'><i class='bi bi-trash'></i></a>
                                      </td>";
                                 echo "</tr>";
-                            } ?>
+                            } 
+
+
+                            ?>
                         </tbody>
                     </table>
                     <nav class="py-2">
                         <ul class="pagination justify-content-center">
                             <?php
-                            if ($hidePagination) {
-                                return;
+                            if (!$hidePagination) {
+                                include 'app/views/partials/pagination.php';
                             }
-                            include 'app/views/partials/pagination.php';
-
                             ?>
-
                         </ul>
                     </nav>
                 </div>
@@ -122,6 +129,7 @@
         </div>
 
     </div>
+
     <script src="
     https://cdn.jsdelivr.net/npm/dayjs@1.11.10/dayjs.min.js
     "></script>
@@ -129,12 +137,14 @@
     const now = dayjs();
     const formattedTime = now.format('DD/MM/YY HH:mm');
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="/public/js/bootstrap/bootstrap.bundle.min.js"> </script>
 
     <script src="/public/js/admin/products/show.js"> </script>
-    <script src="/public/js/bootstrap/bootstrap.bundle.min.js"> </script>
 
 
 
 </body>
+
 
 </html>

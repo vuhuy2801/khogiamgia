@@ -1,24 +1,24 @@
 <?php
 // Router admin handel suppliers
-$router->get('/admin/nha-cung-cap/show', function () {
+$router->get('/admin/nha-cung-cap/danh-sach', function () {
     require 'app/controllers/admin/SupplierController.php';
     $SupplierController = new SupplierController();
     $SupplierController->index();
 });
 
 
-$router->get('/admin/nha-cung-cap/detail', function () {
+$router->get('/admin/nha-cung-cap/chi-tiet', function () {
     require 'app/controllers/admin/SupplierController.php';
     $SupplierController = new SupplierController();
     $SupplierController->detail();
 });
 
-$router->get('/admin/nha-cung-cap/create', function () {
+$router->get('/admin/nha-cung-cap/them', function () {
     require 'app/controllers/admin/SupplierController.php';
     $SupplierController = new SupplierController();
     $SupplierController->create();
 });
-$router->get('/admin/nha-cung-cap/edit', function () {
+$router->get('/admin/nha-cung-cap/cap-nhat', function () {
     require 'app/controllers/admin/SupplierController.php';
     $SupplierController = new SupplierController();
     $SupplierController->edit();

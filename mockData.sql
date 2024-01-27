@@ -9,7 +9,7 @@ INSERT INTO Category (categoryId, categoryName) VALUES
 INSERT INTO Supplier (supplierName, address_target, logoSupplier) VALUES 
     ('Shopee', 'https://shopee.vn/', '/public/uploads/suppliers/27-01-2024/Shopee.svg.png'),
     ('Tiki', 'https://tiki.vn/', '/public/uploads/suppliers/27-01-2024/Logo_Tiki.png'),
-    ('Tiktok Shop', 'https://www.tiktok.com/', '/public/uploads/suppliers/27-01-2024/tiktoksop.png'),
+    ('ShopeeFood', 'https://shopeefood.vn/', '/public/uploads/suppliers/27-01-2024/shopeefood.png'),
     ('Lazada', 'https://www.lazada.vn/' ,'/public/uploads/suppliers/27-01-2024/lazada-logo-freelogovectors.net_.png'),
     ('Grab','https://www.grab.com/vn/', '/public/uploads/suppliers/27-01-2024/grab-logo.png');
 
@@ -24,6 +24,11 @@ VALUES
 ('VOUCHER008', '30K', 100, '2024-01-25', '2024-02-28','Chỉ áp dụng khi mua trên 1.000.000 VNĐ', 1, '2024-01-26 10:00:00', '2024-01-26 10:00:00', 1, 1, 1, 'https://shopee.vn/', 1,'250K', '20K', 1),
 ('VOUCHER09', '50K', 100, '2024-01-25', '2024-02-28','Chỉ áp dụng khi mua trên 1.000.000 VNĐ', 1, '2024-01-26 10:00:00', '2024-01-26 10:00:00', 1, 3, 1, 'https://shopee.vn/', 1, '250K', '20K', 1),
 ('VOUCHER0045', 'Freeship', 100, '2024-01-25', '2024-02-28','Áp dụng cho học sinh, sinh viên', 1, '2024-01-26 10:00:00', '2024-01-26 10:00:00', 1, 2, 1, 'https://shopee.vn/', 1,'250K', '20K', 1);
+
+INSERT INTO Used (voucherId, usedCount)
+VALUES 
+('VOUCHER0012', 10);
+
 
 INSERT INTO Product (productId,productName, image, link, rateCount, soldCount, status) VALUES 
     ('sp001','Samsung Galaxy S21', 'samsung_s21.jpg', 'https://example.com/samsung_s21', 4.5, 1000, 1),

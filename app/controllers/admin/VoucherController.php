@@ -2,17 +2,20 @@
 require_once 'app/models/VoucherModel.php';
 require_once 'app/models/CategoryModel.php';
 require_once 'app/models/SupplierModel.php';
+include_once 'app/controllers/admin/AdminController.php';
 
 
-class VoucherController {
+class VoucherController extends AdminController{
     private $voucherData;
     private $categoryModel;
     private $supplierModal;
-   
+
+
     public function __construct() {
         $this->voucherData = new Voucher(); 
         $this->categoryModel = new Category();
         $this->supplierModal = new Supplier();
+
     }
 
     public function getListOfVoucher() {
@@ -29,6 +32,7 @@ class VoucherController {
    
     public function index()
     {
+        $this->checkLogin();
         $categories = $this->categoryModel->List();
         $vouchers = $this->voucherData->List();
         $suppliers = $this->supplierModal->List();
@@ -37,6 +41,9 @@ class VoucherController {
     }
     public function detail()
     {
+        $this->checkLogin();
+
+        $titlePage = "Chi tiết mã giảm giá";
         $categories = $this->categoryModel->List();
         $voucherData = $this->voucherData;
         $suppliers = $this->supplierModal->List();
@@ -47,9 +54,11 @@ class VoucherController {
 
     public function create()
     {
+        $this->checkLogin();
+
         $categories = $this->categoryModel->List();
        
-      
+        $titlePage = "Thêm mã giảm giá";
    
         $suppliers = $this->supplierModal->ListName();
         
@@ -58,6 +67,9 @@ class VoucherController {
 
     public function edit()
     {
+        $this->checkLogin();
+
+        $titlePage = "Sửa mã giảm giá";
         $categories = $this->categoryModel->List();
         $voucherData = $this->voucherData;
 
@@ -93,7 +105,7 @@ class VoucherController {
         $this->voucherData->setIs_inWallet($_POST['is_inWallet']);
         
         if ($this->voucherData->Add()){
-            header('Location: ../ma-giam-gia/show');
+            header('Location: ../ma-giam-gia/danh-sach');
         }else{
             echo "Thêm mã giảm giá thất bại";
         }
@@ -121,7 +133,7 @@ class VoucherController {
         $this->voucherData->setMaximunDiscount($_POST['maximumDiscount']);
         $this->voucherData->setIs_inWallet($_POST['is_inWallet']);
         if ($this->voucherData->Edit()){
-            header('Location: ../ma-giam-gia/show');
+            header('Location: ../ma-giam-gia/danh-sach');
         }else{
             echo "Sửa mã giảm giá thất bại";
         }
@@ -131,7 +143,7 @@ class VoucherController {
     public function delete($voucherId) {
         $this->voucherData->setVoucherId($voucherId);
         if ($this->voucherData->Delete()){
-            header('Location: ../show');
+            header('Location: ../danh-sach');
         }else{
             echo "Xóa mã giảm giá thất bại";
         }

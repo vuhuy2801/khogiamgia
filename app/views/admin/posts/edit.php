@@ -3,6 +3,10 @@
 
 <head>
     <link rel="stylesheet" href="/public/css/bootstrap/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
@@ -10,6 +14,9 @@
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
     <link rel="stylesheet" href="/public/css/sidebar.css">
     <link rel="stylesheet" href="/public/css/admin/posts.css">
+    <title> <?php echo $titlePage ?> </title>
+    <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">
+
 </head>
 
 <body>
@@ -46,7 +53,7 @@
 
                     <div class="row pt-1">
                         <div class="d-flex justify-content-between px-3 mb-4">
-                            <a href="show" class="my-auto text-decoration-none back_home"><i
+                            <a href="danh-sach" class="my-auto text-decoration-none back_home"><i
                                     class="bi bi-arrow-left mx-1"></i>Quay
                                 lại</a>
                             <div class="justify-content-center">
@@ -121,7 +128,7 @@
                             </form>
                         </div>
                         <div class="col-4">
-                            <div class="card mb-3">
+                            <div class="card mb-3 item-boxshadow">
                                 <div class="card-body">
                                     <p class="card-text label_right"><small class="text-body-secondary">Hình ảnh</small>
                                     </p>
@@ -136,7 +143,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card">
+                            <div class="card item-boxshadow">
                                 <div class="card-body">
                                     <p class="label_right">Thông tin</p>
                                     <hr>

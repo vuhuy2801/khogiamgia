@@ -16,7 +16,7 @@ class AuthenticationController
         if (password_verify($password, $user['password'])) {
             $_SESSION['user'] = $user;
             print_r($_SESSION['user']);
-            header('Location: /admin/trang-chu/show');
+            header('Location: /admin/trang-chu/kho-giam-gia');
         } else {
             $_SESSION['error'] = 'Sai tài khoản hoặc mật khẩu';
             header('Location: /login');

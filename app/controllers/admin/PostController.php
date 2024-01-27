@@ -1,9 +1,10 @@
 <?php
 require_once 'app/models/PostModel.php';
 require_once 'app/models/SupplierModel.php';
+include_once 'app/controllers/admin/AdminController.php';
 
 
-class PostController {
+class PostController extends AdminController{
     private $postData;
     private $supplierData;
 
@@ -35,6 +36,8 @@ class PostController {
     }
     public function index()
     {
+        $this->checkLogin();
+
         $suppliers = $this->supplierData->ListName();
 
         $posts = $this->postData->List();
@@ -43,22 +46,30 @@ class PostController {
     }
     public function detail()
     {
+        $this->checkLogin();
+
         $suppliers = $this->supplierData->ListName();
         $postData = $this->postData;
+        $titlePage = "Chi tiết bài viết";
       include 'app/views/admin/posts/detail.php';
       
     }
 
     public function create()
     {
+        $this->checkLogin();
+
+        $titlePage = "Thêm bài viết";
         $suppliers = $this->supplierData->ListName();
       include 'app/views/admin/posts/create.php';
     }
 
     public function edit()
     {
-        $suppliers = $this->supplierData->ListName();
+        $this->checkLogin();
 
+        $suppliers = $this->supplierData->ListName();
+        $titlePage = "Sửa bài viết";
         $postData = $this->postData;
         include 'app/views/admin/posts/edit.php';
     }
@@ -109,7 +120,7 @@ class PostController {
         $this->postData->setImage($imageUrl);
     
         if ($this->postData->Add()){
-            header('Location: ../bai-viet/show');
+            header('Location: ../bai-viet/danh-sach');
         }else{
             echo "Thêm bài viết thất bại";
         }
@@ -137,7 +148,7 @@ class PostController {
             $this->postData->setImage($imageUrl);
         }
         if ($this->postData->Edit()){
-            header('Location: ../bai-viet/show');
+            header('Location: ../bai-viet/danh-sach');
         }else{
             echo "Sửa bài viết thất bại";
         }
@@ -147,7 +158,7 @@ class PostController {
     public function deletePost($postId) {
         $this->postData->setPostId($postId);
         if ($this->postData->Delete()){
-            header('Location: ../show');
+            header('Location: ../danh-sach');
         }else{
             echo "Xóa bài viết thất bại";
         }
