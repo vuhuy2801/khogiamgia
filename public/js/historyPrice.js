@@ -92,9 +92,9 @@ function renderInfoProduct(data) {
     </div>
     <div class="row go-to-shop ">
         <div class="col-md-4 ms-auto d-flex">
-            <button class="btn btn-primary ms-auto "><i class="bi bi-cart-fill"
-                    style="vertical-align: text-bottom;"></i> Đến nơi
-                bán</button>
+            <a  href="https://go.isclix.com/deep_link/v6/4947205045263540596/4751584435713464237?url_enc=aHR0cHM6Ly9zaG9wZWUudm4v"  target="_blank" class="btn btn-primary ms-auto "><i class="bi bi-cart-fill"
+            style="vertical-align: text-bottom;"></i> Đến nơi
+                bán</a>
         </div>
     </div>`;
 }
@@ -134,8 +134,7 @@ function getHistoryPriceProduct() {
     </div>
     `;
 
-    api
-        .get(`/product/lich-su-gia?link=${elmLinkProduct.value}`)
+    api.get(`/product/lich-su-gia?link=${elmLinkProduct.value}`)
         .then(function (response) {
             elmNotifiCation.classList.add("d-none");
             elmInfoProduct.classList.remove("d-none");
@@ -164,8 +163,7 @@ function getAdviceProduct(description) {
         description: description,
     };
 
-    api
-        .post("/product/lay-loi-khuyen", data)
+    api.post("/product/lay-loi-khuyen", data)
         .then(function (response) {
             elmAdviceProductContent.innerHTML = response.data;
             console.log(response);
