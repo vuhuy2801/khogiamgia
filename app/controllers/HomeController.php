@@ -35,7 +35,7 @@ class HomeController
       1 => "Mã nhập tay"
     );
 
-    // loop vouchers
+  
 
     include 'app/views/home/index.php';
 
