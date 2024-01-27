@@ -11,9 +11,9 @@
                         <div class="testimonial-item">
                             <div class="profile mt-auto">
 
-                                <a href="#">
-                                    <img src="public\images\categori-logo\tat-ca-nganh-hang.png" class="testimonial-img"
-                                        alt="" />
+                                <a href="/shopee/toan-san">
+                                    <img src="/public/images/categori-logo/tat-ca-nganh-hang.png"
+                                        class="testimonial-img" alt="" />
                                 </a>
                                 <p>Toàn sàn</p>
                             </div>
@@ -23,8 +23,8 @@
                     <div class="swiper-slide">
                         <div class="testimonial-item">
                             <div class="profile mt-auto">
-                                <a href="#">
-                                    <img src="public\images\categori-logo\shopee-mail.png" class="testimonial-img"
+                                <a href="/shopee/shopee-mail">
+                                    <img src="/public/images/categori-logo/shopee-mail.png" class="testimonial-img"
                                         alt="" />
                                 </a>
                                 <p>Shopee Mail</p>
@@ -35,8 +35,8 @@
                     <div class="swiper-slide">
                         <div class="testimonial-item">
                             <div class="profile mt-auto">
-                                <a href="#">
-                                    <img src="public\images\categori-logo\voucher-extra.png" class="testimonial-img"
+                                <a href="/shopee/extra">
+                                    <img src="/public/images/categori-logo/voucher-extra.png" class="testimonial-img"
                                         alt="" />
                                 </a>
                                 <p>Voucher extra</p>
@@ -47,8 +47,8 @@
                     <div class="swiper-slide">
                         <div class="testimonial-item">
                             <div class="profile mt-auto">
-                                <a href="#">
-                                    <img src="public\images\categori-logo\thoitrang.png" class="testimonial-img"
+                                <a href="/shopee/thoi-trang">
+                                    <img src="/public/images/categori-logo/thoitrang.png" class="testimonial-img"
                                         alt="" />
                                 </a>
                                 <p>Thời trang</p>
@@ -59,8 +59,8 @@
                     <div class="swiper-slide">
                         <div class="testimonial-item">
                             <div class="profile mt-auto">
-                                <a href="#">
-                                    <img src="public\images\categori-logo\tieudung.png" class="testimonial-img"
+                                <a href="/shopee/tieu-dung">
+                                    <img src="/public/images/categori-logo/tieudung.png" class="testimonial-img"
                                         alt="" />
                                 </a>
                                 <p>Tiêu dùng</p>
@@ -70,8 +70,9 @@
                     <div class="swiper-slide">
                         <div class="testimonial-item">
                             <div class="profile mt-auto">
-                                <a href="#">
-                                    <img src="public\images\categori-logo\doisong.png" class="testimonial-img" alt="" />
+                                <a href="/shopee/doi-song">
+                                    <img src="/public/images/categori-logo/doisong.png" class="testimonial-img"
+                                        alt="" />
                                 </a>
                                 <p>Đời sống</p>
                             </div>
@@ -80,8 +81,8 @@
                     <div class="swiper-slide">
                         <div class="testimonial-item">
                             <div class="profile mt-auto">
-                                <a href="#">
-                                    <img src="public\images\categori-logo\dientu.png" class="testimonial-img" alt="" />
+                                <a href="/shopee/dien-tu">
+                                    <img src="/public/images/categori-logo\dientu.png" class="testimonial-img" alt="" />
                                 </a>
                                 <p>Điện tử</p>
                             </div>

@@ -6,7 +6,7 @@ $maGiamGiaUrl = "#";
 $theoDoiGiaSPUrl = "/theo-doi-gia";
 $tinKhuyenMaiUrl = "/tin-khuyen-mai/shopee";
 $huongDanUrl = "/huong-dan/shopee";
-$adminUrl = "/admin/trang-chu/show";
+$adminUrl = "/admin/trang-chu/kho-giam-gia";
 
 
 // Text variables
@@ -31,7 +31,12 @@ $adminText = "Admin";
                     </a>
                 </li>
                 <li class="dropdown">
-                    <a class="nav-link scrollto <?php echo $currentUrl === "/shopee" || $currentUrl === "/tiki" || $currentUrl === "/lazada" || $currentUrl === "/shopee-food" ? 'active' : ''; ?>"
+                    <a class="nav-link scrollto <?php echo 
+                    $currentUrl === "/shopee" || $currentUrl === "/shopee/toan-san" 
+                    || $currentUrl === "/shopee/shopee-mail" || $currentUrl === "/shopee/extra"
+                    || $currentUrl === "/shopee/thoi-trang" || $currentUrl === "/shopee/tieu-dung"
+                    || $currentUrl === "/shopee/doi-song" || $currentUrl === "/shopee/dien-tu"
+                    || $currentUrl === "/tiki" || $currentUrl === "/lazada" || $currentUrl === "/shopee-food" ? 'active' : ''; ?>"
                         href="<?php echo $maGiamGiaUrl; ?>">
                         <?php echo $maGiamGiaText; ?>
                     </a>
@@ -49,7 +54,7 @@ $adminText = "Admin";
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link scrollto <?php echo $currentUrl === $tinKhuyenMaiUrl || $currentUrl === '/tin-khuyen-mai/shopee' || $currentUrl === '/tin-khuyen-mai/lazada' || $currentUrl === '/tin-khuyen-mai/shopee-food' ? 'active' : ''; ?>"
+                    <a class="nav-link scrollto <?php echo $currentUrl === $tinKhuyenMaiUrl || $currentUrl === '/tin-khuyen-mai/shopee' || $currentUrl === '/tin-khuyen-mai/lazada' || $currentUrl === '/tin-khuyen-mai/shopeeFood' ? 'active' : ''; ?>"
                         href="<?php echo $tinKhuyenMaiUrl; ?>">
                         <?php echo $tinKhuyenMaiText; ?>
                     </a>

@@ -76,6 +76,13 @@
                                     <label class="label_input" for="content">Nội dung</label>
                                     <textarea id="editor" class="form-control" id="content" name="content"></textarea>
                                 </div>
+                                <div class="form-group mt-2">
+                                    <label class="label_input" for="supplierId">Trạng thái</label>
+
+                                    <input type="text" class="form-control"
+                                        value=" <?php echo $statuses[$post['status']] ?>">
+
+                                </div>
 
                                 <div class="row form-group mt-2 d-flex">
                                     <div class="col">

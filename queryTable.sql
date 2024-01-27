@@ -16,12 +16,11 @@ CREATE TABLE IF NOT EXISTS Supplier (
     updatedAt DATETIME
 );
 
--- table Post
 CREATE TABLE IF NOT EXISTS Post (
-    postId INT PRIMARY KEY AUTO_INCREMENT,
+    postId INT AUTO_INCREMENT,
     title NVARCHAR(255),
     image NVARCHAR(255),
-    slug NVARCHAR(255),
+    slug NVARCHAR(255) UNIQUE,
     supplierId INT,
     content TEXT,
     description NVARCHAR(1555),
@@ -29,8 +28,10 @@ CREATE TABLE IF NOT EXISTS Post (
     createdAt DATETIME,
     updateAt DATETIME,
     status INT,
+    PRIMARY KEY (postId),
     FOREIGN KEY (supplierId) REFERENCES Supplier(supplierId)
 );
+
 
 -- table Voucher
 CREATE TABLE IF NOT EXISTS Voucher (

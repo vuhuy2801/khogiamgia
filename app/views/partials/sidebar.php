@@ -41,6 +41,7 @@ $currentPageUrl = $_SERVER['REQUEST_URI'];
                     </a>
                 </li>
 
+
                 <li
                     class="wrap-item py-2 nav-item <?php echo strpos($currentPageUrl, 'ma-giam-gia') !== false ? 'active' : ''; ?>">
                     <a href="<?php echo $maGiamGiaUrl ?>" class="nav-link px-0 align-middle text-dark">

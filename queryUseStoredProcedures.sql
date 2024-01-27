@@ -23,6 +23,7 @@ CALL GetPostsByCategory(1);
 CALL SearchPostByTitle('n');
 CALL GetPostsBySupplierId(3);
 CALL GetGuidancePostsBySupplierId(2);
+CALL GetSlug('abc123');
 -- Voucher
 -- Example usage of the stored procedure
 CALL AddVoucher(
@@ -60,7 +61,7 @@ Call GetListVoucherBySupplier(1);
 CALL GetDetailVoucher('ABC123');
 CALL GetTrendingVouchers(1);
 CALL GetVouchersBySupplierId(2); 
-CALL GetVouchersByCategoryId(2); 
+CALL GetVouchersByCategoryId(2,1); 
 CALL SearchVoucherByKeyword('t');
 -- used
 CALL AddUsed('VOUCHER001', 10); 
@@ -99,7 +100,7 @@ CALL DeleteBanner(4);
 CALL GetListBanners();
 CALL GetDetailBanner(6);
 -- User 
-CALL AddUser('new_user', 'new_user@example.com', 'new_password', 'New User', 2, 1,'2024-10-1','2024-10-1');
+CALL AddUser('tienanh', 'new_user@example.com', '$2y$10$qjBjfDSJhe14QuVh9mEEde4CnapC/BWDqK2DsfBXvG8wI82Nx.Er.', 'New User', 2, 1,'2024-10-1','2024-10-1');
 CALL DeleteUser(4);
 CALL GetAllUsers();
 CALL GetDetailUser(3);

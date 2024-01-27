@@ -112,8 +112,8 @@ class ProductController extends AdminController
     {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
 
-        $targetDirectory = '/public/uploads/products/' . date('d-m-Y') . '/';
-
+        $targetDirectory = 'public/uploads/products/' . date('d-m-Y') . '/';
+        
         $originalFileName = pathinfo($_FILES['file']['name'], PATHINFO_FILENAME); // lấy tên file ảnh
         $extension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION); //lấy đuôi file ảnh
 

@@ -25,7 +25,7 @@
                         $urlImage = '/public/images/logo/round-logo/tiki.jpg';
                         break;
                     case 3:
-                        $urlImage = '/public/images/logo/round-logo/tiktokshop.jpg';
+                        $urlImage = '/public/images/logo/round-logo/shopeeFood.png';
                         break;
                     case 4:
                         $urlImage = '/public/images/logo/round-logo/logo-lazada.png';

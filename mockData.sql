@@ -1,25 +1,29 @@
 use dbVoucher;
 
 INSERT INTO Category (categoryId, categoryName) VALUES
-(1, 'Thời Trang'),
-(2, 'Điện tử'),
-(3, 'Nội trợ'),
-(4, 'Khác');
+(1, 'Toàn sàn'),
+(2, 'Shopee Mail'),
+(3, 'Voucher Extra'),
+(4, 'Thời trang'),
+(5, 'Tiêu dùng'),
+(6, 'Đời sống'),
+(7, 'Điện tử');
 
 INSERT INTO Supplier (supplierName, address_target, logoSupplier) VALUES 
-    ('Shopee', 'https://shopee.vn/', '/public/uploads/suppliers/27-01-2024/Shopee.svg.png'),
-    ('Tiki', 'https://tiki.vn/', '/public/uploads/suppliers/27-01-2024/Logo_Tiki.png'),
-    ('ShopeeFood', 'https://shopeefood.vn/', '/public/uploads/suppliers/27-01-2024/shopeefood.png'),
-    ('Lazada', 'https://www.lazada.vn/' ,'/public/uploads/suppliers/27-01-2024/lazada-logo-freelogovectors.net_.png'),
-    ('Grab','https://www.grab.com/vn/', '/public/uploads/suppliers/27-01-2024/grab-logo.png');
+    ('Shopee', '/shopee', '/public/uploads/suppliers/27-01-2024/Shopee.svg.png'),
+    ('Tiki', '/tiki', '/public/uploads/suppliers/27-01-2024/Logo_Tiki.png'),
+    ('ShopeeFood', '/shopee-food', '/public/uploads/suppliers/28-01-2024/Shopee-Food-Logo.png'),
+    ('Lazada', '/lazada' ,'/public/uploads/suppliers/27-01-2024/lazada-logo-freelogovectors.net_.png'),
+    ('Grab','/grab', '/public/uploads/suppliers/27-01-2024/grab-logo.png');
 
 INSERT INTO Post (title, image,slug, supplierId, content, description, categories_post, createdAt, updateAt,status)
 VALUES 
-    ('CUỘC THI VÔ ĐỊCH PHÁT TRIỂN WEB - WEB DEV CHAMPION 2023', 'https://api.vuhuy.site/uploads/small_img_index_73bc26433c.png','cuoc-thi-vo-dich-phat-trien-web-web-dev-champion-2023', 1, 'Exciting news about the latest gadgets...', 'Introducing the newest electronic devices in the market...', 1, '2023-12-20','2023-12-20', 0);
+    ('CUỘC THI VÔ ĐỊCH PHÁT TRIỂN WEB - WEB DEV CHAMPION 2023', 'https://api.vuhuy.site/uploads/small_img_index_73bc26433c.png',
+    '13c2uo44c-th525i-vo-dich-phat-trien-web-web-dev-champion-2023', 1, 'Exciting news about the latest gadgets...', 'Introducing the newest electronic devices in the market...', 1, '2023-12-20','2023-12-20', 1);
 
 INSERT INTO Voucher (voucherId, voucherName, quantity, expressAt, expiresAt, conditionsOfUse, categoryId, createdAt, updatedAt, is_trend, supplierId, status, address_target, discountType, maximumDiscount, minimumDiscount, is_inWallet)
 VALUES 
-('VOUCHER0012', '60K', 100, '2024-01-25', '2024-02-28', 'Chỉ áp dụng khi mua trên 1.000.000 VNĐ', 1, '2024-01-26 10:00:00', '2024-01-26 10:00:00', 1, 1, 1, 'https://shopee.vn/', 1, '250K', '20K', 1),
+('VOUCHER0024', '60K', 100, '2024-01-25', '2024-02-28', 'Chỉ áp dụng khi mua trên 1.000.000 VNĐ', 2, '2024-01-26 10:00:00', '2024-01-26 10:00:00', 1, 1, 1, 'https://shopee.vn/', 1, '250K', '20K', 1),
 ('VOUCHER007', '20K', 100, '2024-01-25', '2024-02-28', 'Chỉ áp dụng khi mua trên 1.000.000 VNĐ', 1, '2024-01-26 10:00:00', '2024-01-26 10:00:00', 1, 2, 1, 'https://shopee.vn/', 1,'250K', '20K', 1),
 ('VOUCHER008', '30K', 100, '2024-01-25', '2024-02-28','Chỉ áp dụng khi mua trên 1.000.000 VNĐ', 1, '2024-01-26 10:00:00', '2024-01-26 10:00:00', 1, 1, 1, 'https://shopee.vn/', 1,'250K', '20K', 1),
 ('VOUCHER09', '50K', 100, '2024-01-25', '2024-02-28','Chỉ áp dụng khi mua trên 1.000.000 VNĐ', 1, '2024-01-26 10:00:00', '2024-01-26 10:00:00', 1, 3, 1, 'https://shopee.vn/', 1, '250K', '20K', 1),

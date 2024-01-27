@@ -237,6 +237,14 @@ END;
 DELIMITER ;
 
 DELIMITER //
+CREATE PROCEDURE GetSlug(IN slugCondition NVARCHAR(255))
+BEGIN
+    SELECT slug FROM Post WHERE slug = slugCondition;
+END //
+DELIMITER ;
+
+
+DELIMITER //
 
 CREATE PROCEDURE GetListPostsUser()
 BEGIN
@@ -317,7 +325,7 @@ BEGIN
     SELECT *
     FROM Post
     WHERE supplierId = supplier_id_to_search 
-        AND categories_post = 1
+        AND categories_post = 1 And status = 1
     ORDER BY createdAt DESC
     LIMIT 20;
 END //
@@ -334,7 +342,7 @@ BEGIN
     SELECT * 
     FROM Post
     WHERE supplierId = supplierIdParam 
-        AND (categories_post = 2 OR categories_post = 3)
+        AND (categories_post = 2 OR categories_post = 3) And status = 1
     ORDER BY createdAt DESC
     LIMIT 20;
 END //
@@ -503,10 +511,11 @@ DELIMITER ;
 DELIMITER //
 
 CREATE PROCEDURE GetVouchersByCategoryId(
-    IN category_id INT
+    IN category_id INT,
+    IN supplier_id INT
 )
 BEGIN
-    SELECT * FROM Voucher WHERE categoryId = category_id;
+    SELECT voucherId,voucherName,supplierId,expiresAt,discountType,maximumDiscount,minimumDiscount,quantity,categoryId,conditionsOfUse,address_target,is_inWallet FROM Voucher WHERE categoryId = category_id and supplierId = supplier_Id;
 END;
 //
 

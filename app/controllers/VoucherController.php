@@ -1,10 +1,12 @@
 <?php
 include_once 'app/models/VoucherModel.php';
 include_once 'app/models/UsedModel.php';
+require_once 'app/models/CategoryModel.php';
 
 class VoucherController
 {
     private $voucherModel;
+    private $categoryModel;
 
     private $usedModel;
 
@@ -12,6 +14,8 @@ class VoucherController
     {
         $this->voucherModel = new Voucher();
         $this->usedModel = new Used();
+        $this->categoryModel = new Category();
+
     }
     public function index()
     {
@@ -21,14 +25,92 @@ class VoucherController
     public function showShoppee()
     {
         $vouchersShopee = $this->voucherModel->ListVoucherBySupplier(1);
+        $categories = $this->voucherModel->List();
         $manually = array(
             0 => "Mã nhập tay",
             1 => "Có sẵn trong ví"
         );
-
-
         include 'app/views/voucher/shopee.php';
     }
+
+    public function showShopeeFashion()
+    {
+        $vouchersShopee = $this->voucherModel->GetVouchersByCategoryId(4,1);
+        $categories = $this->voucherModel->List();
+        $manually = array(
+            0 => "Mã nhập tay",
+            1 => "Có sẵn trong ví"
+        );
+        include 'app/views/voucher/categoriesShopee/shopeeFashion.php';
+    }
+
+    public function showShopeeAll()
+    {
+        $vouchersShopee = $this->voucherModel->GetVouchersByCategoryId(1,1);
+        $categories = $this->voucherModel->List();
+        $manually = array(
+            0 => "Mã nhập tay",
+            1 => "Có sẵn trong ví"
+        );
+        include 'app/views/voucher/categoriesShopee/shopeeAll.php';
+    }
+
+
+    public function showShopeeMail()
+    {
+        $vouchersShopee = $this->voucherModel->GetVouchersByCategoryId(2,1);
+        $categories = $this->voucherModel->List();
+        $manually = array(
+            0 => "Mã nhập tay",
+            1 => "Có sẵn trong ví"
+        );
+        include 'app/views/voucher/categoriesShopee/shopeeMail.php';
+    }
+
+    public function showShopeeExtra()
+    {
+        $vouchersShopee = $this->voucherModel->GetVouchersByCategoryId(3,1);
+        $categories = $this->voucherModel->List();
+        $manually = array(
+            0 => "Mã nhập tay",
+            1 => "Có sẵn trong ví"
+        );
+        include 'app/views/voucher/categoriesShopee/shopeeExtra.php';
+    }
+
+    public function showShopeeConsum()
+    {
+        $vouchersShopee = $this->voucherModel->GetVouchersByCategoryId(5,1);
+        $categories = $this->voucherModel->List();
+        $manually = array(
+            0 => "Mã nhập tay",
+            1 => "Có sẵn trong ví"
+        );
+        include 'app/views/voucher/categoriesShopee/shopeeConsumption.php';
+    }
+
+    public function showShopeeLife()
+    {
+        $vouchersShopee = $this->voucherModel->GetVouchersByCategoryId(6,1);
+        $categories = $this->voucherModel->List();
+        $manually = array(
+            0 => "Mã nhập tay",
+            1 => "Có sẵn trong ví"
+        );
+        include 'app/views/voucher/categoriesShopee/shopeeLife.php';
+    }
+
+    public function showShopeeElectronic()
+    {
+        $vouchersShopee = $this->voucherModel->GetVouchersByCategoryId(7,1);
+        $categories = $this->voucherModel->List();
+        $manually = array(
+            0 => "Mã nhập tay",
+            1 => "Có sẵn trong ví"
+        );
+        include 'app/views/voucher/categoriesShopee/shopeeElectronic.php';
+    }
+
     public function showTiki()
     {
         $titleVoucher = "MÃ GIẢM GIÁ TIKI";
@@ -42,7 +124,7 @@ class VoucherController
     public function showLazada()
     {
         $titleVoucher = "MÃ GIẢM GIÁ LAZADA";
-        $vouchers = $this->voucherModel->ListVoucherBySupplier(2);
+        $vouchers = $this->voucherModel->ListVoucherBySupplier(4);
         $manually = array(
             0 => "Mã nhập tay",
             1 => "Có sẵn trong ví"
@@ -52,7 +134,7 @@ class VoucherController
     public function shopeeFood()
     {
         $titleVoucher = "MÃ GIẢM GIÁ SHOPEE FOOD";
-        $vouchers = $this->voucherModel->ListVoucherBySupplier(2);
+        $vouchers = $this->voucherModel->ListVoucherBySupplier(3);
         $manually = array(
             0 => "Mã nhập tay",
             1 => "Có sẵn trong ví"
