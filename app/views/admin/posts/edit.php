@@ -97,9 +97,20 @@
                                     <input type="hidden" class="form-control" value="<?php echo $post['image'] ?>"
                                         id="fakeImage" name="fakeImage">
                                 </div>
+                                <div class="form-group mt-2">
+                                    <label class="label_input" for="status">Trạng thái</label>
+                                    <select class="form-select form-select-sm mb-3" name="status" id="status">
+                                        <?php
+                                                foreach ($statuses as $index => $status) {
+                                                    $selected = $index == $post['status'] ? 'selected' : '';
+                                                    echo "<option value=".$index." $selected>".$status."</option>";
+                                                }
+                                            ?>
+                                    </select>
+                                </div>
 
-                                <div class="row form-group mt-2 d-flex">
-                                    <div class="form-group col mt-3">
+                                <div class="row form-group mt-0 d-flex">
+                                    <div class="form-group col mt-0">
                                         <label class="label_input" for="supplierId">Nhà cung cấp</label>
                                         <select class="form-select form-select-sm mb-3" name="supplierId"
                                             id="supplierId">
@@ -111,7 +122,7 @@
                                             ?>
                                         </select>
                                     </div>
-                                    <div class="form-group col mt-3">
+                                    <div class="form-group col mt-0">
                                         <label class="label_input" for="category_post">Danh mục</label>
                                         <select class="form-select form-select-sm mb-3" name="category_post"
                                             id="category_post">

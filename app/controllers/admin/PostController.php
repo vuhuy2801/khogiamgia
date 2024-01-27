@@ -58,7 +58,7 @@ class PostController extends AdminController{
     public function create()
     {
         $this->checkLogin();
-
+        $getSlug = $this->postData;
         $titlePage = "Thêm bài viết";
         $suppliers = $this->supplierData->ListName();
       include 'app/views/admin/posts/create.php';
@@ -78,7 +78,7 @@ class PostController extends AdminController{
     {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
 
-        $targetDirectory = '/public/uploads/posts/' . date('d-m-Y') . '/';
+        $targetDirectory = 'public/uploads/posts/' . date('d-m-Y') . '/';
         
         $originalFileName = pathinfo($_FILES['file']['name'], PATHINFO_FILENAME); // lấy tên file ảnh
         $extension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION); //lấy đuôi file ảnh
@@ -131,7 +131,7 @@ class PostController extends AdminController{
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $this->postData->setContent($_POST['content']);
         $this->postData->setUpdateAt(date('Y-m-d H:i:s'));
-        $this->postData->setStatus(1);
+        $this->postData->setStatus($_POST['status']);
         $this->postData->setSlug($_POST['slug']);
         $this->postData->setPostId($_POST['postId']);
         $this->postData->setTitle($_POST['title']);

@@ -6,7 +6,7 @@ $maGiamGiaUrl = "#";
 $theoDoiGiaSPUrl = "/theo-doi-gia";
 $tinKhuyenMaiUrl = "/tin-khuyen-mai/shopee";
 $huongDanUrl = "/huong-dan/shopee";
-$adminUrl = "/admin/trang-chu/show";
+$adminUrl = "/admin/trang-chu/kho-giam-gia";
 
 
 // Text variables

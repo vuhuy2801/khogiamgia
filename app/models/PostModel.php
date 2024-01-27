@@ -145,6 +145,21 @@ class Post implements PostService
         }
     }
 
+    public function getSlugPost($slug)
+    {
+        $connection = $this->db->getConnection();
+        $query = "CALL GetSlug(?);";
+        try {
+            $statement = $connection->prepare($query);
+            $statement->bindParam(1, $slug);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
     public function ListUser(): array
     {
         $connection = $this->db->getConnection();

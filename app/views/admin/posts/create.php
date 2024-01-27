@@ -26,6 +26,7 @@
             <?php
             require_once 'app/views/partials/sidebar.php';
             require_once 'app/views/admin/posts/generalProcessing.php';
+           
         ?>
 
             <div class="col px-3 py-3 wrapContent">
@@ -142,9 +143,6 @@
         </div>
 
     </div>
-
-
-
 
     <script src="/public/js/admin/posts/create.js"></script>
     <script src="/public/js/bootstrap/bootstrap.bundle.min.js"> </script>
