@@ -41,7 +41,11 @@
 
                     <div class="d-flex align-items-center">
                         <div class="input-group mx-3 container_search">
-                            <input type="text" class="form-control input-search" placeholder="Tìm kiếm...">
+                            <input id="searchInput" type="text" class="form-control input-search" <?php
+                            if (isset($query)) {
+                                echo "value='" . $query . "'";
+                            }
+                            ?> placeholder="Tìm kiếm...">
                             <div class="input-group-append">
                                 <button id="searchBtn" class="btn btn-outline-secondary" type="button">
                                     <i class="bi bi-search"></i>
@@ -71,40 +75,30 @@
                         </thead>
                         <tbody class="body_item">
                             <?php
-                            $productController = new ProductController();
-                            $currentPage = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+                            if (count($products) === 0) {
+                                echo "<tr>";
+                                echo "<td class='item_table' colspan='7' scope='row'>Không có sản phẩm nào</td>";
+                                echo "</tr>";
+                            } {
+                                foreach ($products as $index => $product) {
+                                    echo "<tr>";
+                                    echo "<td class='item_table' scope='row'>" . $product['productID'] . "</td>";
+                                    echo "<td class='item_table_title'>" . $product['productName'] . "</td>";
+                                    echo "<td class='item_table'> <img class='w-100 item_image' src='" . $product['image'] . "' alt=''></td>";
+                                    echo "<td class='item_table'>" . $product['soldCount'] . "sp" . "</td>";
+                                    echo "<td class='item_table'>" . $product['rateCount'] . " sao" . "</td>";
+                                    $statusClass = ($product['status'] == 0) ? 'status-inactive' : 'status-active';
+                                    echo "<td class='item_table '><p class='item_status my-0 rounded-3 " . $statusClass . "'>" . $statusProduct[$product['status']] . "</p></td>";
 
-
-                            $limit = 10;
-                            $totalProducts = $productController->getTotalProduct();
-                            $totalPages = ceil($totalProducts / $limit);
-                            if ($currentPage > $totalPages || $currentPage < 1) {
-                                echo "Không có trang này";
-                                return;
+                                    echo "<td class='item_table'>
+                                            <a class='px-1 action_detail' href='chi-tiet?id=" . urlencode($product['productID']) . "'><i class='bi bi-eye-fill'></i></a>
+                                            <a class='px-1 action_edit' href='cap-nhat?id=" . urlencode($product['productID']) . "'><i class='bi bi-pencil-square'></i></a>
+                                            <a href class='delete-product px-1' data-product-id='" . urlencode($product['productID']) . "' data-bs-toggle='modal' data-bs-target='#deleteProduct'><i class='bi bi-trash'></i></a>
+                                         </td>";
+                                    echo "</tr>";
+                                }
                             }
 
-
-                            $offset = ($currentPage - 1) * $limit;
-                            $products = $productController->getListOfProduct($offset, $limit);
-                            $hidePagination = $totalPages <= 1;
-
-                            foreach ($products as $index => $product) {
-                                echo "<tr>";
-                                echo "<td class='item_table' scope='row'>" . $product['productID'] . "</td>";
-                                echo "<td class='item_table_title'>" . $product['productName'] . "</td>";
-                                echo "<td class='item_table'> <img class='w-100 item_image' src='" . $product['image'] . "' alt=''></td>";
-                                echo "<td class='item_table'>" . $product['soldCount'] . "sp" . "</td>";
-                                echo "<td class='item_table'>" . $product['rateCount']  . " sao". "</td>";
-                                $statusClass = ($product['status'] == 0) ? 'status-inactive' : 'status-active';
-                                echo "<td class='item_table '><p class='item_status my-0 rounded-3 " . $statusClass . "'>" . $statusProduct[$product['status']] . "</p></td>";
-
-                                echo "<td class='item_table'>
-                                        <a class='px-1 action_detail' href='chi-tiet?id=" . urlencode($product['productID']) . "'><i class='bi bi-eye-fill'></i></a>
-                                        <a class='px-1 action_edit' href='cap-nhat?id=" . urlencode($product['productID']) . "'><i class='bi bi-pencil-square'></i></a>
-                                        <a href class='delete-product px-1' data-product-id='" . urlencode($product['productID']) . "' data-bs-toggle='modal' data-bs-target='#deleteProduct'><i class='bi bi-trash'></i></a>
-                                     </td>";
-                                echo "</tr>";
-                            } 
 
 
                             ?>
@@ -134,8 +128,8 @@
     https://cdn.jsdelivr.net/npm/dayjs@1.11.10/dayjs.min.js
     "></script>
     <script>
-    const now = dayjs();
-    const formattedTime = now.format('DD/MM/YY HH:mm');
+        const now = dayjs();
+        const formattedTime = now.format('DD/MM/YY HH:mm');
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="/public/js/bootstrap/bootstrap.bundle.min.js"> </script>
