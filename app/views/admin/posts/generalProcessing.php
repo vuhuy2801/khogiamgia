@@ -13,8 +13,7 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
     1 => "Hiển thị"
 );
 
- $supplierController = new SupplierController();
- $suppliers = $supplierController->getListNameSuppliers();
+
  $listSupplier = array();
  foreach ($suppliers as $index => $supplier) {
      $listSupplier[$supplier['supplierId']] = $supplier['supplierName'];

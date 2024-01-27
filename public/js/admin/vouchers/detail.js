@@ -1,17 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const btnDeleteProduct = $("#btn-delete-product");
-  let idProduct;
+  const btnDeleteVoucher = $("#btn-delete-voucher");
+  let idVoucher;
 
-  const deleteForm = document.forms["delete-product-form"];
+  const deleteForm = document.forms["delete-voucher-form"];
 
-  $("#deleteProduct").on("show.bs.modal", function (event) {
+  $("#deleteVoucher").on("show.bs.modal", function (event) {
     const button = $(event.relatedTarget);
-    idProduct = button.data("product-id");
-    console.log(idProduct);
+    idVoucher = button.data("voucher-id");
+    console.log(idVoucher);
   });
 
-  btnDeleteProduct.click(function () {
-    deleteForm.action = "../theo-doi-gia-san-pham/delete/" + idProduct;
+  btnDeleteVoucher.click(function () {
+    deleteForm.action = "../ma-giam-gia/delete/" + idVoucher;
     deleteForm.submit();
   });
 });

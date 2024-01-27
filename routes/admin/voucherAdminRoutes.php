@@ -9,46 +9,40 @@ $router->get('/admin/ma-giam-gia/show', function () {
 
 
 $router->get('/admin/ma-giam-gia/detail', function () {
-    require 'app/controllers/admin/ProductController.php';
-    $ProductController = new ProductController();
-    $ProductController->detail();
+    require 'app/controllers/admin/VoucherController.php';
+    $VoucherController = new VoucherController();
+    $VoucherController->detail();
 });
 
 $router->get('/admin/ma-giam-gia/create', function () {
-    require 'app/controllers/admin/ProductController.php';
-    $ProductController = new ProductController();
-    $ProductController->create();
+    require 'app/controllers/admin/VoucherController.php';
+    $VoucherController = new VoucherController();
+    $VoucherController->create();
 });
 
 
 $router->get('/admin/ma-giam-gia/edit', function () {
-    require 'app/controllers/admin/ProductController.php';
-    $ProductController = new ProductController();
-    $ProductController->edit();
+    require 'app/controllers/admin/VoucherController.php';
+    $VoucherController = new VoucherController();
+    $VoucherController->edit();
 });
 
-
-$router->post('/admin/ma-giam-gia/upload', function () {
-    require 'app/controllers/admin/ProductController.php';
-    $ProductController = new ProductController();
-    $ProductController->upload();
-});
 $router->post('/admin/ma-giam-gia/add', function () {
-    require 'app/controllers/admin/ProductController.php';
-    $ProductController = new ProductController();
-    $ProductController->add();
+    require 'app/controllers/admin/VoucherController.php';
+    $VoucherController = new VoucherController();
+    $VoucherController->add();
 });
 
 $router->post('/admin/ma-giam-gia/update', function () {
-    require 'app/controllers/admin/ProductController.php';
-    $ProductController = new ProductController();
-    $ProductController->update();
+    require 'app/controllers/admin/VoucherController.php';
+    $VoucherController = new VoucherController();
+    $VoucherController->update();
 });
 
-$router->post('/admin/ma-giam-gia/delete/(\w+)', function ($productId) {
-    require 'app/controllers/admin/ProductController.php';
-    $ProductController = new ProductController();
-    $ProductController->delete($productId);
+$router->post('/admin/ma-giam-gia/delete/(\w+)', function ($voucherId) {
+    require 'app/controllers/admin/VoucherController.php';
+    $VoucherController = new VoucherController();
+    $VoucherController->delete($voucherId);
 });
 
 

@@ -49,7 +49,7 @@
                 </div>
 
 
-                <div class="wrap_table bg-light rounded-3">
+                <div class="wrap_table rounded-3">
                     <table class="table table-hover mb-4">
                         <thead class='head_item'>
                             <tr>
@@ -64,8 +64,6 @@
                         </thead>
                         <tbody class="body_item">
                             <?php
-                                $postController = new PostController();
-                                $posts = $postController->getListOfPosts();
                                 $postsPerPage = 5;
                                 $totalPosts = count($posts);
                             

@@ -48,6 +48,7 @@
   padding-left: 15px;
   padding-right: 15px;
   padding-bottom: 6px;
+  background-color: #ffffff;
 }
 
 #item_head_table {
@@ -239,4 +240,12 @@
 
 .bi-arrow-left::before {
   font-weight: bold !important;
+}
+
+.wrapContent {
+  background-color: #f0f2f5;
+}
+
+.wrap_detail {
+  background-color: #ffffff;
 }

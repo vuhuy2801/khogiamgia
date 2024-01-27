@@ -22,12 +22,11 @@
             require_once 'lib/convertDate.php';
             require_once 'app/controllers/admin/SupplierController.php';
             $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
-            $supplierController = new SupplierController();
-            $supplier = $supplierController->getDetail($id);
+            $supplier = $supplierData->Detail($id);
             ?>
 
 
-            <div class="col px-3 py-3 bg-light">
+            <div class="col px-3 py-3 wrapContent">
                 <div class="toast toast_update align-items-center text-bg-primary border-0 position-absolute start-50 translate-middle"
                     role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="d-flex">
@@ -53,7 +52,7 @@
 
                         </div>
                         <div class="col-8">
-                            <form class="bg-body rounded-3 px-3 pt-3 pb-5" id="formSubmit" method="POST"
+                            <form class="wrap_detail rounded-3 px-3 pt-3 pb-5" id="formSubmit" method="POST"
                                 action="update">
                                 <div class="form-group">
                                     <input type="hidden" value="<?php echo $supplier['supplierId'] ?>"
@@ -63,12 +62,12 @@
                                     <label class="label_input" for="supplierName">Tên nhà cung cấp</label>
                                     <input type="text" class="form-control"
                                         value="<?php echo $supplier['supplierName'] ?>" id="supplierName"
-                                        name="supplierName" readonly>
+                                        name="supplierName">
                                 </div>
                                 <div class="form-group mt-2">
                                     <label class="label_input" for="link_target">Link tham chiếu</label>
                                     <input type="text" value="<?php echo $supplier['address_target'] ?>"
-                                        class="form-control" id="link_target" name="link_target" readonly>
+                                        class="form-control" id="link_target" name="link_target">
                                 </div>
 
                                 <div class="form-group mt-2">

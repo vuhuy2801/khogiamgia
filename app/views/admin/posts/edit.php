@@ -24,12 +24,12 @@
             require_once 'app/views/admin/posts/generalProcessing.php';
             require_once 'app/controllers/admin/PostController.php';
             $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
-            $postController = new PostController();
-            $post= $postController->getPostDetail($id);
+            $post = $postData->getPostDetail($id);
+
             ?>
 
 
-            <div class="col px-3 py-3 bg-light">
+            <div class="col px-3 py-3 wrapContent">
                 <div class="toast toast_update align-items-center text-bg-primary border-0 position-absolute start-50 translate-middle"
                     role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="d-flex">
@@ -55,7 +55,7 @@
 
                         </div>
                         <div class="col-8">
-                            <form class="bg-body rounded-3 px-3 pt-3 pb-5" id="formSubmit" method="POST"
+                            <form class="wrap_detail rounded-3 px-3 pt-3 pb-5" id="formSubmit" method="POST"
                                 action="update">
                                 <div class="form-group">
                                     <input type="hidden" value="<?php echo $post['postId'] ?>" class="form-control"

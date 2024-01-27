@@ -10,7 +10,7 @@
                 </div>
             </div>
         </div>
-        <div class="row list-promotion justify-content-center gap-md-4 gap-2">
+        <div class="row list-promotion justify-content-center gap-4">
             <?php
             require_once 'app/views/component/itemPromotion.php';
             // render list voucher
@@ -33,16 +33,28 @@
                     default:
                         $urlImage = 'public/images/logo/round-logo/default.png';
                 }
+                $typeDisount = array(
+                    1 => "Free Ship",
+                    2 => "Shopee Mail",
+                    3 => "Nạp điện thoại",
+                    4 => "Khác"
+                );
+                $categories = array(
+                    1 => "Thời Trang",
+                    2 => "Điện tử",
+                    3 => "Nội trợ" ,
+                    4 => "Khác" 
+               );
                 echo itemPromotion(
                     $urlImage,
-                    $voucher['voucherName'],
+                    $typeDisount[$voucher['discountType']],
                     $voucher['expiresAt'],
-                    $voucher['discount'],
+                    $voucher['voucherName'],
                     $voucher['maximumDiscount'],
                     $voucher['minimumDiscount'],
-                    $manually[$voucher['is_manually']],
+                    $manually[$voucher['is_inWallet']],
                     $voucher['quantity'],
-                    $voucher['categoryId'],
+                    $categories[$voucher['categoryId']],
                     $voucher['conditionsOfUse'],
                     $voucher['address_target'],
                     $voucher['voucherId'],

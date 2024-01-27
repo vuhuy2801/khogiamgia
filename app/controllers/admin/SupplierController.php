@@ -23,15 +23,18 @@ class SupplierController {
     }
 
     public function index() {
+        $suppliers = $this->supplierData->List();
         include 'app/views/admin/suppliers/show.php';
     }
     public function create() {
         include 'app/views/admin/suppliers/create.php';
     }
     public function detail() {
+        $supplierData = $this->supplierData;
         include 'app/views/admin/suppliers/detail.php';
     }
     public function edit() {
+        $supplierData = $this->supplierData;
         include 'app/views/admin/suppliers/edit.php';
     }
 

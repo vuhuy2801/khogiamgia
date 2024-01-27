@@ -26,7 +26,7 @@
             ?>
 
             <!-- end sidebar -->
-            <div class="col px-3 py-3 wrap_dasboard position-relative">
+            <div class="col px-3 py-3 wrap_dasboard wrapContent position-relative">
                 <div class="mt-5 d-flex justify-content-between align-items-center">
                     <h3 class="mb-0">
                         Danh sách sản phẩm đang theo dõi
@@ -49,7 +49,7 @@
                 </div>
 
 
-                <div class="wrap_table bg-light rounded-3">
+                <div class="wrap_table wrap_detail rounded-3">
                     <table class="table table-hover mb-4">
                         <thead class='head_item'>
                             <tr>
@@ -79,10 +79,6 @@
 
                             $offset = ($currentPage - 1) * $limit;
                             $products = $productController->getListOfProduct($offset, $limit);
-
-                            // $start = ($currentPage - 1) * $productsPerPage;
-                            // $end = $start + $productsPerPage;
-                            // $paginatedProducts = array_slice($products, $start, $productsPerPage);
                             $hidePagination = $totalPages <= 1;
 
                             foreach ($products as $index => $product) {
@@ -114,8 +110,6 @@
 
                             ?>
 
-
-
                         </ul>
                     </nav>
                 </div>
@@ -132,8 +126,8 @@
     https://cdn.jsdelivr.net/npm/dayjs@1.11.10/dayjs.min.js
     "></script>
     <script>
-        const now = dayjs();
-        const formattedTime = now.format('DD/MM/YY HH:mm');
+    const now = dayjs();
+    const formattedTime = now.format('DD/MM/YY HH:mm');
     </script>
 
     <script src="/public/js/admin/products/show.js"> </script>

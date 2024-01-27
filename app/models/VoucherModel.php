@@ -7,7 +7,7 @@ class Voucher implements VoucherService {
     private $quantity;
     private $expressAt;
     private $expiresAt;
-    private $orderConditions;
+    private $minimumDiscount;
     private $conditionsOfUse;
     private $categoryId;
     private $createdAt;
@@ -38,8 +38,8 @@ class Voucher implements VoucherService {
     public function getExpiresAt() {
         return $this->expiresAt;
     }
-    public function getOrderConditions() {
-        return $this->orderConditions;
+    public function getMinimumDiscount() {
+        return $this->minimumDiscount;
     }
     public function getConditionsOfUse() {
         return $this->conditionsOfUse;
@@ -92,8 +92,8 @@ class Voucher implements VoucherService {
         $this->expiresAt = $value;
     }
 
-    public function setOrderConditions($value) {
-        $this->orderConditions = $value;
+    public function setMinimumDiscount($value) {
+        $this->minimumDiscount = $value;
     }
 
     public function setConditionsOfUse($value) {
@@ -147,7 +147,7 @@ class Voucher implements VoucherService {
         $statement->bindParam(3, $this->quantity);
         $statement->bindParam(4, $this->expressAt);
         $statement->bindParam(5, $this->expiresAt);
-        $statement->bindParam(6, $this->orderConditions);
+        $statement->bindParam(6, $this->minimumDiscount);
         $statement->bindParam(7, $this->conditionsOfUse);
         $statement->bindParam(8, $this->categoryId);
         $statement->bindParam(9, $this->createdAt);
@@ -175,7 +175,7 @@ class Voucher implements VoucherService {
         $statement->bindParam(3, $this->quantity);
         $statement->bindParam(4, $this->expressAt);
         $statement->bindParam(5, $this->expiresAt);
-        $statement->bindParam(6, $this->orderConditions);
+        $statement->bindParam(6, $this->minimumDiscount);
         $statement->bindParam(7, $this->conditionsOfUse);
         $statement->bindParam(8, $this->categoryId);
         $statement->bindParam(9, $this->updatedAt);
@@ -251,7 +251,7 @@ class Voucher implements VoucherService {
             $statement = $connection->prepare($query);
             $statement->bindParam(1, $voucherId);
             $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $result;
         }catch (PDOException $e) {
             return false;

@@ -25,6 +25,8 @@ class VoucherController
             0 => "Mã có sẵn",
             1 => "Mã nhập tay"
         );
+
+       
         include 'app/views/voucher/shopee.php';
     }
     public function showTiki()

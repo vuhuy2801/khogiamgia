@@ -9,6 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/public/css/sidebar.css">
+    <link rel="stylesheet" href="/public/css/promotion.css">
     <link rel="stylesheet" href="/public/css/admin/vouchers.css">
 </head>
 
@@ -19,14 +20,14 @@
         <div class="row flex-nowrap">
             <?php
                 require_once 'app/views/partials/sidebar.php';
-                require_once 'app/views/admin/products/deleteModal.php';
+                require_once 'app/views/admin/vouchers/deleteModal.php';
                 require_once 'lib/convertDate.php';
                 require_once 'app/views/admin/vouchers/generalProcessing.php';
                 require_once 'app/controllers/admin/VoucherController.php';
             ?>
 
             <!-- end sidebar -->
-            <div class="col px-3 py-3 wrap_dasboard position-relative">
+            <div class="col px-3 py-3 wrapContent position-relative">
                 <div class="mt-5 d-flex justify-content-between align-items-center">
                     <h3 class="mb-0">
                         Danh sách mã giảm giá
@@ -49,7 +50,7 @@
                 </div>
 
 
-                <div class="wrap_table bg-light rounded-3">
+                <div class="wrap_table  rounded-3">
                     <table class="table table-hover mb-4">
                         <thead class='head_item'>
                             <tr>
@@ -64,8 +65,7 @@
                         </thead>
                         <tbody class="body_item">
                             <?php
-                                $voucherController = new VoucherController();
-                                $vouchers = $voucherController->getListOfVoucher();
+                              
                                 $vouchersPerPage = 10;
                                 $totalVouchers = count($vouchers);
                             
@@ -90,7 +90,7 @@
                                     echo "<td class='item_table'>
                                         <a class='px-1 action_detail' href='detail?id=" . urlencode($voucher['voucherId']) .  "'><i class='bi bi-eye-fill'></i></a>
                                         <a class='px-1 action_edit' href='edit?id=" . urlencode($voucher['voucherId']) ."'><i class='bi bi-pencil-square'></i></a>
-                                        <a href='' class='delete-product px-1' data-product-id='" . urlencode($voucher['voucherId']) . "' data-bs-toggle='modal' data-bs-target='#deleteProduct'><i class='bi bi-trash'></i></a>
+                                        <a href='' class='delete-voucher px-1' data-voucher-id='" . urlencode($voucher['voucherId']) . "' data-bs-toggle='modal' data-bs-target='#deleteVoucher'><i class='bi bi-trash'></i></a>
                                      </td>";
                                      echo "</tr>" ; } ?>
                         </tbody>
@@ -117,7 +117,7 @@
 
                 <!-- Button trigger modal -->
 
-                <form name="delete-product-form" method="POST"></form>
+                <form name="delete-voucher-form" method="POST"></form>
 
             </div>
         </div>
@@ -131,7 +131,7 @@
     const formattedTime = now.format('DD/MM/YY HH:mm');
     </script>
 
-    <script src="/public/js/admin/products/show.js"> </script>
+    <script src="/public/js/admin/vouchers/show.js"> </script>
     <script src="/public/js/bootstrap/bootstrap.bundle.min.js"> </script>
 
 

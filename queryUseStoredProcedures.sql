@@ -24,22 +24,40 @@ CALL SearchPostByTitle('n');
 CALL GetPostsBySupplierId(3);
 CALL GetGuidancePostsBySupplierId(2);
 -- Voucher
+-- Example usage of the stored procedure
 CALL AddVoucher(
-    'VOUCHER007','Voucher Name', 50, '2024-01-15', '2024-02-28', 
-    'Order conditions here', 'Conditions of use here', 'Description here', 1, 
-    '2024-01-06', '2024-01-06', 1, 1, 1, 'Target address here', 1,'50K', 1
+    'ABC123',               -- voucher_id
+    'Special Voucher',      -- voucher_name
+    10,                      -- voucher_quantity
+    '2024-02-01',           -- voucher_expressAt
+    '2024-03-01',           -- voucher_expiresAt
+    '50k',                    -- voucher_minimumDiscount
+    'Use for online orders', -- voucher_conditionsOfUse
+    1,                       -- voucher_categoryId
+    '2024-01-27 12:00:00',   -- voucher_createdAt
+    '2024-01-27 12:30:00',   -- voucher_updatedAt
+    1,                       -- voucher_is_trend
+    1,                     -- voucher_supplierId
+    1,                       -- voucher_status
+    'Online',                -- voucher_address_target
+    1,                       -- voucher_discountType
+    '10%',                   -- voucher_maximumDiscount
+    1                        -- voucher_is_inWallet
 );
 
+
+
 CALL UpdateVoucher(
-    'VOUCHER001', 'Voucher Updated Name', 75, '2024-02-15', '2024-03-31', 
-    'New Order conditions', 'New Conditions of use', 3,'2024-01-06', 
+    'ABC123', 'Voucher Updated Name', 75, '2024-02-15', '2024-03-31', 
+    '20k', 'New Conditions of use', 3,'2024-01-06', 
     0, 2, 1, 'New Target address', 2, '500.000 VNĐ', 1
 );
 
-CALL DeleteVoucher('VOUCHER006');
+CALL DeleteVoucher('ABC123');
 CALL GetListVouchersAdmin();
 CALL GetListVouchersUser();
-CALL GetDetailVoucher('VOUCHER001');
+Call GetListVoucherBySupplier(1);
+CALL GetDetailVoucher('ABC123');
 CALL GetTrendingVouchers(1);
 CALL GetVouchersBySupplierId(2); 
 CALL GetVouchersByCategoryId(2); 
@@ -52,10 +70,10 @@ CALL GetListUsed();
 CALL GetUsedAndVoucherList();
 -- Product
 CALL AddProduct('Bồn ngâm chân massage cao cấp con lăn tự động SereneLife SL12 - Tự động làm nóng, đèn hồng ngoại, thác nước, có CO-CQ', 'link_hình_ảnh', 'https://shopee.vn/product/289338775/16393652444?utm_campaign=-&utm_content=----&utm_medium=affiliates&utm_source=an_17372060085&utm_term=af2vyjn4d6mm', 10, 20, 1);
-CALL UpdateProduct(10848, 'Tên sản phẩm mới', 'link_hình_ảnh_mới','link_sản_phẩm', 30 ,40,1);
-CALL DeleteProduct('sp001');
+CALL UpdateProduct('sp09123', 'Tên sản phẩm mới', 'link_hình_ảnh_mới','link_sản_phẩm', 30 ,40,'2024-06-01',1);
+CALL DeleteProduct('sp09123');
 CALL GetListProducts();
-CALL GetProductDetail('sp004');
+CALL GetProductDetail('sp09123');
 CALL SearchProduct('s');
 CALL GetPriceById('sp09123');
 -- ProductPrice
