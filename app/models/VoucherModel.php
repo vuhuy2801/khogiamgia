@@ -283,12 +283,13 @@ class Voucher implements VoucherService {
         return [];
     }
 
-    public function GetVouchersByCategoryId(): array{
+    public function GetVouchersByCategoryId($category,$supplierId): array{
         $connection = $this->db->getConnection();
         if ($connection){
-            $query = "CALL GetVouchersByCategoryId(?)";
+            $query = "CALL GetVouchersByCategoryId(?,?)";
             $statement = $connection->prepare($query);
-            $statement->bindParam(1, $this->categoryId);
+            $statement->bindParam(1, $category);
+            $statement->bindParam(2, $supplierId);
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $result;

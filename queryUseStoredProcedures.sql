@@ -61,7 +61,7 @@ Call GetListVoucherBySupplier(1);
 CALL GetDetailVoucher('ABC123');
 CALL GetTrendingVouchers(1);
 CALL GetVouchersBySupplierId(2); 
-CALL GetVouchersByCategoryId(2); 
+CALL GetVouchersByCategoryId(2,1); 
 CALL SearchVoucherByKeyword('t');
 -- used
 CALL AddUsed('VOUCHER001', 10); 

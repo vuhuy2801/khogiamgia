@@ -511,10 +511,11 @@ DELIMITER ;
 DELIMITER //
 
 CREATE PROCEDURE GetVouchersByCategoryId(
-    IN category_id INT
+    IN category_id INT,
+    IN supplier_id INT
 )
 BEGIN
-    SELECT * FROM Voucher WHERE categoryId = category_id;
+    SELECT voucherId,voucherName,supplierId,expiresAt,discountType,maximumDiscount,minimumDiscount,quantity,categoryId,conditionsOfUse,address_target,is_inWallet FROM Voucher WHERE categoryId = category_id and supplierId = supplier_Id;
 END;
 //
 

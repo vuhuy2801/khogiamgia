@@ -7,6 +7,6 @@ interface VoucherService {
     public function Detail($voucherId);
     public function GetTrendingVouchers(): array;
     public function GetVouchersBySupplierId(): array;
-    public function GetVouchersByCategoryId(): array;
+    public function GetVouchersByCategoryId($i,$a): array;
     public function SearchVoucherAndDiscountByKeyword(): array;
 }
