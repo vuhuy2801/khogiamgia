@@ -140,7 +140,7 @@
                                     <div class="round-icon"><i class="bi bi-ticket-fill"></i></div>
                                 </div>
                                 <div class="col-8 d-flex  flex-column statistics">
-                                    <span>Tổng số lượng mã giảm giá hiện có</span>
+                                    <span>Tổng số lượng mã giảm giá</span>
                                     <b>
                                         <?php echo $totalVoucher ?>
                                     </b>
