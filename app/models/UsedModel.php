@@ -102,7 +102,7 @@ class Used implements UsedService {
     // addUsed
     public function addUsed($voucherId, $usedCount) {
         $connection = $this->db->getConnection();
-        $query = "INSERT INTO Used(voucherId, usedCount) VALUES (?, ?)";
+        $query = "INSERT INTO used(voucherId, usedCount) VALUES (?, ?)";
         $statement = $connection->prepare($query);
         $statement->bindParam(1, $voucherId);
         $statement->bindParam(2, $usedCount);
@@ -116,7 +116,7 @@ class Used implements UsedService {
     // updateUsed
     public function updateUsed($voucherId, $usedCount) {
         $connection = $this->db->getConnection();
-        $query = "UPDATE Used SET usedCount = ? WHERE voucherId = ?";
+        $query = "UPDATE used SET usedCount = ? WHERE voucherId = ?";
         $statement = $connection->prepare($query);
         $statement->bindParam(1, $usedCount);
         $statement->bindParam(2, $voucherId);
@@ -130,7 +130,7 @@ class Used implements UsedService {
     // isExistUsed
     public function isExistUsed($voucherId) {
         $connection = $this->db->getConnection();
-        $query = "SELECT * FROM Used WHERE voucherId = ?";
+        $query = "SELECT * FROM used WHERE voucherId = ?";
         $statement = $connection->prepare($query);
         $statement->bindParam(1, $voucherId);
         try {
@@ -147,7 +147,7 @@ class Used implements UsedService {
     // getUsedByVoucherId
     public function getUsedByVoucherId($voucherId): array{
         $connection = $this->db->getConnection();
-        $query = "SELECT * FROM Used WHERE voucherId = ?";
+        $query = "SELECT * FROM used WHERE voucherId = ?";
         $statement = $connection->prepare($query);
         $statement->bindParam(1, $voucherId);
         try {
