@@ -42,9 +42,9 @@
                 $categories = array(
                     1 => "Thời Trang",
                     2 => "Điện tử",
-                    3 => "Nội trợ" ,
-                    4 => "Khác" 
-               );
+                    3 => "Nội trợ",
+                    4 => "Khác"
+                );
                 echo itemPromotion(
                     $urlImage,
                     $typeDisount[$voucher['discountType']],
@@ -75,10 +75,6 @@
             ?>
         </div>
 
-
-        <div class="d-flex justify-content-center mt-5">
-            <button type="button" class="btn btn-xem-them">Xem thêm</button>
-        </div>
     </div>
 </section>
 <!-- End Section promotion -->

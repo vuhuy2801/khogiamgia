@@ -2,6 +2,14 @@ const toastElList = document.querySelector(".toast");
 const toastElm = new bootstrap.Toast(toastElList, { delay: 2000 });
 let elmToastContent = document.querySelector("#toastContent");
 
+
+// Moblie nav
+$(".mobile-nav-toggle").on("click", function (e) {
+    $("#navbar").toggleClass("navbar-mobile");
+    $(this).toggleClass("bi-list bi-x");
+    $("#sub-navbar").toggleClass("active");
+});
+
 const api = axios.create({
     baseURL: 'http://localhost/api/',
     timeout: 15000,

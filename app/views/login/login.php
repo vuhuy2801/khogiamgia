@@ -9,9 +9,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" href="public/css/bootstrap/bootstrap.min.css" />
-    <link rel="stylesheet" href="public/css/general.css" />
-    <link rel="stylesheet" href="public/css/login.css" />
+    <link rel="stylesheet" href="/public/css/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="/public/css/general.css" />
+    <link rel="stylesheet" href="/public/css/login.css" />
 </head>
 
 <body>
@@ -69,7 +69,7 @@
         </div>
     </footer>
     <!-- END: COPYRIGHT -->
-    <script src="public\js\login.js"></script>
+    <script src="/public\js\login.js"></script>
 </body>
 
 </html>
