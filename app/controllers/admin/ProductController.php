@@ -53,7 +53,7 @@ class ProductController extends AdminController
 
     public function search()
     {
-        // $this->checkLogin();
+        $this->checkLogin();
         $currentPage = isset($_GET['page']) ? (int) $_GET['page'] : 1;
         $query = isset($_GET['q']) ? $_GET['q'] : "";
         $limit = 10;
