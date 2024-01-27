@@ -236,4 +236,31 @@ section.banner {
 .carousel-control-next.fade-out {
     opacity: 0.5;
 }
+
+@media (max-width: 1300px) {
+    .carousel-item img {
+        height: 529.51px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .carousel-item img {
+        height: 444.11px;
+    }
+}
+
+@media (max-width: 991px) {
+    .carousel-item img {
+        height: 330.24px;
+    }
+}
+
+@media (max-width: 768px) {
+    section.banner {
+        margin-top: 0px;
+    }
+    .carousel-item img {
+        height: 173.84px;
+    }
+}
 /* banner end  */

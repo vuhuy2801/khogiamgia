@@ -22,11 +22,11 @@ class VoucherController
     {
         $vouchersShopee = $this->voucherModel->ListVoucherBySupplier(1);
         $manually = array(
-            0 => "Mã có sẵn",
-            1 => "Mã nhập tay"
+            0 => "Mã nhập tay",
+            1 => "Có sẵn trong ví"
         );
 
-       
+
         include 'app/views/voucher/shopee.php';
     }
     public function showTiki()
@@ -34,8 +34,8 @@ class VoucherController
         $titleVoucher = "MÃ GIẢM GIÁ TIKI";
         $vouchers = $this->voucherModel->ListVoucherBySupplier(2);
         $manually = array(
-            0 => "Mã có sẵn",
-            1 => "Mã nhập tay"
+            0 => "Mã nhập tay",
+            1 => "Có sẵn trong ví"
         );
         include 'app/views/voucher/tiki.php';
     }
@@ -44,8 +44,8 @@ class VoucherController
         $titleVoucher = "MÃ GIẢM GIÁ LAZADA";
         $vouchers = $this->voucherModel->ListVoucherBySupplier(2);
         $manually = array(
-            0 => "Mã có sẵn",
-            1 => "Mã nhập tay"
+            0 => "Mã nhập tay",
+            1 => "Có sẵn trong ví"
         );
         include 'app/views/voucher/lazada.php';
     }
@@ -54,8 +54,8 @@ class VoucherController
         $titleVoucher = "MÃ GIẢM GIÁ SHOPEE FOOD";
         $vouchers = $this->voucherModel->ListVoucherBySupplier(2);
         $manually = array(
-            0 => "Mã có sẵn",
-            1 => "Mã nhập tay"
+            0 => "Mã nhập tay",
+            1 => "Có sẵn trong ví"
         );
         include 'app/views/voucher/shopeeFood.php';
     }

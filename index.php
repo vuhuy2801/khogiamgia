@@ -32,7 +32,6 @@ require_once 'routes/voucherRoutes.php';
 // 404 
 $router->set404(function () {
     header('HTTP/1.1 404 Not Found');
-    echo '404 - Page not found';
     include 'app/views/404.php';
 });
 
