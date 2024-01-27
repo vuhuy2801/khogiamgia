@@ -58,7 +58,7 @@ function itemPromotion($logoUrl, $promotionType, $endDate, $discountValue, $minP
 function renderTypeEvent($isOpenApp, $promotionCode, $link)
 {
     if ($isOpenApp) {
-        return '<button type="button" class="btn badge-copy" onclick="openLink(\'' . $link . '\')">Mở App Ngay</button>';
+        return '<button type="button" class="btn badge-open" onclick="openLink(\'' . $link . '\', \'' . $promotionCode . '\')">Mở App Ngay</button>';
     } else {
         return '<button type="button" class="btn badge-copy" onclick="copyCouponCode(event,\'' . $promotionCode . '\', \'' . $link . '\')">Sao chép ngay</button>';
     }

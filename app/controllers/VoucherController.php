@@ -31,7 +31,8 @@ class VoucherController
     }
     public function showTiki()
     {
-        $vouchersTiki = $this->voucherModel->ListVoucherBySupplier(2);
+        $titleVoucher = "MÃ GIẢM GIÁ TIKI";
+        $vouchers = $this->voucherModel->ListVoucherBySupplier(2);
         $manually = array(
             0 => "Mã có sẵn",
             1 => "Mã nhập tay"
@@ -40,17 +41,31 @@ class VoucherController
     }
     public function showLazada()
     {
+        $titleVoucher = "MÃ GIẢM GIÁ LAZADA";
+        $vouchers = $this->voucherModel->ListVoucherBySupplier(2);
+        $manually = array(
+            0 => "Mã có sẵn",
+            1 => "Mã nhập tay"
+        );
         include 'app/views/voucher/lazada.php';
     }
-    public function tiktokShop()
+    public function shopeeFood()
     {
-        include 'app/views/voucher/tiktok.php';
+        $titleVoucher = "MÃ GIẢM GIÁ SHOPEE FOOD";
+        $vouchers = $this->voucherModel->ListVoucherBySupplier(2);
+        $manually = array(
+            0 => "Mã có sẵn",
+            1 => "Mã nhập tay"
+        );
+        include 'app/views/voucher/shopeeFood.php';
     }
 
     // update used count
     public function updateUsedCount()
     {
+        $_POST = json_decode(file_get_contents("php://input"), true);
         header('Content-Type: application/json');
+
         $voucherId = isset($_POST['voucherId']) ? $_POST['voucherId'] : null;
         if ($voucherId === null) {
             http_response_code(400);
@@ -69,7 +84,7 @@ class VoucherController
 
         } else {
             $usedVoucher = $this->usedModel->getUsedByVoucherId($voucherId);
-            $usedCount = $usedVoucher['usedCount'];
+            $usedCount = $usedVoucher[0]['usedCount'];
             $usedCount++;
             $this->usedModel->updateUsed($voucherId, $usedCount);
         }

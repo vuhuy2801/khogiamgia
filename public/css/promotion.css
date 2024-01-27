@@ -8,6 +8,10 @@
   border-radius: 16px;
 }
 
+.item-promotion button {
+  font-size: 12px !important;
+}
+
 .section-promotion {
   padding: 35px 0px;
 }

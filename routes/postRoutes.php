@@ -29,10 +29,10 @@ $router->get('/huong-dan/lazada', function () {
     $GuidanceController->lazadaShow();
     logUserAccess();
 });
-$router->get('/huong-dan/tiktokshop', function () {
+$router->get('/huong-dan/shopee-food', function () {
     require 'app/controllers/GuidanceController.php';
     $GuidanceController = new GuidanceController();
-    $GuidanceController->tiktokShow();
+    $GuidanceController->shopeeFoodShow();
     logUserAccess();
 });
 

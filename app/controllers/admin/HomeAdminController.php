@@ -15,6 +15,7 @@ class HomeAdminController extends AdminController
         $TotalVisitCountToday = $this->getTotalVisitCountToday();
         $TotalVisitCount = $this->getTotalVisitCount();
         $VisitCount24h = $this->getVisitCount24h();
+        $TotalUsedVoucherCount = $this->getTodayUsedVoucher();
         include 'app/views/admin/home/index.php';
     }
     public function getRealtimeUserCount()
@@ -35,6 +36,11 @@ class HomeAdminController extends AdminController
     public function getVisitCount24h()
     {
         return $this->statisticModel->getVisitCount24h();
+    }
+    //getTodayUsedVoucher
+    public function getTodayUsedVoucher()
+    {
+        return $this->statisticModel->getTodayUsedVoucher();
     }
 }
 

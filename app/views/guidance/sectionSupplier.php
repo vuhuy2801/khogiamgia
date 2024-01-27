@@ -8,12 +8,12 @@
             </div>
         </div>
         <?php
-            $currentURL = $_SERVER['REQUEST_URI'];
+        $currentURL = $_SERVER['REQUEST_URI'];
 
-            $isShopeeActive = strpos($currentURL, 'shopee') !== false;
-            $isLazadaActive = strpos($currentURL, 'lazada') !== false;
-            $isTiktokActive = strpos($currentURL, 'tiktok') !== false;
-            ?>
+        $isShopeeActive = $currentURL === '/huong-dan/shopee';
+        $isLazadaActive = strpos($currentURL, 'lazada') !== false;
+        $isShopeeFoodActive = strpos($currentURL, 'shopee-food') !== false;
+        ?>
 
         <div class=" d-flex justify-content-start mb-3">
             <a href="shopee" class="btn-supplier <?php echo $isShopeeActive ? 'active' : ''; ?>">
@@ -22,8 +22,8 @@
             <a href="lazada" class="btn-supplier mx-3 <?php echo $isLazadaActive ? 'active' : ''; ?>">
                 Hướng dẫn Lazada
             </a>
-            <a href="tiktokshop" class="btn-supplier <?php echo $isTiktokActive ? 'active' : ''; ?>">
-                Hướng dẫn Tiktok Shop
+            <a href="shopee-food" class="btn-supplier <?php echo $isShopeeFoodActive ? 'active' : ''; ?>">
+                Hướng dẫn Shopee Food
             </a>
         </div>
 
