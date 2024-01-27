@@ -69,7 +69,7 @@
         </div>
     </footer>
     <!-- END: COPYRIGHT -->
-    <script src="/public\js\login.js"></script>
+    <script src="/public/js/login.js"></script>
 </body>
 
 </html>

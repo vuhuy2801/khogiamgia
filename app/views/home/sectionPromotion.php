@@ -19,19 +19,19 @@
                 $urlImage = '';
                 switch ($voucher['supplierId']) {
                     case 1:
-                        $urlImage = 'public/images/logo/round-logo/logo-shopee-tron.png';
+                        $urlImage = '/public/images/logo/round-logo/logo-shopee-tron.png';
                         break;
                     case 2:
-                        $urlImage = 'public/images/logo/round-logo/tiki.jpg';
+                        $urlImage = '/public/images/logo/round-logo/tiki.jpg';
                         break;
                     case 3:
-                        $urlImage = 'public/images/logo/round-logo/tiktokshop.jpg';
+                        $urlImage = '/public/images/logo/round-logo/tiktokshop.jpg';
                         break;
                     case 4:
-                        $urlImage = 'public/images/logo/round-logo/logo-lazada.png';
+                        $urlImage = '/public/images/logo/round-logo/logo-lazada.png';
                         break;
                     default:
-                        $urlImage = 'public/images/logo/round-logo/default.png';
+                        $urlImage = '/public/images/logo/round-logo/default.png';
                 }
                 $typeDisount = array(
                     1 => "Free Ship",
