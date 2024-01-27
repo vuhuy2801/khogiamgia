@@ -49,7 +49,7 @@ $adminText = "Admin";
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link scrollto <?php echo $currentUrl === $tinKhuyenMaiUrl ? 'active' : ''; ?>"
+                    <a class="nav-link scrollto <?php echo $currentUrl === $tinKhuyenMaiUrl || $currentUrl === '/tin-khuyen-mai/shopee' || $currentUrl === '/tin-khuyen-mai/lazada' || $currentUrl === '/tin-khuyen-mai/shopee-food' ? 'active' : ''; ?>"
                         href="<?php echo $tinKhuyenMaiUrl; ?>">
                         <?php echo $tinKhuyenMaiText; ?>
                     </a>

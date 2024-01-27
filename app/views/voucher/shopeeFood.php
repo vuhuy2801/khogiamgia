@@ -45,7 +45,7 @@
 
                     <div class="carousel-item active">
                         <a href="https://shopeefood.vn/" target="_blank">
-                            <img src="//public/images/banner/shopee-food-banner.jpg" alt="">
+                            <img src="/public/images/banner/shopee-food-banner.jpg" alt="">
                         </a>
                     </div>
                 </div>
