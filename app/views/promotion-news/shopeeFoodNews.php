@@ -32,15 +32,15 @@
     </div>
     <div class="mt-5">
         <?php
-            $urlImage ='/public/images/banner/tiktok.jpg';
-            require_once 'app/views/promotion-news/sectionBanners.php';
-            $title = 'TIN KHUYẾN MẠI TIKTOK SHOP';
-            $supplierId = 3;
-            require_once 'app/views/promotion-news/sectionPosts.php';
+        $urlImage = '/public/images/banner/shopee-food-banner.jpg';
+        require_once 'app/views/promotion-news/sectionBanners.php';
+        $title = 'TIN KHUYẾN MẠI SHOPEEFOOD';
+        $supplierId = 3;
+        require_once 'app/views/promotion-news/sectionPosts.php';
         ?>
     </div>
     <?php
-        require_once 'app/views/footer.php';
+    require_once 'app/views/footer.php';
     ?>
 </body>
 

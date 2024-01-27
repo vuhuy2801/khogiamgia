@@ -5,10 +5,10 @@ $router->get('/tin-khuyen-mai/shopee', function () {
     $NewsPromotionController->shopeeShow();
     logUserAccess();
 });
-$router->get('/tin-khuyen-mai/tiktok', function () {
+$router->get('/tin-khuyen-mai/shopeeFood', function () {
     require 'app/controllers/NewsPromotionController.php';
     $NewsPromotionController = new NewsPromotionController();
-    $NewsPromotionController->tiktokShow();
+    $NewsPromotionController->shopeeFoodShow();
     logUserAccess();
 });
 $router->get('/tin-khuyen-mai/lazada', function () {

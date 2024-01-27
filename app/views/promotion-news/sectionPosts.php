@@ -4,18 +4,20 @@
         <div class="row">
             <div class="col-12 mt-5">
                 <div class="titlePost">
-                    <h2><?php echo $title ?></h2>
+                    <h2>
+                        <?php echo $title ?>
+                    </h2>
                 </div>
             </div>
         </div>
 
         <?php
-            $currentURL = $_SERVER['REQUEST_URI']; // Lấy đường dẫn URL hiện tại
-
-            $isShopeeActive = strpos($currentURL, 'shopee') !== false;
-            $isLazadaActive = strpos($currentURL, 'lazada') !== false;
-            $isTiktokActive = strpos($currentURL, 'tiktok') !== false;
-            ?>
+        $currentURL = $_SERVER['REQUEST_URI']; // Lấy đường dẫn URL hiện tại
+        
+        $isShopeeActive = $currentURL === '/tin-khuyen-mai/shopee';
+        $isLazadaActive = strpos($currentURL, 'lazada') !== false;
+        $isShopeeFoodActive = strpos($currentURL, 'shopeeFood') !== false;
+        ?>
 
         <div class=" d-flex justify-content-start mb-3">
             <a href="shopee" class="btn-supplier <?php echo $isShopeeActive ? 'active' : ''; ?>">
@@ -24,8 +26,8 @@
             <a href="lazada" class="btn-supplier mx-3 <?php echo $isLazadaActive ? 'active' : ''; ?>">
                 Tin khuyến mại Lazada
             </a>
-            <a href="tiktok" class="btn-supplier <?php echo $isTiktokActive ? 'active' : ''; ?>">
-                Tin khuyến mại Tiktok Shop
+            <a href="shopeeFood" class="btn-supplier <?php echo $isShopeeFoodActive ? 'active' : ''; ?>">
+                Tin khuyến mại ShopeeFood
             </a>
         </div>
 
@@ -34,47 +36,48 @@
             <?php
             require_once 'app/controllers/PostController.php';
             include_once 'app/views/component/itemPost.php';
-           
-                $postController = new PostController();
-                $posts = $postController->getListWithSupplier($supplierId);
-                $postsPerPage = 6;
-                $totalPosts = count($posts);
-    
-                $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
-                $totalPages = ceil($totalPosts / $postsPerPage);
-    
-                $start = ($currentPage - 1) * $postsPerPage;
-                $end = $start + $postsPerPage;
-                $paginatedPosts = array_slice($posts, $start, $postsPerPage);
-    
-                $hidePagination = $totalPages <= 1;
-              
-               
-                foreach ($paginatedPosts as $index => $post) {
-                    $imgSrc = $post['image'];
-                    $postDate = $post['createdAt'];
-                    $postTitle = $post['title'];
-                    $postLink = "new.html?slug=" . $post['slug'];
-                    $description = $post['description'];
-                    echo itemPostBox($imgSrc, $postDate, $postTitle, $postLink, $description);
-                }
-           
-           
+
+            $postController = new PostController();
+            $posts = $postController->getListWithSupplier($supplierId);
+            $postsPerPage = 6;
+            $totalPosts = count($posts);
+
+            $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+            $totalPages = ceil($totalPosts / $postsPerPage);
+
+            $start = ($currentPage - 1) * $postsPerPage;
+            $end = $start + $postsPerPage;
+            $paginatedPosts = array_slice($posts, $start, $postsPerPage);
+
+            $hidePagination = $totalPages <= 1;
+
+
+            foreach ($paginatedPosts as $index => $post) {
+                $imgSrc = $post['image'];
+                $postDate = $post['createdAt'];
+                $postTitle = $post['title'];
+                $postLink = "new.html?slug=" . $post['slug'];
+                $description = $post['description'];
+                echo itemPostBox($imgSrc, $postDate, $postTitle, $postLink, $description);
+            }
+
+
             ?>
 
         </div>
 
-        <nav class="  py-2" aria-label="Page navigation example"
-            <?php echo $hidePagination ? 'style="display: none;"' : ''; ?>>
+        <nav class="  py-2" aria-label="Page navigation example" <?php echo $hidePagination ? 'style="display: none;"' : ''; ?>>
             <ul class="pagination justify-content-center">
                 <li class="page-item <?php echo ($currentPage == 1) ? 'disabled' : ''; ?>">
                     <a class="page-link"
                         href="?page=<?php echo ($currentPage > 1) ? ($currentPage - 1) : 1; ?>">Previous</a>
                 </li>
-                <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
-                <li class="page-item <?php echo ($currentPage == $i) ? 'active' : ''; ?>">
-                    <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                </li>
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <li class="page-item <?php echo ($currentPage == $i) ? 'active' : ''; ?>">
+                        <a class="page-link" href="?page=<?php echo $i; ?>">
+                            <?php echo $i; ?>
+                        </a>
+                    </li>
                 <?php endfor; ?>
                 <li class="page-item <?php echo ($currentPage == $totalPages) ? 'disabled' : ''; ?>">
                     <a class="page-link"
