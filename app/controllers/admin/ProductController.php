@@ -3,42 +3,93 @@ require_once 'app/models/ProductModel.php';
 include_once 'app/controllers/admin/AdminController.php';
 
 
-class ProductController extends AdminController{
+class ProductController extends AdminController
+{
     private $productData;
 
-    public function __construct() {
-        $this->productData = new Product(); 
+    public function __construct()
+    {
+        $this->productData = new Product();
     }
 
-    public function getListOfProduct($offSet, $limit) {
+    public function getListOfProduct($offSet, $limit)
+    {
         return $this->productData->ListAdmin($offSet, $limit);
     }
 
-    public function getDetail($id) {
+    public function getDetail($id)
+    {
         return $this->productData->Detail($id);
     }
 
-    public function getPrices($id) {
+    public function getPrices($id)
+    {
         return $this->productData->GetProductWithPriceById($id);
     }
 
-    public function getTotalProduct() {
+    public function getTotalProduct()
+    {
         return $this->productData->CountProduct();
     }
-   
+
     public function index()
     {
         $this->checkLogin();
-
-      include 'app/views/admin/products/show.php';
+        $currentPage = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+        $limit = 10;
+        $totalProducts = $this->getTotalProduct();
+        $totalPages = ceil($totalProducts / $limit);
+        if ($currentPage > $totalPages || $currentPage < 1) {
+            $products = [];
+            $hidePagination = true;
+            include 'app/views/admin/products/show.php';
+        }
+        $offset = ($currentPage - 1) * $limit;
+        $products = $this->getListOfProduct($offset, $limit);
+        $hidePagination = $totalPages <= 1;
+        include 'app/views/admin/products/show.php';
     }
+
+
+    public function search()
+    {
+        $this->checkLogin();
+        $currentPage = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+        $query = isset($_GET['q']) ? $_GET['q'] : "";
+        $limit = 10;
+        $totalProducts = $this->countSearchProduct($query);
+        $totalPages = ceil($totalProducts / $limit);
+        if ($currentPage > $totalPages || $currentPage < 1) {
+            $products = [];
+            $hidePagination = true;
+            include 'app/views/admin/products/show.php';
+        }
+        $offset = ($currentPage - 1) * $limit;
+        $products = $this->getResultSearch($query, $offset, $limit);
+        $hidePagination = $totalPages <= 1;
+        include 'app/views/admin/products/show.php';
+    }
+
+    // count search product
+    public function countSearchProduct($query)
+    {
+        return $this->productData->CountSearchProduct($query);
+    }
+
+    public function getResultSearch($query, $offSet, $limit)
+    {
+        return $this->productData->SearchProductWithPagination($query, $offSet, $limit);
+    }
+
+
+
     public function detail()
     {
         $this->checkLogin();
 
         $titlePage = "Chi tiết theo dõi sản phẩm";
-      include 'app/views/admin/products/detail.php';
-      
+        include 'app/views/admin/products/detail.php';
+
     }
 
     public function create()
@@ -46,7 +97,7 @@ class ProductController extends AdminController{
         $this->checkLogin();
 
         $titlePage = "Thêm theo dõi sản phẩm";
-      include 'app/views/admin/products/create.php';
+        include 'app/views/admin/products/create.php';
     }
 
     public function edit()
@@ -56,7 +107,7 @@ class ProductController extends AdminController{
         $titlePage = "Sửa theo dõi sản phẩm";
         include 'app/views/admin/products/edit.php';
     }
-  
+
     public function upload()
     {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
@@ -77,7 +128,7 @@ class ProductController extends AdminController{
         if (!file_exists($targetDirectory)) {
             mkdir($targetDirectory, 0777, true);
         }
-        
+
         if (move_uploaded_file($_FILES['file']['tmp_name'], $targetFile)) {
             echo "File đã được tải lên thành công.";
         } else {
@@ -85,8 +136,9 @@ class ProductController extends AdminController{
         }
     }
 
-  
-    public function add() {
+
+    public function add()
+    {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $this->productData->setProductID($_POST['productId']);
         $this->productData->setProductName($_POST['productName']);
@@ -100,16 +152,17 @@ class ProductController extends AdminController{
         $targetDirectory = '/public/uploads/products/' . date('d-m-Y') . '/';
         $imageUrl = $targetDirectory . $imageName;
         $this->productData->setImage($imageUrl);
-    
-        if ($this->productData->Add()){
+
+        if ($this->productData->Add()) {
             header('Location: ../theo-doi-gia-san-pham/danh-sach');
-        }else{
+        } else {
             echo "Thêm sản phẩm theo dõi thất bại";
         }
-        
+
     }
 
-    public function update() {
+    public function update()
+    {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $this->productData->setProductID($_POST['productId']);
         $this->productData->setProductName($_POST['productName']);
@@ -122,30 +175,33 @@ class ProductController extends AdminController{
         $imageFake = ($_POST['fakeImage']);
         if ($imageName == "") {
             $this->productData->setImage($imageFake);
-        }else { $targetDirectory = '/public/uploads/products/' . date('d-m-Y') . '/';
+        } else {
+            $targetDirectory = '/public/uploads/products/' . date('d-m-Y') . '/';
             $imageUrl = $targetDirectory . $imageName;
-            
+
             $this->productData->setImage($imageUrl);
         }
-        if ($this->productData->Edit()){
+        if ($this->productData->Edit()) {
             header('Location: ../theo-doi-gia-san-pham/danh-sach');
-        }else{
+        } else {
             echo "Sửa sản phẩm theo dõi thất bại";
         }
-        
+
     }
 
-    public function delete($productId) {
+    public function delete($productId)
+    {
         $this->productData->setProductID($productId);
-        if ($this->productData->Delete()){
+        if ($this->productData->Delete()) {
             header('Location: ../danh-sach');
-        }else{
+        } else {
             echo "Xóa sản phẩm theo dõi thất bại";
         }
-        
+
     }
 
-    
-   
- 
+
+
+
+
 }

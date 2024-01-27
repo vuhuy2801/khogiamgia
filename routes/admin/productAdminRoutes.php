@@ -50,5 +50,12 @@ $router->post('/admin/theo-doi-gia-san-pham/delete/(\w+)', function ($productId)
     $ProductController->delete($productId);
 });
 
+// router for search
+$router->get('/admin/theo-doi-gia-san-pham/search', function () {
+    require 'app/controllers/admin/ProductController.php';
+    $ProductController = new ProductController();
+    $ProductController->search();
+});
+
 
 ?>

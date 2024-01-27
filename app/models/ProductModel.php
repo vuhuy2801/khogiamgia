@@ -81,18 +81,22 @@ class Product implements ProductService
         return $this->status;
     }
 
-    public function getCreatedAt() {
+    public function getCreatedAt()
+    {
         return $this->createdAt;
     }
 
-    public function setCreatedAt($value) {
+    public function setCreatedAt($value)
+    {
         $this->createdAt = $value;
     }
-    public function getUpdateAt() {
+    public function getUpdateAt()
+    {
         return $this->updatedAt;
     }
 
-    public function setUpdateAt($value) {
+    public function setUpdateAt($value)
+    {
         $this->updatedAt = $value;
     }
 
@@ -294,6 +298,35 @@ class Product implements ProductService
             return false;
         } catch (PDOException $e) {
             return false;
+        }
+    }
+
+    // search product with pagination
+    public function CountSearchProduct($productName): int
+    {
+        $connection = $this->db->getConnection();
+        $query = "SELECT COUNT(*) FROM product WHERE productName LIKE '%$productName%'";
+        $staement = $connection->prepare($query);
+        try {
+            $staement->execute();
+            $result = $staement->fetchColumn();
+            return $result;
+        } catch (PDOException $e) {
+            return 0;
+        }
+    }
+
+    public function SearchProductWithPagination($productName, $offSet, $limit): array
+    {
+        $connection = $this->db->getConnection();
+        $query = "SELECT * FROM product WHERE productName LIKE '%$productName%' LIMIT $limit OFFSET $offSet";
+        $staement = $connection->prepare($query);
+        try {
+            $staement->execute();
+            $result = $staement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            return [];
         }
     }
 
