@@ -126,11 +126,19 @@
                                     <div class="mb-3">
                                         <canvas id="myChart"></canvas>
                                     </div>
-                                    <p class="label_input">Thời gian tạo: <span
-                                            class="float-end date_value"><?php echo convertDateFormat($product['createdAt']) ?></span>
+                                    <p class="label_input">Thời gian tạo: <span class="float-end date_value"><?php 
+                                            //  time zone vietnam
+                                            date_default_timezone_set('Asia/Ho_Chi_Minh');
+                                        
+                                            
+                                            echo date('Y-m-d'); ?></span>
                                     </p>
-                                    <p class="label_input">Thời gian cập nhật: <span
-                                            class="float-end date_value"><?php echo convertDateFormat( $product['updatedAt']) ?></span>
+                                    <p class="label_input">Thời gian cập nhật: <span class="float-end date_value"><?php 
+                                            
+                                            date_default_timezone_set('Asia/Ho_Chi_Minh');
+                                        
+                                            
+                                            echo date('Y-m-d');?></span>
                                     </p>
                                 </div>
                             </div>

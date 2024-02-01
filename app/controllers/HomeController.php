@@ -31,8 +31,8 @@ class HomeController
     $isShowMore = $totalPost > 6;
     $vouchers = $this->voucherModel->ListUser();
     $manually = array(
-      0 => "Mã có sẵn",
-      1 => "Mã nhập tay"
+      0 => "Mã nhập tay",
+      1 => "Có sẵn trong ví"
     );
 
   

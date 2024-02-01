@@ -69,7 +69,7 @@ class StatisticControllerAdmin extends AdminController
         $labels = array();
         $data = array();
         foreach ($dataChart as $item) {
-            array_push($labels, ($item['supplierId'] === 1) ? "SHOPEE" : (($item['supplierId'] === 2) ? "LADAZA" : (($item['supplierId'] === 3) ? "TIKI" : "TIKTOKSHOP")));
+            array_push($labels, ($item['supplierId'] === 1) ? "SHOPEE" : (($item['supplierId'] === 2) ? "TIKI" : (($item['supplierId'] === 3) ? "SHOPEEFOOD" : "LAZADA")));
             array_push($data, $item['voucher_count']);
         }
         return array(

@@ -2,130 +2,132 @@ Create schema dbVoucher;
 use dbVoucher;
 
 -- table Category
-CREATE TABLE IF NOT EXISTS Category (
-    categoryId INT PRIMARY KEY AUTO_INCREMENT,
-    categoryName NVARCHAR(255)
-);
+CREATE TABLE IF NOT EXISTS CATEGORY (
+    categoryId INT AUTO_INCREMENT PRIMARY KEY,
+    categoryName VARCHAR(255)
+) ENGINE=InnoDB;
+
 -- table Supplier
-CREATE TABLE IF NOT EXISTS Supplier (
-    supplierId INT PRIMARY KEY AUTO_INCREMENT,
-    supplierName NVARCHAR(255),
-    address_target NVARCHAR(255),
-    logoSupplier NVARCHAR(255),
+CREATE TABLE IF NOT EXISTS SUPPLIER (
+    supplierId INT AUTO_INCREMENT PRIMARY KEY,
+    supplierName VARCHAR(255),
+    address_target VARCHAR(255),
+    logoSupplier VARCHAR(255),
     createdAt DATETIME,
     updatedAt DATETIME
-);
+) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS Post (
-    postId INT AUTO_INCREMENT,
-    title NVARCHAR(255),
-    image NVARCHAR(255),
-    slug NVARCHAR(255) UNIQUE,
+
+CREATE TABLE IF NOT EXISTS POST (
+    postId INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255),
+    image VARCHAR(255),
+    slug VARCHAR(255) UNIQUE,
     supplierId INT,
     content TEXT,
-    description NVARCHAR(1555),
+    description VARCHAR(1555),
     categories_post INT,
     createdAt DATETIME,
-    updateAt DATETIME,
+    updatedAt DATETIME,
     status INT,
-    PRIMARY KEY (postId),
     FOREIGN KEY (supplierId) REFERENCES Supplier(supplierId)
-);
-
+) ENGINE=InnoDB;
 
 -- table Voucher
-CREATE TABLE IF NOT EXISTS Voucher (
-    voucherId NVARCHAR(15) PRIMARY KEY NOT NULL,
-    voucherName NVARCHAR(255),
+CREATE TABLE IF NOT EXISTS VOUCHER (
+    voucherId VARCHAR(15) PRIMARY KEY NOT NULL,
+    voucherName VARCHAR(255),
     quantity INT,
     expressAt DATE,
     expiresAt DATE,
-    conditionsOfUse NVARCHAR(255),
+    conditionsOfUse VARCHAR(255),
     categoryId INT,
     createdAt DATETIME,
     updatedAt DATETIME,
     is_trend TINYINT(1),
     supplierId INT,
     status INT,
-    address_target NVARCHAR(255),
+    address_target VARCHAR(255),
     discountType INT,
-    maximumDiscount NVARCHAR(255),
-    minimumDiscount NVARCHAR(255),
+    maximumDiscount VARCHAR(255),
+    minimumDiscount VARCHAR(255),
     is_inWallet TINYINT(1),
     FOREIGN KEY (supplierId) REFERENCES Supplier(supplierId),
-	FOREIGN KEY (categoryId) REFERENCES Category(categoryId)
-);
-
+    FOREIGN KEY (categoryId) REFERENCES Category(categoryId)
+) ENGINE=InnoDB;
 
 -- table Use
-CREATE TABLE IF NOT EXISTS Used (
-	usedId INT PRIMARY KEY AUTO_INCREMENT,
-    voucherId NVARCHAR(15),
+CREATE TABLE IF NOT EXISTS USED (
+    usedId INT AUTO_INCREMENT PRIMARY KEY,
+    voucherId VARCHAR(15),
     usedCount INT,
-    FOREIGN KEY (voucherId)REFERENCES Voucher(voucherId)
-);
+    FOREIGN KEY (voucherId) REFERENCES Voucher(voucherId)
+) ENGINE=InnoDB;
+
 
 -- table Product 
-CREATE TABLE IF NOT EXISTS Product (
-    productID NVARCHAR(255) PRIMARY KEY,
-    productName NVARCHAR(255),
-    image NVARCHAR(255),
+CREATE TABLE IF NOT EXISTS PRODUCT (
+    productID VARCHAR(255) PRIMARY KEY,
+    productName VARCHAR(255),
+    image VARCHAR(255),
     link TEXT,
-    rateCount FLOAT(15),
-    soldCount Float(15),
-	createdAt DATETIME,
+    rateCount FLOAT,
+    soldCount FLOAT,
+    createdAt DATETIME,
     updatedAt DATETIME,
     status INT
-);
-
+) ENGINE=InnoDB;
 
 -- table ProductPrice
-CREATE TABLE IF NOT EXISTS ProductPrice (
-    productPriceID INT PRIMARY KEY AUTO_INCREMENT,
-    productID NVARCHAR(255),
+CREATE TABLE IF NOT EXISTS PRODUCTPRICE (
+    productPriceID INT AUTO_INCREMENT PRIMARY KEY,
+    productID VARCHAR(255),
     date DATE,
-    currentPrice FLOAT(25),
+    currentPrice FLOAT,
     FOREIGN KEY (productID) REFERENCES Product(productID)
-);
+) ENGINE=InnoDB;
+
 
 -- table banner
-CREATE TABLE IF NOT EXISTS Banner (
-    bannerId INT PRIMARY KEY AUTO_INCREMENT,
-    image NVARCHAR(255),
-    title NVARCHAR(255),
-    address_target NVARCHAR(255),
+CREATE TABLE IF NOT EXISTS BANNER (
+    bannerId INT AUTO_INCREMENT PRIMARY KEY,
+    image VARCHAR(255),
+    title VARCHAR(255),
+    address_target VARCHAR(255),
     status INT,
     createdAt DATETIME,
     updatedAt DATETIME
-);
+) ENGINE=InnoDB;
+
+
 -- table user
-CREATE TABLE IF NOT EXISTS User (
-	userId int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    userName NVARCHAR(255),
-    email NVARCHAR(255),
-    password NVARCHAR(255),
-    fullName nvarchar(255) NOT NULL,
-    status int NOT NULL,
-    role int not null,
+CREATE TABLE IF NOT EXISTS USER (
+    userId INT AUTO_INCREMENT PRIMARY KEY,
+    userName VARCHAR(255),
+    email VARCHAR(255),
+    password VARCHAR(255),
+    fullName VARCHAR(255) NOT NULL,
+    status INT NOT NULL,
+    role INT NOT NULL,
     createdAt DATETIME,
     updatedAt DATETIME
-);
+) ENGINE=InnoDB;
 
-    CREATE TABLE user_access_log (
-        log_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-        user_ip VARCHAR(45),
-        visit_time DATETIME,
-        page_url VARCHAR(2048),
-        user_agent VARCHAR(512),
-        referer_url VARCHAR(2048) NULL
-    );
 
+CREATE TABLE IF NOT EXISTS USER_ACCESS_LOG (
+    log_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_ip VARCHAR(45),
+    visit_time DATETIME,
+    page_url VARCHAR(2048),
+    user_agent VARCHAR(512),
+    referer_url VARCHAR(2048)
+) ENGINE=InnoDB;
 
 
 DELIMITER //
 
-CREATE TRIGGER generate_random_id_user
-BEFORE INSERT ON User
+CREATE TRIGGER GENERATE_RANDOM_ID_USER
+BEFORE INSERT ON USER
 FOR EACH ROW
 BEGIN
     DECLARE random_number INT;
@@ -137,10 +139,11 @@ END;
 DELIMITER ;
 
 
+
 DELIMITER //
 
-CREATE TRIGGER generate_random_id_post
-BEFORE INSERT ON Post
+CREATE TRIGGER GENERATE_RANDOM_ID_POST
+BEFORE INSERT ON POST
 FOR EACH ROW
 BEGIN
     DECLARE random_number INT;
