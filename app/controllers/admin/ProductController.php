@@ -17,16 +17,6 @@ class ProductController extends AdminController
         return $this->productData->ListAdmin($offSet, $limit);
     }
 
-    public function getDetail($id)
-    {
-        return $this->productData->Detail($id);
-    }
-
-    public function getPrices($id)
-    {
-        return $this->productData->GetProductWithPriceById($id);
-    }
-
     public function getTotalProduct()
     {
         return $this->productData->CountProduct();
@@ -47,6 +37,13 @@ class ProductController extends AdminController
         $offset = ($currentPage - 1) * $limit;
         $products = $this->getListOfProduct($offset, $limit);
         $hidePagination = $totalPages <= 1;
+        $statusProduct = array(
+            0 => "Tắt",
+            1 => "Đang theo dõi"
+        );
+
+        require_once 'app/views/admin/products/deleteModal.php';
+        require_once 'lib/convertDate.php';
         include 'app/views/admin/products/show.php';
     }
 
@@ -88,8 +85,29 @@ class ProductController extends AdminController
         $this->checkLogin();
 
         $titlePage = "Chi tiết theo dõi sản phẩm";
-        include 'app/views/admin/products/detail.php';
+        $statusProduct = array(
+            0 => "Tắt",
+            1 => "Đang theo dõi"
+        );
 
+        $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
+        $product = $this->productData->Detail($id);
+        $prices = $this->productData->GetProductWithPriceById($id);
+        $listPrices = array();
+        $listDates = array();
+        function convertDateChart($inputDate)
+        {
+            date_default_timezone_set('Asia/Ho_Chi_Minh');
+            $timestamp = strtotime($inputDate);
+            return date('d/m/y', $timestamp);
+        }
+        foreach ($prices as $index => $price) {
+            $listPrices[] = $price['currentPrice'];
+            $listDates[] = convertDateChart($price['date']);
+        }
+        require_once 'app/views/admin/products/deleteModal.php';
+        require_once 'lib/convertDate.php';
+        include 'app/views/admin/products/detail.php';
     }
 
     public function create()
@@ -97,6 +115,7 @@ class ProductController extends AdminController
         $this->checkLogin();
 
         $titlePage = "Thêm theo dõi sản phẩm";
+        require_once 'app/views/admin/products/generalProcessing.php';
         include 'app/views/admin/products/create.php';
     }
 
@@ -105,6 +124,14 @@ class ProductController extends AdminController
         $this->checkLogin();
 
         $titlePage = "Sửa theo dõi sản phẩm";
+
+        $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
+        $product = $this->productData->Detail($id);
+        $statuses = array(
+            0 => "Không theo dõi",
+            1 => "Theo dõi"
+        );
+        require_once 'lib/convertDate.php';
         include 'app/views/admin/products/edit.php';
     }
 
@@ -113,7 +140,7 @@ class ProductController extends AdminController
         date_default_timezone_set('Asia/Ho_Chi_Minh');
 
         $targetDirectory = 'public/uploads/products/' . date('d-m-Y') . '/';
-        
+
         $originalFileName = pathinfo($_FILES['file']['name'], PATHINFO_FILENAME); // lấy tên file ảnh
         $extension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION); //lấy đuôi file ảnh
 
@@ -158,19 +185,18 @@ class ProductController extends AdminController
         } else {
             echo "Thêm sản phẩm theo dõi thất bại";
         }
-
     }
 
     public function update()
     {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
-        $this->productData->setProductID($_POST['productId']);
         $this->productData->setProductName($_POST['productName']);
         $this->productData->setLink($_POST['link']);
         $this->productData->setRateCount($_POST['rateCount']);
         $this->productData->setSoldCount(($_POST['soldCount']));
         $this->productData->setUpdateAt(date('Y-m-d H:i:s'));
         $this->productData->setStatus($_POST['status']);
+        $this->productData->setProductID($_POST['productId']);
         $imageName = ($_POST['image']);
         $imageFake = ($_POST['fakeImage']);
         if ($imageName == "") {
@@ -186,7 +212,6 @@ class ProductController extends AdminController
         } else {
             echo "Sửa sản phẩm theo dõi thất bại";
         }
-
     }
 
     public function delete($productId)
@@ -197,11 +222,5 @@ class ProductController extends AdminController
         } else {
             echo "Xóa sản phẩm theo dõi thất bại";
         }
-
     }
-
-
-
-
-
 }

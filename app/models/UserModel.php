@@ -122,7 +122,9 @@ class User implements UserService
     public function Add(): bool
     {
         $connection = $this->db->getConnection();
-        $query = "CALL AddUser(?, ?, ?, ?, ?, ?, ?, ?)";
+        $query = "
+        INSERT INTO User (userName, email, password, fullName, status,role, createdAt, updatedAt)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
         $statement = $connection->prepare($query);
         $statement->bindParam(1, $this->userName, PDO::PARAM_STR);
         $statement->bindParam(2, $this->email, PDO::PARAM_STR);
@@ -144,7 +146,7 @@ class User implements UserService
     public function Delete(): bool
     {
         $connection = $this->db->getConnection();
-        $query = "CALL DeleteUser(?)";
+        $query = "DELETE FROM User WHERE userId = ?;";
         $statement = $connection->prepare($query);
         $statement->bindParam(1, $this->userId);
         try {
@@ -185,5 +187,4 @@ class User implements UserService
             return [];
         }
     }
-
 }

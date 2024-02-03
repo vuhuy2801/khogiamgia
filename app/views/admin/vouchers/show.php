@@ -24,11 +24,7 @@
         <!-- end -->
         <div class="row flex-nowrap">
             <?php
-                require_once 'app/views/partials/sidebar.php';
-                require_once 'app/views/admin/vouchers/deleteModal.php';
-                require_once 'lib/convertDate.php';
-                require_once 'app/views/admin/vouchers/generalProcessing.php';
-                require_once 'app/controllers/admin/VoucherController.php';
+            require_once 'app/views/partials/sidebar.php';
             ?>
 
             <!-- end sidebar -->
@@ -70,34 +66,35 @@
                         </thead>
                         <tbody class="body_item">
                             <?php
-                              
-                                $vouchersPerPage = 10;
-                                $totalVouchers = count($vouchers);
-                            
-                                $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
-                                $totalPages = ceil($totalVouchers / $vouchersPerPage);
 
-                                $start = ($currentPage - 1) * $vouchersPerPage;
-                                $end = $start + $vouchersPerPage;
-                                $paginatedVoucher = array_slice($vouchers, $start, $vouchersPerPage);
-                                $hidePagination = $totalPages <= 1;
-                               
-                                foreach ($paginatedVoucher as $index => $voucher) {
-                                    echo "<tr>";
-                                    echo "<td class='item_table' scope='row'>" . $voucher['voucherId'] . "</td>";
-                                    echo "<td class='item_table'>" . $voucher['voucherName'] . "</td>";
-                                    echo "<td class='item_table'>" . $typeDisount[$voucher['discountType']] ."</td>";
-                                    echo "<td class='item_table'>" . $listSupplier[$voucher['supplierId']] . "</td>";
-                                    echo "<td class='item_table'>" . convertDate($voucher['expiresAt']) ."</td>";
-                                    $statusClass = ($voucher['status'] == 0) ? 'status-inactive' : 'status-active';
-                                    echo "<td class='item_table '><p class='item_status my-0 rounded-3 " . $statusClass . "'>" . $statusVoucher[$voucher['status']] . "</p></td>";
-                        
-                                    echo "<td class='item_table'>
+                            $vouchersPerPage = 10;
+                            $totalVouchers = count($vouchers);
+
+                            $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+                            $totalPages = ceil($totalVouchers / $vouchersPerPage);
+
+                            $start = ($currentPage - 1) * $vouchersPerPage;
+                            $end = $start + $vouchersPerPage;
+                            $paginatedVoucher = array_slice($vouchers, $start, $vouchersPerPage);
+                            $hidePagination = $totalPages <= 1;
+
+                            foreach ($paginatedVoucher as $index => $voucher) {
+                                echo "<tr>";
+                                echo "<td class='item_table' scope='row'>" . $voucher['voucherId'] . "</td>";
+                                echo "<td class='item_table'>" . $voucher['voucherName'] . "</td>";
+                                echo "<td class='item_table'>" . $typeDisount[$voucher['discountType']] . "</td>";
+                                echo "<td class='item_table'>" . $listSupplier[$voucher['supplierId']] . "</td>";
+                                echo "<td class='item_table'>" . convertDate($voucher['expiresAt']) . "</td>";
+                                $statusClass = ($voucher['status'] == 0) ? 'status-inactive' : 'status-active';
+                                echo "<td class='item_table '><p class='item_status my-0 rounded-3 " . $statusClass . "'>" . $statusVoucher[$voucher['status']] . "</p></td>";
+
+                                echo "<td class='item_table'>
                                         <a class='px-1 action_detail' href='chi-tiet?id=" . urlencode($voucher['voucherId']) .  "'><i class='bi bi-eye-fill'></i></a>
-                                        <a class='px-1 action_edit' href='cap-nhat?id=" . urlencode($voucher['voucherId']) ."'><i class='bi bi-pencil-square'></i></a>
+                                        <a class='px-1 action_edit' href='cap-nhat?id=" . urlencode($voucher['voucherId']) . "'><i class='bi bi-pencil-square'></i></a>
                                         <a href='' class='delete-voucher px-1' data-voucher-id='" . urlencode($voucher['voucherId']) . "' data-bs-toggle='modal' data-bs-target='#deleteVoucher'><i class='bi bi-trash'></i></a>
                                      </td>";
-                                     echo "</tr>" ; } ?>
+                                echo "</tr>";
+                            } ?>
                         </tbody>
                     </table>
                     <nav class="  py-2" aria-label="Page navigation example"

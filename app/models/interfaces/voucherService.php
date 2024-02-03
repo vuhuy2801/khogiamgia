@@ -1,5 +1,6 @@
 <?php
-interface VoucherService {
+interface VoucherService
+{
     public function Add(): bool;
     public function Edit(): bool;
     public function Delete(): bool;
@@ -7,6 +8,6 @@ interface VoucherService {
     public function Detail($voucherId);
     public function GetTrendingVouchers(): array;
     public function GetVouchersBySupplierId(): array;
-    public function GetVouchersByCategoryId($i,$a): array;
-    public function SearchVoucherAndDiscountByKeyword(): array;
+    public function GetVouchersByCategoryId($i, $a): array;
+    public function SearchVoucherByKeyword(): array;
 }

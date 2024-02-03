@@ -61,13 +61,25 @@
     require_once 'app/views/footer.php';
     ?>
 
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div class="toast align-items-center border-0" role="alert" aria-live="assertive" aria-atomic="true"
+            style="background-color: #d1e7dd; color:#0f5132;">
+            <div class="d-flex">
+                <div class="toast-body" id="toastContent">
 
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/public/js/bootstrap/bootstrap.bundle.min.js"> </script>
     <script src="/public/js/jquery/jquery-3.6.3.min.js"> </script>
     <script src="/public/js/swiperjs/swiper-bundle.min.js"> </script>
     <script src="/public/js/general.js"> </script>
     <script src="/public/js/voucher.js"> </script>
-    
+
 
 
 </body>

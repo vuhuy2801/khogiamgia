@@ -11,8 +11,7 @@
     <link rel="stylesheet" href="/public/css/admin/products.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <title> <?php echo $titlePage ?> </title>
     <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">
 
@@ -25,18 +24,15 @@
         <div class="row flex-nowrap">
             <?php
             require_once 'app/views/partials/sidebar.php';
-            require_once 'app/views/admin/products/generalProcessing.php';
-        ?>
+            ?>
 
             <div class="col px-3 py-3 wrapContent">
-                <div class="toast toast_create align-items-center text-bg-primary border-0 position-absolute start-50 translate-middle"
-                    role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast toast_create align-items-center text-bg-primary border-0 position-absolute start-50 translate-middle" role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="d-flex">
                         <div class="toast-body">
                             Thêm sản phẩm theo dõi thành công ! <span></span>
                         </div>
-                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                            aria-label="Close"></button>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                     </div>
                 </div>
                 <div class="mt-4">
@@ -44,14 +40,12 @@
 
                     <div class="row pt-1">
                         <div class="d-flex justify-content-between px-3 mb-4">
-                            <a href="danh-sach" class="my-auto text-decoration-none back_home"><i
-                                    class="bi bi-arrow-left mx-1 "></i>Quay
+                            <a href="danh-sach" class="my-auto text-decoration-none back_home"><i class="bi bi-arrow-left mx-1 "></i>Quay
                                 lại</a>
                             <button id="btnSubmit" class="btn btn-primary"><i class="bi bi-check2 mx-1"></i>Tạo</button>
                         </div>
                         <div class="col-8">
-                            <form class="wrap_detail rounded-3 px-3 pt-3 pb-5" id="formSubmit" method="POST"
-                                action="add">
+                            <form class="wrap_detail rounded-3 px-3 pt-3 pb-5" id="formSubmit" method="POST" action="add">
 
                                 <div class="form-group">
                                     <label class="label_input" for="link">Link sản phẩm</label>
@@ -99,10 +93,8 @@
                                 </div>
                                 <div class="px-4 mb-5">
                                     <div class="dropzone-container">
-                                        <form action="upload" class="dropzone text-center rounded-3" id="myDropzone"
-                                            enctype="multipart/form-data"></form>
-                                        <button id="deleteImageBtn" style="display:none;"><i
-                                                class="bi bi-trash"></i></button>
+                                        <form action="upload" class="dropzone text-center rounded-3" id="myDropzone" enctype="multipart/form-data"></form>
+                                        <button id="deleteImageBtn" style="display:none;"><i class="bi bi-trash"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -112,11 +104,9 @@
                                     <hr>
                                 </div>
                                 <div class="px-3">
-                                    <p class="label_input">Thời gian tạo: <span
-                                            class="float-end date_value create_at"></span>
+                                    <p class="label_input">Thời gian tạo: <span class="float-end date_value create_at"></span>
                                     </p>
-                                    <p class="label_input">Thời gian cập nhật: <span
-                                            class="float-end date_value update_at"></span>
+                                    <p class="label_input">Thời gian cập nhật: <span class="float-end date_value update_at"></span>
                                     </p>
                                 </div>
                             </div>
@@ -138,10 +128,10 @@
     "></script>
 
     <script>
-    const now = dayjs();
-    const formattedTime = now.format('hh:mm A DD/MM/YY');
-    document.querySelector('.create_at').textContent = formattedTime;
-    document.querySelector('.update_at').textContent = formattedTime;
+        const now = dayjs();
+        const formattedTime = now.format('hh:mm A DD/MM/YY');
+        document.querySelector('.create_at').textContent = formattedTime;
+        document.querySelector('.update_at').textContent = formattedTime;
     </script>
     <script src="/public/js/jquery/jquery-3.6.3.min.js"> </script>
 

@@ -2,4 +2,21 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
+  width: 100%;
+}
+
+.img_typeVoucher {
+  height: auto;
+  width: 100%;
+  object-fit: cover;
+}
+
+.section-help-voucher {
+  padding: 35px 0px;
+}
+
+@media (max-width: 768px) {
+  .section-help-voucher {
+    padding: 0px 0px;
+  }
 }

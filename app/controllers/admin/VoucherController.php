@@ -5,39 +5,33 @@ require_once 'app/models/SupplierModel.php';
 include_once 'app/controllers/admin/AdminController.php';
 
 
-class VoucherController extends AdminController{
+class VoucherController extends AdminController
+{
     private $voucherData;
     private $categoryModel;
     private $supplierModal;
 
 
-    public function __construct() {
-        $this->voucherData = new Voucher(); 
+    public function __construct()
+    {
+        $this->voucherData = new Voucher();
         $this->categoryModel = new Category();
         $this->supplierModal = new Supplier();
-
     }
 
-    public function getListOfVoucher() {
-        return $this->voucherData->List();
-    }
 
-    public function getDetail($id) {
-        return $this->voucherData->Detail($id);
-    }
 
-    // public function getPrices($id) {
-    //     return $this->voucherData->GetProductWithPriceById($id);
-    // }
-   
     public function index()
     {
         $this->checkLogin();
         $categories = $this->categoryModel->List();
         $vouchers = $this->voucherData->List();
         $suppliers = $this->supplierModal->List();
-      include 'app/views/admin/vouchers/show.php';
-      
+
+        require_once 'app/views/admin/vouchers/deleteModal.php';
+        require_once 'lib/convertDate.php';
+        require_once 'app/views/admin/vouchers/generalProcessing.php';
+        include 'app/views/admin/vouchers/show.php';
     }
     public function detail()
     {
@@ -47,9 +41,13 @@ class VoucherController extends AdminController{
         $categories = $this->categoryModel->List();
         $voucherData = $this->voucherData;
         $suppliers = $this->supplierModal->List();
+        $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
+        $voucher = $this->voucherData->Detail($id);
 
-      include 'app/views/admin/vouchers/detail.php';
-      
+        require_once 'app/views/admin/vouchers/deleteModal.php';
+        require_once 'lib/convertDate.php';
+        require_once 'app/views/admin/vouchers/generalProcessing.php';
+        include 'app/views/admin/vouchers/detail.php';
     }
 
     public function create()
@@ -57,11 +55,12 @@ class VoucherController extends AdminController{
         $this->checkLogin();
 
         $categories = $this->categoryModel->List();
-       
+
         $titlePage = "Thêm mã giảm giá";
-   
+
         $suppliers = $this->supplierModal->ListName();
-        
+        require_once 'app/views/admin/vouchers/generalProcessing.php';
+
         include_once 'app/views/admin/vouchers/create.php';
     }
 
@@ -73,16 +72,21 @@ class VoucherController extends AdminController{
         $categories = $this->categoryModel->List();
         $voucherData = $this->voucherData;
 
-        $suppliers = $this->supplierModal->List();
+        $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
+        $voucher = $this->voucherData->Detail($id);
 
+        $suppliers = $this->supplierModal->List();
+        require_once 'lib/convertDate.php';
+        require_once 'app/views/admin/vouchers/generalProcessing.php';
         include 'app/views/admin/vouchers/edit.php';
     }
-  
-  
+
+
 
     // function format date year/month/day
- 
-    public function add() {
+
+    public function add()
+    {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $expressAt = date('Y-m-d', strtotime($_POST['expressAt']));
         $expiresAt = date('Y-m-d', strtotime($_POST['expiresAt']));
@@ -103,16 +107,16 @@ class VoucherController extends AdminController{
         $this->voucherData->setDiscountType($_POST['discountType']);
         $this->voucherData->setMaximunDiscount($_POST['maximumDiscount']);
         $this->voucherData->setIs_inWallet($_POST['is_inWallet']);
-        
-        if ($this->voucherData->Add()){
+
+        if ($this->voucherData->Add()) {
             header('Location: ../ma-giam-gia/danh-sach');
-        }else{
+        } else {
             echo "Thêm mã giảm giá thất bại";
         }
-        
     }
 
-    public function update() {
+    public function update()
+    {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $expressAt = date('Y-m-d', strtotime($_POST['expressAt']));
         $expiresAt = date('Y-m-d', strtotime($_POST['expiresAt']));
@@ -132,25 +136,20 @@ class VoucherController extends AdminController{
         $this->voucherData->setDiscountType($_POST['discountType']);
         $this->voucherData->setMaximunDiscount($_POST['maximumDiscount']);
         $this->voucherData->setIs_inWallet($_POST['is_inWallet']);
-        if ($this->voucherData->Edit()){
+        if ($this->voucherData->Edit()) {
             header('Location: ../ma-giam-gia/danh-sach');
-        }else{
+        } else {
             echo "Sửa mã giảm giá thất bại";
         }
-        
     }
 
-    public function delete($voucherId) {
+    public function delete($voucherId)
+    {
         $this->voucherData->setVoucherId($voucherId);
-        if ($this->voucherData->Delete()){
+        if ($this->voucherData->Delete()) {
             header('Location: ../danh-sach');
-        }else{
+        } else {
             echo "Xóa mã giảm giá thất bại";
         }
-        
     }
-
-    
-   
- 
 }

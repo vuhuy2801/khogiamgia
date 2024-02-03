@@ -24,10 +24,7 @@
         <!-- end -->
         <div class="row flex-nowrap">
             <?php
-                require_once 'app/views/partials/sidebar.php';
-                require_once 'app/views/admin/suppliers/deleteModal.php';
-                require_once 'lib/convertDate.php';
-                require_once 'app/controllers/admin/SupplierController.php';
+            require_once 'app/views/partials/sidebar.php';
             ?>
 
             <!-- end sidebar -->
@@ -67,29 +64,30 @@
                         </thead>
                         <tbody class="body_item">
                             <?php
-                                $suppliersPerPage = 5;
-                                $totalSuppliers = count($suppliers);
-                            
-                                $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
-                                $totalPages = ceil($totalSuppliers / $suppliersPerPage);
+                            $suppliersPerPage = 5;
+                            $totalSuppliers = count($suppliers);
 
-                                $start = ($currentPage - 1) * $suppliersPerPage;
-                                $end = $start + $suppliersPerPage;
-                                $paginatedSuppliers = array_slice($suppliers, $start, $suppliersPerPage);
-                                $hidePagination = $totalPages <= 1;
-                                
-                                foreach ($paginatedSuppliers as $index => $supplier) {
-                                    echo "<tr>";
-                                    echo "<td class='item_table' scope='row'>" . $supplier['supplierId'] . "</td>";
-                                    echo "<td class='item_table'>" . $supplier['supplierName'] . "</td>";
-                                    echo "<td class='item_table'> <img class='w-100 item_image' src='". $supplier['logoSupplier'] ."' alt=''></td>";
-                                    echo "<td class='item_table'>" .  $supplier['address_target'] . "</td>";                               
-                                    echo "<td class='item_table'>
+                            $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+                            $totalPages = ceil($totalSuppliers / $suppliersPerPage);
+
+                            $start = ($currentPage - 1) * $suppliersPerPage;
+                            $end = $start + $suppliersPerPage;
+                            $paginatedSuppliers = array_slice($suppliers, $start, $suppliersPerPage);
+                            $hidePagination = $totalPages <= 1;
+
+                            foreach ($paginatedSuppliers as $index => $supplier) {
+                                echo "<tr>";
+                                echo "<td class='item_table' scope='row'>" . $supplier['supplierId'] . "</td>";
+                                echo "<td class='item_table'>" . $supplier['supplierName'] . "</td>";
+                                echo "<td class='item_table'> <img class='w-100 item_image' src='" . $supplier['logoSupplier'] . "' alt=''></td>";
+                                echo "<td class='item_table'>" .  $supplier['address_target'] . "</td>";
+                                echo "<td class='item_table'>
                                         <a class='px-1 action_detail' href='chi-tiet?id=" . urlencode($supplier['supplierId']) .  "'><i class='bi bi-eye-fill'></i></a>
-                                        <a class='px-1 action_edit' href='cap-nhat?id=" . urlencode($supplier['supplierId']) ."'><i class='bi bi-pencil-square'></i></a>
+                                        <a class='px-1 action_edit' href='cap-nhat?id=" . urlencode($supplier['supplierId']) . "'><i class='bi bi-pencil-square'></i></a>
                                         <a href='' class='delete-supplier px-1' data-supplier-id='" . urlencode($supplier['supplierId']) . "' data-bs-toggle='modal' data-bs-target='#deleteSupplier'><i class='bi bi-trash'></i></a>
                                      </td>";
-                                     echo "</tr>" ; } ?>
+                                echo "</tr>";
+                            } ?>
                         </tbody>
                     </table>
                     <nav class="  py-2" aria-label="Page navigation example"

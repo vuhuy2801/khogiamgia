@@ -58,7 +58,9 @@ class ProductPrice implements productPriceService
     public function Add(): bool
     {
         $connection = $this->db->getConnection();
-        $query = "CALL AddProductPrice(?, ?, ?)";
+        $query = " 
+        INSERT INTO ProductPrice (productID, date, currentPrice)
+        VALUES (?, ?, ?);";
         $statement = $connection->prepare($query);
         $statement->bindParam(1, $this->productID);
         $statement->bindParam(2, $this->date);
@@ -74,12 +76,15 @@ class ProductPrice implements productPriceService
     public function Edit(): bool
     {
         $connection = $this->db->getConnection();
-        $query = "CALL UpdateProductPrice(?, ?, ?, ?)";
+        $query = "
+        UPDATE ProductPrice
+        SET productID = ?, date = ?, currentPrice = ?
+        WHERE productPriceID = ?;";
         $statement = $connection->prepare($query);
-        $statement->bindParam(1, $this->productPriceID);
-        $statement->bindParam(2, $this->productID);
-        $statement->bindParam(3, $this->date);
-        $statement->bindParam(4, $this->currentPrice);
+        $statement->bindParam(1, $this->productID);
+        $statement->bindParam(2, $this->date);
+        $statement->bindParam(3, $this->currentPrice);
+        $statement->bindParam(4, $this->productPriceID);
         try {
             $statement->execute();
             return true;
@@ -91,7 +96,7 @@ class ProductPrice implements productPriceService
     public function Delete(): bool
     {
         $connection = $this->db->getConnection();
-        $query = "CALL DeleteProductPrice(?)";
+        $query = " DELETE FROM ProductPrice WHERE productPriceID = ?;";
         $statement = $connection->prepare($query);
         $statement->bindParam(1, $this->productPriceID);
         try {
@@ -156,5 +161,3 @@ class ProductPrice implements productPriceService
         }
     }
 }
-
-?>

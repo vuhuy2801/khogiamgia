@@ -30,22 +30,22 @@
         <div class="container text-center mt-5">
             <div class="row align-items-start">
                 <div class="col-3">
-                    <a href=""> <img src="/public/images/typeVoucher/shopee-removebg-preview.png" alt=""> </a>
+                    <a href=""> <img class="img_typeVoucher" src="/public/images/typeVoucher/shopee-removebg-preview.png" alt=""> </a>
                 </div>
                 <div class="col-3">
-                    <a href=""> <img src="/public/images/typeVoucher/freeship-removebg-preview.png" alt=""> </a>
+                    <a href=""> <img class="img_typeVoucher" src="/public/images/typeVoucher/freeship-removebg-preview.png" alt=""> </a>
                 </div>
                 <div class="col-3">
-                    <a href=""> <img src="/public/images/typeVoucher/shop-removebg-preview.png" alt=""> </a>
+                    <a href=""> <img class="img_typeVoucher" src="/public/images/typeVoucher/shop-removebg-preview.png" alt=""> </a>
                 </div>
                 <div class="col-3">
-                    <a href=""> <img src="/public/images/typeVoucher/khac-removebg-preview.png" alt=""> </a>
+                    <a href=""> <img class="img_typeVoucher" src="/public/images/typeVoucher/khac-removebg-preview.png" alt=""> </a>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<section class="section-help-voucher" style=" padding: 35px 0px">
+<section class="section-help-voucher">
     <div class="container">
         <div class="row justify-content-center">
             <div class="mt-5">

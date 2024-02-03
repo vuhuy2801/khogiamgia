@@ -25,11 +25,7 @@
         <!-- end -->
         <div class="row flex-nowrap">
             <?php
-                require_once 'app/views/partials/sidebar.php';
-                require_once 'app/views/admin/posts/deleteModal.php';
-                require_once 'lib/convertDate.php';
-                require_once 'app/views/admin/posts/generalProcessing.php';
-                require_once 'app/controllers/admin/PostController.php';
+            require_once 'app/views/partials/sidebar.php';
             ?>
 
             <!-- end sidebar -->
@@ -71,33 +67,34 @@
                         </thead>
                         <tbody class="body_item">
                             <?php
-                                $postsPerPage = 5;
-                                $totalPosts = count($posts);
-                            
-                                $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
-                                $totalPages = ceil($totalPosts / $postsPerPage);
+                            $postsPerPage = 5;
+                            $totalPosts = count($posts);
 
-                                $start = ($currentPage - 1) * $postsPerPage;
-                                $end = $start + $postsPerPage;
-                                $paginatedPosts = array_slice($posts, $start, $postsPerPage);
-                                $hidePagination = $totalPages <= 1;
-                                
-                                foreach ($paginatedPosts as $index => $post) {
-                                    echo "<tr>";
-                                    echo "<td class='item_table' scope='row'>" . $post['postId'] . "</td>";
-                                    echo "<td class='item_table_title'>" . $post['title'] . "</td>";
-                                    echo "<td class='item_table'> <img class='w-100 item_image' src='". $post['image'] ."' alt=''></td>";
-                                    echo "<td class='item_table'>" . $categories[ $post['categories_post']] . "</td>";
-                                    echo "<td class='item_table'>" . convertDateFormat( $post['createdAt']) . "</td>";
-                                    $statusClass = ($post['status'] == 0) ? 'status-inactive' : 'status-active';
-                                    echo "<td class='item_table '><p class='item_status my-0 rounded-3 " . $statusClass . "'>" . $statuses[$post['status']] . "</p></td>";
-                        
-                                    echo "<td class='item_table'>
+                            $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+                            $totalPages = ceil($totalPosts / $postsPerPage);
+
+                            $start = ($currentPage - 1) * $postsPerPage;
+                            $end = $start + $postsPerPage;
+                            $paginatedPosts = array_slice($posts, $start, $postsPerPage);
+                            $hidePagination = $totalPages <= 1;
+
+                            foreach ($paginatedPosts as $index => $post) {
+                                echo "<tr>";
+                                echo "<td class='item_table' scope='row'>" . $post['postId'] . "</td>";
+                                echo "<td class='item_table_title'>" . $post['title'] . "</td>";
+                                echo "<td class='item_table'> <img class='w-100 item_image' src='" . $post['image'] . "' alt=''></td>";
+                                echo "<td class='item_table'>" . $listCategoriesPost[$post['categories_post']] . "</td>";
+                                echo "<td class='item_table'>" . convertDateFormat($post['createdAt']) . "</td>";
+                                $statusClass = ($post['status'] == 0) ? 'status-inactive' : 'status-active';
+                                echo "<td class='item_table '><p class='item_status my-0 rounded-3 " . $statusClass . "'>" . $statuses[$post['status']] . "</p></td>";
+
+                                echo "<td class='item_table'>
                                         <a class='px-1 action_detail' href='chi-tiet?id=" . urlencode($post['postId']) .  "'><i class='bi bi-eye-fill'></i></a>
-                                        <a class='px-1 action_edit' href='cap-nhat?id=" . urlencode($post['postId']) ."'><i class='bi bi-pencil-square'></i></a>
+                                        <a class='px-1 action_edit' href='cap-nhat?id=" . urlencode($post['postId']) . "'><i class='bi bi-pencil-square'></i></a>
                                         <a href='' class='delete-post px-1' data-post-id='" . urlencode($post['postId']) . "' data-bs-toggle='modal' data-bs-target='#deletePost'><i class='bi bi-trash'></i></a>
                                      </td>";
-                                     echo "</tr>" ; } ?>
+                                echo "</tr>";
+                            } ?>
                         </tbody>
                     </table>
                     <nav class="  py-2" aria-label="Page navigation example"

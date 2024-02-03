@@ -1,9 +1,11 @@
 <?php
-interface UsedService {
-    public function Add(): bool;
-    public function Edit(): bool;
-    public function Delete(): bool;
+interface UsedService
+{
+    public function addUsed($voucherId, $usedCount);
+    public function updateUsed($voucherId, $usedCount);
+
+    public function getUsedByVoucherId($voucherId);
+
+    public function isExistUsed($voucherId);
     public function List(): array;
-    public function GetUsedAndVoucherList(): array;
 }
-?>

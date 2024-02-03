@@ -26,10 +26,6 @@
         <div class="row flex-nowrap">
             <?php
             require_once 'app/views/partials/sidebar.php';
-            require_once 'app/views/admin/products/deleteModal.php';
-            require_once 'lib/convertDate.php';
-            require_once 'app/views/admin/products/generalProcessing.php';
-            require_once 'app/controllers/admin/ProductController.php';
             ?>
 
             <!-- end sidebar -->
@@ -42,10 +38,11 @@
                     <div class="d-flex align-items-center">
                         <div class="input-group mx-3 container_search">
                             <input id="searchInput" type="text" class="form-control input-search" <?php
-                            if (isset($query)) {
-                                echo "value='" . $query . "'";
-                            }
-                            ?> placeholder="Tìm kiếm...">
+                                                                                                    if (isset($query)) {
+                                                                                                        echo "value='" . $query . "'";
+                                                                                                    }
+                                                                                                    ?>
+                                placeholder="Tìm kiếm...">
                             <div class="input-group-append">
                                 <button id="searchBtn" class="btn btn-outline-secondary" type="button">
                                     <i class="bi bi-search"></i>
@@ -128,8 +125,8 @@
     https://cdn.jsdelivr.net/npm/dayjs@1.11.10/dayjs.min.js
     "></script>
     <script>
-        const now = dayjs();
-        const formattedTime = now.format('DD/MM/YY HH:mm');
+    const now = dayjs();
+    const formattedTime = now.format('DD/MM/YY HH:mm');
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="/public/js/bootstrap/bootstrap.bundle.min.js"> </script>

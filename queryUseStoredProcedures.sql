@@ -54,7 +54,7 @@ CALL UpdateVoucher(
     0, 2, 1, 'New Target address', 2, '500.000 VNĐ', 1
 );
 
-CALL DeleteVoucher('ABC123');
+CALL DeleteVoucher('SIEUNGON7K5X3PN');
 CALL GetListVouchersAdmin();
 CALL GetListVouchersUser();
 Call GetListVoucherBySupplier(1);
