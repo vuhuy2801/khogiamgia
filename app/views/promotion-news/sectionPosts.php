@@ -13,13 +13,13 @@
 
         <?php
         $currentURL = $_SERVER['REQUEST_URI']; // Lấy đường dẫn URL hiện tại
-        
+
         $isShopeeActive = $currentURL === '/tin-khuyen-mai/shopee';
         $isLazadaActive = strpos($currentURL, 'lazada') !== false;
         $isShopeeFoodActive = strpos($currentURL, 'shopeeFood') !== false;
         ?>
 
-        <div class=" d-flex justify-content-start mb-3">
+        <div class="d-flex justify-content-start mb-3">
             <a href="shopee" class="btn-supplier <?php echo $isShopeeActive ? 'active' : ''; ?>">
                 Tin khuyến mại Shopee
             </a>
@@ -69,10 +69,9 @@
         <nav class="  py-2" aria-label="Page navigation example" <?php echo $hidePagination ? 'style="display: none;"' : ''; ?>>
             <ul class="pagination justify-content-center">
                 <li class="page-item <?php echo ($currentPage == 1) ? 'disabled' : ''; ?>">
-                    <a class="page-link"
-                        href="?page=<?php echo ($currentPage > 1) ? ($currentPage - 1) : 1; ?>">Previous</a>
+                    <a class="page-link" href="?page=<?php echo ($currentPage > 1) ? ($currentPage - 1) : 1; ?>">Previous</a>
                 </li>
-                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
                     <li class="page-item <?php echo ($currentPage == $i) ? 'active' : ''; ?>">
                         <a class="page-link" href="?page=<?php echo $i; ?>">
                             <?php echo $i; ?>
@@ -80,8 +79,7 @@
                     </li>
                 <?php endfor; ?>
                 <li class="page-item <?php echo ($currentPage == $totalPages) ? 'disabled' : ''; ?>">
-                    <a class="page-link"
-                        href="?page=<?php echo ($currentPage < $totalPages) ? ($currentPage + 1) : $totalPages; ?>">Next</a>
+                    <a class="page-link" href="?page=<?php echo ($currentPage < $totalPages) ? ($currentPage + 1) : $totalPages; ?>">Next</a>
                 </li>
             </ul>
         </nav>

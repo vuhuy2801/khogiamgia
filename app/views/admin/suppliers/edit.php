@@ -24,15 +24,9 @@
     <div class="container-fluid">
         <div class="row flex-nowrap">
             <?php
-            
+
             require_once 'app/views/partials/sidebar.php';
-            require_once 'lib/convertDate.php';
-            require_once 'app/controllers/admin/SupplierController.php';
-            $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
-            $supplier = $supplierData->Detail($id);
             ?>
-
-
             <div class="col px-3 py-3 wrapContent">
                 <div class="toast toast_update align-items-center text-bg-primary border-0 position-absolute start-50 translate-middle"
                     role="alert" aria-live="assertive" aria-atomic="true">
@@ -112,7 +106,7 @@
                                 </div>
                                 <div class="px-3">
                                     <p class="label_input">Thời gian tạo: <span
-                                            class="float-end date_value"><?php  echo convertDateFormat($supplier['createdAt'])  ?></span>
+                                            class="float-end date_value"><?php echo convertDateFormat($supplier['createdAt'])  ?></span>
                                     </p>
                                     <p class="label_input">Thời gian cập nhật: <span
                                             class="float-end date_value update_at"></span>

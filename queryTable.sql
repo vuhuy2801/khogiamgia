@@ -17,6 +17,10 @@ CREATE TABLE IF NOT EXISTS SUPPLIER (
     updatedAt DATETIME
 ) ENGINE=InnoDB;
 
+CREATE TABLE IF NOT EXISTS CATEGORY_POST (
+    categoryies_post INT AUTO_INCREMENT PRIMARY KEY,
+    categories_post_name VARCHAR(255)
+) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS POST (
     postId INT AUTO_INCREMENT PRIMARY KEY,
@@ -30,7 +34,8 @@ CREATE TABLE IF NOT EXISTS POST (
     createdAt DATETIME,
     updatedAt DATETIME,
     status INT,
-    FOREIGN KEY (supplierId) REFERENCES Supplier(supplierId)
+    FOREIGN KEY (supplierId) REFERENCES Supplier(supplierId),
+    FOREIGN KEY (categories_post) REFERENCES CATEGORY_POST(categories_post)
 ) ENGINE=InnoDB;
 
 -- table Voucher

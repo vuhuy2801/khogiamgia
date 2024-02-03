@@ -153,6 +153,7 @@ function clearAllErrors() {
 }
 
 let myDropzone;
+console.log(dataProduct.image);
 
 Dropzone.options.myDropzone = {
   acceptedFiles: "image/*",
@@ -167,7 +168,7 @@ Dropzone.options.myDropzone = {
     const defaultImageUrl = dataProduct.image;
     let mockFile = {
       name: "Filename",
-      size: 12345,
+      size: 12345678,
     };
     this.displayExistingFile(mockFile, defaultImageUrl);
 

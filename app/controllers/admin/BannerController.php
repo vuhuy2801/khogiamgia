@@ -3,7 +3,8 @@ require_once 'app/models/BannerModel.php';
 include_once 'app/controllers/admin/AdminController.php';
 
 
-class BannerController extends AdminController{
+class BannerController extends AdminController
+{
     private $bannerData;
 
     public function __construct()
@@ -11,51 +12,52 @@ class BannerController extends AdminController{
         $this->bannerData = new Banner();
     }
 
-    public function getListOfBanners()
+    public function index()
     {
-        return $this->bannerData->List();
-
-    }
-
-    public function getDetail($id)
-    {
-        return $this->bannerData->Detail($id);
-    }
-
-    public function index() {
         $this->checkLogin();
-
+        $statuses = array(
+            0 => "Ẩn",
+            1 => "Hiển thị"
+        );
         $banners = $this->bannerData->List();
+        require_once 'app/views/admin/banners/deleteModal.php';
+        require_once 'lib/convertDate.php';
         include 'app/views/admin/banners/show.php';
     }
-    public function create() {
+    public function create()
+    {
         $this->checkLogin();
 
         $titlePage = "Thêm banner";
         include 'app/views/admin/banners/create.php';
     }
-    public function detail() {
+    public function detail()
+    {
         $this->checkLogin();
 
-        $bannerData = $this->bannerData;
         $titlePage = "Chi tiết banner";
+        $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
+        $banner = $this->bannerData->Detail($id);
+        require_once 'app/views/admin/banners/deleteModal.php';
+        require_once 'lib/convertDate.php';
         include 'app/views/admin/banners/detail.php';
     }
-    public function edit() {
+    public function edit()
+    {
         $this->checkLogin();
-
-        $bannerData = $this->bannerData;
+        $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
+        $banner = $this->bannerData->Detail($id);
         $titlePage = "Sửa banner";
+        require_once 'lib/convertDate.php';
         include 'app/views/admin/banners/edit.php';
     }
 
     public function delete($bannerId)
     {
         $this->bannerData->setBannerID($bannerId);
-        if ($this->bannerData->Delete()){
+        if ($this->bannerData->Delete()) {
             header('Location: ../danh-sach');
-        }else
-        {
+        } else {
             echo "Xóa banner thất bại !";
         }
     }
@@ -101,13 +103,12 @@ class BannerController extends AdminController{
         $targetDirectory = '/public/uploads/banners/' . date('d-m-Y') . '/';
         $imageUrl = $targetDirectory . $imageName;
         $this->bannerData->setImage($imageUrl);
-    
-        if ($this->bannerData->Add()){
+
+        if ($this->bannerData->Add()) {
             header('Location: ../banner/danh-sach');
-        }else{
+        } else {
             echo "Thêm banner thất bại";
         }
-
     }
 
     public function update()
@@ -128,11 +129,10 @@ class BannerController extends AdminController{
 
             $this->bannerData->setImage($imageUrl);
         }
-        if ($this->bannerData->Edit()){
+        if ($this->bannerData->Edit()) {
             header('Location: ../banner/danh-sach');
-        }else{
+        } else {
             echo "Sửa nhà cung cấp thất bại";
         }
-
     }
 }

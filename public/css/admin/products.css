@@ -130,6 +130,10 @@
   background-color: #fff !important;
 }
 
+.productIdHidde {
+  color: #bdb9b9;
+}
+
 .wrap_img_detail {
   max-width: 100%;
   text-align: center;

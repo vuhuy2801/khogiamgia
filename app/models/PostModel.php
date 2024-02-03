@@ -111,12 +111,12 @@ class Post implements PostService
     {
         $this->createdAt = $value;
     }
-    public function getUpdateAt()
+    public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
 
-    public function setUpdateAt($value)
+    public function setUpdatedAt($value)
     {
         $this->updatedAt = $value;
     }
@@ -135,7 +135,15 @@ class Post implements PostService
         $connection = $this->db->getConnection();
 
         if ($connection) {
-            $query = "CALL GetListPosts()";
+            $query = "SELECT
+            postId,
+            title,
+            image,
+            categories_post,
+            createdAt,
+            status
+        FROM
+            POST";
             $statement = $connection->prepare($query);
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -145,27 +153,22 @@ class Post implements PostService
         }
     }
 
-    public function getSlugPost($slug)
-    {
-        $connection = $this->db->getConnection();
-        $query = "CALL GetSlug(?);";
-        try {
-            $statement = $connection->prepare($query);
-            $statement->bindParam(1, $slug);
-            $statement->execute();
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
-            return $result;
-        } catch (PDOException $e) {
-            return false;
-        }
-    }
+
 
     public function ListUser(): array
     {
         $connection = $this->db->getConnection();
 
         if ($connection) {
-            $query = "CALL GetListPostsUser()";
+            $query = "SELECT
+            postId,
+            title,
+            image,
+            createdAt,
+            slug,
+            description
+        FROM
+            POST";
             $statement = $connection->prepare($query);
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -178,7 +181,8 @@ class Post implements PostService
     public function Add(): bool
     {
         $connection = $this->db->getConnection();
-        $query = "CALL AddPost(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO POST (title, image,slug, supplierId, content, description, categories_post, createdAt,updatedAt, status)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $statement = $connection->prepare($query);
         $statement->bindParam(1, $this->title);
         $statement->bindParam(2, $this->image);
@@ -196,24 +200,33 @@ class Post implements PostService
         } catch (PDOException $e) {
             return false;
         }
-
     }
 
     public function Edit(): bool
     {
         $connection = $this->db->getConnection();
-        $query = "CALL UpdatePost(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $query = "UPDATE POST
+                SET title = ?,
+                    image = ?,
+                    slug = ?,
+                    supplierId = ?,
+                    content = ?,
+                    description = ?,
+                    categories_post = ?,
+                    updatedAt = ?,
+                    status = ?
+                WHERE postId = ?;";
         $statement = $connection->prepare($query);
-        $statement->bindParam(1, $this->postId);
-        $statement->bindParam(2, $this->title);
-        $statement->bindParam(3, $this->image);
-        $statement->bindParam(4, $this->slug);
-        $statement->bindParam(5, $this->supplierId);
-        $statement->bindParam(6, $this->content);
-        $statement->bindParam(7, $this->description);
-        $statement->bindParam(8, $this->categories_post);
-        $statement->bindParam(9, $this->updatedAt);
-        $statement->bindParam(10, $this->status);
+        $statement->bindParam(1, $this->title);
+        $statement->bindParam(2, $this->image);
+        $statement->bindParam(3, $this->slug);
+        $statement->bindParam(4, $this->supplierId);
+        $statement->bindParam(5, $this->content);
+        $statement->bindParam(6, $this->description);
+        $statement->bindParam(7, $this->categories_post);
+        $statement->bindParam(8, $this->updatedAt);
+        $statement->bindParam(9, $this->status);
+        $statement->bindParam(10, $this->postId);
         try {
             $statement->execute();
             return true;
@@ -222,10 +235,12 @@ class Post implements PostService
         }
     }
 
+
     public function Delete(): bool
     {
         $connection = $this->db->getConnection();
-        $query = "CALL DeletePost(?)";
+        $query = " DELETE FROM POST
+        WHERE postId = ?";
         $statement = $connection->prepare($query);
         $statement->bindParam(1, $this->postId);
         try {
@@ -239,7 +254,9 @@ class Post implements PostService
     public function Search(): array
     {
         $connection = $this->db->getConnection();
-        $query = "CALL SearchPostByTitle(?)";
+        $query = "SELECT *
+        FROM POST
+        WHERE title LIKE CONCAT('%', ?, '%')";
         $statement = $connection->prepare($query);
         $statement->bindParam(1, $this->title);
         try {
@@ -254,7 +271,8 @@ class Post implements PostService
     public function GetPostsByCategory(): array
     {
         $connection = $this->db->getConnection();
-        $query = "CALL GetPostsByCategory(?)";
+        $query = "SELECT * FROM Post
+        WHERE categories_post = ?";
         $statement = $connection->prepare($query);
         $statement->bindParam(1, $this->categories_post);
         try {
@@ -270,7 +288,12 @@ class Post implements PostService
     public function GetPostsBySupplier($id): array
     {
         $connection = $this->db->getConnection();
-        $query = "CALL GetPostsBySupplierId(?)";
+        $query = "SELECT *
+        FROM POST
+        WHERE supplierId = ? 
+            AND categories_post = 1 AND status = 1
+        ORDER BY createdAt DESC
+        LIMIT 20";
         $statement = $connection->prepare($query);
         $statement->bindParam(1, $id);
 
@@ -287,7 +310,22 @@ class Post implements PostService
     public function GetPostDetail($postId)
     {
         $connection = $this->db->getConnection();
-        $query = "CALL GetPostDetail(?)";
+        $query = "SELECT
+        postId,
+        title,
+        image,
+        slug,
+        supplierId,
+        content,
+        description,
+        categories_post,
+        createdAt,
+        updatedAt,
+        status
+        FROM
+            Post
+        WHERE
+            postId = (?)";
         try {
             $statement = $connection->prepare($query);
             $statement->bindParam(1, $postId, PDO::PARAM_INT);
@@ -303,7 +341,7 @@ class Post implements PostService
     public function GetPostDetailBySlug($slug)
     {
         $connection = $this->db->getConnection();
-        $query = "SELECT * FROM post WHERE slug = '$slug'";
+        $query = "SELECT * FROM POST WHERE slug = '$slug'";
         try {
             $statement = $connection->prepare($query);
             $statement->execute();
@@ -313,7 +351,6 @@ class Post implements PostService
             return false;
         }
     }
-
 
     public function GetCategory($categoryId)
     {
@@ -333,7 +370,7 @@ class Post implements PostService
     {
 
         $connection = $this->db->getConnection();
-        $query = "SELECT post.title, post.image, post.slug,post.description,post.createdAt FROM post WHERE post.status = 1 ORDER BY createdAt DESC LIMIT $limit OFFSET $offset";
+        $query = "SELECT post.title, post.image, post.slug,post.description,post.createdAt FROM POST WHERE post.status = 1 ORDER BY createdAt DESC LIMIT $limit OFFSET $offset";
         $statement = $connection->prepare($query);
         try {
             $statement->execute();
@@ -348,7 +385,7 @@ class Post implements PostService
     public function GetTotalPost(): int
     {
         $connection = $this->db->getConnection();
-        $query = "SELECT COUNT(*) FROM post";
+        $query = "SELECT COUNT(*) FROM POST";
         $statement = $connection->prepare($query);
         try {
             $statement->execute();
@@ -363,7 +400,12 @@ class Post implements PostService
     public function GetGuidancePostsBySupplierId($id): array
     {
         $connection = $this->db->getConnection();
-        $query = "CALL GetGuidancePostsBySupplierId(?)";
+        $query = "SELECT * 
+        FROM POST
+        WHERE supplierId = ? 
+            AND (categories_post = 2 OR categories_post = 3) And status = 1
+        ORDER BY createdAt DESC
+        LIMIT 20";
         $statement = $connection->prepare($query);
         $statement->bindParam(1, $id);
 
@@ -375,6 +417,4 @@ class Post implements PostService
             return [];
         }
     }
-
 }
-?>

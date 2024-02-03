@@ -2,7 +2,8 @@
 require_once 'app/config/DbConnection.php';
 require_once 'app/models/interfaces/bannerService.php';
 
-class Banner implements BannerService {
+class Banner implements BannerService
+{
     private $bannerID;
     private $image;
     private $title;
@@ -12,69 +13,87 @@ class Banner implements BannerService {
     private $updatedAt;
     private $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = new DBConnection();
     }
 
-    public function getBannerID() {
+    public function getBannerID()
+    {
         return $this->bannerID;
     }
 
-    public function setBannerID($bannerID) {
+    public function setBannerID($bannerID)
+    {
         $this->bannerID = $bannerID;
     }
 
-    public function getImage() {
+    public function getImage()
+    {
         return $this->image;
     }
 
-    public function setImage($image) {
+    public function setImage($image)
+    {
         $this->image = $image;
     }
 
-    public function getTitle() {
+    public function getTitle()
+    {
         return $this->title;
     }
 
-    public function setTitle($title) {
+    public function setTitle($title)
+    {
         $this->title = $title;
     }
 
-    public function getAddressTarget() {
+    public function getAddressTarget()
+    {
         return $this->address_target;
     }
 
-    public function setAddressTarget($address_target) {
+    public function setAddressTarget($address_target)
+    {
         $this->address_target = $address_target;
     }
 
-    public function getStatus() {
+    public function getStatus()
+    {
         return $this->status;
     }
 
-    public function setStatus($status) {
+    public function setStatus($status)
+    {
         $this->status = $status;
     }
 
-    public function getCreatedAt() {
+    public function getCreatedAt()
+    {
         return $this->createdAt;
     }
 
-    public function setCreatedAt($createdAt) {
+    public function setCreatedAt($createdAt)
+    {
         $this->createdAt = $createdAt;
     }
 
-    public function getUpdatedAt() {
+    public function getUpdatedAt()
+    {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt($updatedAt) {
+    public function setUpdatedAt($updatedAt)
+    {
         $this->updatedAt = $updatedAt;
     }
 
-    public function Add(): bool {
+    public function Add(): bool
+    {
         $connection = $this->db->getConnection();
-        $query = "CALL AddBanner(?,?,?,?,?,?)";
+        $query = "
+        INSERT INTO BANNER (image,title,address_target,status,createdAt,updatedAt)
+        VALUES (?,?,?,?,?,?)";
         $staement = $connection->prepare($query);
         $staement->bindParam(1, $this->image);
         $staement->bindParam(2, $this->title);
@@ -90,16 +109,38 @@ class Banner implements BannerService {
         }
     }
 
-    public function Edit(): bool {
+    public function Edit(): bool
+    {
         $connection = $this->db->getConnection();
-        $query = "CALL UpdateBanner(?,?,?,?,?,?)";
+        $query = "UPDATE BANNER
+                SET image = ?,
+                    title = ?,
+                    address_target = ?,
+                    status = ?,
+                    updatedAt = ?
+                WHERE bannerId = ?";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(1, $this->image);
+        $statement->bindParam(2, $this->title);
+        $statement->bindParam(3, $this->address_target);
+        $statement->bindParam(4, $this->status);
+        $statement->bindParam(5, $this->updatedAt);
+        $statement->bindParam(6, $this->bannerID);
+        try {
+            $statement->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+
+    public function Delete(): bool
+    {
+        $connection = $this->db->getConnection();
+        $query = "DELETE FROM BANNER WHERE bannerId = ?";
         $staement = $connection->prepare($query);
         $staement->bindParam(1, $this->bannerID);
-        $staement->bindParam(2, $this->image);
-        $staement->bindParam(3, $this->title);
-        $staement->bindParam(4, $this->address_target);
-        $staement->bindParam(5, $this->status);
-        $staement->bindParam(6, $this->updatedAt);
         try {
             $staement->execute();
             return true;
@@ -108,23 +149,11 @@ class Banner implements BannerService {
         }
     }
 
-    public function Delete(): bool {
-        $connection = $this->db->getConnection();
-        $query = "CALL DeleteBanner(?)";
-        $staement = $connection->prepare($query);
-        $staement->bindParam(1, $this->bannerID);
-        try {
-            $staement->execute();
-            return true;
-        } catch (PDOException $e) {
-            return false;
-        }
-    }
-
-    public function List(): array {
+    public function List(): array
+    {
         $connection = $this->db->getConnection();
         if ($connection) {
-            $query = "CALL GetListBanners()";
+            $query = "SELECT bannerId,image,address_target,title,createdAt,status FROM BANNER";
             $staement = $connection->prepare($query);
             $staement->execute();
             $result = $staement->fetchAll(PDO::FETCH_ASSOC);
@@ -134,18 +163,18 @@ class Banner implements BannerService {
         }
     }
 
-    public function Detail($bannerId) {
+    public function Detail($bannerId)
+    {
         $connection = $this->db->getConnection();
-        $query = "CALL GetDetailBanner(?)";
+        $query = "SELECT bannerId,image,address_target,title,createdAt,updatedAt,status FROM BANNER where bannerId = ?";
         try {
             $statement = $connection->prepare($query);
             $statement->bindParam(1, $bannerId, PDO::PARAM_INT);
             $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $result;
-        }catch (PDOException $e) {
+        } catch (PDOException $e) {
             return false;
         }
     }
 }
-?>

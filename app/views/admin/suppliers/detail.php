@@ -12,8 +12,7 @@
     <link rel="stylesheet" href="/public/css/admin/suppliers.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <title> <?php echo $titlePage ?> </title>
     <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">
 
@@ -25,12 +24,6 @@
         <div class="row flex-nowrap">
             <?php
             require_once 'app/views/partials/sidebar.php';
-            require_once 'app/views/admin/suppliers/deleteModal.php';
-            require_once 'lib/convertDate.php';
-            require_once 'app/controllers/admin/SupplierController.php';
-            $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
-            $supplier = $supplierData->Detail($id);
-           
             ?>
 
             <div class="col px-3 py-3 wrapContent">
@@ -40,15 +33,11 @@
 
                     <div class="row pt-1">
                         <div class="d-flex justify-content-between px-3 mb-4">
-                            <a href="danh-sach" class="my-auto text-decoration-none back_home"><i
-                                    class="bi bi-arrow-left mx-1"></i>Quay
+                            <a href="danh-sach" class="my-auto text-decoration-none back_home"><i class="bi bi-arrow-left mx-1"></i>Quay
                                 lại</a>
                             <div>
-                                <a class="btn btn-danger mx-1" data-supplier-id='<?php echo $id ?>'
-                                    data-bs-toggle='modal' data-bs-target='#deleteSupplier'><i
-                                        class='mx-1 bi bi-trash'></i>Xóa</a>
-                                <a class="btn btn-primary" href="<?php echo 'cap-nhat?id='.$id ?>"><i
-                                        class='mx-1 bi bi-pencil-square'></i>Sửa</a>
+                                <a class="btn btn-danger mx-1" data-supplier-id='<?php echo $id ?>' data-bs-toggle='modal' data-bs-target='#deleteSupplier'><i class='mx-1 bi bi-trash'></i>Xóa</a>
+                                <a class="btn btn-primary" href="<?php echo 'cap-nhat?id=' . $id ?>"><i class='mx-1 bi bi-pencil-square'></i>Sửa</a>
                             </div>
 
                         </div>
@@ -57,14 +46,11 @@
 
                                 <div class="form-group">
                                     <label class="label_input" for="supplierName">Tên nhà cung cấp</label>
-                                    <input type="text" class="form-control"
-                                        value="<?php echo $supplier['supplierName'] ?>" id="supplierName"
-                                        name="supplierName" readonly>
+                                    <input type="text" class="form-control" value="<?php echo $supplier['supplierName'] ?>" id="supplierName" name="supplierName" readonly disabled>
                                 </div>
                                 <div class="form-group mt-2">
                                     <label class="label_input" for="link_target">Link tham chiếu</label>
-                                    <input type="text" value="<?php echo $supplier['address_target'] ?>"
-                                        class="form-control" id="link_target" name="link_target" readonly>
+                                    <input type="text" value="<?php echo $supplier['address_target'] ?>" class="form-control" id="link_target" name="link_target" readonly disabled>
                                 </div>
 
                             </form>
@@ -86,11 +72,9 @@
                                     <hr>
                                 </div>
                                 <div class="px-3">
-                                    <p class="label_input">Thời gian tạo: <span
-                                            class="float-end date_value"><?php echo convertDateFormat($supplier['createdAt']) ?></span>
+                                    <p class="label_input">Thời gian tạo: <span class="float-end date_value"><?php echo convertDateFormat($supplier['createdAt']) ?></span>
                                     </p>
-                                    <p class="label_input">Thời gian cập nhật: <span
-                                            class="float-end date_value"><?php echo convertDateFormat( $supplier['updatedAt']) ?></span>
+                                    <p class="label_input">Thời gian cập nhật: <span class="float-end date_value"><?php echo convertDateFormat($supplier['updatedAt']) ?></span>
                                     </p>
                                 </div>
                             </div>

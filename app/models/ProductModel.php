@@ -122,7 +122,9 @@ class Product implements ProductService
         // INSERT INTO Product (productID, productName, image, link, rateCount, soldCount, status)
         // VALUES (in_productID, in_productName, in_image, in_link, in_rateCount, in_soldCount, in_status);
         $connection = $this->db->getConnection();
-        $query = "CALL AddProduct(?,?,?,?,?,?,?,?,?)";
+        $query = "
+        INSERT INTO Product (productId,productName, image, link, rateCount, soldCount, createdAt, updatedAt, status)
+        VALUES (?,?,?,?,?,?,?,?,?);";
         $staement = $connection->prepare($query);
         $staement->bindParam(1, $this->productID);
         $staement->bindParam(2, $this->productName);
@@ -144,28 +146,39 @@ class Product implements ProductService
     public function Edit(): bool
     {
         $connection = $this->db->getConnection();
-        $query = "CALL UpdateProduct(?,?,?,?,?,?,?,?)";
-        $staement = $connection->prepare($query);
-        $staement->bindParam(1, $this->productID);
-        $staement->bindParam(2, $this->productName);
-        $staement->bindParam(3, $this->image);
-        $staement->bindParam(4, $this->link);
-        $staement->bindParam(5, $this->rateCount);
-        $staement->bindParam(6, $this->soldCount);
-        $staement->bindParam(7, $this->updatedAt);
-        $staement->bindParam(8, $this->status);
+        $query = "
+            UPDATE Product
+            SET productName = ?,
+                image = ?,
+                link = ?,
+                rateCount = ?,
+                soldCount = ?,
+                updatedAt = ?,
+                status = ?
+            WHERE productID = ?;";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(1, $this->productName);
+        $statement->bindParam(2, $this->image);
+        $statement->bindParam(3, $this->link);
+        $statement->bindParam(4, $this->rateCount);
+        $statement->bindParam(5, $this->soldCount);
+        $statement->bindParam(6, $this->updatedAt);
+        $statement->bindParam(7, $this->status);
+        $statement->bindParam(8, $this->productID);
         try {
-            $staement->execute();
+            $statement->execute();
             return true;
         } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
             return false;
         }
     }
 
+
     public function Delete(): bool
     {
         $connection = $this->db->getConnection();
-        $query = "CALL DeleteProduct(?)";
+        $query = " DELETE FROM Product WHERE productID = ?;";
         $staement = $connection->prepare($query);
         $staement->bindParam(1, $this->productID);
         try {
@@ -208,7 +221,11 @@ class Product implements ProductService
     public function Detail($productId)
     {
         $connection = $this->db->getConnection();
-        $query = "CALL GetProductDetail(?)";
+        $query = "
+        SELECT P.*, PP.date, PP.currentPrice
+        FROM Product P
+        LEFT JOIN ProductPrice PP ON P.productID = PP.productID
+        WHERE P.productID = ?;";
         try {
             $statement = $connection->prepare($query);
             $statement->bindParam(1, $productId);
@@ -221,25 +238,12 @@ class Product implements ProductService
     }
 
 
-    public function Search(): array
-    {
-        $connection = $this->db->getConnection();
-        $query = "CALL SearchProduct(?)";
-        $staement = $connection->prepare($query);
-        $staement->bindParam(1, $this->productName);
-        try {
-            $staement->execute();
-            $result = $staement->fetchAll(PDO::FETCH_ASSOC);
-            return $result;
-        } catch (PDOException $e) {
-            return [];
-        }
-    }
-
     public function GetProductWithPriceById($id)
     {
         $connection = $this->db->getConnection();
-        $query = "CALL GetPriceById(?)";
+        $query = " SELECT currentPrice, date
+        FROM ProductPrice
+        WHERE productId = ?;";
         $staement = $connection->prepare($query);
         $staement->bindParam(1, $id);
         try {
@@ -249,7 +253,6 @@ class Product implements ProductService
         } catch (PDOException $e) {
             return [];
         }
-
     }
     //get limit 10 product
     public function GetLimitProduct($offSet): array
@@ -264,7 +267,6 @@ class Product implements ProductService
         } catch (PDOException $e) {
             return [];
         }
-
     }
     //count product
     public function CountProduct(): int
@@ -279,7 +281,6 @@ class Product implements ProductService
         } catch (PDOException $e) {
             return 0;
         }
-
     }
     //isExist
     public function isExist(): bool
@@ -329,7 +330,4 @@ class Product implements ProductService
             return [];
         }
     }
-
 }
-
-?>

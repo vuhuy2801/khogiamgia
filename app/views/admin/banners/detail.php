@@ -25,12 +25,6 @@
         <div class="row flex-nowrap">
             <?php
             require_once 'app/views/partials/sidebar.php';
-            require_once 'app/views/admin/banners/deleteModal.php';
-            require_once 'lib/convertDate.php';
-            require_once 'app/controllers/admin/BannerController.php';
-            $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
-            $banner = $bannerData->Detail($id);
-            
             ?>
 
             <div class="col px-3 py-3 wrapContent">
@@ -46,7 +40,7 @@
                             <div>
                                 <a class="btn btn-danger mx-1" data-banner-id='<?php echo $id ?>' data-bs-toggle='modal'
                                     data-bs-target='#deleteBanner'><i class='mx-1 bi bi-trash'></i>Xóa</a>
-                                <a class="btn btn-primary" href="<?php echo 'cap-nhat?id='.$id ?>"><i
+                                <a class="btn btn-primary" href="<?php echo 'cap-nhat?id=' . $id ?>"><i
                                         class='mx-1 bi bi-pencil-square'></i>Sửa</a>
                             </div>
 
@@ -58,12 +52,12 @@
                                     <label class="label_input" for="address_target">Trang đích</label>
                                     <input type="text" class="form-control"
                                         value="<?php echo $banner['address_target'] ?>" id="address_target"
-                                        name="address_target" readonly>
+                                        name="address_target" readonly disabled>
                                 </div>
                                 <div class="form-group mt-2">
                                     <label class="label_input" for="title">Tiêu đề</label>
                                     <input type="text" value="<?php echo $banner['title'] ?>" class="form-control"
-                                        id="title" name="title" readonly>
+                                        id="title" name="title" readonly disabled>
                                 </div>
 
                             </form>
@@ -89,7 +83,7 @@
                                             class="float-end date_value"><?php echo convertDateFormat($banner['createdAt']) ?></span>
                                     </p>
                                     <p class="label_input">Thời gian cập nhật: <span
-                                            class="float-end date_value"><?php echo convertDateFormat( $banner['updatedAt']) ?></span>
+                                            class="float-end date_value"><?php echo convertDateFormat($banner['updatedAt']) ?></span>
                                     </p>
                                 </div>
                             </div>

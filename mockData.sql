@@ -9,6 +9,13 @@ INSERT INTO CATEGORY (categoryId, categoryName) VALUES
 (6, 'Đời sống'),
 (7, 'Điện tử');
 
+INSERT INTO CATEGORY_POST (categoryies_post, categories_post_name) VALUES
+(1, 'Khuyến mại'),
+(2, 'Hướng dẫn'),
+(3, 'Kinh nghiệm mua sắm'),
+(4, 'Khác');
+
+
 INSERT INTO SUPPLIER (supplierName, address_target, logoSupplier) VALUES 
     ('Shopee', '/shopee', '/public/uploads/suppliers/27-01-2024/Shopee.svg.png'),
     ('Tiki', '/tiki', '/public/uploads/suppliers/27-01-2024/Logo_Tiki.png'),
@@ -16,7 +23,7 @@ INSERT INTO SUPPLIER (supplierName, address_target, logoSupplier) VALUES
     ('Lazada', '/lazada' ,'/public/uploads/suppliers/27-01-2024/lazada-logo-freelogovectors.net_.png'),
     ('Grab','/grab', '/public/uploads/suppliers/27-01-2024/grab-logo.png');
 
-INSERT INTO POST (title, image,slug, supplierId, content, description, categories_post, createdAt, updateAt,status)
+INSERT INTO POST (title, image,slug, supplierId, content, description, categories_post, createdAt, updatedAt,status)
 VALUES 
     ('CUỘC THI VÔ ĐỊCH PHÁT TRIỂN WEB - WEB DEV CHAMPION 2023', 'https://api.vuhuy.site/uploads/small_img_index_73bc26433c.png',
     'couc-thi-vo-dich-phat-trien-web-web-dev-champion-2023', 1, 'Exciting news about the latest gadgets...', 'Introducing the newest electronic devices in the market...', 1, '2023-12-20','2023-12-20', 1);

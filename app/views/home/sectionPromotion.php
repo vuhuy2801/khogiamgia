@@ -14,7 +14,7 @@
             <?php
             require_once 'app/views/component/itemPromotion.php';
             // render list voucher
-            
+
             foreach ($vouchers as $voucher) {
                 $urlImage = '';
                 switch ($voucher['supplierId']) {

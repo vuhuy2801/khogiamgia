@@ -24,17 +24,8 @@
     <div class="container-fluid">
         <div class="row flex-nowrap">
             <?php
-        //    error_reporting(0); 
-            
             require_once 'app/views/partials/sidebar.php';
-            require_once 'lib/convertDate.php';
-            require_once 'app/views/admin/products/generalProcessing.php';
-            require_once 'app/controllers/admin/ProductController.php';
-            $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
-            $ProductController = new ProductController();
-            $product= $ProductController->getDetail($id);
             ?>
-
 
             <div class="col px-3 py-3 wrapContent">
                 <div class="toast toast_update align-items-center text-bg-primary border-0 position-absolute start-50 translate-middle"
@@ -76,7 +67,7 @@
                                 </div>
                                 <div class="form-group mt-2">
                                     <label class="label_input" for="productId">ID sản phẩm</label>
-                                    <input type="text" class="form-control" id="productId"
+                                    <input type="text" class="form-control productIdHidde" id="productId"
                                         value="<?php echo $product['productID'] ?>" name="productId">
                                 </div>
                                 <div class="row">
@@ -94,11 +85,11 @@
                                 <div class="form-group col mt-3">
                                     <select class="form-select form-select-sm mb-3" name="status" id="status">
                                         <?php
-                                                foreach ($statusTwoProduct as $key => $status) {
-                                                    $selected = ($key == $product['status']) ? 'selected' : '';
-                                                    echo "<option value=$key $selected>$status</option>";
-                                                }
-                                            ?>
+                                        foreach ($statuses as $key => $status) {
+                                            $selected = ($key == $product['status']) ? 'selected' : '';
+                                            echo "<option value=$key $selected>$status</option>";
+                                        }
+                                        ?>
                                     </select>
                                 </div>
 
@@ -135,7 +126,7 @@
                                 </div>
                                 <div class="px-3">
                                     <p class="label_input">Thời gian tạo: <span
-                                            class="float-end date_value"><?php  echo convertDateFormat($product['createdAt'])  ?></span>
+                                            class="float-end date_value"><?php echo convertDateFormat($product['createdAt'])  ?></span>
                                     </p>
                                     <p class="label_input">Thời gian cập nhật: <span
                                             class="float-end date_value update_at"></span>

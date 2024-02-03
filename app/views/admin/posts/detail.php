@@ -12,8 +12,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <title> <?php echo $titlePage ?> </title>
     <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">
 
@@ -25,13 +24,6 @@
         <div class="row flex-nowrap">
             <?php
             require_once 'app/views/partials/sidebar.php';
-            require_once 'app/views/admin/posts/deleteModal.php';
-            require_once 'lib/convertDate.php';
-            require_once 'app/views/admin/posts/generalProcessing.php';
-            require_once 'app/controllers/admin/PostController.php';
-            $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
-            $post = $postData->getPostDetail($id);
-            
             ?>
 
             <div class="col px-3 py-3 wrapContent">
@@ -41,15 +33,11 @@
 
                     <div class="row pt-1">
                         <div class="d-flex justify-content-between px-3 mb-4">
-                            <a href="danh-sach" class="my-auto text-decoration-none back_home"><i
-                                    class="bi bi-arrow-left mx-1"></i>Quay
+                            <a href="danh-sach" class="my-auto text-decoration-none back_home"><i class="bi bi-arrow-left mx-1"></i>Quay
                                 lại</a>
                             <div>
-                                <a class="btn btn-danger mx-1 drop-post" data-post-id='<?php echo $id ?>'
-                                    data-bs-toggle='modal' data-bs-target='#deletePost'><i
-                                        class='mx-1 bi bi-trash'></i>Xóa</a>
-                                <a class="btn btn-primary" href="<?php echo 'cap-nhat?id='.$id ?>"><i
-                                        class='mx-1 bi bi-pencil-square'></i>Sửa</a>
+                                <a class="btn btn-danger mx-1 drop-post" data-post-id='<?php echo $id ?>' data-bs-toggle='modal' data-bs-target='#deletePost'><i class='mx-1 bi bi-trash'></i>Xóa</a>
+                                <a class="btn btn-primary" href="<?php echo 'cap-nhat?id=' . $id ?>"><i class='mx-1 bi bi-pencil-square'></i>Sửa</a>
                             </div>
 
                         </div>
@@ -58,18 +46,15 @@
 
                                 <div class="form-group">
                                     <label class="label_input" for="title">Tiêu đề</label>
-                                    <input type="text" class="form-control" value="<?php echo $post['title'] ?>"
-                                        id="title" name="title" readonly>
+                                    <input type="text" class="form-control" value="<?php echo $post['title'] ?>" id="title" name="title" readonly disabled>
                                 </div>
                                 <div class="form-group mt-2">
                                     <label class="label_input" for="description">Mô tả</label>
-                                    <input type="text" value="<?php echo $post['description'] ?>" class="form-control"
-                                        id="description" name="description" readonly>
+                                    <input type="text" value="<?php echo $post['description'] ?>" class="form-control" id="description" name="description" readonly disabled>
                                 </div>
                                 <div class="form-group mt-2">
                                     <label class="label_input" for="slug">Slug</label>
-                                    <input type="text" value="<?php echo $post['slug'] ?>" class="form-control"
-                                        id="slug" name="slug" readonly>
+                                    <input type="text" value="<?php echo $post['slug'] ?>" class="form-control" id="slug" name="slug" readonly disabled>
                                 </div>
 
                                 <div class="form-group mt-2">
@@ -79,21 +64,18 @@
                                 <div class="form-group mt-2">
                                     <label class="label_input" for="supplierId">Trạng thái</label>
 
-                                    <input type="text" class="form-control"
-                                        value=" <?php echo $statuses[$post['status']] ?>">
+                                    <input disabled type="text" class="form-control" value=" <?php echo $statuses[$post['status']] ?>">
 
                                 </div>
 
                                 <div class="row form-group mt-2 d-flex">
                                     <div class="col">
                                         <label class="label_input" for="supp">Nhà cung cấp</label>
-                                        <input type="text" value="<?php echo $listSupplier[ $post['supplierId']] ?>"
-                                            class="form-control" id="supp" name="supp" readonly>
+                                        <input type="text" value="<?php echo $listSupplier[$post['supplierId']] ?>" class="form-control" id="supp" name="supp" readonly disabled>
                                     </div>
                                     <div class="col">
                                         <label class="label_input" for="cate">Danh mục</label>
-                                        <input type="text" value="<?php echo $categories[ $post['categories_post']] ?>"
-                                            class="form-control" id="cate" name="cate" readonly>
+                                        <input type="text" value="<?php echo $listCategoriesPost[$post['categories_post']] ?>" class="form-control" id="cate" name="cate" readonly disabled>
                                     </div>
                                 </div>
                             </form>
@@ -115,11 +97,9 @@
                                     <hr>
                                 </div>
                                 <div class="px-3">
-                                    <p class="label_input">Thời gian tạo: <span
-                                            class="float-end date_value"><?php echo convertDateFormat($post['createdAt']) ?></span>
+                                    <p class="label_input">Thời gian tạo: <span class="float-end date_value"><?php echo convertDateFormat($post['createdAt']) ?></span>
                                     </p>
-                                    <p class="label_input">Thời gian cập nhật: <span
-                                            class="float-end date_value"><?php echo convertDateFormat( $post['updateAt']) ?></span>
+                                    <p class="label_input">Thời gian cập nhật: <span class="float-end date_value"><?php echo convertDateFormat($post['updatedAt']) ?></span>
                                     </p>
                                 </div>
                             </div>
@@ -133,10 +113,10 @@
 
     </div>
     <script>
-    const dataPost = {
-        content: `<?php echo $post['content'] ?>`,
-        image: "<?php echo $post['image'] ?>",
-    }
+        const dataPost = {
+            content: `<?php echo $post['content'] ?>`,
+            image: "<?php echo $post['image'] ?>",
+        }
     </script>
     <script src="/public/js/admin/posts/detail.js"> </script>
     <script src="/public/js/bootstrap/bootstrap.bundle.min.js"> </script>

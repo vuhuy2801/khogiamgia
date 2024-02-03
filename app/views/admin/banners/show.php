@@ -12,8 +12,7 @@
     <link rel="stylesheet" href="/public/css/admin/banners.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">
 
 </head>
@@ -24,11 +23,7 @@
         <!-- end -->
         <div class="row flex-nowrap">
             <?php
-                require_once 'app/views/partials/sidebar.php';
-                require_once 'app/views/admin/banners/deleteModal.php';
-                require_once 'lib/convertDate.php';
-                require_once 'app/views/admin/banners/generalProcessing.php';
-                require_once 'app/controllers/admin/BannerController.php';
+            require_once 'app/views/partials/sidebar.php';
             ?>
 
             <!-- end sidebar -->
@@ -69,51 +64,49 @@
                         </thead>
                         <tbody class="body_item">
                             <?php
-          
-                                $bannersPerPage = 5;
-                                $totalBanners = count($banners);
-                            
-                                $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
-                                $totalPages = ceil($totalBanners / $bannersPerPage);
 
-                                $start = ($currentPage - 1) * $bannersPerPage;
-                                $end = $start + $bannersPerPage;
-                                $paginatedBanners = array_slice($banners, $start, $bannersPerPage);
-                                $hidePagination = $totalPages <= 1;
-                                
-                                foreach ($paginatedBanners as $index => $banner) {
-                                    echo "<tr>";
-                                    echo "<td class='item_table' scope='row'>" . $banner['bannerId'] . "</td>";
-                                    echo "<td class='item_table'>" . $banner['address_target'] . "</td>";
-                                    echo "<td class='item_table'> <img class='w-100 item_image' src='". $banner['image'] ."' alt=''></td>";
-                                    echo "<td class='item_table'>" . $banner['title'] . "</td>";
-                                    echo "<td class='item_table'>" . convertDateFormat( $banner['createdAt']) . "</td>";
-                                    $statusClass = ($banner['status'] == 0) ? 'status-inactive' : 'status-active';
-                                    echo "<td class='item_table '><p class='item_status my-0 rounded-3 " . $statusClass . "'>" . $statuses[$banner['status']] . "</p></td>";
-                        
-                                    echo "<td class='item_table'>
+                            $bannersPerPage = 5;
+                            $totalBanners = count($banners);
+
+                            $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+                            $totalPages = ceil($totalBanners / $bannersPerPage);
+
+                            $start = ($currentPage - 1) * $bannersPerPage;
+                            $end = $start + $bannersPerPage;
+                            $paginatedBanners = array_slice($banners, $start, $bannersPerPage);
+                            $hidePagination = $totalPages <= 1;
+
+                            foreach ($paginatedBanners as $index => $banner) {
+                                echo "<tr>";
+                                echo "<td class='item_table' scope='row'>" . $banner['bannerId'] . "</td>";
+                                echo "<td class='item_table'>" . $banner['address_target'] . "</td>";
+                                echo "<td class='item_table'> <img class='w-100 item_image' src='" . $banner['image'] . "' alt=''></td>";
+                                echo "<td class='item_table'>" . $banner['title'] . "</td>";
+                                echo "<td class='item_table'>" . convertDateFormat($banner['createdAt']) . "</td>";
+                                $statusClass = ($banner['status'] == 0) ? 'status-inactive' : 'status-active';
+                                echo "<td class='item_table '><p class='item_status my-0 rounded-3 " . $statusClass . "'>" . $statuses[$banner['status']] . "</p></td>";
+
+                                echo "<td class='item_table'>
                                         <a class='px-1 action_detail' href='chi-tiet?id=" . urlencode($banner['bannerId']) .  "'><i class='bi bi-eye-fill'></i></a>
-                                        <a class='px-1 action_edit' href='cap-nhat?id=" . urlencode($banner['bannerId']) ."'><i class='bi bi-pencil-square'></i></a>
+                                        <a class='px-1 action_edit' href='cap-nhat?id=" . urlencode($banner['bannerId']) . "'><i class='bi bi-pencil-square'></i></a>
                                         <a href='' class='delete-banner px-1' data-banner-id='" . urlencode($banner['bannerId']) . "' data-bs-toggle='modal' data-bs-target='#deleteBanner'><i class='bi bi-trash'></i></a>
                                      </td>";
-                                     echo "</tr>" ; } ?>
+                                echo "</tr>";
+                            } ?>
                         </tbody>
                     </table>
-                    <nav class="  py-2" aria-label="Page navigation example"
-                        <?php echo $hidePagination ? 'style="display: none;"' : ''; ?>>
+                    <nav class="  py-2" aria-label="Page navigation example" <?php echo $hidePagination ? 'style="display: none;"' : ''; ?>>
                         <ul class="pagination justify-content-center">
                             <li class="page-item <?php echo ($currentPage == 1) ? 'disabled' : ''; ?>">
-                                <a class="page-link"
-                                    href="?page=<?php echo ($currentPage > 1) ? ($currentPage - 1) : 1; ?>">Previous</a>
+                                <a class="page-link" href="?page=<?php echo ($currentPage > 1) ? ($currentPage - 1) : 1; ?>">Previous</a>
                             </li>
                             <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
-                            <li class="page-item <?php echo ($currentPage == $i) ? 'active' : ''; ?>">
-                                <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                            </li>
+                                <li class="page-item <?php echo ($currentPage == $i) ? 'active' : ''; ?>">
+                                    <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                                </li>
                             <?php endfor; ?>
                             <li class="page-item <?php echo ($currentPage == $totalPages) ? 'disabled' : ''; ?>">
-                                <a class="page-link"
-                                    href="?page=<?php echo ($currentPage < $totalPages) ? ($currentPage + 1) : $totalPages; ?>">Next</a>
+                                <a class="page-link" href="?page=<?php echo ($currentPage < $totalPages) ? ($currentPage + 1) : $totalPages; ?>">Next</a>
                             </li>
                         </ul>
                     </nav>
@@ -131,8 +124,8 @@
     https://cdn.jsdelivr.net/npm/dayjs@1.11.10/dayjs.min.js
     "></script>
     <script>
-    const now = dayjs();
-    const formattedTime = now.format('DD/MM/YY HH:mm');
+        const now = dayjs();
+        const formattedTime = now.format('DD/MM/YY HH:mm');
     </script>
 
     <script src="/public/js/admin/banners/show.js"> </script>
