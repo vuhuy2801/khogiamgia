@@ -115,7 +115,6 @@ class ProductController extends AdminController
         $this->checkLogin();
 
         $titlePage = "Thêm theo dõi sản phẩm";
-        require_once 'app/views/admin/products/generalProcessing.php';
         include 'app/views/admin/products/create.php';
     }
 
