@@ -39,12 +39,16 @@
                     3 => "Nạp điện thoại",
                     4 => "Khác"
                 );
-                $categories = array(
-                    1 => "Thời Trang",
-                    2 => "Điện tử",
-                    3 => "Nội trợ",
-                    4 => "Khác"
-                );
+
+                //
+                $newCategoryArray = [];
+
+                foreach ($categories as $category) {
+                    $categoryId = $category['categoryId'];
+                    $categoryName = $category['categoryName'];
+                    $newCategoryArray[$categoryId] = $categoryName;
+                }
+
                 echo itemPromotion(
                     $urlImage,
                     $typeDisount[$voucher['discountType']],
@@ -54,7 +58,7 @@
                     $voucher['minimumDiscount'],
                     $manually[$voucher['is_inWallet']],
                     $voucher['quantity'],
-                    $categories[$voucher['categoryId']],
+                    $newCategoryArray[$voucher['categoryId']],
                     $voucher['conditionsOfUse'],
                     $voucher['address_target'],
                     $voucher['voucherId'],

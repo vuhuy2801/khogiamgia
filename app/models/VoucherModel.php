@@ -174,33 +174,34 @@ class Voucher implements VoucherService
         $this->is_inWallet = $value;
     }
 
-    public function Add(): bool
+    public function addVoucher(Voucher $voucher): bool
     {
         $connection = $this->db->getConnection();
         $query = "
-        INSERT INTO Voucher (
-            voucherId, voucherName, quantity, expressAt, expiresAt, minimumDiscount,
-            conditionsOfUse, categoryId, createdAt, updatedAt, is_trend,
-            supplierId, status, address_target, discountType, maximumDiscount, is_inWallet
-        ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+            INSERT INTO Voucher (
+                voucherId, voucherName, quantity, expressAt, expiresAt, minimumDiscount,
+                conditionsOfUse, categoryId, createdAt, updatedAt, is_trend,
+                supplierId, status, address_target, discountType, maximumDiscount, is_inWallet
+            ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
         $statement = $connection->prepare($query);
-        $statement->bindParam(1, $this->voucherId);
-        $statement->bindParam(2, $this->voucherName);
-        $statement->bindParam(3, $this->quantity);
-        $statement->bindParam(4, $this->expressAt);
-        $statement->bindParam(5, $this->expiresAt);
-        $statement->bindParam(6, $this->minimumDiscount);
-        $statement->bindParam(7, $this->conditionsOfUse);
-        $statement->bindParam(8, $this->categoryId);
-        $statement->bindParam(9, $this->createdAt);
-        $statement->bindParam(10, $this->updatedAt);
-        $statement->bindParam(11, $this->is_trend);
-        $statement->bindParam(12, $this->supplierId);
-        $statement->bindParam(13, $this->status);
-        $statement->bindParam(14, $this->address_target);
-        $statement->bindParam(15, $this->discountType);
-        $statement->bindParam(16, $this->maximunDiscount);
-        $statement->bindParam(17, $this->is_inWallet);
+        $statement->bindValue(1, $voucher->getVoucherId());
+        $statement->bindValue(2, $voucher->getVoucherName());
+        $statement->bindValue(3, $voucher->getQuantity());
+        $statement->bindValue(4, $voucher->getExpressAt());
+        $statement->bindValue(5, $voucher->getExpiresAt());
+        $statement->bindValue(6, $voucher->getMinimumDiscount());
+        $statement->bindValue(7, $voucher->getConditionsOfUse());
+        $statement->bindValue(8, $voucher->getCategoryId());
+        $statement->bindValue(9, $voucher->getCreatedAt());
+        $statement->bindValue(10, $voucher->getUpdatedAt());
+        $statement->bindValue(11, $voucher->getIsTrend());
+        $statement->bindValue(12, $voucher->getSupplierId());
+        $statement->bindValue(13, $voucher->getStatus());
+        $statement->bindValue(14, $voucher->getAddress_target());
+        $statement->bindValue(15, $voucher->getDiscountType());
+        $statement->bindValue(16, $voucher->getMaximunDiscount());
+        $statement->bindValue(17, $voucher->getIs_inWallet());
+
         try {
             $statement->execute();
             return true;
@@ -208,61 +209,46 @@ class Voucher implements VoucherService
             return false;
         }
     }
-    public function Edit(): bool
+
+    public function updateVoucher(Voucher $voucher): bool
     {
         $connection = $this->db->getConnection();
         $query = "
-            UPDATE Voucher
-            SET voucherName = ?,
-                quantity = ?,
-                expressAt = ?,
-                expiresAt = ?,
-                minimumDiscount = ?,
-                conditionsOfUse = ?,
-                categoryId = ?,
-                updatedAt = ?,
-                is_trend = ?,
-                supplierId = ?,
-                status = ?,
-                address_target = ?,
-                discountType = ?,
-                maximumDiscount = ?, 
-                is_inWallet = ?
-            WHERE voucherId = ?;";
-        $statement = $connection->prepare($query);
-        $statement->bindParam(1, $this->voucherName);
-        $statement->bindParam(2, $this->quantity);
-        $statement->bindParam(3, $this->expressAt);
-        $statement->bindParam(4, $this->expiresAt);
-        $statement->bindParam(5, $this->minimumDiscount);
-        $statement->bindParam(6, $this->conditionsOfUse);
-        $statement->bindParam(7, $this->categoryId);
-        $statement->bindParam(8, $this->updatedAt);
-        $statement->bindParam(9, $this->is_trend);
-        $statement->bindParam(10, $this->supplierId);
-        $statement->bindParam(11, $this->status);
-        $statement->bindParam(12, $this->address_target);
-        $statement->bindParam(13, $this->discountType);
-        $statement->bindParam(14, $this->maximunDiscount);
-        $statement->bindParam(15, $this->is_inWallet);
-        $statement->bindParam(16, $this->voucherId);
-
-        try {
-            $statement->execute();
-            return true;
-        } catch (PDOException $e) {
-
-            return false;
-        }
-    }
-
-    public function Delete(): bool
-    {
-        $connection = $this->db->getConnection();
-        $query = "DELETE FROM Voucher
+        UPDATE Voucher
+        SET voucherName = ?,
+            quantity = ?,
+            expressAt = ?,
+            expiresAt = ?,
+            minimumDiscount = ?,
+            conditionsOfUse = ?,
+            categoryId = ?,
+            updatedAt = ?,
+            is_trend = ?,
+            supplierId = ?,
+            status = ?,
+            address_target = ?,
+            discountType = ?,
+            maximumDiscount = ?, 
+            is_inWallet = ?
         WHERE voucherId = ?;";
         $statement = $connection->prepare($query);
-        $statement->bindParam(1, $this->voucherId);
+        $statement->bindValue(1, $voucher->getVoucherName());
+        $statement->bindValue(2, $voucher->getQuantity());
+        $statement->bindValue(3, $voucher->getExpressAt());
+        $statement->bindValue(4, $voucher->getExpiresAt());
+        $statement->bindValue(5, $voucher->getMinimumDiscount());
+        $statement->bindValue(6, $voucher->getConditionsOfUse());
+        $statement->bindValue(7, $voucher->getCategoryId());
+        $statement->bindValue(8, $voucher->getUpdatedAt());
+        $statement->bindValue(9, $voucher->getIsTrend());
+        $statement->bindValue(10, $voucher->getSupplierId());
+        $statement->bindValue(11, $voucher->getStatus());
+        $statement->bindValue(12, $voucher->getAddress_target());
+        $statement->bindValue(13, $voucher->getDiscountType());
+        $statement->bindValue(14, $voucher->getMaximunDiscount());
+        $statement->bindValue(15, $voucher->getIs_inWallet());
+        $statement->bindValue(16, $voucher->getVoucherId());
+
         try {
             $statement->execute();
             return true;
@@ -272,7 +258,22 @@ class Voucher implements VoucherService
     }
 
 
-    public function List(): array
+    public function deleteVoucher($voucherId): bool
+    {
+        $connection = $this->db->getConnection();
+        $query = "DELETE FROM Voucher WHERE voucherId = ?;";
+        $statement = $connection->prepare($query);
+        $statement->bindValue(1, $voucherId);
+        try {
+            $statement->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+
+    public function getListVoucherByAdmin(): array
     {
         $connection = $this->db->getConnection();
         if ($connection) {
@@ -285,7 +286,7 @@ class Voucher implements VoucherService
         return [];
     }
 
-    public function ListUser(): array
+    public function getListVoucherByUser(): array
     {
         $connection = $this->db->getConnection();
         if ($connection) {
@@ -298,13 +299,13 @@ class Voucher implements VoucherService
         return [];
     }
 
-    public function ListVoucherBySupplier($idSupplier): array
+    public function getListVoucherBySupplier($idSupplier): array
     {
         $connection = $this->db->getConnection();
         if ($connection) {
             $query = "SELECT voucherId,voucherName,supplierId,expiresAt,discountType,maximumDiscount,minimumDiscount,quantity,categoryId,conditionsOfUse,address_target,is_inWallet FROM Voucher Where supplierId = ?;";
             $statement = $connection->prepare($query);
-            $statement->bindParam(1, $idSupplier);
+            $statement->bindValue(1, $idSupplier);
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $result;
@@ -312,7 +313,7 @@ class Voucher implements VoucherService
         return [];
     }
 
-    public function Detail($voucherId)
+    public function getVoucherDetail($voucherId)
     {
         $connection = $this->db->getConnection();
         $query = "SELECT * FROM Voucher where voucherId = ?;";
@@ -340,21 +341,8 @@ class Voucher implements VoucherService
         }
         return [];
     }
-    public function GetVouchersBySupplierId(): array
-    {
-        $connection = $this->db->getConnection();
-        if ($connection) {
-            $query = " SELECT * FROM Voucher WHERE supplierId = ?;";
-            $statement = $connection->prepare($query);
-            $statement->bindParam(1, $this->supplierId);
-            $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-            return $result;
-        }
-        return [];
-    }
 
-    public function GetVouchersByCategoryId($category, $supplierId): array
+    public function getVouchersByCategoryId($category, $supplierId): array
     {
         $connection = $this->db->getConnection();
         if ($connection) {

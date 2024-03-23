@@ -1,13 +1,13 @@
 <?php
 interface VoucherService
 {
-    public function Add(): bool;
-    public function Edit(): bool;
-    public function Delete(): bool;
-    public function List(): array;
-    public function Detail($voucherId);
-    public function GetTrendingVouchers(): array;
-    public function GetVouchersBySupplierId(): array;
-    public function GetVouchersByCategoryId($i, $a): array;
+    public function addVoucher(Voucher $voucher): bool;
+    public function updateVoucher(Voucher $voucher): bool;
+    public function deleteVoucher($voucherId): bool;
+    public function getListVoucherByAdmin(): array;
+    public function getListVoucherByUser(): array;
+    public function getVoucherDetail($voucherId);
+    public function getListVoucherBySupplier($idSupplier): array;
+    public function getVouchersByCategoryId($category, $supplierId): array;
     public function SearchVoucherByKeyword(): array;
 }

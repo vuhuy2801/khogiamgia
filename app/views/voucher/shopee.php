@@ -7,8 +7,7 @@
     <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="/public/css/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="/public/css/general.css">
@@ -25,14 +24,12 @@
 
 <body>
     <div class="toast-container position-fixed top-0 end-0 p-3">
-        <div class="toast align-items-center border-0" role="alert" aria-live="assertive" aria-atomic="true"
-            style="background-color: #d1e7dd; color:#0f5132;">
+        <div class="toast align-items-center border-0" role="alert" aria-live="assertive" aria-atomic="true" style="background-color: #d1e7dd; color:#0f5132;">
             <div class="d-flex">
                 <div class="toast-body" id="toastContent">
 
                 </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                    aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
         </div>
     </div>
@@ -46,11 +43,10 @@
         </div>
     </div>
     <?php
-    $titleVoucher = "MÃ GIẢM GIÁ SHOPEE";
-    $vouchers = $vouchersShopee;
+
     require_once 'app/views/banner.php';
     require_once 'app/views/voucher/sectionSideBarCategori.php';
-    
+
     require_once 'app/views/home/sectionPromotion.php';
     require_once 'app/views/voucher/sectionHelpVoucher.php';
     require_once 'app/views/footer.php';

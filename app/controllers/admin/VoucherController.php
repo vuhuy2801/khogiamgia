@@ -25,7 +25,7 @@ class VoucherController extends AdminController
     {
         $this->checkLogin();
         $categories = $this->categoryModel->List();
-        $vouchers = $this->voucherData->List();
+        $vouchers = $this->voucherData->getListVoucherByAdmin();
         $suppliers = $this->supplierModal->List();
 
         require_once 'app/views/admin/vouchers/deleteModal.php';
@@ -42,7 +42,7 @@ class VoucherController extends AdminController
         $voucherData = $this->voucherData;
         $suppliers = $this->supplierModal->List();
         $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
-        $voucher = $this->voucherData->Detail($id);
+        $voucher = $this->voucherData->getVoucherDetail($id);
 
         require_once 'app/views/admin/vouchers/deleteModal.php';
         require_once 'lib/convertDate.php';
@@ -73,7 +73,7 @@ class VoucherController extends AdminController
         $voucherData = $this->voucherData;
 
         $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
-        $voucher = $this->voucherData->Detail($id);
+        $voucher = $this->voucherData->getVoucherDetail($id);
 
         $suppliers = $this->supplierModal->List();
         require_once 'lib/convertDate.php';
@@ -90,64 +90,80 @@ class VoucherController extends AdminController
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $expressAt = date('Y-m-d', strtotime($_POST['expressAt']));
         $expiresAt = date('Y-m-d', strtotime($_POST['expiresAt']));
-        $this->voucherData->setVoucherId($_POST['voucherId']);
-        $this->voucherData->setVoucherName($_POST['voucherName']);
-        $this->voucherData->setQuantity($_POST['quantity']);
-        $this->voucherData->setExpressAt($expressAt);
-        $this->voucherData->setExpiresAt($expiresAt);
-        $this->voucherData->setMinimumDiscount(($_POST['minimunDiscount']));
-        $this->voucherData->setConditionsOfUse(($_POST['conditionsOfUse']));
-        $this->voucherData->setCategoryId(($_POST['categoryId']));
-        $this->voucherData->setCreatedAt(date('Y-m-d H:i:s'));
-        $this->voucherData->setUpdatedAt(date('Y-m-d H:i:s'));
-        $this->voucherData->setIsTrend($_POST['is_trend']);
-        $this->voucherData->setSupplierId($_POST['supplierId']);
-        $this->voucherData->setStatus(1);
-        $this->voucherData->setAddress_target($_POST['address_target']);
-        $this->voucherData->setDiscountType($_POST['discountType']);
-        $this->voucherData->setMaximunDiscount($_POST['maximumDiscount']);
-        $this->voucherData->setIs_inWallet($_POST['is_inWallet']);
 
-        if ($this->voucherData->Add()) {
+        // Tạo đối tượng Voucher và đặt các giá trị từ dữ liệu POST
+        $voucher = new Voucher();
+        $voucher->setVoucherId($_POST['voucherId']);
+        $voucher->setVoucherName($_POST['voucherName']);
+        $voucher->setQuantity($_POST['quantity']);
+        $voucher->setExpressAt($expressAt);
+        $voucher->setExpiresAt($expiresAt);
+        $voucher->setMinimumDiscount($_POST['minimumDiscount']);
+        $voucher->setConditionsOfUse($_POST['conditionsOfUse']);
+        $voucher->setCategoryId($_POST['categoryId']);
+        $voucher->setCreatedAt(date('Y-m-d H:i:s'));
+        $voucher->setUpdatedAt(date('Y-m-d H:i:s'));
+        $voucher->setIsTrend($_POST['is_trend']);
+        $voucher->setSupplierId($_POST['supplierId']);
+        $voucher->setStatus(1);
+        $voucher->setAddress_target($_POST['address_target']);
+        $voucher->setDiscountType($_POST['discountType']);
+        $voucher->setMaximunDiscount($_POST['maximumDiscount']);
+        $voucher->setIs_inWallet($_POST['is_inWallet']);
+
+        // Gọi hàm addVoucher() trong model
+        if ($this->voucherData->addVoucher($voucher)) {
             header('Location: ../ma-giam-gia/danh-sach');
+            exit(); // Đảm bảo chương trình kết thúc sau khi chuyển hướng
         } else {
             echo "Thêm mã giảm giá thất bại";
         }
     }
+
 
     public function update()
     {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $expressAt = date('Y-m-d', strtotime($_POST['expressAt']));
         $expiresAt = date('Y-m-d', strtotime($_POST['expiresAt']));
-        $this->voucherData->setVoucherId($_POST['voucherId']);
-        $this->voucherData->setVoucherName($_POST['voucherName']);
-        $this->voucherData->setQuantity($_POST['quantity']);
-        $this->voucherData->setExpressAt($expressAt);
-        $this->voucherData->setExpiresAt($expiresAt);
-        $this->voucherData->setMinimumDiscount(($_POST['minimunDiscount']));
-        $this->voucherData->setConditionsOfUse(($_POST['conditionsOfUse']));
-        $this->voucherData->setCategoryId(($_POST['categoryId']));
-        $this->voucherData->setUpdatedAt(date('Y-m-d H:i:s'));
-        $this->voucherData->setIsTrend($_POST['is_trend']);
-        $this->voucherData->setSupplierId($_POST['supplierId']);
-        $this->voucherData->setStatus(1);
-        $this->voucherData->setAddress_target($_POST['address_target']);
-        $this->voucherData->setDiscountType($_POST['discountType']);
-        $this->voucherData->setMaximunDiscount($_POST['maximumDiscount']);
-        $this->voucherData->setIs_inWallet($_POST['is_inWallet']);
-        if ($this->voucherData->Edit()) {
+
+        // Tạo đối tượng Voucher và đặt các giá trị từ dữ liệu POST
+        $voucher = new Voucher();
+        $voucher->setVoucherId($_POST['voucherId']);
+        $voucher->setVoucherName($_POST['voucherName']);
+        $voucher->setQuantity($_POST['quantity']);
+        $voucher->setExpressAt($expressAt);
+        $voucher->setExpiresAt($expiresAt);
+        $voucher->setMinimumDiscount($_POST['minimumDiscount']); // Lưu ý sửa chính tả
+        $voucher->setConditionsOfUse($_POST['conditionsOfUse']);
+        $voucher->setCategoryId($_POST['categoryId']);
+        $voucher->setUpdatedAt(date('Y-m-d H:i:s'));
+        $voucher->setIsTrend($_POST['is_trend']);
+        $voucher->setSupplierId($_POST['supplierId']);
+        $voucher->setStatus(1);
+        $voucher->setAddress_target($_POST['address_target']);
+        $voucher->setDiscountType($_POST['discountType']);
+        $voucher->setMaximunDiscount($_POST['maximumDiscount']); // Lưu ý sửa chính tả
+        $voucher->setIs_inWallet($_POST['is_inWallet']);
+
+        // Gọi hàm updateVoucher() từ model và truyền đối tượng Voucher vào
+        if ($this->voucherData->updateVoucher($voucher)) {
             header('Location: ../ma-giam-gia/danh-sach');
+            exit(); // Đảm bảo chương trình kết thúc sau khi chuyển hướng
         } else {
             echo "Sửa mã giảm giá thất bại";
         }
     }
 
+
     public function delete($voucherId)
     {
-        $this->voucherData->setVoucherId($voucherId);
-        if ($this->voucherData->Delete()) {
+        if ($this->voucherData->deleteVoucher($voucherId)) {
+            // Đặt thông báo vào session
+            $_SESSION['success_message'] = "Mã giảm giá đã được xóa thành công.";
+
             header('Location: ../danh-sach');
+            exit(); // Đảm bảo chương trình kết thúc sau khi chuyển hướng
         } else {
             echo "Xóa mã giảm giá thất bại";
         }

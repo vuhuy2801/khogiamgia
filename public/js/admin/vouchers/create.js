@@ -28,7 +28,7 @@ formSubmit.addEventListener("keyup", function (e) {
   if (elmInput === "voucherName") {
     elmDiscount.innerText = e.target.value;
   }
-  if (elmInput === "minimunDiscount") {
+  if (elmInput === "minimumDiscount") {
     minPriceElement.innerText = e.target.value;
   }
   if (elmInput === "maximumDiscount") {
@@ -127,13 +127,13 @@ document.getElementById("quantity").addEventListener("change", function () {
 });
 
 document
-  .getElementById("minimunDiscount")
+  .getElementById("minimumDiscount")
   .addEventListener("change", function () {
-    const minimunDiscountValue = this.value.trim();
-    if (minimunDiscountValue === "") {
-      showError("minimunDiscount", "Vui lòng nhập đơn tối thiểu");
+    const minimumDiscountValue = this.value.trim();
+    if (minimumDiscountValue === "") {
+      showError("minimumDiscount", "Vui lòng nhập đơn tối thiểu");
     } else {
-      hideError("minimunDiscount");
+      hideError("minimumDiscount");
     }
   });
 
@@ -212,8 +212,8 @@ btnSubmit.addEventListener("click", () => {
     document.getElementById("conditionsOfUse").value;
   const expiresAtElement = document.getElementById("expiresAt").value;
 
-  const minimunDiscount = document
-    .getElementById("minimunDiscount")
+  const minimumDiscount = document
+    .getElementById("minimumDiscount")
     .value.trim();
   const maximumDiscount = document
     .getElementById("maximumDiscount")
@@ -281,11 +281,11 @@ btnSubmit.addEventListener("click", () => {
     hideError("quantity");
   }
 
-  if (minimunDiscount === "") {
-    showError("minimunDiscount", "Vui lòng nhập đơn tối thiểu");
+  if (minimumDiscount === "") {
+    showError("minimumDiscount", "Vui lòng nhập đơn tối thiểu");
     isValid = false;
   } else {
-    hideError("minimunDiscount");
+    hideError("minimumDiscount");
   }
 
   if (maximumDiscount === "") {

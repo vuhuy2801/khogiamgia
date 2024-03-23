@@ -15,7 +15,6 @@ class VoucherController
         $this->voucherModel = new Voucher();
         $this->usedModel = new Used();
         $this->categoryModel = new Category();
-
     }
     public function index()
     {
@@ -24,8 +23,9 @@ class VoucherController
 
     public function showShoppee()
     {
-        $vouchersShopee = $this->voucherModel->ListVoucherBySupplier(1);
-        $categories = $this->voucherModel->List();
+        $titleVoucher = "MÃ GIẢM GIÁ SHOPEE";
+        $vouchers = $this->voucherModel->getListVoucherBySupplier(1);
+        $categories = $this->categoryModel->List();
         $manually = array(
             0 => "Mã nhập tay",
             1 => "Có sẵn trong ví"
@@ -35,8 +35,8 @@ class VoucherController
 
     public function showShopeeFashion()
     {
-        $vouchersShopee = $this->voucherModel->GetVouchersByCategoryId(4,1);
-        $categories = $this->voucherModel->List();
+        $vouchersShopee = $this->voucherModel->getVouchersByCategoryId(4, 1);
+        $categories = $this->categoryModel->List();
         $manually = array(
             0 => "Mã nhập tay",
             1 => "Có sẵn trong ví"
@@ -46,8 +46,8 @@ class VoucherController
 
     public function showShopeeAll()
     {
-        $vouchersShopee = $this->voucherModel->GetVouchersByCategoryId(1,1);
-        $categories = $this->voucherModel->List();
+        $vouchersShopee = $this->voucherModel->getVouchersByCategoryId(1, 1);
+        $categories = $this->categoryModel->List();
         $manually = array(
             0 => "Mã nhập tay",
             1 => "Có sẵn trong ví"
@@ -58,8 +58,8 @@ class VoucherController
 
     public function showShopeeMail()
     {
-        $vouchersShopee = $this->voucherModel->GetVouchersByCategoryId(2,1);
-        $categories = $this->voucherModel->List();
+        $vouchersShopee = $this->voucherModel->getVouchersByCategoryId(2, 1);
+        $categories = $this->categoryModel->List();
         $manually = array(
             0 => "Mã nhập tay",
             1 => "Có sẵn trong ví"
@@ -69,8 +69,8 @@ class VoucherController
 
     public function showShopeeExtra()
     {
-        $vouchersShopee = $this->voucherModel->GetVouchersByCategoryId(3,1);
-        $categories = $this->voucherModel->List();
+        $vouchersShopee = $this->voucherModel->getVouchersByCategoryId(3, 1);
+        $categories = $this->categoryModel->List();
         $manually = array(
             0 => "Mã nhập tay",
             1 => "Có sẵn trong ví"
@@ -80,8 +80,8 @@ class VoucherController
 
     public function showShopeeConsum()
     {
-        $vouchersShopee = $this->voucherModel->GetVouchersByCategoryId(5,1);
-        $categories = $this->voucherModel->List();
+        $vouchersShopee = $this->voucherModel->getVouchersByCategoryId(5, 1);
+        $categories = $this->categoryModel->List();
         $manually = array(
             0 => "Mã nhập tay",
             1 => "Có sẵn trong ví"
@@ -91,8 +91,8 @@ class VoucherController
 
     public function showShopeeLife()
     {
-        $vouchersShopee = $this->voucherModel->GetVouchersByCategoryId(6,1);
-        $categories = $this->voucherModel->List();
+        $vouchersShopee = $this->voucherModel->getVouchersByCategoryId(6, 1);
+        $categories = $this->categoryModel->List();
         $manually = array(
             0 => "Mã nhập tay",
             1 => "Có sẵn trong ví"
@@ -102,8 +102,8 @@ class VoucherController
 
     public function showShopeeElectronic()
     {
-        $vouchersShopee = $this->voucherModel->GetVouchersByCategoryId(7,1);
-        $categories = $this->voucherModel->List();
+        $vouchersShopee = $this->voucherModel->getVouchersByCategoryId(7, 1);
+        $categories = $this->categoryModel->List();
         $manually = array(
             0 => "Mã nhập tay",
             1 => "Có sẵn trong ví"
@@ -114,7 +114,9 @@ class VoucherController
     public function showTiki()
     {
         $titleVoucher = "MÃ GIẢM GIÁ TIKI";
-        $vouchers = $this->voucherModel->ListVoucherBySupplier(2);
+        $vouchers = $this->voucherModel->getListVoucherBySupplier(2);
+        $categories = $this->categoryModel->List();
+
         $manually = array(
             0 => "Mã nhập tay",
             1 => "Có sẵn trong ví"
@@ -124,7 +126,9 @@ class VoucherController
     public function showLazada()
     {
         $titleVoucher = "MÃ GIẢM GIÁ LAZADA";
-        $vouchers = $this->voucherModel->ListVoucherBySupplier(4);
+        $vouchers = $this->voucherModel->getListVoucherBySupplier(4);
+        $categories = $this->categoryModel->List();
+
         $manually = array(
             0 => "Mã nhập tay",
             1 => "Có sẵn trong ví"
@@ -134,7 +138,9 @@ class VoucherController
     public function shopeeFood()
     {
         $titleVoucher = "MÃ GIẢM GIÁ SHOPEE FOOD";
-        $vouchers = $this->voucherModel->ListVoucherBySupplier(3);
+        $vouchers = $this->voucherModel->getListVoucherBySupplier(3);
+        $categories = $this->categoryModel->List();
+
         $manually = array(
             0 => "Mã nhập tay",
             1 => "Có sẵn trong ví"
@@ -163,7 +169,6 @@ class VoucherController
         if ($isVoucherExist === false) {
             // add new used
             $this->usedModel->addUsed($voucherId, 1);
-
         } else {
             $usedVoucher = $this->usedModel->getUsedByVoucherId($voucherId);
             $usedCount = $usedVoucher[0]['usedCount'];
@@ -176,12 +181,5 @@ class VoucherController
                 'message' => 'Cập nhật thành công'
             )
         );
-
-
-
     }
-
 }
-
-
-?>
