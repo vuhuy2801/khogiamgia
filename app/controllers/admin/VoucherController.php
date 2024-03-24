@@ -113,6 +113,7 @@ class VoucherController extends AdminController
 
         // Gọi hàm addVoucher() trong model
         if ($this->voucherData->addVoucher($voucher)) {
+            $_SESSION['addVoucher_success_message'] = "Mã giảm giá đã được thêm thành công!";
             header('Location: ../ma-giam-gia/danh-sach');
             exit(); // Đảm bảo chương trình kết thúc sau khi chuyển hướng
         } else {
@@ -123,6 +124,7 @@ class VoucherController extends AdminController
 
     public function update()
     {
+        session_start();
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $expressAt = date('Y-m-d', strtotime($_POST['expressAt']));
         $expiresAt = date('Y-m-d', strtotime($_POST['expiresAt']));
@@ -148,6 +150,7 @@ class VoucherController extends AdminController
 
         // Gọi hàm updateVoucher() từ model và truyền đối tượng Voucher vào
         if ($this->voucherData->updateVoucher($voucher)) {
+            $_SESSION['updateVoucher_success_message'] = "Mã giảm giá đã được cập nhật thành công!";
             header('Location: ../ma-giam-gia/danh-sach');
             exit(); // Đảm bảo chương trình kết thúc sau khi chuyển hướng
         } else {
@@ -160,7 +163,7 @@ class VoucherController extends AdminController
     {
         if ($this->voucherData->deleteVoucher($voucherId)) {
             // Đặt thông báo vào session
-            $_SESSION['success_message'] = "Mã giảm giá đã được xóa thành công.";
+            $_SESSION['success_message'] = "Mã giảm giá đã được xóa thành công!";
 
             header('Location: ../danh-sach');
             exit(); // Đảm bảo chương trình kết thúc sau khi chuyển hướng

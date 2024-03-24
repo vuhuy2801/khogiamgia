@@ -31,16 +31,7 @@
             ?>
 
             <div class="col px-3 py-3 wrapContent">
-                <div class="toast toast_create align-items-center text-bg-primary border-0 position-absolute start-50 translate-middle"
-                    role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="d-flex">
-                        <div class="toast-body">
-                            Thêm mã giảm giá thành công ! <span></span>
-                        </div>
-                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                            aria-label="Close"></button>
-                    </div>
-                </div>
+
                 <div class="mt-4">
                     <h3 class="mt-3 mb-3">Thêm mã giảm giá</h3>
 

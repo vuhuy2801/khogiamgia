@@ -293,20 +293,7 @@ btnSubmit.addEventListener("click", () => {
   if (!isValid) {
     event.preventDefault();
   } else {
-    $(".toast_update").toast("show");
-    const toast = $(".toast_update");
-    // toast.toast("show");
-
-    let countdown = 2;
-    const countdownInterval = setInterval(function () {
-      toast.find("span").html("Rời đi sau " + countdown + " giây");
-      countdown--;
-
-      if (countdown < 0) {
-        clearInterval(countdownInterval);
-        formSubmit.submit();
-      }
-    }, 1000);
+    formSubmit.submit();
   }
 });
 

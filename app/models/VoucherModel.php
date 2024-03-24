@@ -174,8 +174,31 @@ class Voucher implements VoucherService
         $this->is_inWallet = $value;
     }
 
+    public function checkData($data)
+    {
+        foreach ($data as $key => $value) {
+            if (empty($value)) {
+                throw new Exception("The value for '{$key}' cannot be empty");
+            }
+        }
+    }
+
+
+
     public function addVoucher(Voucher $voucher): bool
     {
+        $this->checkData((array)$voucher);
+        if ($voucher === null) {
+            throw new InvalidArgumentException("Voucher object cannot be null.");
+        }
+        if ($voucher->getExpiresAt() <= $voucher->getCreatedAt()) {
+            throw new InvalidArgumentException("Expiration date must be greater than creation date.");
+        }
+        $existingVoucherId = $this->checkExistingVoucherId($voucher->getVoucherId());
+        if ($existingVoucherId) {
+            throw new RuntimeException("VoucherId already exists in the database.");
+        }
+
         $connection = $this->db->getConnection();
         $query = "
             INSERT INTO Voucher (
@@ -212,6 +235,17 @@ class Voucher implements VoucherService
 
     public function updateVoucher(Voucher $voucher): bool
     {
+        $this->checkData((array)$voucher);
+        if ($voucher === null) {
+            throw new InvalidArgumentException("Voucher object cannot be null.");
+        }
+        if ($voucher->getExpiresAt() <= $voucher->getCreatedAt()) {
+            throw new InvalidArgumentException("Expiration date must be greater than creation date.");
+        }
+        $existingVoucherId = $this->checkExistingVoucherId($voucher->getVoucherId());
+        if (!$existingVoucherId) {
+            throw new RuntimeException("VoucherId does not exist in the database.");
+        }
         $connection = $this->db->getConnection();
         $query = "
         UPDATE Voucher
@@ -260,6 +294,12 @@ class Voucher implements VoucherService
 
     public function deleteVoucher($voucherId): bool
     {
+        if (empty($voucherId)) {
+            throw new InvalidArgumentException("VoucherId empty or null.");
+        }
+        if (!$this->checkExistingVoucherId($voucherId)) {
+            throw new InvalidArgumentException("VoucherId does not exist in the database.");
+        }
         $connection = $this->db->getConnection();
         $query = "DELETE FROM Voucher WHERE voucherId = ?;";
         $statement = $connection->prepare($query);
@@ -301,6 +341,9 @@ class Voucher implements VoucherService
 
     public function getListVoucherBySupplier($idSupplier): array
     {
+        if (empty($idSupplier)) {
+            throw new InvalidArgumentException("idSupplier cannot be empty or null.");
+        }
         $connection = $this->db->getConnection();
         if ($connection) {
             $query = "SELECT voucherId,voucherName,supplierId,expiresAt,discountType,maximumDiscount,minimumDiscount,quantity,categoryId,conditionsOfUse,address_target,is_inWallet FROM Voucher Where supplierId = ?;";
@@ -315,6 +358,12 @@ class Voucher implements VoucherService
 
     public function getVoucherDetail($voucherId)
     {
+        if (empty($voucherId)) {
+            throw new InvalidArgumentException("VoucherId empty or null.");
+        }
+        if (!$this->checkExistingVoucherId($voucherId)) {
+            throw new InvalidArgumentException("VoucherId does not exist in the database.");
+        }
         $connection = $this->db->getConnection();
         $query = "SELECT * FROM Voucher where voucherId = ?;";
         try {
@@ -324,7 +373,7 @@ class Voucher implements VoucherService
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $result;
         } catch (PDOException $e) {
-            return false;
+            return [];
         }
     }
 
@@ -341,9 +390,19 @@ class Voucher implements VoucherService
         }
         return [];
     }
-
+ 
     public function getVouchersByCategoryId($category, $supplierId): array
     {
+        if (!is_int($category) || !is_int($supplierId)) {
+            throw new InvalidArgumentException("Category and supplierId must be integers.");
+        }
+
+        if ($category <= 0 || $supplierId <= 0) {
+            throw new InvalidArgumentException("Category and supplierId must be positive integers.");
+        }
+        if (empty($category) || empty($supplierId)) {
+            throw new InvalidArgumentException("Category and supplierId must not be empty.");
+        }
         $connection = $this->db->getConnection();
         if ($connection) {
             $query = "SELECT voucherId,voucherName,supplierId,expiresAt,discountType,maximumDiscount,minimumDiscount,quantity,categoryId,conditionsOfUse,address_target,is_inWallet FROM Voucher WHERE categoryId = ? and supplierId = ?;";
@@ -374,5 +433,17 @@ class Voucher implements VoucherService
             return $result;
         }
         return [];
+    }
+
+
+    private function checkExistingVoucherId($voucherId): bool
+    {
+        $connection = $this->db->getConnection();
+        $query = "SELECT COUNT(*) FROM Voucher WHERE voucherId = ?";
+        $statement = $connection->prepare($query);
+        $statement->bindValue(1, $voucherId);
+        $statement->execute();
+        $count = $statement->fetchColumn();
+        return $count > 0;
     }
 }
