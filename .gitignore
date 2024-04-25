@@ -9,3 +9,4 @@
 /vendor/
 /.env
 /public/uploads/
+*.cache

@@ -1,6 +1,6 @@
 <?php
 $currentUrl = $_SERVER['REQUEST_URI'];
-$logoUrl = "https://api.vuhuy.site/uploads/LOGO_2bd919edea.png";
+$logoUrl = "/public/images/logo.png";
 $homeUrl = "/trang-chu";
 $maGiamGiaUrl = "#";
 $theoDoiGiaSPUrl = "/theo-doi-gia";
@@ -25,19 +25,17 @@ $adminText = "Admin";
         <nav id="navbar" class="navbar">
             <ul>
                 <li>
-                    <a class="nav-link scrollto <?php echo $currentUrl === $homeUrl || $currentUrl === "/" ? 'active' : ''; ?>"
-                        href="<?php echo $homeUrl; ?>">
+                    <a class="nav-link scrollto <?php echo $currentUrl === $homeUrl || $currentUrl === "/" ? 'active' : ''; ?>" href="<?php echo $homeUrl; ?>">
                         <?php echo $trangChuText; ?>
                     </a>
                 </li>
                 <li class="dropdown">
-                    <a class="nav-link scrollto <?php echo 
-                    $currentUrl === "/shopee" || $currentUrl === "/shopee/toan-san" 
-                    || $currentUrl === "/shopee/shopee-mail" || $currentUrl === "/shopee/extra"
-                    || $currentUrl === "/shopee/thoi-trang" || $currentUrl === "/shopee/tieu-dung"
-                    || $currentUrl === "/shopee/doi-song" || $currentUrl === "/shopee/dien-tu"
-                    || $currentUrl === "/tiki" || $currentUrl === "/lazada" || $currentUrl === "/shopee-food" ? 'active' : ''; ?>"
-                        href="<?php echo $maGiamGiaUrl; ?>">
+                    <a class="nav-link scrollto <?php echo
+                                                $currentUrl === "/shopee" || $currentUrl === "/shopee/toan-san"
+                                                    || $currentUrl === "/shopee/shopee-mail" || $currentUrl === "/shopee/extra"
+                                                    || $currentUrl === "/shopee/thoi-trang" || $currentUrl === "/shopee/tieu-dung"
+                                                    || $currentUrl === "/shopee/doi-song" || $currentUrl === "/shopee/dien-tu"
+                                                    || $currentUrl === "/tiki" || $currentUrl === "/lazada" || $currentUrl === "/shopee-food" ? 'active' : ''; ?>" href="<?php echo $maGiamGiaUrl; ?>">
                         <?php echo $maGiamGiaText; ?>
                     </a>
                     <ul>
@@ -48,20 +46,17 @@ $adminText = "Admin";
                     </ul>
                 </li>
                 <li>
-                    <a class="nav-link scrollto <?php echo $currentUrl === $theoDoiGiaSPUrl ? 'active' : ''; ?>"
-                        href="<?php echo $theoDoiGiaSPUrl; ?>">
+                    <a class="nav-link scrollto <?php echo $currentUrl === $theoDoiGiaSPUrl ? 'active' : ''; ?>" href="<?php echo $theoDoiGiaSPUrl; ?>">
                         <?php echo $theoDoiGiaSpText; ?>
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link scrollto <?php echo $currentUrl === $tinKhuyenMaiUrl || $currentUrl === '/tin-khuyen-mai/shopee' || $currentUrl === '/tin-khuyen-mai/lazada' || $currentUrl === '/tin-khuyen-mai/shopeeFood' ? 'active' : ''; ?>"
-                        href="<?php echo $tinKhuyenMaiUrl; ?>">
+                    <a class="nav-link scrollto <?php echo $currentUrl === $tinKhuyenMaiUrl || $currentUrl === '/tin-khuyen-mai/shopee' || $currentUrl === '/tin-khuyen-mai/lazada' || $currentUrl === '/tin-khuyen-mai/shopeeFood' ? 'active' : ''; ?>" href="<?php echo $tinKhuyenMaiUrl; ?>">
                         <?php echo $tinKhuyenMaiText; ?>
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link scrollto <?php echo $currentUrl === $huongDanUrl || $currentUrl === '/huong-dan/shopee' || $currentUrl === '/huong-dan/lazada' || $currentUrl === '/huong-dan/shopee-food' ? 'active' : ''; ?>"
-                        href="<?php echo $huongDanUrl; ?>">
+                    <a class="nav-link scrollto <?php echo $currentUrl === $huongDanUrl || $currentUrl === '/huong-dan/shopee' || $currentUrl === '/huong-dan/lazada' || $currentUrl === '/huong-dan/shopee-food' ? 'active' : ''; ?>" href="<?php echo $huongDanUrl; ?>">
                         <?php echo $huongDanText; ?>
                     </a>
                 </li>

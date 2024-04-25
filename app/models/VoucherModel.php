@@ -174,31 +174,19 @@ class Voucher implements VoucherService
         $this->is_inWallet = $value;
     }
 
-    public function checkData($data)
+
+    public function addVoucher(?Voucher $voucher): bool
     {
-        foreach ($data as $key => $value) {
-            if (empty($value)) {
-                throw new Exception("The value for '{$key}' cannot be empty");
-            }
-        }
-    }
-
-
-
-    public function addVoucher(Voucher $voucher): bool
-    {
-        $this->checkData((array)$voucher);
         if ($voucher === null) {
             throw new InvalidArgumentException("Voucher object cannot be null.");
         }
-        if ($voucher->getExpiresAt() <= $voucher->getCreatedAt()) {
+        if ($voucher->getExpiresAt() <= $voucher->getExpressAt()) {
             throw new InvalidArgumentException("Expiration date must be greater than creation date.");
         }
         $existingVoucherId = $this->checkExistingVoucherId($voucher->getVoucherId());
         if ($existingVoucherId) {
             throw new RuntimeException("VoucherId already exists in the database.");
         }
-
         $connection = $this->db->getConnection();
         $query = "
             INSERT INTO Voucher (
@@ -224,22 +212,21 @@ class Voucher implements VoucherService
         $statement->bindValue(15, $voucher->getDiscountType());
         $statement->bindValue(16, $voucher->getMaximunDiscount());
         $statement->bindValue(17, $voucher->getIs_inWallet());
-
         try {
             $statement->execute();
             return true;
         } catch (PDOException $e) {
+            echo $e->getMessage();
             return false;
         }
     }
 
-    public function updateVoucher(Voucher $voucher): bool
+    public function updateVoucher(?Voucher $voucher): bool
     {
-        $this->checkData((array)$voucher);
         if ($voucher === null) {
             throw new InvalidArgumentException("Voucher object cannot be null.");
         }
-        if ($voucher->getExpiresAt() <= $voucher->getCreatedAt()) {
+        if ($voucher->getExpiresAt() <= $voucher->getExpressAt()) {
             throw new InvalidArgumentException("Expiration date must be greater than creation date.");
         }
         $existingVoucherId = $this->checkExistingVoucherId($voucher->getVoucherId());
@@ -282,7 +269,6 @@ class Voucher implements VoucherService
         $statement->bindValue(14, $voucher->getMaximunDiscount());
         $statement->bindValue(15, $voucher->getIs_inWallet());
         $statement->bindValue(16, $voucher->getVoucherId());
-
         try {
             $statement->execute();
             return true;
@@ -390,7 +376,7 @@ class Voucher implements VoucherService
         }
         return [];
     }
- 
+
     public function getVouchersByCategoryId($category, $supplierId): array
     {
         if (!is_int($category) || !is_int($supplierId)) {
@@ -407,8 +393,8 @@ class Voucher implements VoucherService
         if ($connection) {
             $query = "SELECT voucherId,voucherName,supplierId,expiresAt,discountType,maximumDiscount,minimumDiscount,quantity,categoryId,conditionsOfUse,address_target,is_inWallet FROM Voucher WHERE categoryId = ? and supplierId = ?;";
             $statement = $connection->prepare($query);
-            $statement->bindParam(1, $category);
-            $statement->bindParam(2, $supplierId);
+            $statement->bindValue(1, $category);
+            $statement->bindValue(2, $supplierId);
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $result;

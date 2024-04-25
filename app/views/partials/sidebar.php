@@ -1,5 +1,5 @@
 <?php
-// $logoUrl = "https://api.vuhuy.site/uploads/LOGO_2bd919edea.png";
+$logoUrl = "/public/images/logo.png";
 $homeUrl = "../trang-chu/kho-giam-gia";
 $maGiamGiaUrl = "../ma-giam-gia/danh-sach";
 $theoDoiGiaSPUrl = "../theo-doi-gia-san-pham/danh-sach";
